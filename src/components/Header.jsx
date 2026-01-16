@@ -75,12 +75,13 @@ const Header = () => {
     return (
         <>
             <header className={`header ${scrolled ? 'scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`}>
-                {/* Brand - JP Morgan Style: All in one horizontal line */}
+                {/* Brand Lockup - Logo + Stacked Name */}
                 <Link to="/" className="brand">
                     <img src={logo} alt="IEC" className="brand-logo" />
-                    <span className="brand-name">Indian Engineering Company</span>
-                    <span className="brand-divider">|</span>
-                    <span className="brand-cert">EASA Certified</span>
+                    <div className="brand-text">
+                        <span className="brand-name">Indian Engineering Company</span>
+                        <span className="brand-cert">EASA Certified</span>
+                    </div>
                 </Link>
 
                 {/* Navigation */}
@@ -244,17 +245,19 @@ const Header = () => {
                     justify-content: space-between;
                     height: 72px;
                     padding: 0 40px;
-                    background: var(--color-white);
-                    border-bottom: 1px solid var(--color-border);
-                    transition: all 0.3s ease;
+                    background: transparent;
+                    border-bottom: 1px solid transparent;
+                    transition: all 0.4s ease;
                 }
 
                 .header.scrolled {
                     height: 64px;
+                    background: var(--color-white);
+                    border-bottom: 1px solid var(--color-border);
                     box-shadow: 0 2px 12px rgba(0,0,0,0.08);
                 }
 
-                /* ========== BRAND (Single Line) ========== */
+                /* ========== BRAND LOCKUP ========== */
                 .brand {
                     display: flex;
                     align-items: center;
@@ -263,36 +266,50 @@ const Header = () => {
                 }
 
                 .brand-logo {
-                    height: 44px;
+                    height: 56px;
                     width: auto;
                     object-fit: contain;
-                    transition: height 0.3s ease;
+                    transition: all 0.3s ease;
+                    filter: brightness(0) invert(1); /* White logo on dark bg */
                 }
 
                 .header.scrolled .brand-logo {
-                    height: 38px;
+                    height: 46px;
+                    filter: none; /* Original logo colors on white bg */
+                }
+
+                .brand-text {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0;
+                    line-height: 1.15;
                 }
 
                 .brand-name {
-                    font-size: 1.125rem;
+                    font-size: 1.0625rem;
                     font-weight: 700;
-                    color: var(--color-text);
+                    color: var(--color-white);
                     letter-spacing: -0.01em;
                     white-space: nowrap;
+                    transition: color 0.3s ease;
                 }
 
-                .brand-divider {
-                    color: var(--color-border);
-                    font-weight: 300;
-                    font-size: 1.25rem;
+                .header.scrolled .brand-name {
+                    color: var(--color-text);
                 }
 
                 .brand-cert {
-                    font-family: var(--font-serif);
-                    font-size: 0.875rem;
-                    font-style: italic;
-                    color: var(--color-accent);
+                    font-size: 0.6875rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.08em;
+                    color: rgba(255, 255, 255, 0.7);
                     white-space: nowrap;
+                    transition: color 0.3s ease;
+                }
+
+                .header.scrolled .brand-cert {
+                    color: var(--color-accent);
                 }
 
                 /* ========== NAVIGATION ========== */
@@ -313,15 +330,24 @@ const Header = () => {
                     gap: 4px;
                     font-size: 0.8125rem;
                     font-weight: 500;
-                    color: var(--color-text-light);
+                    color: rgba(255, 255, 255, 0.85);
                     text-transform: uppercase;
                     letter-spacing: 0.04em;
                     padding: 8px 0;
                     transition: color 0.2s;
                 }
 
+                .header.scrolled .nav-link {
+                    color: var(--color-text-light);
+                }
+
                 .nav-link:hover,
                 .nav-link.active {
+                    color: var(--color-white);
+                }
+
+                .header.scrolled .nav-link:hover,
+                .header.scrolled .nav-link.active {
                     color: var(--color-accent);
                 }
 
@@ -390,12 +416,21 @@ const Header = () => {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    color: var(--color-text-light);
+                    color: rgba(255, 255, 255, 0.8);
                     border-radius: 4px;
                     transition: all 0.15s;
                 }
 
+                .header.scrolled .icon-btn {
+                    color: var(--color-text-light);
+                }
+
                 .icon-btn:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    color: var(--color-white);
+                }
+
+                .header.scrolled .icon-btn:hover {
                     background: var(--color-light);
                     color: var(--color-text);
                 }
@@ -451,13 +486,23 @@ const Header = () => {
                     padding: 6px 10px;
                     font-size: 0.6875rem;
                     font-weight: 600;
-                    color: var(--color-text-light);
-                    border: 1px solid var(--color-border);
+                    color: rgba(255, 255, 255, 0.8);
+                    border: 1px solid rgba(255, 255, 255, 0.3);
                     border-radius: 4px;
                     transition: all 0.15s;
                 }
 
+                .header.scrolled .lang-btn {
+                    color: var(--color-text-light);
+                    border-color: var(--color-border);
+                }
+
                 .lang-btn:hover {
+                    border-color: rgba(255, 255, 255, 0.6);
+                    color: var(--color-white);
+                }
+
+                .header.scrolled .lang-btn:hover {
                     border-color: var(--color-text-light);
                     color: var(--color-text);
                 }
@@ -526,12 +571,12 @@ const Header = () => {
                     font-weight: 600;
                 }
 
-                /* Header CTA */
+                /* Header CTA - matches language button size */
                 .header-cta {
                     display: flex;
                     align-items: center;
-                    gap: 6px;
-                    padding: 8px 16px;
+                    gap: 4px;
+                    padding: 6px 12px;
                     font-size: 0.6875rem;
                     font-weight: 600;
                     text-transform: uppercase;
@@ -557,8 +602,12 @@ const Header = () => {
                 .menu-toggle span {
                     width: 18px;
                     height: 2px;
-                    background: var(--color-text);
+                    background: var(--color-white);
                     transition: all 0.3s ease;
+                }
+
+                .header.scrolled .menu-toggle span {
+                    background: var(--color-text);
                 }
 
                 .menu-toggle.active span:nth-child(1) {
@@ -662,9 +711,7 @@ const Header = () => {
                         padding: 0 20px;
                     }
 
-                    .brand-name,
-                    .brand-divider,
-                    .brand-cert {
+                    .brand-text {
                         display: none;
                     }
 
