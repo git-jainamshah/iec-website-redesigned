@@ -34,30 +34,33 @@ const Hero = () => {
             { r: 100, g: 255, b: 100 },  // Green
         ];
 
-        // Flowing wave mesh - tighter lines
+        // Flowing wave mesh - at very bottom, full width
         const drawWaveMesh = () => {
             const width = canvas.offsetWidth;
             const height = canvas.offsetHeight;
             
             ctx.clearRect(0, 0, width, height);
             
-            // More lines, tighter spacing for denser mesh
-            const numLines = 35;
-            const lineSpacing = 5;
+            // Dense mesh lines
+            const numLines = 30;
+            const lineSpacing = 4;
+            const meshHeight = numLines * lineSpacing;
+            const startY = (height - meshHeight) / 2; // Center vertically in canvas
             
             for (let l = 0; l < numLines; l++) {
-                const baseY = height * 0.1 + l * lineSpacing;
-                const phaseOffset = l * 0.35;
+                const baseY = startY + l * lineSpacing;
+                const phaseOffset = l * 0.4;
                 
                 ctx.beginPath();
                 
+                // Full width - left to right
                 for (let x = 0; x <= width; x += 2) {
                     let y = baseY;
                     
                     // Multiple sine waves for flowing cloth effect
-                    y += Math.sin(x * 0.006 + time * 1.2 + phaseOffset) * (22 + l * 1.2);
-                    y += Math.sin(x * 0.015 + time * 1.8 + phaseOffset * 0.6) * (12 + l * 0.6);
-                    y += Math.sin(x * 0.003 + time * 0.6) * 18;
+                    y += Math.sin(x * 0.005 + time * 1.3 + phaseOffset) * (18 + l * 0.8);
+                    y += Math.sin(x * 0.012 + time * 2 + phaseOffset * 0.5) * (10 + l * 0.5);
+                    y += Math.sin(x * 0.003 + time * 0.7) * 12;
                     
                     if (x === 0) {
                         ctx.moveTo(x, y);
@@ -66,7 +69,7 @@ const Hero = () => {
                     }
                 }
                 
-                // Rainbow gradient
+                // Rainbow gradient - full width
                 const gradient = ctx.createLinearGradient(0, 0, width, 0);
                 const colorIndex = (l / numLines) * (colors.length - 1);
                 const c1 = colors[Math.floor(colorIndex) % colors.length];
@@ -77,10 +80,11 @@ const Hero = () => {
                 const g = Math.round(c1.g + (c2.g - c1.g) * t);
                 const b = Math.round(c1.b + (c2.b - c1.b) * t);
                 
-                const alpha = 0.65 - (l * 0.012);
-                gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${alpha * 0.4})`);
-                gradient.addColorStop(0.35, `rgba(${r}, ${g}, ${b}, ${alpha * 0.9})`);
-                gradient.addColorStop(0.65, `rgba(${r}, ${g}, ${b}, ${alpha})`);
+                const alpha = 0.7 - (l * 0.015);
+                gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${alpha * 0.5})`);
+                gradient.addColorStop(0.25, `rgba(${r}, ${g}, ${b}, ${alpha})`);
+                gradient.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, ${alpha})`);
+                gradient.addColorStop(0.75, `rgba(${r}, ${g}, ${b}, ${alpha})`);
                 gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, ${alpha * 0.5})`);
                 
                 ctx.strokeStyle = gradient;
@@ -88,24 +92,31 @@ const Hero = () => {
                 ctx.stroke();
             }
 
-            // Vertical cross-lines for mesh - tighter
-            for (let x = 0; x < width; x += 18) {
-                const wobbleX = Math.sin(time + x * 0.008) * 12;
-                const startY = height * 0.1;
-                const endY = height * 0.1 + numLines * lineSpacing;
+            // Vertical cross-lines for mesh texture
+            for (let x = 0; x < width; x += 15) {
+                const wobbleX = Math.sin(time + x * 0.01) * 8;
                 
                 ctx.beginPath();
-                ctx.moveTo(x + wobbleX, startY);
                 
-                for (let y = startY; y <= endY; y += 4) {
-                    const wobble = Math.sin(y * 0.04 + time * 1.8 + x * 0.008) * 6;
-                    ctx.lineTo(x + wobbleX + wobble, y);
+                for (let l = 0; l < numLines; l++) {
+                    const baseY = startY + l * lineSpacing;
+                    let y = baseY;
+                    
+                    y += Math.sin(x * 0.005 + time * 1.3 + l * 0.4) * (18 + l * 0.8);
+                    y += Math.sin(x * 0.012 + time * 2 + l * 0.2) * (10 + l * 0.5);
+                    y += Math.sin(x * 0.003 + time * 0.7) * 12;
+                    
+                    if (l === 0) {
+                        ctx.moveTo(x + wobbleX, y);
+                    } else {
+                        ctx.lineTo(x + wobbleX, y);
+                    }
                 }
                 
                 const colorIdx = Math.floor((x / width) * colors.length) % colors.length;
                 const c = colors[colorIdx];
-                ctx.strokeStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.25)`;
-                ctx.lineWidth = 0.8;
+                ctx.strokeStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.2)`;
+                ctx.lineWidth = 0.6;
                 ctx.stroke();
             }
 
@@ -219,13 +230,14 @@ const Hero = () => {
                     );
                 }
 
-                /* Wave canvas - positioned at bottom, flowing randomly */
+                /* Wave canvas - at very bottom of hero, full width */
                 .hero-canvas {
                     position: absolute;
-                    bottom: 60px;
+                    bottom: 0;
                     left: 0;
                     right: 0;
-                    height: 220px;
+                    width: 100%;
+                    height: 160px;
                     z-index: 1;
                     pointer-events: none;
                 }
@@ -334,7 +346,7 @@ const Hero = () => {
                 /* Stats Strip */
                 .hero-stats {
                     position: relative;
-                    z-index: 2;
+                    z-index: 3;
                     background: var(--color-white);
                     border-top: 3px solid var(--color-accent);
                 }
@@ -405,8 +417,8 @@ const Hero = () => {
                     }
 
                     .hero-canvas {
-                        height: 180px;
-                        bottom: 55px;
+                        height: 140px;
+                        bottom: 0;
                     }
 
                     .stats-container {
@@ -440,8 +452,8 @@ const Hero = () => {
                     }
 
                     .hero-canvas {
-                        height: 150px;
-                        bottom: 50px;
+                        height: 120px;
+                        bottom: 0;
                     }
 
                     .stat-value {
