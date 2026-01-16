@@ -25,7 +25,7 @@ const Clients = () => {
         <section className="clients">
             <div className="clients-inner">
                 <div className="clients-label">
-                    <span>Trusted by India & International leading industries</span>
+                    <span>Trusted Globally</span>
                 </div>
                 
                 <div className="clients-marquee">
@@ -105,22 +105,22 @@ const Clients = () => {
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    width: 140px;
                     height: 48px;
                     padding: 0 var(--space-lg);
-                    opacity: 0.4;
+                    opacity: 0.6;
                     transition: opacity 0.3s;
                 }
 
                 .client-logo:hover {
-                    opacity: 0.7;
+                    opacity: 1;
                 }
 
                 .client-logo img {
+                    width: 100%;
                     height: 100%;
-                    width: auto;
-                    max-width: 120px;
                     object-fit: contain;
-                    filter: brightness(0) invert(1);
+                    object-position: center;
                 }
 
                 @media (max-width: 768px) {
@@ -139,11 +139,8 @@ const Clients = () => {
                     }
 
                     .client-logo {
+                        width: 120px;
                         height: 40px;
-                    }
-
-                    .client-logo img {
-                        max-width: 100px;
                     }
                 }
             `}</style>
