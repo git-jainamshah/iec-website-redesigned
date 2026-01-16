@@ -39,12 +39,10 @@ const Footer = () => {
                         {/* Brand */}
                         <div className="footer-brand">
                             <Link to="/" className="footer-logo">
-                                <div className="footer-logo-circle">
-                                    <img src={logo} alt="IEC" />
-                                </div>
+                                <img src={logo} alt="IEC" className="footer-logo-img" />
                                 <div className="footer-logo-text">
-                                    <span>Indian Engineering</span>
-                                    <span className="accent">Company</span>
+                                    <span className="footer-brand-name">Indian Engineering Company</span>
+                                    <span className="footer-brand-cert">EASA Certified</span>
                                 </div>
                             </Link>
                             <p className="footer-tagline">Our Repairs Run the Industries</p>
@@ -216,39 +214,39 @@ const Footer = () => {
                 .footer-logo {
                     display: inline-flex;
                     align-items: center;
-                    gap: var(--space-md);
+                    gap: 12px;
                     margin-bottom: var(--space-lg);
-                    background: var(--color-white);
-                    padding: var(--space-md) var(--space-lg) var(--space-md) var(--space-md);
-                    border-left: 4px solid var(--color-accent);
                 }
 
-                .footer-logo-circle {
-                    width: 44px;
-                    height: 44px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex-shrink: 0;
-                }
-
-                .footer-logo-circle img {
-                    width: 100%;
-                    height: 100%;
+                .footer-logo-img {
+                    height: 56px;
+                    width: auto;
                     object-fit: contain;
+                    flex-shrink: 0;
                 }
 
                 .footer-logo-text {
                     display: flex;
                     flex-direction: column;
-                    font-size: 1rem;
-                    font-weight: 700;
-                    color: var(--color-text);
+                    gap: 0;
                     line-height: 1.15;
                 }
 
-                .footer-logo-text .accent {
+                .footer-brand-name {
+                    font-size: 1.125rem;
+                    font-weight: 700;
+                    color: var(--color-white);
+                    letter-spacing: -0.01em;
+                    white-space: nowrap;
+                }
+
+                .footer-brand-cert {
+                    font-size: 0.6875rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.08em;
                     color: var(--color-accent);
+                    white-space: nowrap;
                 }
 
                 .footer-tagline {
@@ -389,4 +387,5 @@ const Footer = () => {
 };
 
 export default Footer;
+
 
