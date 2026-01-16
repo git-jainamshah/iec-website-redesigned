@@ -9,15 +9,16 @@ import marthonLogo from '../assets/clientel-logos/marthon-energy-logo.png';
 import tecoLogo from '../assets/clientel-logos/teco-logo.png';
 
 // Client logos
+// Note: Logos that are already white/light need to be inverted differently
 const clients = [
-    { name: 'ABB', logo: abbLogo },
-    { name: 'Ansaldo', logo: ansaldoLogo },
-    { name: 'BHEL', logo: bhelLogo },
-    { name: 'CG Power Group', logo: cgPowerLogo },
-    { name: 'Kirloskar Group', logo: kirloskarLogo },
-    { name: 'Marelli', logo: marelliLogo },
-    { name: 'Marthon Energy', logo: marthonLogo },
-    { name: 'TECO', logo: tecoLogo },
+    { name: 'ABB', logo: abbLogo, invert: false },
+    { name: 'Ansaldo', logo: ansaldoLogo, invert: false },
+    { name: 'BHEL', logo: bhelLogo, invert: false },
+    { name: 'CG Power Group', logo: cgPowerLogo, invert: false },
+    { name: 'Kirloskar Group', logo: kirloskarLogo, invert: false },
+    { name: 'Marelli', logo: marelliLogo, invert: true }, // Likely white
+    { name: 'Marthon Energy', logo: marthonLogo, invert: true }, // Likely white
+    { name: 'TECO', logo: tecoLogo, invert: false },
 ];
 
 const Clients = () => {
@@ -33,13 +34,21 @@ const Clients = () => {
                         {/* First set */}
                         {clients.map((client, idx) => (
                             <div key={idx} className="client-logo">
-                                <img src={client.logo} alt={client.name} />
+                                <img 
+                                    src={client.logo} 
+                                    alt={client.name}
+                                    className={client.invert ? 'logo-invert' : ''}
+                                />
                             </div>
                         ))}
                         {/* Duplicate for seamless loop */}
                         {clients.map((client, idx) => (
                             <div key={`dup-${idx}`} className="client-logo">
-                                <img src={client.logo} alt={client.name} />
+                                <img 
+                                    src={client.logo} 
+                                    alt={client.name}
+                                    className={client.invert ? 'logo-invert' : ''}
+                                />
                             </div>
                         ))}
                     </div>
@@ -105,11 +114,11 @@ const Clients = () => {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    width: 140px;
-                    height: 48px;
+                    width: 180px;
+                    height: 64px;
                     padding: 0 var(--space-lg);
                     transition: all 0.3s;
-                    opacity: 0.8;
+                    opacity: 0.9;
                 }
 
                 .client-logo:hover {
@@ -118,13 +127,15 @@ const Clients = () => {
                 }
 
                 .client-logo img {
-                    max-width: 100%;
-                    max-height: 100%;
-                    width: auto;
-                    height: auto;
+                    width: 100%;
+                    height: 100%;
                     object-fit: contain;
                     object-position: center;
-                    filter: brightness(0) invert(1) contrast(1.2);
+                    filter: brightness(0) invert(1) contrast(1.8) saturate(0);
+                }
+
+                .client-logo img.logo-invert {
+                    filter: brightness(0) invert(1) contrast(2.2) saturate(0);
                 }
 
                 @media (max-width: 768px) {
@@ -143,8 +154,8 @@ const Clients = () => {
                     }
 
                     .client-logo {
-                        width: 120px;
-                        height: 40px;
+                        width: 150px;
+                        height: 56px;
                         padding: 0 var(--space-md);
                     }
                 }
