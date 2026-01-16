@@ -131,11 +131,21 @@ const Clients = () => {
                     height: 100%;
                     object-fit: contain;
                     object-position: center;
-                    filter: brightness(0) invert(1) contrast(1.8) saturate(0);
+                    /* Add subtle drop-shadow to create outline and prevent white logos from disappearing */
+                    filter: brightness(0) invert(1) contrast(1.8) saturate(0)
+                            drop-shadow(0 0 2px rgba(0, 0, 0, 0.4))
+                            drop-shadow(0 0 1px rgba(0, 0, 0, 0.6));
                 }
 
                 .client-logo img.logo-invert {
-                    filter: brightness(0) invert(1) contrast(2.2) saturate(0);
+                    /* For logos that are already white/light, adjust brightness slightly and add stronger outline */
+                    filter: brightness(0.05) invert(1) contrast(2.5) saturate(0)
+                            /* Create outline effect with multiple drop-shadows */
+                            drop-shadow(-1px 0 2px rgba(0, 0, 0, 0.6))
+                            drop-shadow(1px 0 2px rgba(0, 0, 0, 0.6))
+                            drop-shadow(0 -1px 2px rgba(0, 0, 0, 0.6))
+                            drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6))
+                            drop-shadow(0 0 3px rgba(0, 0, 0, 0.5));
                 }
 
                 @media (max-width: 768px) {
