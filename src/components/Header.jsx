@@ -217,17 +217,6 @@ const Header = () => {
 
             {/* Mobile Menu */}
             <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-                {/* Mobile Brand Section */}
-                <div className="mobile-brand-section">
-                    <Link to="/" className="mobile-brand" onClick={() => setMenuOpen(false)}>
-                        <img src={logo} alt="IEC" className="mobile-brand-logo" />
-                        <div className="mobile-brand-text">
-                            <span className="mobile-brand-name">Indian Engineering Company</span>
-                            <span className="mobile-brand-cert">EASA Certified</span>
-                        </div>
-                    </Link>
-                </div>
-
                 {/* Mobile Actions Bar - Search, Language, Call */}
                 <div className="mobile-actions-bar">
                     {/* Mobile Search */}
@@ -771,48 +760,6 @@ const Header = () => {
                     visibility: visible;
                 }
 
-                /* Mobile Brand Section */
-                .mobile-brand-section {
-                    padding-bottom: 20px;
-                    margin-bottom: 20px;
-                    border-bottom: 1px solid var(--color-border);
-                }
-
-                .mobile-brand {
-                    display: flex;
-                    align-items: center;
-                    gap: 14px;
-                }
-
-                .mobile-brand-logo {
-                    height: 60px;
-                    width: auto;
-                    object-fit: contain;
-                    flex-shrink: 0;
-                }
-
-                .mobile-brand-text {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 2px;
-                    line-height: 1.15;
-                }
-
-                .mobile-brand-name {
-                    font-size: 1.125rem;
-                    font-weight: 700;
-                    color: var(--color-text);
-                    letter-spacing: -0.01em;
-                }
-
-                .mobile-brand-cert {
-                    font-size: 0.75rem;
-                    font-weight: 500;
-                    text-transform: uppercase;
-                    letter-spacing: 0.08em;
-                    color: var(--color-accent);
-                }
-
                 .mobile-nav {
                     display: flex;
                     flex-direction: column;
@@ -1110,14 +1057,6 @@ const Header = () => {
 
                     .mobile-menu {
                         top: 64px;
-                    }
-
-                    .mobile-brand-logo {
-                        height: 56px;
-                    }
-
-                    .mobile-brand-name {
-                        font-size: 1rem;
                     }
                 }
             `}</style>
