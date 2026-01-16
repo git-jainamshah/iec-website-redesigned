@@ -57,15 +57,29 @@ const Clients = () => {
 
             <style>{`
                 .clients {
-                    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
+                    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
                     padding: var(--space-xl) 0;
                     overflow: hidden;
+                    position: relative;
+                }
+
+                .clients::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 50%;
+                    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+                    pointer-events: none;
                 }
 
                 .clients-inner {
                     display: flex;
                     align-items: center;
                     gap: var(--space-2xl);
+                    position: relative;
+                    z-index: 1;
                 }
 
                 .clients-label {
@@ -78,7 +92,7 @@ const Clients = () => {
                     font-weight: 600;
                     text-transform: uppercase;
                     letter-spacing: 0.12em;
-                    color: rgba(255, 255, 255, 0.7);
+                    color: rgba(255, 255, 255, 0.8);
                     white-space: nowrap;
                 }
 
@@ -131,21 +145,12 @@ const Clients = () => {
                     height: 100%;
                     object-fit: contain;
                     object-position: center;
-                    /* Add subtle drop-shadow to create outline and prevent white logos from disappearing */
-                    filter: brightness(0) invert(1) contrast(1.8) saturate(0)
-                            drop-shadow(0 0 2px rgba(0, 0, 0, 0.4))
-                            drop-shadow(0 0 1px rgba(0, 0, 0, 0.6));
+                    filter: brightness(0) invert(1) contrast(1.8) saturate(0);
                 }
 
                 .client-logo img.logo-invert {
-                    /* For logos that are already white/light, adjust brightness slightly and add stronger outline */
-                    filter: brightness(0.05) invert(1) contrast(2.5) saturate(0)
-                            /* Create outline effect with multiple drop-shadows */
-                            drop-shadow(-1px 0 2px rgba(0, 0, 0, 0.6))
-                            drop-shadow(1px 0 2px rgba(0, 0, 0, 0.6))
-                            drop-shadow(0 -1px 2px rgba(0, 0, 0, 0.6))
-                            drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6))
-                            drop-shadow(0 0 3px rgba(0, 0, 0, 0.5));
+                    /* For logos with white elements, just invert (white becomes visible, black becomes white) */
+                    filter: invert(1) contrast(2) saturate(0);
                 }
 
                 @media (max-width: 768px) {
