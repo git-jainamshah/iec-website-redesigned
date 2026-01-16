@@ -37,13 +37,8 @@ const Hero = () => {
                     </div>
                 </div>
 
-                {/* EASA Badge - Stamp style */}
-                <div className="easa-stamp">
-                    <div className="stamp-inner">
-                        <img src={easaLogo} alt="EASA Accredited Member" />
-                        <span className="stamp-text">Accredited</span>
-                    </div>
-                </div>
+                {/* EASA Logo - Simple */}
+                <img src={easaLogo} alt="EASA Accredited Member" className="easa-logo" />
             </div>
 
             {/* Stats Strip */}
@@ -180,48 +175,12 @@ const Hero = () => {
                     transform: translateX(4px);
                 }
 
-                /* EASA Stamp - transparent, no background */
-                .easa-stamp {
-                    position: relative;
+                /* EASA Logo - Simple, no borders, no background */
+                .easa-logo {
+                    width: 80px;
+                    height: auto;
                     flex-shrink: 0;
                     margin-right: var(--space-xl);
-                    transform: rotate(12deg);
-                    opacity: 0.85;
-                    transition: all 0.3s ease;
-                }
-
-                .easa-stamp:hover {
-                    transform: rotate(8deg) scale(1.05);
-                    opacity: 1;
-                }
-
-                .stamp-inner {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: 4px;
-                    padding: 12px;
-                    border: 3px solid rgba(255, 255, 255, 0.7);
-                    border-radius: 50%;
-                    width: 100px;
-                    height: 100px;
-                    justify-content: center;
-                }
-
-                .easa-stamp img {
-                    width: 50px;
-                    height: 50px;
-                    object-fit: contain;
-                    filter: brightness(0) invert(1);
-                    opacity: 0.9;
-                }
-
-                .stamp-text {
-                    font-size: 0.5rem;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 0.15em;
-                    color: rgba(255, 255, 255, 0.8);
                 }
 
                 /* Stats Strip */
@@ -283,28 +242,13 @@ const Hero = () => {
                         gap: var(--space-lg);
                     }
 
-                    /* Keep stamp visible on tablet */
-                    .easa-stamp {
+                    /* EASA logo on tablet */
+                    .easa-logo {
                         position: absolute;
                         top: calc(var(--header-height) + var(--space-lg));
                         right: var(--space-lg);
+                        width: 70px;
                         margin-right: 0;
-                    }
-
-                    .stamp-inner {
-                        width: 80px;
-                        height: 80px;
-                        padding: 8px;
-                        border-width: 2px;
-                    }
-
-                    .easa-stamp img {
-                        width: 40px;
-                        height: 40px;
-                    }
-
-                    .stamp-text {
-                        font-size: 0.4rem;
                     }
 
                     .stats-container {
@@ -333,27 +277,11 @@ const Hero = () => {
                         padding-top: calc(var(--header-height) + var(--space-md));
                     }
 
-                    /* Smaller stamp on mobile but still visible */
-                    .easa-stamp {
+                    /* EASA logo on mobile */
+                    .easa-logo {
                         top: calc(var(--header-height) + var(--space-sm));
                         right: var(--space-md);
-                    }
-
-                    .stamp-inner {
-                        width: 60px;
-                        height: 60px;
-                        padding: 6px;
-                        border-width: 2px;
-                    }
-
-                    .easa-stamp img {
-                        width: 28px;
-                        height: 28px;
-                    }
-
-                    .stamp-text {
-                        font-size: 0.35rem;
-                        letter-spacing: 0.1em;
+                        width: 55px;
                     }
 
                     .stat-value {
