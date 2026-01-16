@@ -753,6 +753,7 @@ const Header = () => {
                     visibility: hidden;
                     transition: all 0.3s ease;
                     overflow-y: auto;
+                    border-top: 1px solid var(--color-border);
                 }
 
                 .mobile-menu.open {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/iec-logo.png';
+import projectBannerBg from '../assets/project-banner-bg.jpg';
 
 const Footer = () => {
     return (
@@ -115,9 +116,32 @@ const Footer = () => {
 
                 /* CTA Section */
                 .footer-cta {
+                    position: relative;
                     background: var(--color-cream);
+                    background-image: url(${projectBannerBg});
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
                     padding: var(--space-4xl) 0;
                     border-bottom: 1px solid var(--color-border);
+                    overflow: hidden;
+                }
+
+                .footer-cta::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: var(--color-cream);
+                    opacity: 0.85;
+                    z-index: 0;
+                }
+
+                .footer-cta .container {
+                    position: relative;
+                    z-index: 1;
                 }
 
                 .cta-content {
