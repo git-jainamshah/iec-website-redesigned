@@ -70,6 +70,7 @@ const Header = () => {
             ]
         },
         { label: 'Infrastructure', path: '/infrastructure' },
+        { label: 'Blogs', path: '/blogs' },
         { label: 'Contact', path: '/contact' },
     ];
 

@@ -9,6 +9,7 @@ import AboutPage from './pages/About';
 import LeadershipPage from './pages/Leadership';
 import ServicesPage from './pages/Services';
 import InfrastructurePage from './pages/Infrastructure';
+import BlogsPage from './pages/Blogs';
 import ContactPage from './pages/Contact';
 
 import './styles/index.css';
@@ -24,6 +25,7 @@ function App() {
                     <Route path="/leadership" element={<LeadershipPage />} />
                     <Route path="/services" element={<ServicesPage />} />
                     <Route path="/infrastructure" element={<InfrastructurePage />} />
+                    <Route path="/blogs" element={<BlogsPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                 </Routes>
             </main>
