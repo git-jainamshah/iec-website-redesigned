@@ -48,7 +48,7 @@ const Clients = () => {
 
             <style>{`
                 .clients {
-                    background: linear-gradient(135deg, #d4af37 0%, #b8941f 50%, #8b6914 100%);
+                    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
                     padding: var(--space-xl) 0;
                     overflow: hidden;
                 }
