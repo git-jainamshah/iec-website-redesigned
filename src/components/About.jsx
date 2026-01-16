@@ -1,60 +1,104 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+const features = [
+    {
+        icon: '🏭',
+        title: 'State-of-the-Art Facility',
+        desc: '300,000 sq.ft total area with 75,000 sq.ft dedicated shop floor'
+    },
+    {
+        icon: '⚡',
+        title: 'Captive Power',
+        desc: '5 MW power generation for uninterrupted operations'
+    },
+    {
+        icon: '🏗️',
+        title: 'Heavy Lifting',
+        desc: 'Cranes from 10 to 300 tons for largest machinery'
+    },
+    {
+        icon: '✓',
+        title: 'Quality Certified',
+        desc: 'ISO 9001:2008 certified with EASA membership since 2014'
+    }
+];
+
 const About = () => {
     return (
         <section className="about section">
             <div className="container">
                 <div className="about-grid">
+                    {/* Left Content */}
                     <div className="about-content">
-                        <h2>Trusted by India's Leading Industries</h2>
-                        <p className="about-lead">
-                            Indian Engineering Company is one of India's largest and most 
-                            trusted facilities for industrial motor and generator repair.
-                        </p>
-                        <p>
-                            Established in 1998, we specialize in rewinding and repairing 
-                            high voltage motors and generators up to 250 MW capacity. Our 
-                            state-of-the-art facility spans 300,000 sq.ft with a 75,000 sq.ft 
-                            dedicated shop floor.
-                        </p>
-                        <p>
-                            We serve industries across Gujarat, Maharashtra, Madhya Pradesh, 
-                            Rajasthan, Karnataka, and international clients with unmatched 
-                            quality and reliability.
-                        </p>
-                        <Link to="/about" className="btn btn-outline">
-                            Learn More About Us →
-                        </Link>
+                        <span className="label">About Us</span>
+                        <h2 className="display-title">
+                            A legacy of<br />
+                            <em>engineering excellence.</em>
+                        </h2>
+                        
+                        <div className="about-text">
+                            <p>
+                                Since 1998, Indian Engineering Company has established itself as 
+                                one of India's largest and most trusted facilities for industrial 
+                                motor and generator repair.
+                            </p>
+                            <p>
+                                Our commitment to quality, precision, and customer satisfaction 
+                                has made us the preferred partner for leading industries across 
+                                Gujarat, Maharashtra, Madhya Pradesh, Rajasthan, Karnataka, and 
+                                international markets.
+                            </p>
+                            <p>
+                                We specialize in rewinding and repairing high voltage motors and 
+                                generators up to 250 MW capacity, delivering solutions that keep 
+                                industries running at peak performance.
+                            </p>
+                        </div>
+
+                        <div className="about-cta">
+                            <Link to="/about" className="btn btn-dark">
+                                Discover Our Story
+                            </Link>
+                        </div>
                     </div>
 
+                    {/* Right - Features */}
                     <div className="about-features">
-                        <div className="feature">
-                            <div className="feature-number">01</div>
-                            <div className="feature-content">
-                                <h4>ISO 9001:2008 Certified</h4>
-                                <p>Quality management system certified</p>
+                        {features.map((feature, idx) => (
+                            <div 
+                                key={idx} 
+                                className="feature-card"
+                                style={{ animationDelay: `${idx * 0.1}s` }}
+                            >
+                                <span className="feature-icon">{feature.icon}</span>
+                                <div className="feature-content">
+                                    <h4>{feature.title}</h4>
+                                    <p>{feature.desc}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="feature">
-                            <div className="feature-number">02</div>
-                            <div className="feature-content">
-                                <h4>EASA Member Since 2014</h4>
-                                <p>International repair standards</p>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Certifications Bar */}
+            <div className="certifications">
+                <div className="container">
+                    <div className="cert-inner">
+                        <span className="cert-title">Certifications & Memberships</span>
+                        <div className="cert-list">
+                            <div className="cert-item">
+                                <span className="cert-name">ISO 9001:2008</span>
+                                <span className="cert-label">Quality Management</span>
                             </div>
-                        </div>
-                        <div className="feature">
-                            <div className="feature-number">03</div>
-                            <div className="feature-content">
-                                <h4>5 MW Captive Power</h4>
-                                <p>Uninterrupted operations</p>
+                            <div className="cert-item">
+                                <span className="cert-name">EASA Member</span>
+                                <span className="cert-label">Since 2014</span>
                             </div>
-                        </div>
-                        <div className="feature">
-                            <div className="feature-number">04</div>
-                            <div className="feature-content">
-                                <h4>300 Ton Crane Capacity</h4>
-                                <p>Handle the largest machinery</p>
+                            <div className="cert-item">
+                                <span className="cert-name">NSIC Registered</span>
+                                <span className="cert-label">Government Certified</span>
                             </div>
                         </div>
                     </div>
@@ -62,70 +106,138 @@ const About = () => {
             </div>
 
             <style>{`
+                .about {
+                    background: var(--color-white);
+                }
+
                 .about-grid {
                     display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: var(--space-16);
+                    grid-template-columns: 1.2fr 1fr;
+                    gap: var(--space-4xl);
                     align-items: start;
                 }
 
+                .about-content .label {
+                    display: block;
+                    margin-bottom: var(--space-md);
+                }
+
                 .about-content h2 {
-                    margin-bottom: var(--space-6);
+                    margin-bottom: var(--space-xl);
                 }
 
-                .about-lead {
-                    font-size: 1.125rem;
-                    color: var(--color-gray-700);
-                    margin-bottom: var(--space-4);
+                .about-text {
+                    margin-bottom: var(--space-2xl);
                 }
 
-                .about-content p {
-                    margin-bottom: var(--space-4);
+                .about-text p {
+                    font-size: 1rem;
+                    line-height: 1.8;
+                    margin-bottom: var(--space-lg);
                 }
 
-                .about-content .btn {
-                    margin-top: var(--space-4);
+                .about-text p:last-child {
+                    margin-bottom: 0;
                 }
 
                 .about-features {
                     display: flex;
                     flex-direction: column;
-                    gap: var(--space-4);
+                    gap: var(--space-lg);
                 }
 
-                .feature {
+                .feature-card {
                     display: flex;
-                    gap: var(--space-4);
-                    padding: var(--space-4);
-                    background: var(--color-gray-50);
-                    border-left: 3px solid var(--color-gray-200);
-                    transition: var(--transition);
+                    gap: var(--space-lg);
+                    padding: var(--space-lg);
+                    background: var(--color-light);
+                    border-left: 3px solid transparent;
+                    transition: all 0.3s var(--ease-out);
                 }
 
-                .feature:hover {
+                .feature-card:hover {
                     border-left-color: var(--color-accent);
+                    transform: translateX(8px);
                 }
 
-                .feature-number {
-                    font-size: 0.875rem;
-                    font-weight: 700;
-                    color: var(--color-accent);
+                .feature-icon {
+                    font-size: 1.5rem;
+                    flex-shrink: 0;
                 }
 
                 .feature-content h4 {
                     font-size: 0.9375rem;
-                    margin-bottom: var(--space-1);
+                    font-weight: 600;
+                    margin-bottom: var(--space-xs);
                 }
 
                 .feature-content p {
                     font-size: 0.875rem;
-                    margin: 0;
+                    line-height: 1.5;
                 }
 
-                @media (max-width: 900px) {
+                /* Certifications */
+                .certifications {
+                    background: var(--color-primary);
+                    padding: var(--space-2xl) 0;
+                    margin-top: var(--space-5xl);
+                }
+
+                .cert-inner {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+
+                .cert-title {
+                    font-size: 0.6875rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: rgba(255, 255, 255, 0.5);
+                }
+
+                .cert-list {
+                    display: flex;
+                    gap: var(--space-3xl);
+                }
+
+                .cert-item {
+                    text-align: center;
+                }
+
+                .cert-name {
+                    display: block;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: var(--color-white);
+                    margin-bottom: 2px;
+                }
+
+                .cert-label {
+                    font-size: 0.6875rem;
+                    color: rgba(255, 255, 255, 0.5);
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                }
+
+                @media (max-width: 1024px) {
                     .about-grid {
                         grid-template-columns: 1fr;
-                        gap: var(--space-8);
+                        gap: var(--space-3xl);
+                    }
+                }
+
+                @media (max-width: 768px) {
+                    .cert-inner {
+                        flex-direction: column;
+                        gap: var(--space-xl);
+                    }
+
+                    .cert-list {
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        gap: var(--space-xl);
                     }
                 }
             `}</style>
