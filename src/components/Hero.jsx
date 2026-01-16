@@ -61,28 +61,6 @@ const Hero = () => {
                 <img src={easaLogo} alt="EASA" className="easa-logo" />
             </div>
 
-            {/* Stats Strip */}
-            <div className="hero-stats">
-                <div className="container stats-container">
-                    <div className="stat animate-fade-up delay-2">
-                        <span className="stat-value">250<span className="stat-unit">MW</span></span>
-                        <span className="stat-label">Repair Capacity</span>
-                    </div>
-                    <div className="stat animate-fade-up delay-3">
-                        <span className="stat-value">400<span className="stat-unit">+</span></span>
-                        <span className="stat-label">Annual Projects</span>
-                    </div>
-                    <div className="stat animate-fade-up delay-4">
-                        <span className="stat-value">75<span className="stat-unit">K</span></span>
-                        <span className="stat-label">Sq.Ft Shop Floor</span>
-                    </div>
-                    <div className="stat animate-fade-up delay-5">
-                        <span className="stat-value">24<span className="stat-unit">/7</span></span>
-                        <span className="stat-label">Emergency Support</span>
-                    </div>
-                </div>
-            </div>
-
             <style>{`
                 .hero {
                     position: relative;
@@ -233,7 +211,7 @@ const Hero = () => {
                 /* EASA Badge with circular text */
                 .easa-badge {
                     position: absolute;
-                    bottom: 100px;
+                    bottom: var(--space-2xl);
                     right: var(--space-2xl);
                     width: 110px;
                     height: 110px;
@@ -272,54 +250,6 @@ const Hero = () => {
                     object-fit: contain;
                 }
 
-                /* Stats Strip */
-                .hero-stats {
-                    position: relative;
-                    z-index: 3;
-                    background: var(--color-white);
-                    border-top: 3px solid var(--color-accent);
-                }
-
-                .stats-container {
-                    display: grid;
-                    grid-template-columns: repeat(4, 1fr);
-                }
-
-                .stat {
-                    padding: var(--space-md) var(--space-sm);
-                    text-align: center;
-                    border-right: 1px solid var(--color-border);
-                    opacity: 0;
-                }
-
-                .stat:last-child {
-                    border-right: none;
-                }
-
-                .stat-value {
-                    display: block;
-                    font-family: var(--font-serif);
-                    font-size: 1.75rem;
-                    font-weight: 400;
-                    color: var(--color-text);
-                    line-height: 1;
-                }
-
-                .stat-unit {
-                    font-size: 1.125rem;
-                    color: var(--color-accent);
-                }
-
-                .stat-label {
-                    display: block;
-                    font-size: 0.5625rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 0.1em;
-                    color: var(--color-muted);
-                    margin-top: var(--space-xs);
-                }
-
                 @media (max-width: 900px) {
                     .hero {
                         min-height: 65vh;
@@ -339,7 +269,7 @@ const Hero = () => {
                     }
 
                     .easa-badge {
-                        bottom: 90px;
+                        bottom: var(--space-lg);
                         right: var(--space-lg);
                         width: 90px;
                         height: 90px;
@@ -352,22 +282,6 @@ const Hero = () => {
 
                     .easa-text-circle text {
                         font-size: 7px;
-                    }
-
-                    .stats-container {
-                        grid-template-columns: repeat(2, 1fr);
-                    }
-
-                    .stat {
-                        border-bottom: 1px solid var(--color-border);
-                    }
-
-                    .stat:nth-child(2) {
-                        border-right: none;
-                    }
-
-                    .stat:nth-last-child(-n+2) {
-                        border-bottom: none;
                     }
                 }
 
@@ -382,7 +296,7 @@ const Hero = () => {
                     }
 
                     .easa-badge {
-                        bottom: 80px;
+                        bottom: var(--space-md);
                         right: var(--space-md);
                         width: 75px;
                         height: 75px;
@@ -395,14 +309,6 @@ const Hero = () => {
 
                     .easa-text-circle text {
                         font-size: 6px;
-                    }
-
-                    .hero-phone {
-                        font-size: 0.8125rem;
-                    }
-
-                    .stat-value {
-                        font-size: 1.5rem;
                     }
                 }
             `}</style>
