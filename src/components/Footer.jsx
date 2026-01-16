@@ -199,21 +199,22 @@ const Footer = () => {
                 }
 
                 .footer-logo {
-                    display: flex;
+                    display: inline-flex;
                     align-items: center;
                     gap: var(--space-md);
                     margin-bottom: var(--space-lg);
+                    background: var(--color-white);
+                    padding: var(--space-md) var(--space-lg) var(--space-md) var(--space-md);
+                    border-left: 4px solid var(--color-accent);
                 }
 
                 .footer-logo-circle {
-                    width: 48px;
-                    height: 48px;
-                    background: var(--color-white);
-                    border-radius: 50%;
+                    width: 44px;
+                    height: 44px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    padding: 6px;
+                    flex-shrink: 0;
                 }
 
                 .footer-logo-circle img {
@@ -225,10 +226,10 @@ const Footer = () => {
                 .footer-logo-text {
                     display: flex;
                     flex-direction: column;
-                    font-size: 0.9375rem;
-                    font-weight: 600;
-                    color: var(--color-white);
-                    line-height: 1.2;
+                    font-size: 1rem;
+                    font-weight: 700;
+                    color: var(--color-text);
+                    line-height: 1.15;
                 }
 
                 .footer-logo-text .accent {
