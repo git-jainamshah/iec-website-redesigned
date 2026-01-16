@@ -115,9 +115,9 @@ const Footer = () => {
 
                 /* CTA Section */
                 .footer-cta {
-                    background: var(--color-primary);
+                    background: var(--color-cream);
                     padding: var(--space-4xl) 0;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                    border-bottom: 1px solid var(--color-border);
                 }
 
                 .cta-content {
@@ -130,7 +130,7 @@ const Footer = () => {
                 .cta-text h3 {
                     font-size: clamp(1.5rem, 3vw, 2rem);
                     font-weight: 400;
-                    color: var(--color-white);
+                    color: var(--color-text);
                     margin-bottom: var(--space-sm);
                 }
 
@@ -140,7 +140,7 @@ const Footer = () => {
 
                 .cta-text p {
                     font-size: 0.9375rem;
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--color-text-light);
                 }
 
                 .cta-actions {
@@ -158,15 +158,15 @@ const Footer = () => {
                     font-weight: 600;
                     text-transform: uppercase;
                     letter-spacing: 0.05em;
-                    color: var(--color-primary);
-                    background: var(--color-white);
+                    color: var(--color-white);
+                    background: var(--color-accent);
                     padding: 14px 24px;
                     border-radius: 4px;
                     transition: all 0.3s var(--ease-out);
                 }
 
                 .cta-btn-primary:hover {
-                    background: var(--color-accent);
+                    background: var(--color-accent-hover);
                     color: var(--color-white);
                     gap: 12px;
                 }
@@ -182,15 +182,15 @@ const Footer = () => {
 
                 .cta-divider {
                     font-size: 0.75rem;
-                    color: rgba(255, 255, 255, 0.3);
+                    color: var(--color-muted);
                 }
 
                 .cta-phone {
                     font-size: 1rem;
                     font-weight: 600;
-                    color: var(--color-white);
+                    color: var(--color-text);
                     padding: 14px 24px;
-                    border: 2px solid rgba(255, 255, 255, 0.3);
+                    border: 2px solid var(--color-border);
                     border-radius: 4px;
                     transition: all 0.3s;
                 }
@@ -216,6 +216,9 @@ const Footer = () => {
                     align-items: center;
                     gap: 12px;
                     margin-bottom: var(--space-lg);
+                    background: var(--color-white);
+                    padding: var(--space-md) var(--space-lg) var(--space-md) var(--space-md);
+                    border-left: 4px solid var(--color-accent);
                 }
 
                 .footer-logo-img {
@@ -235,7 +238,7 @@ const Footer = () => {
                 .footer-brand-name {
                     font-size: 1.125rem;
                     font-weight: 700;
-                    color: var(--color-white);
+                    color: var(--color-text);
                     letter-spacing: -0.01em;
                     white-space: nowrap;
                 }
