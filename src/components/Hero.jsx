@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import heroBg from '../assets/iec-hero-bg.jpeg';
+import easaLogo from '../assets/easa-logo.png';
 
 const Hero = () => {
     const canvasRef = useRef(null);
@@ -21,7 +22,6 @@ const Hero = () => {
         window.addEventListener('resize', resize);
         resize();
 
-        // Particle class for mesh animation
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
@@ -47,7 +47,6 @@ const Hero = () => {
             }
         }
 
-        // Initialize particles
         for (let i = 0; i < 40; i++) {
             particles.push(new Particle());
         }
@@ -83,7 +82,6 @@ const Hero = () => {
             animationId = requestAnimationFrame(animate);
         };
 
-        // Check for reduced motion preference
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             animate();
         }
@@ -104,6 +102,12 @@ const Hero = () => {
             
             {/* Mesh Animation Canvas */}
             <canvas ref={canvasRef} className="hero-canvas" aria-hidden="true" />
+
+            {/* EASA Badge - Top Right */}
+            <div className="easa-badge">
+                <img src={easaLogo} alt="EASA Certified" />
+                <span>Accredited Member</span>
+            </div>
 
             {/* Content */}
             <div className="container hero-content">
@@ -191,6 +195,36 @@ const Hero = () => {
                     z-index: 1;
                     opacity: 0.6;
                     pointer-events: none;
+                }
+
+                /* EASA Badge */
+                .easa-badge {
+                    position: absolute;
+                    top: calc(var(--header-height) + var(--space-xl));
+                    right: var(--space-xl);
+                    z-index: 10;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: var(--space-sm);
+                    background: rgba(255, 255, 255, 0.95);
+                    padding: var(--space-md) var(--space-lg);
+                    border-radius: 4px;
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                }
+
+                .easa-badge img {
+                    height: 56px;
+                    width: auto;
+                    object-fit: contain;
+                }
+
+                .easa-badge span {
+                    font-size: 0.625rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.08em;
+                    color: var(--color-text-light);
                 }
 
                 .hero-content {
@@ -325,6 +359,17 @@ const Hero = () => {
                         min-height: 80vh;
                     }
 
+                    .easa-badge {
+                        top: auto;
+                        bottom: 140px;
+                        right: var(--space-md);
+                        padding: var(--space-sm) var(--space-md);
+                    }
+
+                    .easa-badge img {
+                        height: 40px;
+                    }
+
                     .stats-container {
                         grid-template-columns: repeat(2, 1fr);
                     }
@@ -349,6 +394,10 @@ const Hero = () => {
 
                     .hero-content {
                         padding-top: calc(var(--header-height) + var(--space-xl));
+                    }
+
+                    .easa-badge {
+                        display: none;
                     }
 
                     .stat-value {

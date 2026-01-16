@@ -75,144 +75,139 @@ const Header = () => {
     return (
         <>
             <header className={`header ${scrolled ? 'scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`}>
-                {/* Brand Block - Full impact design */}
+                {/* Brand Block - Enlarged & Impactful */}
                 <Link to="/" className="brand-block">
-                    <div className="brand-block-inner">
-                        <div className="brand-logo">
-                            <img src={logo} alt="IEC" />
-                        </div>
-                        <div className="brand-text">
-                            <span className="brand-name">Indian Engineering</span>
-                            <span className="brand-company">Company</span>
-                        </div>
+                    <div className="brand-logo">
+                        <img src={logo} alt="IEC" />
                     </div>
-                    <div className="brand-accent"></div>
+                    <div className="brand-text">
+                        <span className="brand-name">Indian Engineering Company</span>
+                        <span className="brand-cert">EASA Certified</span>
+                    </div>
                 </Link>
 
                 {/* Main Header Content */}
                 <div className="header-main">
-                    <div className="header-inner">
-                        {/* Navigation */}
-                        <nav className="nav">
-                            {navItems.map((item, idx) => (
-                                <div 
-                                    key={item.label}
-                                    className="nav-item"
-                                    onMouseEnter={() => item.dropdown && setActiveDropdown(idx)}
-                                    onMouseLeave={() => setActiveDropdown(null)}
+                    {/* Navigation - Left side */}
+                    <nav className="nav">
+                        {navItems.map((item, idx) => (
+                            <div 
+                                key={item.label}
+                                className="nav-item"
+                                onMouseEnter={() => item.dropdown && setActiveDropdown(idx)}
+                                onMouseLeave={() => setActiveDropdown(null)}
+                            >
+                                <NavLink 
+                                    to={item.path}
+                                    className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
                                 >
-                                    <NavLink 
-                                        to={item.path}
-                                        className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-                                    >
-                                        {item.label}
-                                        {item.dropdown && (
-                                            <svg className="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                                <path d="M6 9l6 6 6-6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                            </svg>
-                                        )}
-                                    </NavLink>
-                                    
+                                    {item.label}
                                     {item.dropdown && (
-                                        <div className={`dropdown ${activeDropdown === idx ? 'active' : ''}`}>
-                                            <div className="dropdown-inner">
-                                                {item.dropdown.map(sub => (
-                                                    <Link key={sub.label} to={sub.path} className="dropdown-link">
-                                                        {sub.label}
-                                                    </Link>
-                                                ))}
-                                            </div>
-                                        </div>
+                                        <svg className="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path d="M6 9l6 6 6-6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                        </svg>
                                     )}
-                                </div>
-                            ))}
-                        </nav>
-
-                        {/* Actions */}
-                        <div className="header-actions">
-                            {/* Search */}
-                            <div className="search-wrapper" ref={searchRef}>
-                                <button 
-                                    className="icon-btn" 
-                                    onClick={() => setSearchOpen(!searchOpen)}
-                                    aria-label="Search"
-                                >
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <circle cx="11" cy="11" r="8"/>
-                                        <path d="m21 21-4.35-4.35"/>
-                                    </svg>
-                                </button>
+                                </NavLink>
                                 
-                                <div className={`search-dropdown ${searchOpen ? 'active' : ''}`}>
-                                    <input 
-                                        type="search" 
-                                        placeholder="Search..." 
-                                        autoFocus={searchOpen}
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Language Switcher */}
-                            <div className="lang-wrapper" ref={langRef}>
-                                <button 
-                                    className="lang-btn" 
-                                    onClick={() => setLangOpen(!langOpen)}
-                                >
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                                    </svg>
-                                    <span>{currentLang.toUpperCase()}</span>
-                                </button>
-
-                                <div className={`lang-dropdown ${langOpen ? 'active' : ''}`}>
-                                    <div className="lang-section">
-                                        <span className="lang-section-title">Indian Languages</span>
-                                        {languages.indian.map(lang => (
-                                            <button 
-                                                key={lang.code}
-                                                className={`lang-option ${currentLang === lang.code ? 'active' : ''}`}
-                                                onClick={() => { setCurrentLang(lang.code); setLangOpen(false); }}
-                                            >
-                                                {lang.name}
-                                            </button>
-                                        ))}
+                                {item.dropdown && (
+                                    <div className={`dropdown ${activeDropdown === idx ? 'active' : ''}`}>
+                                        <div className="dropdown-inner">
+                                            {item.dropdown.map(sub => (
+                                                <Link key={sub.label} to={sub.path} className="dropdown-link">
+                                                    {sub.label}
+                                                </Link>
+                                            ))}
+                                        </div>
                                     </div>
-                                    <div className="lang-section">
-                                        <span className="lang-section-title">International</span>
-                                        {languages.international.map(lang => (
-                                            <button 
-                                                key={lang.code}
-                                                className={`lang-option ${currentLang === lang.code ? 'active' : ''}`}
-                                                onClick={() => { setCurrentLang(lang.code); setLangOpen(false); }}
-                                            >
-                                                {lang.name}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
+                                )}
                             </div>
+                        ))}
+                    </nav>
 
-                            {/* CTA */}
-                            <Link to="/contact" className="header-cta">
-                                Connect
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                    {/* Actions - Right side */}
+                    <div className="header-actions">
+                        {/* Search */}
+                        <div className="search-wrapper" ref={searchRef}>
+                            <button 
+                                className="icon-btn" 
+                                onClick={() => setSearchOpen(!searchOpen)}
+                                aria-label="Search"
+                            >
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="m21 21-4.35-4.35"/>
                                 </svg>
-                            </Link>
+                            </button>
+                            
+                            <div className={`search-dropdown ${searchOpen ? 'active' : ''}`}>
+                                <input 
+                                    type="search" 
+                                    placeholder="Search..." 
+                                    autoFocus={searchOpen}
+                                />
+                            </div>
                         </div>
 
-                        {/* Mobile Toggle */}
-                        <button 
-                            className={`menu-toggle ${menuOpen ? 'active' : ''}`}
-                            onClick={() => setMenuOpen(!menuOpen)}
-                            aria-label="Toggle menu"
-                        >
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
+                        {/* Language Switcher */}
+                        <div className="lang-wrapper" ref={langRef}>
+                            <button 
+                                className="lang-btn" 
+                                onClick={() => setLangOpen(!langOpen)}
+                            >
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                </svg>
+                                <span>{currentLang.toUpperCase()}</span>
+                            </button>
+
+                            <div className={`lang-dropdown ${langOpen ? 'active' : ''}`}>
+                                <div className="lang-section">
+                                    <span className="lang-section-title">Indian Languages</span>
+                                    {languages.indian.map(lang => (
+                                        <button 
+                                            key={lang.code}
+                                            className={`lang-option ${currentLang === lang.code ? 'active' : ''}`}
+                                            onClick={() => { setCurrentLang(lang.code); setLangOpen(false); }}
+                                        >
+                                            {lang.name}
+                                        </button>
+                                    ))}
+                                </div>
+                                <div className="lang-section">
+                                    <span className="lang-section-title">International</span>
+                                    {languages.international.map(lang => (
+                                        <button 
+                                            key={lang.code}
+                                            className={`lang-option ${currentLang === lang.code ? 'active' : ''}`}
+                                            onClick={() => { setCurrentLang(lang.code); setLangOpen(false); }}
+                                        >
+                                            {lang.name}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* CTA */}
+                        <Link to="/contact" className="header-cta">
+                            Connect
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </Link>
                     </div>
+
+                    {/* Mobile Toggle */}
+                    <button 
+                        className={`menu-toggle ${menuOpen ? 'active' : ''}`}
+                        onClick={() => setMenuOpen(!menuOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                 </div>
             </header>
 
@@ -255,38 +250,23 @@ const Header = () => {
                     transition: all 0.4s var(--ease-out);
                 }
 
-                /* ========== BRAND BLOCK - The Hero Element ========== */
+                /* ========== BRAND BLOCK ========== */
                 .brand-block {
-                    position: relative;
                     display: flex;
                     align-items: center;
+                    gap: var(--space-lg);
                     background: var(--color-white);
                     padding: 0 var(--space-2xl) 0 var(--space-xl);
                     height: 100%;
                     flex-shrink: 0;
-                    box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+                    box-shadow: 4px 0 24px rgba(0,0,0,0.12);
                     z-index: 10;
-                }
-
-                .brand-block::before {
-                    content: '';
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    bottom: 0;
-                    width: 4px;
-                    background: var(--color-accent);
-                }
-
-                .brand-block-inner {
-                    display: flex;
-                    align-items: center;
-                    gap: var(--space-md);
+                    border-left: 5px solid var(--color-accent);
                 }
 
                 .brand-logo {
-                    width: 52px;
-                    height: 52px;
+                    width: 64px;
+                    height: 64px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -295,8 +275,8 @@ const Header = () => {
                 }
 
                 .header.scrolled .brand-logo {
-                    width: 44px;
-                    height: 44px;
+                    width: 52px;
+                    height: 52px;
                 }
 
                 .brand-logo img {
@@ -308,33 +288,25 @@ const Header = () => {
                 .brand-text {
                     display: flex;
                     flex-direction: column;
-                    line-height: 1.1;
+                    gap: 2px;
                 }
 
                 .brand-name {
-                    font-size: 1.125rem;
+                    font-size: 1.25rem;
                     font-weight: 700;
                     color: var(--color-text);
                     letter-spacing: -0.01em;
                     white-space: nowrap;
+                    line-height: 1.2;
                 }
 
-                .brand-company {
-                    font-size: 1.125rem;
-                    font-weight: 700;
+                .brand-cert {
+                    font-family: var(--font-serif);
+                    font-size: 0.75rem;
+                    font-style: italic;
+                    font-weight: 400;
                     color: var(--color-accent);
-                    letter-spacing: -0.01em;
-                }
-
-                .brand-accent {
-                    position: absolute;
-                    right: -20px;
-                    top: 0;
-                    bottom: 0;
-                    width: 40px;
-                    background: var(--color-white);
-                    clip-path: polygon(0 0, 50% 0, 100% 50%, 50% 100%, 0 100%);
-                    z-index: -1;
+                    letter-spacing: 0.02em;
                 }
 
                 /* ========== MAIN HEADER ========== */
@@ -342,7 +314,9 @@ const Header = () => {
                     flex: 1;
                     display: flex;
                     align-items: center;
+                    justify-content: space-between;
                     background: transparent;
+                    padding: 0 var(--space-xl);
                     transition: background 0.4s var(--ease-out);
                 }
 
@@ -351,23 +325,11 @@ const Header = () => {
                     backdrop-filter: blur(20px);
                 }
 
-                .header-inner {
-                    flex: 1;
-                    display: flex;
-                    align-items: center;
-                    justify-content: flex-end;
-                    gap: var(--space-xl);
-                    padding: 0 var(--space-xl);
-                    max-width: calc(var(--max-width) - 320px);
-                }
-
-                /* Navigation */
+                /* Navigation - Left */
                 .nav {
                     display: flex;
                     align-items: center;
                     gap: var(--space-xl);
-                    margin-right: auto;
-                    padding-left: var(--space-xl);
                 }
 
                 .nav-item {
@@ -452,7 +414,7 @@ const Header = () => {
                     color: var(--color-text);
                 }
 
-                /* Header Actions */
+                /* Header Actions - Right */
                 .header-actions {
                     display: flex;
                     align-items: center;
@@ -645,7 +607,7 @@ const Header = () => {
                     flex-direction: column;
                     gap: 5px;
                     padding: 8px;
-                    margin-right: -8px;
+                    margin-left: auto;
                 }
 
                 .menu-toggle span {
@@ -737,20 +699,20 @@ const Header = () => {
 
                 /* ========== RESPONSIVE ========== */
                 @media (max-width: 1100px) {
+                    .brand-name {
+                        font-size: 1rem;
+                    }
+                }
+
+                @media (max-width: 900px) {
                     .brand-text {
                         display: none;
                     }
                     
                     .brand-block {
-                        padding: 0 var(--space-xl);
+                        padding: 0 var(--space-lg);
                     }
 
-                    .brand-accent {
-                        display: none;
-                    }
-                }
-
-                @media (max-width: 900px) {
                     .nav,
                     .header-actions {
                         display: none;
@@ -759,20 +721,16 @@ const Header = () => {
                     .menu-toggle {
                         display: flex;
                     }
-
-                    .header-inner {
-                        justify-content: flex-end;
-                    }
                 }
 
                 @media (max-width: 480px) {
                     .brand-logo {
-                        width: 40px;
-                        height: 40px;
+                        width: 48px;
+                        height: 48px;
                     }
 
                     .brand-block {
-                        padding: 0 var(--space-lg);
+                        padding: 0 var(--space-md);
                     }
                 }
             `}</style>
