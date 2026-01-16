@@ -48,7 +48,7 @@ const Clients = () => {
 
             <style>{`
                 .clients {
-                    background: linear-gradient(135deg, var(--color-cream) 0%, #f0ede6 100%);
+                    background: linear-gradient(135deg, #d4af37 0%, #b8941f 50%, #8b6914 100%);
                     padding: var(--space-xl) 0;
                     overflow: hidden;
                 }
@@ -69,7 +69,7 @@ const Clients = () => {
                     font-weight: 600;
                     text-transform: uppercase;
                     letter-spacing: 0.12em;
-                    color: var(--color-muted);
+                    color: rgba(255, 255, 255, 0.7);
                     white-space: nowrap;
                 }
 
@@ -107,14 +107,13 @@ const Clients = () => {
                     justify-content: center;
                     width: 140px;
                     height: 48px;
-                    padding: 8px var(--space-lg);
-                    background: rgba(255, 255, 255, 0.6);
-                    border-radius: 4px;
+                    padding: 0 var(--space-lg);
                     transition: all 0.3s;
+                    opacity: 0.8;
                 }
 
                 .client-logo:hover {
-                    background: rgba(255, 255, 255, 0.9);
+                    opacity: 1;
                     transform: translateY(-2px);
                 }
 
@@ -145,7 +144,7 @@ const Clients = () => {
                     .client-logo {
                         width: 120px;
                         height: 40px;
-                        padding: 6px var(--space-md);
+                        padding: 0 var(--space-md);
                     }
                 }
             `}</style>
