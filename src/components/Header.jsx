@@ -748,13 +748,11 @@ const Header = () => {
                     bottom: 0;
                     background: var(--color-white);
                     z-index: 999;
-                    padding: 24px;
+                    padding: 0 24px 24px 24px;
                     opacity: 0;
                     visibility: hidden;
                     transition: all 0.3s ease;
                     overflow-y: auto;
-                    margin-top: 0;
-                    border-top: 1px solid var(--color-border);
                 }
 
                 .mobile-menu.open {
@@ -807,6 +805,7 @@ const Header = () => {
 
                 /* ========== MOBILE ACTIONS BAR ========== */
                 .mobile-actions-bar {
+                    padding-top: 24px;
                     padding-bottom: 20px;
                     margin-bottom: 20px;
                     border-bottom: 1px solid var(--color-border);
