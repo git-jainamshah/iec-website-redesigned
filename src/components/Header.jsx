@@ -414,7 +414,7 @@ const Header = () => {
                     justify-content: center;
                 }
 
-                @media (max-width: 1100px) {
+                @media (max-width: 960px) {
                     .nav,
                     .header-actions .phone,
                     .header-actions .btn {
