@@ -43,7 +43,7 @@
     
     /* Layout */
     --max-width: 1400px;
-    --header-height: 80px;
+    --header-height: 72px;
     
     /* Animation */
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
