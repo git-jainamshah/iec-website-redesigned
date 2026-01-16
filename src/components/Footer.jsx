@@ -17,7 +17,7 @@ const Footer = () => {
                             <p>Get expert consultation and a detailed quote for your repair needs.</p>
                         </div>
                         <div className="cta-actions">
-                            <Link to="/contact" className="cta-link">
+                            <Link to="/contact" className="cta-btn-primary">
                                 Connect Now
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                     <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -152,23 +152,34 @@ const Footer = () => {
                     flex-shrink: 0;
                 }
 
-                .cta-link {
-                    display: flex;
+                .cta-btn-primary {
+                    display: inline-flex;
                     align-items: center;
-                    gap: var(--space-sm);
+                    gap: 8px;
                     font-size: 0.875rem;
                     font-weight: 600;
                     text-transform: uppercase;
                     letter-spacing: 0.05em;
-                    color: var(--color-white);
-                    padding-bottom: 4px;
-                    border-bottom: 2px solid var(--color-accent);
+                    color: var(--color-primary);
+                    background: var(--color-white);
+                    padding: 14px 24px;
+                    border-radius: 4px;
                     transition: all 0.3s var(--ease-out);
                 }
 
-                .cta-link:hover {
-                    gap: var(--space-md);
-                    color: var(--color-accent);
+                .cta-btn-primary:hover {
+                    background: var(--color-accent);
+                    color: var(--color-white);
+                    gap: 12px;
+                }
+
+                .cta-btn-primary svg {
+                    flex-shrink: 0;
+                    transition: transform 0.3s;
+                }
+
+                .cta-btn-primary:hover svg {
+                    transform: translateX(4px);
                 }
 
                 .cta-divider {
@@ -180,10 +191,14 @@ const Footer = () => {
                     font-size: 1rem;
                     font-weight: 600;
                     color: var(--color-white);
-                    transition: color 0.2s;
+                    padding: 14px 24px;
+                    border: 2px solid rgba(255, 255, 255, 0.3);
+                    border-radius: 4px;
+                    transition: all 0.3s;
                 }
 
                 .cta-phone:hover {
+                    border-color: var(--color-accent);
                     color: var(--color-accent);
                 }
 
@@ -345,6 +360,13 @@ const Footer = () => {
 
                     .cta-actions {
                         flex-direction: column;
+                        width: 100%;
+                    }
+
+                    .cta-btn-primary,
+                    .cta-phone {
+                        width: 100%;
+                        justify-content: center;
                     }
 
                     .footer-grid {
@@ -367,3 +389,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

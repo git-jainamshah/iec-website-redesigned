@@ -81,11 +81,11 @@ const Services = () => {
                     ))}
                 </div>
 
-                {/* Bottom CTA - Fixed */}
+                {/* Bottom CTA */}
                 <div className="services-bottom-cta">
-                    <span className="cta-question">Not sure what you need?</span>
-                    <a href="tel:+919824214839" className="cta-link">
-                        <span>Talk to an Engineer</span>
+                    <span className="bottom-cta-text">Not sure what you need?</span>
+                    <a href="tel:+919824214839" className="bottom-cta-btn">
+                        Talk to an Engineer
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                         </svg>
@@ -297,35 +297,36 @@ const Services = () => {
                     border-radius: 8px;
                 }
 
-                .cta-question {
+                .bottom-cta-text {
                     font-size: 0.9375rem;
                     color: var(--color-text-light);
                 }
 
-                .cta-link {
+                .bottom-cta-btn {
                     display: inline-flex;
                     align-items: center;
-                    gap: var(--space-sm);
+                    gap: 8px;
                     font-size: 0.875rem;
                     font-weight: 600;
                     color: var(--color-accent);
-                    padding: 10px 20px;
+                    padding: 12px 20px;
                     background: var(--color-white);
                     border: 2px solid var(--color-accent);
                     border-radius: 6px;
                     transition: all 0.3s var(--ease-out);
                 }
 
-                .cta-link:hover {
+                .bottom-cta-btn:hover {
                     background: var(--color-accent);
                     color: var(--color-white);
                 }
 
-                .cta-link svg {
+                .bottom-cta-btn svg {
+                    flex-shrink: 0;
                     transition: transform 0.3s;
                 }
 
-                .cta-link:hover svg {
+                .bottom-cta-btn:hover svg {
                     transform: rotate(15deg);
                 }
 
