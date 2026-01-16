@@ -87,33 +87,35 @@ const About = () => {
                                         <img src={img.src} alt={img.caption} />
                                     </div>
                                 ))}
+                            </div>
 
-                                {/* Navigation Arrows */}
+                            {/* Caption Bar with Navigation */}
+                            <div className="gallery-controls">
                                 <button className="gallery-nav prev" onClick={goToPrev} aria-label="Previous image">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                         <path d="M15 18l-6-6 6-6"/>
                                     </svg>
                                 </button>
+
+                                <div className="gallery-caption">
+                                    <span className="caption-text">{images[currentImage].caption}</span>
+                                    <div className="gallery-dots">
+                                        {images.map((_, idx) => (
+                                            <button 
+                                                key={idx} 
+                                                className={`dot ${idx === currentImage ? 'active' : ''}`}
+                                                onClick={() => setCurrentImage(idx)}
+                                                aria-label={`Go to slide ${idx + 1}`}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+
                                 <button className="gallery-nav next" onClick={goToNext} aria-label="Next image">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                         <path d="M9 18l6-6-6-6"/>
                                     </svg>
                                 </button>
-                            </div>
-
-                            {/* Caption Bar - Always Visible */}
-                            <div className="gallery-caption">
-                                <span className="caption-text">{images[currentImage].caption}</span>
-                                <div className="gallery-dots">
-                                    {images.map((_, idx) => (
-                                        <button 
-                                            key={idx} 
-                                            className={`dot ${idx === currentImage ? 'active' : ''}`}
-                                            onClick={() => setCurrentImage(idx)}
-                                            aria-label={`Go to slide ${idx + 1}`}
-                                        />
-                                    ))}
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -252,42 +254,35 @@ const About = () => {
                     object-fit: cover;
                 }
 
-                /* Navigation Arrows */
+                /* Controls Bar - Caption + Navigation */
+                .gallery-controls {
+                    display: flex;
+                    align-items: center;
+                    gap: var(--space-sm);
+                    padding: var(--space-sm) var(--space-md);
+                    background: var(--color-white);
+                    border-top: 1px solid var(--color-border);
+                }
+
+                /* Navigation Arrows in Caption Bar */
                 .gallery-nav {
-                    position: absolute;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    width: 44px;
-                    height: 44px;
+                    width: 36px;
+                    height: 36px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    background: var(--color-white);
-                    border: none;
+                    background: var(--color-light);
+                    border: 1px solid var(--color-border);
                     border-radius: 50%;
                     cursor: pointer;
-                    opacity: 0;
-                    transition: all 0.3s var(--ease-out);
-                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-                    z-index: 2;
-                }
-
-                .gallery-images:hover .gallery-nav {
-                    opacity: 1;
+                    transition: all 0.2s var(--ease-out);
+                    flex-shrink: 0;
                 }
 
                 .gallery-nav:hover {
                     background: var(--color-accent);
+                    border-color: var(--color-accent);
                     color: var(--color-white);
-                    transform: translateY(-50%) scale(1.1);
-                }
-
-                .gallery-nav.prev {
-                    left: var(--space-md);
-                }
-
-                .gallery-nav.next {
-                    right: var(--space-md);
                 }
 
                 .gallery-nav svg {
@@ -302,14 +297,13 @@ const About = () => {
                     transform: translateX(2px);
                 }
 
-                /* Caption Bar - Always Visible */
+                /* Caption */
                 .gallery-caption {
+                    flex: 1;
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    padding: var(--space-md) var(--space-lg);
-                    background: var(--color-white);
-                    border-top: 1px solid var(--color-border);
+                    padding: 0 var(--space-md);
                 }
 
                 .caption-text {
@@ -409,10 +403,6 @@ const About = () => {
                     .about-visual {
                         order: -1;
                     }
-
-                    .gallery-nav {
-                        opacity: 1;
-                    }
                 }
 
                 @media (max-width: 768px) {
@@ -440,16 +430,16 @@ const About = () => {
                     }
 
                     .gallery-nav {
-                        width: 36px;
-                        height: 36px;
+                        width: 32px;
+                        height: 32px;
                     }
 
-                    .gallery-nav.prev {
-                        left: var(--space-sm);
+                    .gallery-caption {
+                        padding: 0 var(--space-sm);
                     }
 
-                    .gallery-nav.next {
-                        right: var(--space-sm);
+                    .caption-text {
+                        font-size: 0.8125rem;
                     }
                 }
             `}</style>
