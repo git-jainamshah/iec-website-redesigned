@@ -736,7 +736,7 @@ const Header = () => {
                 }
 
                 /* ========== RESPONSIVE ========== */
-                @media (max-width: 1200px) {
+                @media (max-width: 1100px) {
                     .brand-text {
                         display: none;
                     }
@@ -750,7 +750,7 @@ const Header = () => {
                     }
                 }
 
-                @media (max-width: 1024px) {
+                @media (max-width: 900px) {
                     .nav,
                     .header-actions {
                         display: none;
@@ -765,7 +765,7 @@ const Header = () => {
                     }
                 }
 
-                @media (max-width: 600px) {
+                @media (max-width: 480px) {
                     .brand-logo {
                         width: 40px;
                         height: 40px;
