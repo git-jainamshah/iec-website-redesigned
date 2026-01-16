@@ -105,8 +105,8 @@ const Services = () => {
                     justify-content: space-between;
                     align-items: flex-end;
                     gap: var(--space-2xl);
-                    margin-bottom: var(--space-2xl);
-                    padding-bottom: var(--space-lg);
+                    margin-bottom: var(--space-3xl);
+                    padding-bottom: var(--space-xl);
                     border-bottom: 1px solid var(--color-border);
                 }
 

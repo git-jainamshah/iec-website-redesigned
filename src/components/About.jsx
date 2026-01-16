@@ -141,11 +141,11 @@ const About = () => {
                 }
 
                 .about-content h2 {
-                    margin-bottom: var(--space-lg);
+                    margin-bottom: var(--space-xl);
                 }
 
                 .about-text {
-                    margin-bottom: var(--space-lg);
+                    margin-bottom: var(--space-xl);
                 }
 
                 .about-text p {
@@ -162,8 +162,8 @@ const About = () => {
                 .about-stats {
                     display: flex;
                     gap: var(--space-xl);
-                    margin-bottom: var(--space-lg);
-                    padding: var(--space-md) 0;
+                    margin-bottom: var(--space-xl);
+                    padding: var(--space-lg) 0;
                     border-top: 1px solid var(--color-border);
                     border-bottom: 1px solid var(--color-border);
                 }

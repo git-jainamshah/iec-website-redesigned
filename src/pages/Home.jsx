@@ -3,7 +3,6 @@ import Hero from '../components/Hero';
 import Clients from '../components/Clients';
 import About from '../components/About';
 import Certifications from '../components/Certifications';
-import Metrics from '../components/Metrics';
 import Services from '../components/Services';
 import Blogs from '../components/Blogs';
 import CTA from '../components/CTA';
@@ -16,7 +15,6 @@ const Home = () => {
             <Clients />
             <About />
             <Certifications />
-            <Metrics />
             <Services />
             <Blogs />
             <CTA />
