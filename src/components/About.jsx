@@ -3,22 +3,22 @@ import { Link } from 'react-router-dom';
 
 const features = [
     {
-        icon: '🏭',
+        number: '01',
         title: 'State-of-the-Art Facility',
         desc: '300,000 sq.ft total area with 75,000 sq.ft dedicated shop floor'
     },
     {
-        icon: '⚡',
+        number: '02',
         title: 'Captive Power',
         desc: '5 MW power generation for uninterrupted operations'
     },
     {
-        icon: '🏗️',
+        number: '03',
         title: 'Heavy Lifting',
         desc: 'Cranes from 10 to 300 tons for largest machinery'
     },
     {
-        icon: '✓',
+        number: '04',
         title: 'Quality Certified',
         desc: 'ISO 9001:2008 certified with EASA membership since 2014'
     }
@@ -71,7 +71,7 @@ const About = () => {
                                 className="feature-card"
                                 style={{ animationDelay: `${idx * 0.1}s` }}
                             >
-                                <span className="feature-icon">{feature.icon}</span>
+                                <span className="feature-number">{feature.number}</span>
                                 <div className="feature-content">
                                     <h4>{feature.title}</h4>
                                     <p>{feature.desc}</p>
@@ -143,7 +143,7 @@ const About = () => {
                 .about-features {
                     display: flex;
                     flex-direction: column;
-                    gap: var(--space-lg);
+                    gap: var(--space-md);
                 }
 
                 .feature-card {
@@ -160,9 +160,13 @@ const About = () => {
                     transform: translateX(8px);
                 }
 
-                .feature-icon {
-                    font-size: 1.5rem;
+                .feature-number {
+                    font-family: var(--font-serif);
+                    font-size: 1.25rem;
+                    font-weight: 500;
+                    color: var(--color-accent);
                     flex-shrink: 0;
+                    width: 32px;
                 }
 
                 .feature-content h4 {

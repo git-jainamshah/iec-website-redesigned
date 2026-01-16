@@ -17,14 +17,15 @@ const Footer = () => {
                             <p>Get expert consultation and a detailed quote for your repair needs.</p>
                         </div>
                         <div className="cta-actions">
-                            <Link to="/contact" className="btn btn-primary">
-                                Request Quote
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <Link to="/contact" className="cta-link">
+                                Connect Now
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                     <path d="M5 12h14M12 5l7 7-7 7"/>
                                 </svg>
                             </Link>
-                            <a href="tel:+919824214839" className="btn btn-secondary">
-                                Call: +91 98242 14839
+                            <span className="cta-divider">or</span>
+                            <a href="tel:+919824214839" className="cta-phone">
+                                +91 98242 14839
                             </a>
                         </div>
                     </div>
@@ -38,19 +39,19 @@ const Footer = () => {
                         {/* Brand */}
                         <div className="footer-brand">
                             <Link to="/" className="footer-logo">
-                                <img src={logo} alt="IEC" />
+                                <div className="footer-logo-circle">
+                                    <img src={logo} alt="IEC" />
+                                </div>
+                                <div className="footer-logo-text">
+                                    <span>Indian Engineering</span>
+                                    <span className="accent">Company</span>
+                                </div>
                             </Link>
-                            <p className="footer-tagline">
-                                <strong>Our Repairs Run the Industries</strong>
-                            </p>
+                            <p className="footer-tagline">Our Repairs Run the Industries</p>
                             <p className="footer-desc">
                                 India's premier engineering company for industrial motor 
                                 and generator repair services.
                             </p>
-                            <div className="footer-certifications">
-                                <span>ISO 9001 Certified</span>
-                                <span>EASA Member</span>
-                            </div>
                         </div>
 
                         {/* Quick Links */}
@@ -118,7 +119,7 @@ const Footer = () => {
                 .footer-cta {
                     background: var(--color-primary);
                     padding: var(--space-4xl) 0;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
                 }
 
                 .cta-content {
@@ -129,10 +130,10 @@ const Footer = () => {
                 }
 
                 .cta-text h3 {
-                    font-size: clamp(1.75rem, 4vw, 2.5rem);
+                    font-size: clamp(1.5rem, 3vw, 2rem);
                     font-weight: 400;
                     color: var(--color-white);
-                    margin-bottom: var(--space-md);
+                    margin-bottom: var(--space-sm);
                 }
 
                 .cta-text h3 em {
@@ -140,14 +141,50 @@ const Footer = () => {
                 }
 
                 .cta-text p {
-                    font-size: 1rem;
-                    color: rgba(255, 255, 255, 0.6);
+                    font-size: 0.9375rem;
+                    color: rgba(255, 255, 255, 0.5);
                 }
 
                 .cta-actions {
                     display: flex;
-                    gap: var(--space-md);
+                    align-items: center;
+                    gap: var(--space-lg);
                     flex-shrink: 0;
+                }
+
+                .cta-link {
+                    display: flex;
+                    align-items: center;
+                    gap: var(--space-sm);
+                    font-size: 0.875rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                    color: var(--color-white);
+                    padding-bottom: 4px;
+                    border-bottom: 2px solid var(--color-accent);
+                    transition: all 0.3s var(--ease-out);
+                }
+
+                .cta-link:hover {
+                    gap: var(--space-md);
+                    color: var(--color-accent);
+                }
+
+                .cta-divider {
+                    font-size: 0.75rem;
+                    color: rgba(255, 255, 255, 0.3);
+                }
+
+                .cta-phone {
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: var(--color-white);
+                    transition: color 0.2s;
+                }
+
+                .cta-phone:hover {
+                    color: var(--color-accent);
                 }
 
                 /* Main Footer */
@@ -161,14 +198,49 @@ const Footer = () => {
                     gap: var(--space-3xl);
                 }
 
-                .footer-logo img {
-                    height: 48px;
+                .footer-logo {
+                    display: flex;
+                    align-items: center;
+                    gap: var(--space-md);
                     margin-bottom: var(--space-lg);
                 }
 
-                .footer-tagline {
+                .footer-logo-circle {
+                    width: 48px;
+                    height: 48px;
+                    background: var(--color-white);
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 6px;
+                }
+
+                .footer-logo-circle img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+
+                .footer-logo-text {
+                    display: flex;
+                    flex-direction: column;
+                    font-size: 0.9375rem;
+                    font-weight: 600;
+                    color: var(--color-white);
+                    line-height: 1.2;
+                }
+
+                .footer-logo-text .accent {
                     color: var(--color-accent);
-                    font-size: 0.8125rem;
+                }
+
+                .footer-tagline {
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: var(--color-accent);
                     margin-bottom: var(--space-md);
                 }
 
@@ -176,23 +248,6 @@ const Footer = () => {
                     font-size: 0.9375rem;
                     color: rgba(255, 255, 255, 0.5);
                     line-height: 1.7;
-                    margin-bottom: var(--space-lg);
-                }
-
-                .footer-certifications {
-                    display: flex;
-                    gap: var(--space-md);
-                }
-
-                .footer-certifications span {
-                    font-size: 0.6875rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 0.05em;
-                    color: rgba(255, 255, 255, 0.3);
-                    padding: 6px 12px;
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    border-radius: 100px;
                 }
 
                 .footer-col h4 {
@@ -242,7 +297,7 @@ const Footer = () => {
 
                 /* Footer Bottom */
                 .footer-bottom {
-                    border-top: 1px solid rgba(255, 255, 255, 0.1);
+                    border-top: 1px solid rgba(255, 255, 255, 0.08);
                     padding: var(--space-lg) 0;
                 }
 
@@ -289,12 +344,6 @@ const Footer = () => {
 
                     .cta-actions {
                         flex-direction: column;
-                        width: 100%;
-                    }
-
-                    .cta-actions .btn {
-                        width: 100%;
-                        justify-content: center;
                     }
 
                     .footer-grid {

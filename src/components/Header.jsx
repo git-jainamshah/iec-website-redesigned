@@ -1,12 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import logo from '../assets/iec-logo.png';
+
+const languages = {
+    indian: [
+        { code: 'en', name: 'English' },
+        { code: 'hi', name: 'हिंदी' },
+        { code: 'gu', name: 'ગુજરાતી' },
+        { code: 'mr', name: 'मराठी' },
+        { code: 'te', name: 'తెలుగు' },
+        { code: 'ta', name: 'தமிழ்' },
+        { code: 'ml', name: 'മലയാളം' },
+        { code: 'kn', name: 'ಕನ್ನಡ' },
+    ],
+    international: [
+        { code: 'fr', name: 'Français' },
+        { code: 'es', name: 'Español' },
+        { code: 'de', name: 'Deutsch' },
+    ]
+};
 
 const Header = () => {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
+    const [searchOpen, setSearchOpen] = useState(false);
+    const [langOpen, setLangOpen] = useState(false);
+    const [currentLang, setCurrentLang] = useState('en');
     const location = useLocation();
+    const searchRef = useRef(null);
+    const langRef = useRef(null);
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -17,10 +40,26 @@ const Header = () => {
     useEffect(() => {
         setMenuOpen(false);
         setActiveDropdown(null);
+        setSearchOpen(false);
+        setLangOpen(false);
     }, [location]);
 
+    // Close dropdowns on outside click
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (searchRef.current && !searchRef.current.contains(e.target)) {
+                setSearchOpen(false);
+            }
+            if (langRef.current && !langRef.current.contains(e.target)) {
+                setLangOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
     const navItems = [
-        { label: 'About Us', path: '/about' },
+        { label: 'About', path: '/about' },
         { 
             label: 'Services', 
             path: '/services',
@@ -30,30 +69,31 @@ const Header = () => {
                 { label: 'Spare Parts', path: '/services#spares' },
             ]
         },
-        { 
-            label: 'Capabilities', 
-            path: '/infrastructure',
-            dropdown: [
-                { label: 'Infrastructure', path: '/infrastructure' },
-                { label: 'Testing Facilities', path: '/infrastructure#testing' },
-                { label: 'Quality Assurance', path: '/infrastructure#quality' },
-            ]
-        },
+        { label: 'Infrastructure', path: '/infrastructure' },
         { label: 'Contact', path: '/contact' },
     ];
+
+    const getCurrentLangName = () => {
+        const all = [...languages.indian, ...languages.international];
+        return all.find(l => l.code === currentLang)?.name || 'EN';
+    };
 
     return (
         <>
             <header className={`header ${scrolled ? 'scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`}>
                 <div className="header-inner">
+                    {/* Logo */}
                     <Link to="/" className="logo">
-                        <img src={logo} alt="IEC" />
+                        <div className="logo-circle">
+                            <img src={logo} alt="IEC" />
+                        </div>
                         <div className="logo-text">
                             <span className="logo-name">Indian Engineering</span>
-                            <span className="logo-tagline">Company</span>
+                            <span className="logo-company">Company</span>
                         </div>
                     </Link>
 
+                    {/* Navigation */}
                     <nav className="nav">
                         {navItems.map((item, idx) => (
                             <div 
@@ -89,16 +129,84 @@ const Header = () => {
                         ))}
                     </nav>
 
+                    {/* Actions */}
                     <div className="header-actions">
-                        <a href="tel:+919824214839" className="phone">
-                            <span className="phone-label">24/7 Support</span>
-                            <span className="phone-number">+91 98242 14839</span>
-                        </a>
-                        <Link to="/contact" className="btn btn-primary">
-                            Get Quote
+                        {/* Search */}
+                        <div className="search-wrapper" ref={searchRef}>
+                            <button 
+                                className="icon-btn" 
+                                onClick={() => setSearchOpen(!searchOpen)}
+                                aria-label="Search"
+                            >
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="m21 21-4.35-4.35"/>
+                                </svg>
+                            </button>
+                            
+                            <div className={`search-dropdown ${searchOpen ? 'active' : ''}`}>
+                                <input 
+                                    type="search" 
+                                    placeholder="Search..." 
+                                    autoFocus={searchOpen}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Language Switcher */}
+                        <div className="lang-wrapper" ref={langRef}>
+                            <button 
+                                className="lang-btn" 
+                                onClick={() => setLangOpen(!langOpen)}
+                            >
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                </svg>
+                                <span>{currentLang.toUpperCase()}</span>
+                                <svg className="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M6 9l6 6 6-6" strokeWidth="2"/>
+                                </svg>
+                            </button>
+
+                            <div className={`lang-dropdown ${langOpen ? 'active' : ''}`}>
+                                <div className="lang-section">
+                                    <span className="lang-section-title">Indian Languages</span>
+                                    {languages.indian.map(lang => (
+                                        <button 
+                                            key={lang.code}
+                                            className={`lang-option ${currentLang === lang.code ? 'active' : ''}`}
+                                            onClick={() => { setCurrentLang(lang.code); setLangOpen(false); }}
+                                        >
+                                            {lang.name}
+                                        </button>
+                                    ))}
+                                </div>
+                                <div className="lang-section">
+                                    <span className="lang-section-title">International</span>
+                                    {languages.international.map(lang => (
+                                        <button 
+                                            key={lang.code}
+                                            className={`lang-option ${currentLang === lang.code ? 'active' : ''}`}
+                                            onClick={() => { setCurrentLang(lang.code); setLangOpen(false); }}
+                                        >
+                                            {lang.name}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* CTA */}
+                        <Link to="/contact" className="header-cta">
+                            Connect
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
                         </Link>
                     </div>
 
+                    {/* Mobile Toggle */}
                     <button 
                         className={`menu-toggle ${menuOpen ? 'active' : ''}`}
                         onClick={() => setMenuOpen(!menuOpen)}
@@ -128,7 +236,12 @@ const Header = () => {
                             )}
                         </div>
                     ))}
-                    <Link to="/contact" className="btn btn-primary mobile-cta">Get Quote</Link>
+                    <Link to="/contact" className="mobile-cta">
+                        Connect Now
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </Link>
                 </nav>
             </div>
 
@@ -157,6 +270,7 @@ const Header = () => {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                    gap: var(--space-xl);
                 }
 
                 /* Logo */
@@ -164,33 +278,49 @@ const Header = () => {
                     display: flex;
                     align-items: center;
                     gap: var(--space-md);
+                    flex-shrink: 0;
                 }
 
-                .logo img {
-                    height: 48px;
-                    width: auto;
+                .logo-circle {
+                    width: 56px;
+                    height: 56px;
+                    background: var(--color-white);
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 8px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
                     transition: all 0.3s var(--ease-out);
                 }
 
-                .header.scrolled .logo img {
-                    height: 40px;
+                .header.scrolled .logo-circle {
+                    width: 48px;
+                    height: 48px;
+                    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+                }
+
+                .logo-circle img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
                 }
 
                 .logo-text {
                     display: flex;
                     flex-direction: column;
-                    line-height: 1.1;
+                    line-height: 1.15;
                 }
 
                 .logo-name {
-                    font-size: 0.9375rem;
+                    font-size: 1.0625rem;
                     font-weight: 600;
                     color: var(--color-white);
                     transition: color 0.3s;
                 }
 
-                .logo-tagline {
-                    font-size: 0.9375rem;
+                .logo-company {
+                    font-size: 1.0625rem;
                     font-weight: 600;
                     color: var(--color-accent);
                 }
@@ -216,9 +346,9 @@ const Header = () => {
                     gap: 4px;
                     font-size: 0.8125rem;
                     font-weight: 500;
-                    color: rgba(255, 255, 255, 0.85);
+                    color: rgba(255, 255, 255, 0.8);
                     text-transform: uppercase;
-                    letter-spacing: 0.06em;
+                    letter-spacing: 0.05em;
                     padding: 8px 0;
                     transition: color 0.2s;
                 }
@@ -251,12 +381,12 @@ const Header = () => {
                 .dropdown {
                     position: absolute;
                     top: 100%;
-                    left: -20px;
-                    padding-top: 16px;
+                    left: -16px;
+                    padding-top: 12px;
                     opacity: 0;
                     visibility: hidden;
-                    transform: translateY(10px);
-                    transition: all 0.3s var(--ease-out);
+                    transform: translateY(8px);
+                    transition: all 0.25s var(--ease-out);
                 }
 
                 .dropdown.active {
@@ -269,8 +399,8 @@ const Header = () => {
                     background: var(--color-white);
                     border: 1px solid var(--color-border);
                     border-radius: 4px;
-                    padding: var(--space-sm);
-                    min-width: 220px;
+                    padding: var(--space-xs);
+                    min-width: 200px;
                     box-shadow: var(--shadow-lg);
                 }
 
@@ -292,42 +422,187 @@ const Header = () => {
                 .header-actions {
                     display: flex;
                     align-items: center;
-                    gap: var(--space-xl);
+                    gap: var(--space-md);
                 }
 
-                .phone {
+                .icon-btn {
+                    width: 36px;
+                    height: 36px;
                     display: flex;
-                    flex-direction: column;
-                    align-items: flex-end;
-                    line-height: 1.2;
+                    align-items: center;
+                    justify-content: center;
+                    color: rgba(255, 255, 255, 0.8);
+                    border-radius: 50%;
+                    transition: all 0.2s;
                 }
 
-                .phone-label {
+                .header.scrolled .icon-btn {
+                    color: var(--color-text-light);
+                }
+
+                .icon-btn:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    color: var(--color-white);
+                }
+
+                .header.scrolled .icon-btn:hover {
+                    background: var(--color-light);
+                    color: var(--color-text);
+                }
+
+                /* Search */
+                .search-wrapper {
+                    position: relative;
+                }
+
+                .search-dropdown {
+                    position: absolute;
+                    top: calc(100% + 8px);
+                    right: 0;
+                    background: var(--color-white);
+                    border: 1px solid var(--color-border);
+                    border-radius: 4px;
+                    padding: var(--space-sm);
+                    box-shadow: var(--shadow-lg);
+                    opacity: 0;
+                    visibility: hidden;
+                    transform: translateY(8px);
+                    transition: all 0.25s var(--ease-out);
+                }
+
+                .search-dropdown.active {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                }
+
+                .search-dropdown input {
+                    width: 240px;
+                    padding: var(--space-sm) var(--space-md);
+                    font-size: 0.875rem;
+                    border: 1px solid var(--color-border);
+                    border-radius: 3px;
+                    outline: none;
+                }
+
+                .search-dropdown input:focus {
+                    border-color: var(--color-accent);
+                }
+
+                /* Language Switcher */
+                .lang-wrapper {
+                    position: relative;
+                }
+
+                .lang-btn {
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    padding: 6px 12px;
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    color: rgba(255, 255, 255, 0.8);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-radius: 100px;
+                    transition: all 0.2s;
+                }
+
+                .header.scrolled .lang-btn {
+                    color: var(--color-text-light);
+                    border-color: var(--color-border);
+                }
+
+                .lang-btn:hover {
+                    border-color: rgba(255, 255, 255, 0.4);
+                }
+
+                .header.scrolled .lang-btn:hover {
+                    border-color: var(--color-text-light);
+                }
+
+                .lang-dropdown {
+                    position: absolute;
+                    top: calc(100% + 8px);
+                    right: 0;
+                    background: var(--color-white);
+                    border: 1px solid var(--color-border);
+                    border-radius: 4px;
+                    padding: var(--space-sm);
+                    box-shadow: var(--shadow-lg);
+                    opacity: 0;
+                    visibility: hidden;
+                    transform: translateY(8px);
+                    transition: all 0.25s var(--ease-out);
+                    min-width: 160px;
+                }
+
+                .lang-dropdown.active {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                }
+
+                .lang-section {
+                    padding: var(--space-xs) 0;
+                }
+
+                .lang-section:first-child {
+                    border-bottom: 1px solid var(--color-border);
+                    margin-bottom: var(--space-xs);
+                    padding-bottom: var(--space-sm);
+                }
+
+                .lang-section-title {
+                    display: block;
                     font-size: 0.625rem;
                     font-weight: 600;
                     text-transform: uppercase;
                     letter-spacing: 0.1em;
-                    color: rgba(255, 255, 255, 0.5);
-                    transition: color 0.3s;
-                }
-
-                .header.scrolled .phone-label {
                     color: var(--color-muted);
+                    padding: 0 var(--space-sm);
+                    margin-bottom: var(--space-xs);
                 }
 
-                .phone-number {
-                    font-size: 0.875rem;
-                    font-weight: 600;
-                    color: var(--color-white);
-                    transition: color 0.3s;
+                .lang-option {
+                    display: block;
+                    width: 100%;
+                    text-align: left;
+                    padding: 6px var(--space-sm);
+                    font-size: 0.8125rem;
+                    color: var(--color-text-light);
+                    border-radius: 3px;
+                    transition: all 0.15s;
                 }
 
-                .header.scrolled .phone-number {
+                .lang-option:hover {
+                    background: var(--color-light);
                     color: var(--color-text);
                 }
 
-                .header-actions .btn {
-                    padding: 0.75rem 1.5rem;
+                .lang-option.active {
+                    color: var(--color-accent);
+                    font-weight: 600;
+                }
+
+                /* Header CTA */
+                .header-cta {
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    padding: 8px 16px;
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                    color: var(--color-white);
+                    background: var(--color-accent);
+                    border-radius: 100px;
+                    transition: all 0.2s var(--ease-out);
+                }
+
+                .header-cta:hover {
+                    background: var(--color-accent-hover);
+                    transform: translateY(-1px);
                 }
 
                 /* Menu Toggle */
@@ -340,7 +615,7 @@ const Header = () => {
                 }
 
                 .menu-toggle span {
-                    width: 22px;
+                    width: 20px;
                     height: 2px;
                     background: var(--color-white);
                     transition: all 0.3s var(--ease-out);
@@ -375,6 +650,7 @@ const Header = () => {
                     opacity: 0;
                     visibility: hidden;
                     transition: all 0.4s var(--ease-out);
+                    overflow-y: auto;
                 }
 
                 .mobile-menu.open {
@@ -385,11 +661,11 @@ const Header = () => {
                 .mobile-nav {
                     display: flex;
                     flex-direction: column;
-                    gap: var(--space-md);
+                    gap: var(--space-sm);
                 }
 
                 .mobile-link {
-                    font-size: 1.25rem;
+                    font-size: 1.125rem;
                     font-weight: 500;
                     color: var(--color-text);
                     padding: var(--space-sm) 0;
@@ -400,24 +676,37 @@ const Header = () => {
                     padding: var(--space-sm) 0 var(--space-md) var(--space-lg);
                     display: flex;
                     flex-direction: column;
-                    gap: var(--space-sm);
+                    gap: var(--space-xs);
                 }
 
                 .mobile-sub-link {
                     font-size: 0.9375rem;
                     color: var(--color-text-light);
+                    padding: var(--space-xs) 0;
                 }
 
                 .mobile-cta {
-                    margin-top: var(--space-xl);
-                    width: 100%;
+                    display: flex;
+                    align-items: center;
                     justify-content: center;
+                    gap: var(--space-sm);
+                    margin-top: var(--space-xl);
+                    padding: var(--space-md);
+                    font-size: 0.875rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                    color: var(--color-white);
+                    background: var(--color-accent);
+                    border-radius: 4px;
                 }
 
-                @media (max-width: 960px) {
-                    .nav,
-                    .header-actions .phone,
-                    .header-actions .btn {
+                @media (max-width: 1024px) {
+                    .nav {
+                        display: none;
+                    }
+
+                    .header-actions {
                         display: none;
                     }
 
@@ -429,6 +718,11 @@ const Header = () => {
                 @media (max-width: 600px) {
                     .logo-text {
                         display: none;
+                    }
+
+                    .logo-circle {
+                        width: 48px;
+                        height: 48px;
                     }
                 }
             `}</style>

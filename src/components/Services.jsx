@@ -9,7 +9,7 @@ const services = [
         subtitle: 'HV Machines up to 250MW',
         desc: 'Complete repair and rewinding services for high voltage motors, generators, alternators, and DC machines. Our expertise spans from routine maintenance to complex overhauls.',
         features: ['Stator Rewinding', 'Rotor Repair', 'Core Restacking', 'Insulation Systems'],
-        image: 'linear-gradient(135deg, #1a2d4a 0%, #0a1628 100%)'
+        gradient: 'linear-gradient(135deg, #1a2d4a 0%, #0a1628 100%)'
     },
     {
         id: 'pumps',
@@ -18,7 +18,7 @@ const services = [
         subtitle: 'All Types & Capacities',
         desc: 'Comprehensive pump maintenance, repair, and refurbishment services. We handle centrifugal, submersible, vertical turbine, and specialty pumps for all industrial applications.',
         features: ['Impeller Balancing', 'Seal Replacement', 'Performance Testing', 'Efficiency Optimization'],
-        image: 'linear-gradient(135deg, #2d1a4a 0%, #1a0a28 100%)'
+        gradient: 'linear-gradient(135deg, #2d1a4a 0%, #1a0a28 100%)'
     },
     {
         id: 'spares',
@@ -27,7 +27,7 @@ const services = [
         subtitle: 'Genuine Components',
         desc: 'Genuine spare parts and components from reputed manufacturers with complete technical support. We maintain inventory of critical spares for minimal downtime.',
         features: ['OEM Parts', 'Quick Delivery', 'Technical Support', 'Quality Certified'],
-        image: 'linear-gradient(135deg, #4a2d1a 0%, #281a0a 100%)'
+        gradient: 'linear-gradient(135deg, #4a2d1a 0%, #281a0a 100%)'
     }
 ];
 
@@ -56,7 +56,7 @@ const Services = () => {
                             className="service-card"
                             style={{ animationDelay: `${idx * 0.1}s` }}
                         >
-                            <div className="service-visual" style={{ background: service.image }}>
+                            <div className="service-visual" style={{ background: service.gradient }}>
                                 <span className="service-number">{service.number}</span>
                             </div>
                             
@@ -84,8 +84,11 @@ const Services = () => {
 
                 {/* CTA */}
                 <div className="services-cta">
-                    <Link to="/services" className="btn btn-outline">
+                    <Link to="/services" className="services-cta-link">
                         View All Services
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
                     </Link>
                 </div>
             </div>
@@ -110,7 +113,7 @@ const Services = () => {
                 }
 
                 .services-intro {
-                    font-size: 1.0625rem;
+                    font-size: 1rem;
                     line-height: 1.8;
                 }
 
@@ -135,7 +138,7 @@ const Services = () => {
                 }
 
                 .service-visual {
-                    height: 200px;
+                    height: 180px;
                     display: flex;
                     align-items: flex-end;
                     padding: var(--space-lg);
@@ -145,9 +148,9 @@ const Services = () => {
 
                 .service-number {
                     font-family: var(--font-serif);
-                    font-size: 5rem;
+                    font-size: 4rem;
                     font-weight: 400;
-                    color: rgba(255, 255, 255, 0.1);
+                    color: rgba(255, 255, 255, 0.15);
                     line-height: 1;
                     position: absolute;
                     right: var(--space-lg);
@@ -155,27 +158,27 @@ const Services = () => {
                 }
 
                 .service-content {
-                    padding: var(--space-xl);
+                    padding: var(--space-lg);
                 }
 
                 .service-subtitle {
-                    font-size: 0.6875rem;
+                    font-size: 0.625rem;
                     font-weight: 600;
                     text-transform: uppercase;
                     letter-spacing: 0.1em;
                     color: var(--color-accent);
                     display: block;
-                    margin-bottom: var(--space-sm);
+                    margin-bottom: var(--space-xs);
                 }
 
                 .service-title {
-                    font-size: 1.375rem;
+                    font-size: 1.25rem;
                     font-weight: 500;
                     margin-bottom: var(--space-md);
                 }
 
                 .service-desc {
-                    font-size: 0.9375rem;
+                    font-size: 0.875rem;
                     line-height: 1.7;
                     margin-bottom: var(--space-lg);
                 }
@@ -183,16 +186,16 @@ const Services = () => {
                 .service-features {
                     display: flex;
                     flex-wrap: wrap;
-                    gap: var(--space-sm);
+                    gap: var(--space-xs);
                     margin-bottom: var(--space-lg);
                 }
 
                 .feature-tag {
-                    font-size: 0.75rem;
+                    font-size: 0.6875rem;
                     font-weight: 500;
                     color: var(--color-text-light);
                     background: var(--color-light);
-                    padding: 6px 12px;
+                    padding: 4px 10px;
                     border-radius: 100px;
                 }
 
@@ -200,8 +203,10 @@ const Services = () => {
                     display: inline-flex;
                     align-items: center;
                     gap: var(--space-sm);
-                    font-size: 0.8125rem;
+                    font-size: 0.75rem;
                     font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
                     color: var(--color-text);
                     transition: all 0.2s;
                 }
@@ -215,10 +220,30 @@ const Services = () => {
                     text-align: center;
                 }
 
+                .services-cta-link {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: var(--space-sm);
+                    font-size: 0.8125rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                    color: var(--color-text);
+                    padding-bottom: 4px;
+                    border-bottom: 2px solid var(--color-text);
+                    transition: all 0.3s var(--ease-out);
+                }
+
+                .services-cta-link:hover {
+                    color: var(--color-accent);
+                    border-color: var(--color-accent);
+                    gap: var(--space-md);
+                }
+
                 @media (max-width: 1024px) {
                     .services-grid {
                         grid-template-columns: 1fr;
-                        max-width: 600px;
+                        max-width: 500px;
                     }
                 }
             `}</style>

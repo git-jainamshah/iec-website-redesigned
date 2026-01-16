@@ -26,9 +26,9 @@ const Hero = () => {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.radius = Math.random() * 2 + 1;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = (Math.random() - 0.5) * 0.4;
+                this.radius = Math.random() * 1.5 + 0.5;
             }
             
             update() {
@@ -42,13 +42,13 @@ const Hero = () => {
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(200, 16, 46, 0.6)';
+                ctx.fillStyle = 'rgba(200, 16, 46, 0.5)';
                 ctx.fill();
             }
         }
 
         // Initialize particles
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 40; i++) {
             particles.push(new Particle());
         }
 
@@ -59,12 +59,12 @@ const Hero = () => {
                     const dy = particles[i].y - particles[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
                     
-                    if (dist < 150) {
+                    if (dist < 120) {
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(200, 16, 46, ${0.15 * (1 - dist / 150)})`;
-                        ctx.lineWidth = 1;
+                        ctx.strokeStyle = `rgba(200, 16, 46, ${0.1 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
                 }
@@ -108,7 +108,7 @@ const Hero = () => {
             {/* Content */}
             <div className="container hero-content">
                 <div className="hero-text">
-                    <span className="hero-label animate-fade-up">Since 1998 • ISO 9001 Certified</span>
+                    <span className="hero-label animate-fade-up">Since 1998 · ISO 9001 Certified</span>
                     
                     <h1 className="hero-title display-title animate-fade-up delay-1">
                         Your trusted partner for<br />
@@ -117,19 +117,15 @@ const Hero = () => {
                     
                     <p className="hero-desc animate-fade-up delay-2">
                         India's premier engineering company specializing in high voltage motor 
-                        and generator repair. Powering industries with precision, reliability, 
-                        and over 25 years of expertise.
+                        and generator repair. Powering industries with precision and reliability.
                     </p>
                     
                     <div className="hero-actions animate-fade-up delay-3">
-                        <Link to="/contact" className="btn btn-primary">
-                            Request a Quote
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <Link to="/contact" className="hero-cta">
+                            Connect Now
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
-                        </Link>
-                        <Link to="/services" className="btn btn-secondary">
-                            Our Capabilities
                         </Link>
                     </div>
                 </div>
@@ -160,7 +156,7 @@ const Hero = () => {
             <style>{`
                 .hero {
                     position: relative;
-                    min-height: 100vh;
+                    min-height: 85vh;
                     display: flex;
                     flex-direction: column;
                     overflow: hidden;
@@ -183,9 +179,9 @@ const Hero = () => {
                     inset: 0;
                     background: linear-gradient(
                         135deg,
-                        rgba(10, 22, 40, 0.95) 0%,
-                        rgba(10, 22, 40, 0.85) 40%,
-                        rgba(10, 22, 40, 0.7) 100%
+                        rgba(10, 22, 40, 0.92) 0%,
+                        rgba(10, 22, 40, 0.8) 40%,
+                        rgba(10, 22, 40, 0.65) 100%
                     );
                 }
 
@@ -193,7 +189,7 @@ const Hero = () => {
                     position: absolute;
                     inset: 0;
                     z-index: 1;
-                    opacity: 0.8;
+                    opacity: 0.6;
                     pointer-events: none;
                 }
 
@@ -203,12 +199,12 @@ const Hero = () => {
                     flex: 1;
                     display: flex;
                     align-items: center;
-                    padding-top: calc(var(--header-height) + var(--space-4xl));
-                    padding-bottom: var(--space-4xl);
+                    padding-top: calc(var(--header-height) + var(--space-2xl));
+                    padding-bottom: var(--space-3xl);
                 }
 
                 .hero-text {
-                    max-width: 700px;
+                    max-width: 640px;
                 }
 
                 .hero-label {
@@ -216,18 +212,18 @@ const Hero = () => {
                     font-size: 0.6875rem;
                     font-weight: 600;
                     text-transform: uppercase;
-                    letter-spacing: 0.15em;
-                    color: var(--color-accent);
-                    margin-bottom: var(--space-xl);
+                    letter-spacing: 0.12em;
+                    color: rgba(255, 255, 255, 0.6);
+                    margin-bottom: var(--space-lg);
                     opacity: 0;
                 }
 
                 .hero-title {
-                    font-size: clamp(2.75rem, 6vw, 4.5rem);
+                    font-size: clamp(2.25rem, 5vw, 3.5rem);
                     font-weight: 400;
                     color: var(--color-white);
-                    line-height: 1.1;
-                    margin-bottom: var(--space-xl);
+                    line-height: 1.15;
+                    margin-bottom: var(--space-lg);
                     opacity: 0;
                 }
 
@@ -237,18 +233,43 @@ const Hero = () => {
                 }
 
                 .hero-desc {
-                    font-size: 1.0625rem;
+                    font-size: 1rem;
                     line-height: 1.8;
-                    color: rgba(255, 255, 255, 0.7);
-                    margin-bottom: var(--space-2xl);
-                    max-width: 560px;
+                    color: rgba(255, 255, 255, 0.65);
+                    margin-bottom: var(--space-xl);
+                    max-width: 500px;
                     opacity: 0;
                 }
 
                 .hero-actions {
-                    display: flex;
-                    gap: var(--space-md);
                     opacity: 0;
+                }
+
+                .hero-cta {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: var(--space-sm);
+                    font-size: 0.8125rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.08em;
+                    color: var(--color-white);
+                    padding-bottom: 4px;
+                    border-bottom: 2px solid var(--color-accent);
+                    transition: all 0.3s var(--ease-out);
+                }
+
+                .hero-cta:hover {
+                    gap: var(--space-md);
+                    color: var(--color-accent);
+                }
+
+                .hero-cta svg {
+                    transition: transform 0.3s var(--ease-out);
+                }
+
+                .hero-cta:hover svg {
+                    transform: translateX(4px);
                 }
 
                 /* Stats Strip */
@@ -265,7 +286,7 @@ const Hero = () => {
                 }
 
                 .stat {
-                    padding: var(--space-xl) var(--space-lg);
+                    padding: var(--space-lg) var(--space-md);
                     text-align: center;
                     border-right: 1px solid var(--color-border);
                     opacity: 0;
@@ -278,28 +299,32 @@ const Hero = () => {
                 .stat-value {
                     display: block;
                     font-family: var(--font-serif);
-                    font-size: 2.5rem;
+                    font-size: 2rem;
                     font-weight: 400;
                     color: var(--color-text);
                     line-height: 1;
                 }
 
                 .stat-unit {
-                    font-size: 1.5rem;
+                    font-size: 1.25rem;
                     color: var(--color-accent);
                 }
 
                 .stat-label {
                     display: block;
-                    font-size: 0.6875rem;
+                    font-size: 0.625rem;
                     font-weight: 600;
                     text-transform: uppercase;
                     letter-spacing: 0.1em;
                     color: var(--color-muted);
-                    margin-top: var(--space-sm);
+                    margin-top: var(--space-xs);
                 }
 
                 @media (max-width: 900px) {
+                    .hero {
+                        min-height: 80vh;
+                    }
+
                     .stats-container {
                         grid-template-columns: repeat(2, 1fr);
                     }
@@ -318,21 +343,16 @@ const Hero = () => {
                 }
 
                 @media (max-width: 600px) {
+                    .hero {
+                        min-height: 75vh;
+                    }
+
                     .hero-content {
-                        padding-top: calc(var(--header-height) + var(--space-2xl));
-                    }
-
-                    .hero-actions {
-                        flex-direction: column;
-                    }
-
-                    .hero-actions .btn {
-                        width: 100%;
-                        justify-content: center;
+                        padding-top: calc(var(--header-height) + var(--space-xl));
                     }
 
                     .stat-value {
-                        font-size: 2rem;
+                        font-size: 1.75rem;
                     }
                 }
             `}</style>
