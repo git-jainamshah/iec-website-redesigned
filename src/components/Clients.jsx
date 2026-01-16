@@ -124,6 +124,7 @@ const Clients = () => {
                     height: auto;
                     object-fit: contain;
                     object-position: center;
+                    filter: brightness(0) invert(1) contrast(1.2);
                 }
 
                 @media (max-width: 768px) {
