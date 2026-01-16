@@ -4,6 +4,7 @@ import Clients from '../components/Clients';
 import Metrics from '../components/Metrics';
 import Services from '../components/Services';
 import About from '../components/About';
+import Newsletter from '../components/Newsletter';
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
             <Metrics />
             <Services />
             <About />
+            <Newsletter />
         </>
     );
 };

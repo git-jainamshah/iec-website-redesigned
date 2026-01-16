@@ -1,30 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import heroBg from '../assets/iec-hero-bg.jpeg';
 
-const features = [
-    {
-        number: '01',
-        title: 'State-of-the-Art Facility',
-        desc: '300,000 sq.ft total area with 75,000 sq.ft dedicated shop floor'
-    },
-    {
-        number: '02',
-        title: 'Captive Power',
-        desc: '5 MW power generation for uninterrupted operations'
-    },
-    {
-        number: '03',
-        title: 'Heavy Lifting',
-        desc: 'Cranes from 10 to 300 tons for largest machinery'
-    },
-    {
-        number: '04',
-        title: 'Quality Certified',
-        desc: 'ISO 9001:2008 certified with EASA membership since 2014'
-    }
+const images = [
+    { src: heroBg, caption: 'Main Workshop Floor' },
+    { src: heroBg, caption: 'Quality Testing Lab' },
+    { src: heroBg, caption: 'Heavy Machinery Area' },
 ];
 
 const About = () => {
+    const [currentImage, setCurrentImage] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImage((prev) => (prev + 1) % images.length);
+        }, 4000);
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <section className="about section">
             <div className="container">
@@ -49,11 +42,21 @@ const About = () => {
                                 Gujarat, Maharashtra, Madhya Pradesh, Rajasthan, Karnataka, and 
                                 international markets.
                             </p>
-                            <p>
-                                We specialize in rewinding and repairing high voltage motors and 
-                                generators up to 250 MW capacity, delivering solutions that keep 
-                                industries running at peak performance.
-                            </p>
+                        </div>
+
+                        <div className="about-stats">
+                            <div className="stat">
+                                <span className="stat-value">75K</span>
+                                <span className="stat-label">Sq.Ft Workshop</span>
+                            </div>
+                            <div className="stat">
+                                <span className="stat-value">250</span>
+                                <span className="stat-label">MW Capacity</span>
+                            </div>
+                            <div className="stat">
+                                <span className="stat-value">26+</span>
+                                <span className="stat-label">Years Experience</span>
+                            </div>
                         </div>
 
                         <div className="about-cta">
@@ -63,42 +66,79 @@ const About = () => {
                         </div>
                     </div>
 
-                    {/* Right - Features */}
-                    <div className="about-features">
-                        {features.map((feature, idx) => (
-                            <div 
-                                key={idx} 
-                                className="feature-card"
-                                style={{ animationDelay: `${idx * 0.1}s` }}
-                            >
-                                <span className="feature-number">{feature.number}</span>
-                                <div className="feature-content">
-                                    <h4>{feature.title}</h4>
-                                    <p>{feature.desc}</p>
+                    {/* Right - Floating Image Frame */}
+                    <div className="about-visual">
+                        <div className="floating-frame">
+                            <div className="frame-inner">
+                                {images.map((img, idx) => (
+                                    <div 
+                                        key={idx}
+                                        className={`frame-slide ${idx === currentImage ? 'active' : ''}`}
+                                    >
+                                        <img src={img.src} alt={img.caption} />
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="frame-caption">
+                                <span className="caption-text">{images[currentImage].caption}</span>
+                                <div className="frame-dots">
+                                    {images.map((_, idx) => (
+                                        <button 
+                                            key={idx} 
+                                            className={`dot ${idx === currentImage ? 'active' : ''}`}
+                                            onClick={() => setCurrentImage(idx)}
+                                            aria-label={`Go to slide ${idx + 1}`}
+                                        />
+                                    ))}
                                 </div>
                             </div>
-                        ))}
+                        </div>
+                        <div className="frame-accent" />
                     </div>
                 </div>
             </div>
 
-            {/* Certifications Bar */}
+            {/* Certifications - Quality Stamps */}
             <div className="certifications">
                 <div className="container">
-                    <div className="cert-inner">
-                        <span className="cert-title">Certifications & Memberships</span>
-                        <div className="cert-list">
-                            <div className="cert-item">
-                                <span className="cert-name">ISO 9001:2008</span>
-                                <span className="cert-label">Quality Management</span>
+                    <div className="cert-header">
+                        <span className="label">Certifications & Memberships</span>
+                    </div>
+                    <div className="cert-stamps">
+                        <div className="stamp">
+                            <div className="stamp-inner">
+                                <svg className="stamp-ring" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4 2"/>
+                                </svg>
+                                <div className="stamp-content">
+                                    <span className="stamp-title">ISO</span>
+                                    <span className="stamp-subtitle">9001:2008</span>
+                                    <span className="stamp-desc">Quality Management</span>
+                                </div>
                             </div>
-                            <div className="cert-item">
-                                <span className="cert-name">EASA Member</span>
-                                <span className="cert-label">Since 2014</span>
+                        </div>
+                        <div className="stamp easa">
+                            <div className="stamp-inner">
+                                <svg className="stamp-ring" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4 2"/>
+                                </svg>
+                                <div className="stamp-content">
+                                    <span className="stamp-title">EASA</span>
+                                    <span className="stamp-subtitle">Member</span>
+                                    <span className="stamp-desc">Since 2014</span>
+                                </div>
                             </div>
-                            <div className="cert-item">
-                                <span className="cert-name">NSIC Registered</span>
-                                <span className="cert-label">Government Certified</span>
+                        </div>
+                        <div className="stamp">
+                            <div className="stamp-inner">
+                                <svg className="stamp-ring" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4 2"/>
+                                </svg>
+                                <div className="stamp-content">
+                                    <span className="stamp-title">NSIC</span>
+                                    <span className="stamp-subtitle">Registered</span>
+                                    <span className="stamp-desc">Govt. Certified</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -108,13 +148,14 @@ const About = () => {
             <style>{`
                 .about {
                     background: var(--color-white);
+                    padding-bottom: 0;
                 }
 
                 .about-grid {
                     display: grid;
-                    grid-template-columns: 1.2fr 1fr;
+                    grid-template-columns: 1fr 1fr;
                     gap: var(--space-4xl);
-                    align-items: start;
+                    align-items: center;
                 }
 
                 .about-content .label {
@@ -127,102 +168,221 @@ const About = () => {
                 }
 
                 .about-text {
-                    margin-bottom: var(--space-2xl);
+                    margin-bottom: var(--space-xl);
                 }
 
                 .about-text p {
                     font-size: 1rem;
                     line-height: 1.8;
-                    margin-bottom: var(--space-lg);
+                    margin-bottom: var(--space-md);
                 }
 
                 .about-text p:last-child {
                     margin-bottom: 0;
                 }
 
-                .about-features {
+                /* About Stats */
+                .about-stats {
+                    display: flex;
+                    gap: var(--space-2xl);
+                    margin-bottom: var(--space-xl);
+                    padding: var(--space-lg) 0;
+                    border-top: 1px solid var(--color-border);
+                    border-bottom: 1px solid var(--color-border);
+                }
+
+                .stat {
                     display: flex;
                     flex-direction: column;
-                    gap: var(--space-md);
                 }
 
-                .feature-card {
-                    display: flex;
-                    gap: var(--space-lg);
-                    padding: var(--space-lg);
-                    background: var(--color-light);
-                    border-left: 3px solid transparent;
-                    transition: all 0.3s var(--ease-out);
-                }
-
-                .feature-card:hover {
-                    border-left-color: var(--color-accent);
-                    transform: translateX(8px);
-                }
-
-                .feature-number {
+                .stat-value {
                     font-family: var(--font-serif);
-                    font-size: 1.25rem;
+                    font-size: 2rem;
                     font-weight: 500;
                     color: var(--color-accent);
-                    flex-shrink: 0;
-                    width: 32px;
+                    line-height: 1;
                 }
 
-                .feature-content h4 {
-                    font-size: 0.9375rem;
-                    font-weight: 600;
-                    margin-bottom: var(--space-xs);
+                .stat-label {
+                    font-size: 0.75rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                    color: var(--color-muted);
+                    margin-top: var(--space-xs);
                 }
 
-                .feature-content p {
-                    font-size: 0.875rem;
-                    line-height: 1.5;
+                /* Floating Frame */
+                .about-visual {
+                    position: relative;
+                    padding: var(--space-xl);
                 }
 
-                /* Certifications */
-                .certifications {
-                    background: var(--color-primary);
-                    padding: var(--space-2xl) 0;
-                    margin-top: var(--space-5xl);
+                .floating-frame {
+                    position: relative;
+                    background: var(--color-white);
+                    border-radius: 8px;
+                    overflow: hidden;
+                    box-shadow: 
+                        0 25px 50px -12px rgba(0, 0, 0, 0.15),
+                        0 0 0 1px rgba(0, 0, 0, 0.05);
+                    z-index: 1;
                 }
 
-                .cert-inner {
+                .frame-inner {
+                    position: relative;
+                    aspect-ratio: 4/3;
+                    overflow: hidden;
+                }
+
+                .frame-slide {
+                    position: absolute;
+                    inset: 0;
+                    opacity: 0;
+                    transition: opacity 0.8s ease;
+                }
+
+                .frame-slide.active {
+                    opacity: 1;
+                }
+
+                .frame-slide img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    filter: grayscale(30%);
+                }
+
+                .frame-caption {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                    padding: var(--space-md) var(--space-lg);
+                    background: var(--color-white);
+                    border-top: 1px solid var(--color-border);
                 }
 
-                .cert-title {
-                    font-size: 0.6875rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 0.1em;
-                    color: rgba(255, 255, 255, 0.5);
+                .caption-text {
+                    font-size: 0.8125rem;
+                    font-weight: 500;
+                    color: var(--color-text);
                 }
 
-                .cert-list {
+                .frame-dots {
                     display: flex;
+                    gap: 6px;
+                }
+
+                .dot {
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    background: var(--color-border);
+                    border: none;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                }
+
+                .dot.active {
+                    background: var(--color-accent);
+                    transform: scale(1.2);
+                }
+
+                .dot:hover {
+                    background: var(--color-accent);
+                }
+
+                .frame-accent {
+                    position: absolute;
+                    top: var(--space-lg);
+                    right: var(--space-lg);
+                    bottom: calc(-1 * var(--space-lg));
+                    left: calc(var(--space-xl) + var(--space-lg));
+                    background: var(--color-accent);
+                    border-radius: 8px;
+                    opacity: 0.1;
+                    z-index: 0;
+                }
+
+                /* Certifications - Stamps */
+                .certifications {
+                    background: var(--color-cream);
+                    padding: var(--space-4xl) 0;
+                    margin-top: var(--space-5xl);
+                }
+
+                .cert-header {
+                    text-align: center;
+                    margin-bottom: var(--space-2xl);
+                }
+
+                .cert-stamps {
+                    display: flex;
+                    justify-content: center;
                     gap: var(--space-3xl);
                 }
 
-                .cert-item {
+                .stamp {
+                    width: 140px;
+                    height: 140px;
+                    color: var(--color-primary);
+                }
+
+                .stamp.easa {
+                    color: var(--color-accent);
+                }
+
+                .stamp-inner {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: transform 0.3s var(--ease-out);
+                }
+
+                .stamp:hover .stamp-inner {
+                    transform: rotate(-8deg) scale(1.05);
+                }
+
+                .stamp-ring {
+                    position: absolute;
+                    inset: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .stamp-content {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
                     text-align: center;
                 }
 
-                .cert-name {
-                    display: block;
-                    font-size: 1rem;
+                .stamp-title {
+                    font-family: var(--font-serif);
+                    font-size: 1.5rem;
                     font-weight: 600;
-                    color: var(--color-white);
-                    margin-bottom: 2px;
+                    line-height: 1;
                 }
 
-                .cert-label {
-                    font-size: 0.6875rem;
-                    color: rgba(255, 255, 255, 0.5);
+                .stamp-subtitle {
+                    font-size: 0.75rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    margin-top: 2px;
+                }
+
+                .stamp-desc {
+                    font-size: 0.625rem;
+                    font-weight: 500;
                     text-transform: uppercase;
                     letter-spacing: 0.05em;
+                    color: var(--color-muted);
+                    margin-top: var(--space-xs);
                 }
 
                 @media (max-width: 1024px) {
@@ -230,18 +390,34 @@ const About = () => {
                         grid-template-columns: 1fr;
                         gap: var(--space-3xl);
                     }
+
+                    .about-visual {
+                        max-width: 500px;
+                        margin: 0 auto;
+                    }
                 }
 
                 @media (max-width: 768px) {
-                    .cert-inner {
-                        flex-direction: column;
+                    .about-stats {
+                        gap: var(--space-lg);
+                    }
+
+                    .stat-value {
+                        font-size: 1.5rem;
+                    }
+
+                    .cert-stamps {
+                        flex-wrap: wrap;
                         gap: var(--space-xl);
                     }
 
-                    .cert-list {
-                        flex-wrap: wrap;
-                        justify-content: center;
-                        gap: var(--space-xl);
+                    .stamp {
+                        width: 110px;
+                        height: 110px;
+                    }
+
+                    .stamp-title {
+                        font-size: 1.25rem;
                     }
                 }
             `}</style>
