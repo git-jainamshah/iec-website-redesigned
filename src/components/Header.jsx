@@ -336,7 +336,7 @@ const Header = () => {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    height: 72px;
+                    height: 80px;
                     padding: 0 40px;
                     background: transparent;
                     border-bottom: 1px solid transparent;
@@ -344,7 +344,7 @@ const Header = () => {
                 }
 
                 .header.scrolled {
-                    height: 64px;
+                    height: 72px;
                     background: var(--color-white);
                     border-bottom: 1px solid var(--color-border);
                     box-shadow: 0 2px 12px rgba(0,0,0,0.08);
@@ -359,7 +359,7 @@ const Header = () => {
                 }
 
                 .brand-logo {
-                    height: 64px;
+                    height: 72px;
                     width: auto;
                     object-fit: contain;
                     transition: all 0.3s ease;
@@ -367,7 +367,7 @@ const Header = () => {
                 }
 
                 .header.scrolled .brand-logo {
-                    height: 56px;
+                    height: 64px;
                     filter: none; /* Original logo colors on white bg */
                 }
 
@@ -379,7 +379,7 @@ const Header = () => {
                 }
 
                 .brand-name {
-                    font-size: 1.0625rem;
+                    font-size: 1.125rem;
                     font-weight: 700;
                     color: var(--color-white);
                     letter-spacing: -0.01em;
@@ -753,7 +753,7 @@ const Header = () => {
                 /* ========== MOBILE MENU ========== */
                 .mobile-menu {
                     position: fixed;
-                    top: 72px;
+                    top: 80px;
                     left: 0;
                     right: 0;
                     bottom: 0;
@@ -785,7 +785,7 @@ const Header = () => {
                 }
 
                 .mobile-brand-logo {
-                    height: 52px;
+                    height: 60px;
                     width: auto;
                     object-fit: contain;
                     flex-shrink: 0;
@@ -799,14 +799,14 @@ const Header = () => {
                 }
 
                 .mobile-brand-name {
-                    font-size: 1rem;
+                    font-size: 1.125rem;
                     font-weight: 700;
                     color: var(--color-text);
                     letter-spacing: -0.01em;
                 }
 
                 .mobile-brand-cert {
-                    font-size: 0.6875rem;
+                    font-size: 0.75rem;
                     font-weight: 500;
                     text-transform: uppercase;
                     letter-spacing: 0.08em;
@@ -1034,11 +1034,11 @@ const Header = () => {
                     }
 
                     .brand-logo {
-                        height: 60px;
+                        height: 68px;
                     }
 
                     .header.scrolled .brand-logo {
-                        height: 52px;
+                        height: 60px;
                     }
 
                     .brand-name {
@@ -1077,11 +1077,11 @@ const Header = () => {
                     }
 
                     .brand-logo {
-                        height: 48px;
+                        height: 56px;
                     }
 
                     .header.scrolled .brand-logo {
-                        height: 44px;
+                        height: 52px;
                     }
 
                     .mobile-menu {
@@ -1089,11 +1089,11 @@ const Header = () => {
                     }
 
                     .mobile-brand-logo {
-                        height: 44px;
+                        height: 56px;
                     }
 
                     .mobile-brand-name {
-                        font-size: 0.9375rem;
+                        font-size: 1rem;
                     }
                 }
             `}</style>
