@@ -12,78 +12,85 @@ const Hero = () => {
         
         const ctx = canvas.getContext('2d');
         let animationId;
-        let particles = [];
+        let time = 0;
         
         const resize = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+            canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
         };
         
         window.addEventListener('resize', resize);
         resize();
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.4;
-                this.vy = (Math.random() - 0.5) * 0.4;
-                this.radius = Math.random() * 1.5 + 0.5;
-            }
+        // Floating wave mesh animation
+        const drawWaveMesh = () => {
+            const width = canvas.offsetWidth;
+            const height = canvas.offsetHeight;
             
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
+            ctx.clearRect(0, 0, width, height);
+            
+            // Wave parameters
+            const waves = [
+                { amplitude: 30, frequency: 0.008, speed: 0.015, color: 'rgba(200, 16, 46, 0.4)', yOffset: 0.3 },
+                { amplitude: 25, frequency: 0.012, speed: 0.02, color: 'rgba(200, 16, 46, 0.3)', yOffset: 0.35 },
+                { amplitude: 35, frequency: 0.006, speed: 0.01, color: 'rgba(255, 100, 100, 0.25)', yOffset: 0.4 },
+                { amplitude: 20, frequency: 0.015, speed: 0.025, color: 'rgba(200, 16, 46, 0.2)', yOffset: 0.45 },
+            ];
+
+            // Draw flowing mesh lines
+            const numLines = 12;
+            const lineSpacing = 15;
+            
+            for (let l = 0; l < numLines; l++) {
+                const baseY = height * 0.5 + l * lineSpacing;
+                const phaseOffset = l * 0.3;
                 
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-            }
-            
-            draw() {
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(200, 16, 46, 0.5)';
-                ctx.fill();
-            }
-        }
-
-        for (let i = 0; i < 40; i++) {
-            particles.push(new Particle());
-        }
-
-        const connectParticles = () => {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
+                ctx.moveTo(0, baseY);
+                
+                for (let x = 0; x <= width; x += 3) {
+                    let y = baseY;
                     
-                    if (dist < 120) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(200, 16, 46, ${0.1 * (1 - dist / 120)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
+                    // Combine multiple sine waves for organic movement
+                    y += Math.sin(x * 0.01 + time * 0.8 + phaseOffset) * (20 + l * 2);
+                    y += Math.sin(x * 0.02 + time * 1.2 + phaseOffset * 0.5) * (10 + l);
+                    y += Math.sin(x * 0.005 + time * 0.5) * 15;
+                    
+                    ctx.lineTo(x, y);
                 }
+                
+                // Gradient effect based on line position
+                const gradient = ctx.createLinearGradient(0, 0, width, 0);
+                const alpha = 0.15 - (l * 0.01);
+                gradient.addColorStop(0, `rgba(200, 16, 46, ${alpha * 0.5})`);
+                gradient.addColorStop(0.3, `rgba(200, 16, 46, ${alpha})`);
+                gradient.addColorStop(0.6, `rgba(255, 80, 80, ${alpha})`);
+                gradient.addColorStop(1, `rgba(200, 16, 46, ${alpha * 0.3})`);
+                
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
             }
-        };
 
-        const animate = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            
-            connectParticles();
-            animationId = requestAnimationFrame(animate);
+            // Draw connecting vertical lines for mesh effect
+            for (let x = 0; x < width; x += 40) {
+                const wobble = Math.sin(x * 0.02 + time) * 20;
+                
+                ctx.beginPath();
+                ctx.moveTo(x + wobble, height * 0.5);
+                ctx.lineTo(x + wobble + Math.sin(time + x * 0.01) * 10, height * 0.5 + numLines * lineSpacing);
+                ctx.strokeStyle = `rgba(200, 16, 46, ${0.05 + Math.sin(x * 0.01 + time) * 0.02})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            }
+
+            time += 0.02;
+            animationId = requestAnimationFrame(drawWaveMesh);
         };
 
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            animate();
+            drawWaveMesh();
         }
 
         return () => {
@@ -98,15 +105,6 @@ const Hero = () => {
             <div className="hero-bg">
                 <img src={heroBg} alt="" aria-hidden="true" />
                 <div className="hero-overlay" />
-            </div>
-            
-            {/* Mesh Animation Canvas */}
-            <canvas ref={canvasRef} className="hero-canvas" aria-hidden="true" />
-
-            {/* EASA Badge - Top Right */}
-            <div className="easa-badge">
-                <img src={easaLogo} alt="EASA Certified" />
-                <span>Accredited Member</span>
             </div>
 
             {/* Content */}
@@ -133,7 +131,15 @@ const Hero = () => {
                         </Link>
                     </div>
                 </div>
+
+                {/* EASA Badge - Minimal circular */}
+                <div className="easa-badge">
+                    <img src={easaLogo} alt="EASA Accredited Member" />
+                </div>
             </div>
+
+            {/* Floating Wave Mesh Canvas - Bottom area */}
+            <canvas ref={canvasRef} className="hero-canvas" aria-hidden="true" />
 
             {/* Stats Strip */}
             <div className="hero-stats">
@@ -160,7 +166,7 @@ const Hero = () => {
             <style>{`
                 .hero {
                     position: relative;
-                    min-height: 85vh;
+                    min-height: 70vh;
                     display: flex;
                     flex-direction: column;
                     overflow: hidden;
@@ -189,42 +195,15 @@ const Hero = () => {
                     );
                 }
 
+                /* Wave Mesh Canvas - positioned at bottom */
                 .hero-canvas {
                     position: absolute;
-                    inset: 0;
+                    bottom: 80px;
+                    left: 0;
+                    right: 0;
+                    height: 200px;
                     z-index: 1;
-                    opacity: 0.6;
                     pointer-events: none;
-                }
-
-                /* EASA Badge */
-                .easa-badge {
-                    position: absolute;
-                    top: calc(var(--header-height) + var(--space-xl));
-                    right: var(--space-xl);
-                    z-index: 10;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: var(--space-sm);
-                    background: rgba(255, 255, 255, 0.95);
-                    padding: var(--space-md) var(--space-lg);
-                    border-radius: 4px;
-                    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-                }
-
-                .easa-badge img {
-                    height: 56px;
-                    width: auto;
-                    object-fit: contain;
-                }
-
-                .easa-badge span {
-                    font-size: 0.625rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 0.08em;
-                    color: var(--color-text-light);
                 }
 
                 .hero-content {
@@ -233,12 +212,13 @@ const Hero = () => {
                     flex: 1;
                     display: flex;
                     align-items: center;
-                    padding-top: calc(var(--header-height) + var(--space-2xl));
-                    padding-bottom: var(--space-3xl);
+                    justify-content: space-between;
+                    padding-top: calc(var(--header-height) + var(--space-lg));
+                    padding-bottom: var(--space-xl);
                 }
 
                 .hero-text {
-                    max-width: 640px;
+                    max-width: 580px;
                 }
 
                 .hero-label {
@@ -248,16 +228,16 @@ const Hero = () => {
                     text-transform: uppercase;
                     letter-spacing: 0.12em;
                     color: rgba(255, 255, 255, 0.6);
-                    margin-bottom: var(--space-lg);
+                    margin-bottom: var(--space-md);
                     opacity: 0;
                 }
 
                 .hero-title {
-                    font-size: clamp(2.25rem, 5vw, 3.5rem);
+                    font-size: clamp(2rem, 4.5vw, 3rem);
                     font-weight: 400;
                     color: var(--color-white);
                     line-height: 1.15;
-                    margin-bottom: var(--space-lg);
+                    margin-bottom: var(--space-md);
                     opacity: 0;
                 }
 
@@ -267,11 +247,11 @@ const Hero = () => {
                 }
 
                 .hero-desc {
-                    font-size: 1rem;
-                    line-height: 1.8;
-                    color: rgba(255, 255, 255, 0.65);
-                    margin-bottom: var(--space-xl);
-                    max-width: 500px;
+                    font-size: 0.9375rem;
+                    line-height: 1.7;
+                    color: rgba(255, 255, 255, 0.6);
+                    margin-bottom: var(--space-lg);
+                    max-width: 480px;
                     opacity: 0;
                 }
 
@@ -306,6 +286,30 @@ const Hero = () => {
                     transform: translateX(4px);
                 }
 
+                /* EASA Badge - Minimal circular style */
+                .easa-badge {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 90px;
+                    height: 90px;
+                    border-radius: 50%;
+                    border: 2px solid rgba(255, 255, 255, 0.3);
+                    background: rgba(255, 255, 255, 0.1);
+                    backdrop-filter: blur(8px);
+                    flex-shrink: 0;
+                    margin-right: var(--space-2xl);
+                }
+
+                .easa-badge img {
+                    width: 54px;
+                    height: 54px;
+                    object-fit: contain;
+                    filter: brightness(0) invert(1);
+                    opacity: 0.9;
+                }
+
                 /* Stats Strip */
                 .hero-stats {
                     position: relative;
@@ -320,7 +324,7 @@ const Hero = () => {
                 }
 
                 .stat {
-                    padding: var(--space-lg) var(--space-md);
+                    padding: var(--space-md) var(--space-sm);
                     text-align: center;
                     border-right: 1px solid var(--color-border);
                     opacity: 0;
@@ -333,20 +337,20 @@ const Hero = () => {
                 .stat-value {
                     display: block;
                     font-family: var(--font-serif);
-                    font-size: 2rem;
+                    font-size: 1.75rem;
                     font-weight: 400;
                     color: var(--color-text);
                     line-height: 1;
                 }
 
                 .stat-unit {
-                    font-size: 1.25rem;
+                    font-size: 1.125rem;
                     color: var(--color-accent);
                 }
 
                 .stat-label {
                     display: block;
-                    font-size: 0.625rem;
+                    font-size: 0.5625rem;
                     font-weight: 600;
                     text-transform: uppercase;
                     letter-spacing: 0.1em;
@@ -356,18 +360,32 @@ const Hero = () => {
 
                 @media (max-width: 900px) {
                     .hero {
-                        min-height: 80vh;
+                        min-height: 65vh;
+                    }
+
+                    .hero-content {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        gap: var(--space-lg);
                     }
 
                     .easa-badge {
-                        top: auto;
-                        bottom: 140px;
+                        position: absolute;
+                        top: calc(var(--header-height) + var(--space-md));
                         right: var(--space-md);
-                        padding: var(--space-sm) var(--space-md);
+                        width: 64px;
+                        height: 64px;
+                        margin-right: 0;
                     }
 
                     .easa-badge img {
-                        height: 40px;
+                        width: 36px;
+                        height: 36px;
+                    }
+
+                    .hero-canvas {
+                        height: 150px;
+                        bottom: 70px;
                     }
 
                     .stats-container {
@@ -389,19 +407,24 @@ const Hero = () => {
 
                 @media (max-width: 600px) {
                     .hero {
-                        min-height: 75vh;
+                        min-height: 60vh;
                     }
 
                     .hero-content {
-                        padding-top: calc(var(--header-height) + var(--space-xl));
+                        padding-top: calc(var(--header-height) + var(--space-md));
                     }
 
                     .easa-badge {
                         display: none;
                     }
 
+                    .hero-canvas {
+                        height: 120px;
+                        bottom: 60px;
+                    }
+
                     .stat-value {
-                        font-size: 1.75rem;
+                        font-size: 1.5rem;
                     }
                 }
             `}</style>
