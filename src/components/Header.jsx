@@ -123,12 +123,12 @@ const Header = () => {
                 {/* Actions - Right aligned */}
                 <div className="header-actions">
                     {/* Phone Number */}
-                    <a href="tel:+919824214839" className="header-phone">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                        </svg>
-                        +91 98242 14839
-                    </a>
+                    <div className="header-phone-block">
+                        <a href="tel:+919824214839" className="header-phone">
+                            +91 98242 14839
+                        </a>
+                        <span className="header-phone-hours">Contact 9AM – 5PM</span>
+                    </div>
 
                     {/* Search */}
                     <div className="search-wrapper" ref={searchRef}>
@@ -486,13 +486,17 @@ const Header = () => {
                     margin-left: auto;
                 }
 
-                .header-phone {
+                .header-phone-block {
                     display: flex;
-                    align-items: center;
-                    gap: 6px;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    line-height: 1.2;
+                }
+
+                .header-phone {
                     font-size: 0.8125rem;
                     font-weight: 600;
-                    color: rgba(255, 255, 255, 0.85);
+                    color: rgba(255, 255, 255, 0.9);
                     transition: color 0.2s;
                 }
 
@@ -501,15 +505,20 @@ const Header = () => {
                 }
 
                 .header-phone:hover {
-                    color: var(--color-white);
-                }
-
-                .header.scrolled .header-phone:hover {
                     color: var(--color-accent);
                 }
 
-                .header-phone svg {
-                    color: var(--color-accent);
+                .header-phone-hours {
+                    font-size: 0.5625rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.06em;
+                    color: rgba(255, 255, 255, 0.5);
+                    transition: color 0.2s;
+                }
+
+                .header.scrolled .header-phone-hours {
+                    color: var(--color-muted);
                 }
 
                 .icon-btn {
@@ -928,7 +937,7 @@ const Header = () => {
 
                 /* ========== RESPONSIVE ========== */
                 @media (max-width: 1200px) {
-                    .header-phone {
+                    .header-phone-block {
                         display: none;
                     }
                 }
