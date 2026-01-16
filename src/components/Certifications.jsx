@@ -28,7 +28,7 @@ const Certifications = () => {
             <style>{`
                 .certifications {
                     background: var(--color-cream);
-                    padding: var(--space-2xl) 0;
+                    padding: var(--space-xl) 0;
                 }
 
                 .cert-inner {

@@ -36,7 +36,7 @@ const CTA = () => {
                     background-size: cover;
                     background-position: center;
                     background-repeat: no-repeat;
-                    padding: var(--space-4xl) 0;
+                    padding: var(--space-3xl) 0;
                     border-bottom: 1px solid var(--color-border);
                     overflow: hidden;
                 }

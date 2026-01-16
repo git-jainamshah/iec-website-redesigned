@@ -58,7 +58,7 @@ const Clients = () => {
             <style>{`
                 .clients {
                     background: linear-gradient(to right, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
-                    padding: var(--space-xl) 0;
+                    padding: var(--space-lg) 0;
                     overflow: hidden;
                     position: relative;
                 }

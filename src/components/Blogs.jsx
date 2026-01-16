@@ -85,16 +85,16 @@ const Blogs = () => {
             <style>{`
                 .blogs {
                     background: var(--color-white);
-                    padding: var(--space-5xl) 0;
+                    padding: var(--space-3xl) 0;
                 }
 
                 .blogs-header {
                     display: flex;
                     justify-content: space-between;
                     align-items: flex-end;
-                    gap: var(--space-3xl);
-                    margin-bottom: var(--space-4xl);
-                    padding-bottom: var(--space-2xl);
+                    gap: var(--space-2xl);
+                    margin-bottom: var(--space-2xl);
+                    padding-bottom: var(--space-lg);
                     border-bottom: 1px solid var(--color-border);
                 }
 

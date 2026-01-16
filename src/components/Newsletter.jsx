@@ -74,7 +74,7 @@ const Newsletter = () => {
             <style>{`
                 .newsletter {
                     background: var(--color-primary);
-                    padding: var(--space-4xl) 0;
+                    padding: var(--space-3xl) 0;
                 }
 
                 .newsletter-inner {

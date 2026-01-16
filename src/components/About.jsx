@@ -131,7 +131,7 @@ const About = () => {
                 .about-grid {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
-                    gap: var(--space-4xl);
+                    gap: var(--space-3xl);
                     align-items: center;
                 }
 
@@ -141,11 +141,11 @@ const About = () => {
                 }
 
                 .about-content h2 {
-                    margin-bottom: var(--space-xl);
+                    margin-bottom: var(--space-lg);
                 }
 
                 .about-text {
-                    margin-bottom: var(--space-xl);
+                    margin-bottom: var(--space-lg);
                 }
 
                 .about-text p {
@@ -161,9 +161,9 @@ const About = () => {
                 /* About Stats */
                 .about-stats {
                     display: flex;
-                    gap: var(--space-2xl);
-                    margin-bottom: var(--space-xl);
-                    padding: var(--space-lg) 0;
+                    gap: var(--space-xl);
+                    margin-bottom: var(--space-lg);
+                    padding: var(--space-md) 0;
                     border-top: 1px solid var(--color-border);
                     border-bottom: 1px solid var(--color-border);
                 }

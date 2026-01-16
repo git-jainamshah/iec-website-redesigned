@@ -32,6 +32,7 @@ const Footer = () => {
                                 <Link to="/about">About Us</Link>
                                 <Link to="/services">Services</Link>
                                 <Link to="/infrastructure">Infrastructure</Link>
+                                <Link to="/careers">Careers</Link>
                                 <Link to="/contact">Contact</Link>
                             </nav>
                         </div>
@@ -88,7 +89,7 @@ const Footer = () => {
 
                 /* Main Footer */
                 .footer-main {
-                    padding: var(--space-4xl) 0;
+                    padding: var(--space-3xl) 0;
                 }
 
                 .footer-grid {
@@ -165,18 +166,37 @@ const Footer = () => {
                 .footer-col nav {
                     display: flex;
                     flex-direction: column;
-                    gap: var(--space-sm);
+                    gap: 6px;
                 }
 
                 .footer-col nav a {
                     font-size: 0.9375rem;
                     color: rgba(255, 255, 255, 0.5);
-                    padding: var(--space-xs) 0;
-                    transition: color 0.2s;
+                    padding: 4px 0;
+                    transition: all 0.3s var(--ease-out);
+                    position: relative;
+                    display: inline-block;
+                    width: fit-content;
+                }
+
+                .footer-col nav a::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 0;
+                    height: 1px;
+                    background: var(--color-accent);
+                    transition: width 0.3s var(--ease-out);
                 }
 
                 .footer-col nav a:hover {
-                    color: var(--color-white);
+                    color: var(--color-accent);
+                    padding-left: 8px;
+                }
+
+                .footer-col nav a:hover::after {
+                    width: 100%;
                 }
 
                 .footer-contact address {
