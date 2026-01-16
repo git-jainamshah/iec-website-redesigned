@@ -102,7 +102,7 @@ const Hero = () => {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
-                    filter: grayscale(100%);
+                    filter: grayscale(100%) contrast(1.1) brightness(0.9);
                 }
 
                 .hero-overlay {
@@ -110,9 +110,9 @@ const Hero = () => {
                     inset: 0;
                     background: linear-gradient(
                         135deg,
-                        rgba(10, 22, 40, 0.92) 0%,
-                        rgba(10, 22, 40, 0.8) 40%,
-                        rgba(10, 22, 40, 0.65) 100%
+                        rgba(0, 0, 0, 0.75) 0%,
+                        rgba(0, 0, 0, 0.6) 40%,
+                        rgba(0, 0, 0, 0.45) 100%
                     );
                 }
 
