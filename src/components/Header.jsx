@@ -853,9 +853,10 @@ const Header = () => {
                     justify-content: center;
                     gap: 6px;
                     width: 100%;
-                    padding: 10px 14px;
+                    height: 52px;
+                    padding: 0 14px;
                     font-size: 0.8125rem;
-                    font-weight: 500;
+                    font-weight: 600;
                     color: var(--color-text);
                     background: var(--color-light);
                     border: 1px solid var(--color-border);
@@ -926,7 +927,8 @@ const Header = () => {
                     align-items: center;
                     justify-content: center;
                     flex: 1;
-                    padding: 10px 14px;
+                    height: 52px;
+                    padding: 0 14px;
                     color: var(--color-white);
                     background: var(--color-accent);
                     border-radius: 6px;
