@@ -1,139 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import heroBg from '../assets/iec-hero-bg.jpeg';
 import easaLogo from '../assets/easa-logo.png';
 
 const Hero = () => {
-    const canvasRef = useRef(null);
-
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-        
-        const ctx = canvas.getContext('2d');
-        let animationId;
-        let time = 0;
-        
-        const resize = () => {
-            canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-            canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-        };
-        
-        window.addEventListener('resize', resize);
-        resize();
-
-        // Vibrant rainbow colors
-        const colors = [
-            { r: 255, g: 220, b: 0 },    // Yellow
-            { r: 255, g: 150, b: 50 },   // Orange
-            { r: 255, g: 80, b: 120 },   // Pink/Coral
-            { r: 200, g: 50, b: 150 },   // Magenta
-            { r: 100, g: 100, b: 255 },  // Blue
-            { r: 50, g: 200, b: 150 },   // Teal
-            { r: 100, g: 255, b: 100 },  // Green
-        ];
-
-        // Flowing wave mesh - at very bottom, full width
-        const drawWaveMesh = () => {
-            const width = canvas.offsetWidth;
-            const height = canvas.offsetHeight;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            // Dense mesh lines
-            const numLines = 30;
-            const lineSpacing = 4;
-            const meshHeight = numLines * lineSpacing;
-            const startY = (height - meshHeight) / 2; // Center vertically in canvas
-            
-            for (let l = 0; l < numLines; l++) {
-                const baseY = startY + l * lineSpacing;
-                const phaseOffset = l * 0.4;
-                
-                ctx.beginPath();
-                
-                // Full width - left to right
-                for (let x = 0; x <= width; x += 2) {
-                    let y = baseY;
-                    
-                    // Multiple sine waves for flowing cloth effect
-                    y += Math.sin(x * 0.005 + time * 1.3 + phaseOffset) * (18 + l * 0.8);
-                    y += Math.sin(x * 0.012 + time * 2 + phaseOffset * 0.5) * (10 + l * 0.5);
-                    y += Math.sin(x * 0.003 + time * 0.7) * 12;
-                    
-                    if (x === 0) {
-                        ctx.moveTo(x, y);
-                    } else {
-                        ctx.lineTo(x, y);
-                    }
-                }
-                
-                // Rainbow gradient - full width
-                const gradient = ctx.createLinearGradient(0, 0, width, 0);
-                const colorIndex = (l / numLines) * (colors.length - 1);
-                const c1 = colors[Math.floor(colorIndex) % colors.length];
-                const c2 = colors[Math.ceil(colorIndex) % colors.length];
-                const t = colorIndex % 1;
-                
-                const r = Math.round(c1.r + (c2.r - c1.r) * t);
-                const g = Math.round(c1.g + (c2.g - c1.g) * t);
-                const b = Math.round(c1.b + (c2.b - c1.b) * t);
-                
-                const alpha = 0.7 - (l * 0.015);
-                gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${alpha * 0.5})`);
-                gradient.addColorStop(0.25, `rgba(${r}, ${g}, ${b}, ${alpha})`);
-                gradient.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, ${alpha})`);
-                gradient.addColorStop(0.75, `rgba(${r}, ${g}, ${b}, ${alpha})`);
-                gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, ${alpha * 0.5})`);
-                
-                ctx.strokeStyle = gradient;
-                ctx.lineWidth = 1.5;
-                ctx.stroke();
-            }
-
-            // Vertical cross-lines for mesh texture
-            for (let x = 0; x < width; x += 15) {
-                const wobbleX = Math.sin(time + x * 0.01) * 8;
-                
-                ctx.beginPath();
-                
-                for (let l = 0; l < numLines; l++) {
-                    const baseY = startY + l * lineSpacing;
-                    let y = baseY;
-                    
-                    y += Math.sin(x * 0.005 + time * 1.3 + l * 0.4) * (18 + l * 0.8);
-                    y += Math.sin(x * 0.012 + time * 2 + l * 0.2) * (10 + l * 0.5);
-                    y += Math.sin(x * 0.003 + time * 0.7) * 12;
-                    
-                    if (l === 0) {
-                        ctx.moveTo(x + wobbleX, y);
-                    } else {
-                        ctx.lineTo(x + wobbleX, y);
-                    }
-                }
-                
-                const colorIdx = Math.floor((x / width) * colors.length) % colors.length;
-                const c = colors[colorIdx];
-                ctx.strokeStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.2)`;
-                ctx.lineWidth = 0.6;
-                ctx.stroke();
-            }
-
-            time += 0.02;
-            animationId = requestAnimationFrame(drawWaveMesh);
-        };
-
-        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            drawWaveMesh();
-        }
-
-        return () => {
-            window.removeEventListener('resize', resize);
-            cancelAnimationFrame(animationId);
-        };
-    }, []);
-
     return (
         <section className="hero">
             {/* Background */}
@@ -141,9 +11,6 @@ const Hero = () => {
                 <img src={heroBg} alt="" aria-hidden="true" />
                 <div className="hero-overlay" />
             </div>
-
-            {/* Wave Mesh Canvas - flows at bottom */}
-            <canvas ref={canvasRef} className="hero-canvas" aria-hidden="true" />
 
             {/* Content */}
             <div className="container hero-content">
@@ -170,9 +37,12 @@ const Hero = () => {
                     </div>
                 </div>
 
-                {/* EASA Badge */}
-                <div className="easa-badge">
-                    <img src={easaLogo} alt="EASA Accredited Member" />
+                {/* EASA Badge - Stamp style */}
+                <div className="easa-stamp">
+                    <div className="stamp-inner">
+                        <img src={easaLogo} alt="EASA Accredited Member" />
+                        <span className="stamp-text">Accredited</span>
+                    </div>
                 </div>
             </div>
 
@@ -230,18 +100,6 @@ const Hero = () => {
                     );
                 }
 
-                /* Wave canvas - at very bottom of hero, full width */
-                .hero-canvas {
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
-                    width: 100%;
-                    height: 160px;
-                    z-index: 1;
-                    pointer-events: none;
-                }
-
                 .hero-content {
                     position: relative;
                     z-index: 2;
@@ -250,7 +108,7 @@ const Hero = () => {
                     align-items: center;
                     justify-content: space-between;
                     padding-top: calc(var(--header-height) + var(--space-lg));
-                    padding-bottom: var(--space-lg);
+                    padding-bottom: var(--space-xl);
                 }
 
                 .hero-text {
@@ -322,25 +180,48 @@ const Hero = () => {
                     transform: translateX(4px);
                 }
 
-                /* EASA Badge */
-                .easa-badge {
+                /* EASA Stamp - transparent, no background */
+                .easa-stamp {
                     position: relative;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    width: 80px;
-                    height: 80px;
-                    border-radius: 50%;
-                    background: white;
-                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
                     flex-shrink: 0;
-                    margin-right: var(--space-2xl);
+                    margin-right: var(--space-xl);
+                    transform: rotate(12deg);
+                    opacity: 0.85;
+                    transition: all 0.3s ease;
                 }
 
-                .easa-badge img {
+                .easa-stamp:hover {
+                    transform: rotate(8deg) scale(1.05);
+                    opacity: 1;
+                }
+
+                .stamp-inner {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 4px;
+                    padding: 12px;
+                    border: 3px solid rgba(255, 255, 255, 0.7);
+                    border-radius: 50%;
+                    width: 100px;
+                    height: 100px;
+                    justify-content: center;
+                }
+
+                .easa-stamp img {
                     width: 50px;
                     height: 50px;
                     object-fit: contain;
+                    filter: brightness(0) invert(1);
+                    opacity: 0.9;
+                }
+
+                .stamp-text {
+                    font-size: 0.5rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.15em;
+                    color: rgba(255, 255, 255, 0.8);
                 }
 
                 /* Stats Strip */
@@ -402,23 +283,28 @@ const Hero = () => {
                         gap: var(--space-lg);
                     }
 
-                    .easa-badge {
+                    /* Keep stamp visible on tablet */
+                    .easa-stamp {
                         position: absolute;
-                        top: calc(var(--header-height) + var(--space-md));
-                        right: var(--space-md);
-                        width: 56px;
-                        height: 56px;
+                        top: calc(var(--header-height) + var(--space-lg));
+                        right: var(--space-lg);
                         margin-right: 0;
                     }
 
-                    .easa-badge img {
-                        width: 34px;
-                        height: 34px;
+                    .stamp-inner {
+                        width: 80px;
+                        height: 80px;
+                        padding: 8px;
+                        border-width: 2px;
                     }
 
-                    .hero-canvas {
-                        height: 140px;
-                        bottom: 0;
+                    .easa-stamp img {
+                        width: 40px;
+                        height: 40px;
+                    }
+
+                    .stamp-text {
+                        font-size: 0.4rem;
                     }
 
                     .stats-container {
@@ -447,13 +333,27 @@ const Hero = () => {
                         padding-top: calc(var(--header-height) + var(--space-md));
                     }
 
-                    .easa-badge {
-                        display: none;
+                    /* Smaller stamp on mobile but still visible */
+                    .easa-stamp {
+                        top: calc(var(--header-height) + var(--space-sm));
+                        right: var(--space-md);
                     }
 
-                    .hero-canvas {
-                        height: 120px;
-                        bottom: 0;
+                    .stamp-inner {
+                        width: 60px;
+                        height: 60px;
+                        padding: 6px;
+                        border-width: 2px;
+                    }
+
+                    .easa-stamp img {
+                        width: 28px;
+                        height: 28px;
+                    }
+
+                    .stamp-text {
+                        font-size: 0.35rem;
+                        letter-spacing: 0.1em;
                     }
 
                     .stat-value {
