@@ -4,73 +4,62 @@ import heroBg from '../assets/iec-hero-bg.jpeg';
 
 const Hero = () => {
     return (
-        <section className="hero-section">
+        <section className="hero">
             <div className="hero-bg">
-                {/* Static Industrial Image */}
-                <img src={heroBg} alt="Industrial Motor Repair Facility" className="hero-img" />
-                <div className="hero-overlay"></div>
+                <img src={heroBg} alt="" aria-hidden="true" />
+                <div className="hero-overlay" />
             </div>
 
             <div className="container hero-content">
-                <div className="hero-text-block">
-                    <h1 className="hero-title">
-                        POWERING <br />
-                        <span className="text-white">INDUSTRIES.</span>
-                    </h1>
-                    <p className="hero-subtitle">
-                        India’s leader in High Voltage Motor & Generator Maintenance since 1974.
-                        <br />ISO 9001:2015 Certified.
-                    </p>
-                    <div className="hero-actions">
-                        <Link to="/services" className="btn btn-primary">Explore Capabilities</Link>
-                        <Link to="/contact" className="btn btn-outline">Contact Us</Link>
-                    </div>
+                <p className="hero-tagline">Our Repairs Run the Industries</p>
+                <h1 className="hero-title">
+                    Industrial Motor &<br />
+                    Generator Specialists
+                </h1>
+                <p className="hero-desc">
+                    India's leading facility for high voltage motor and generator 
+                    repair. ISO 9001 certified. Serving industries since 1998.
+                </p>
+                <div className="hero-actions">
+                    <Link to="/services" className="btn btn-primary">Our Services</Link>
+                    <Link to="/contact" className="btn btn-white">Contact Us</Link>
                 </div>
             </div>
 
-            {/* Corporate Stats Strip */}
-            <div className="stats-strip">
-                <div className="container stats-grid">
-                    <div className="stat-item">
-                        <span className="stat-value">50+</span>
-                        <span className="stat-label">Years of Excellence</span>
-                    </div>
-                    <div className="stat-item">
-                        <span className="stat-value">250MW</span>
-                        <span className="stat-label">Repair Capacity</span>
-                    </div>
-                    <div className="stat-item">
-                        <span className="stat-value">ISO 9001</span>
-                        <span className="stat-label">Certified Quality</span>
-                    </div>
-                    <div className="stat-item">
-                        <span className="stat-value">24/7</span>
-                        <span className="stat-label">Emergency Support</span>
-                    </div>
+            <div className="hero-stats">
+                <div className="stat">
+                    <span className="stat-value">250MW</span>
+                    <span className="stat-label">Repair Capacity</span>
+                </div>
+                <div className="stat">
+                    <span className="stat-value">400+</span>
+                    <span className="stat-label">Jobs Annually</span>
+                </div>
+                <div className="stat">
+                    <span className="stat-value">25+</span>
+                    <span className="stat-label">Years Experience</span>
+                </div>
+                <div className="stat">
+                    <span className="stat-value">ISO</span>
+                    <span className="stat-label">9001 Certified</span>
                 </div>
             </div>
 
             <style>{`
-                .hero-section {
+                .hero {
                     position: relative;
-                    height: 90vh;
-                    min-height: 600px;
+                    min-height: 100vh;
                     display: flex;
-                    align-items: center;
-                    overflow: hidden;
-                    margin-top: 80px; /* Header Offset */
+                    flex-direction: column;
                 }
 
                 .hero-bg {
                     position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    z-index: 1;
+                    inset: 0;
+                    z-index: -1;
                 }
 
-                .hero-img {
+                .hero-bg img {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
@@ -78,109 +67,116 @@ const Hero = () => {
 
                 .hero-overlay {
                     position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    /* Corporate Gradient: Dark Left -> Light Right */
-                    background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.2) 100%);
+                    inset: 0;
+                    background: linear-gradient(
+                        to right,
+                        rgba(0, 0, 0, 0.8) 0%,
+                        rgba(0, 0, 0, 0.4) 100%
+                    );
                 }
 
                 .hero-content {
-                    position: relative;
-                    z-index: 2;
-                    width: 100%;
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    padding-top: calc(var(--header-height) + var(--space-12));
+                    padding-bottom: var(--space-24);
+                    max-width: 700px;
                 }
 
-                .hero-text-block {
-                    max-width: 700px;
-                    color: white;
+                .hero-tagline {
+                    font-size: 0.875rem;
+                    font-weight: 600;
+                    color: var(--color-accent);
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    margin-bottom: var(--space-4);
                 }
 
                 .hero-title {
-                    font-size: 64px;
+                    font-size: clamp(2.5rem, 6vw, 4rem);
                     font-weight: 700;
+                    color: var(--color-white);
                     line-height: 1.1;
-                    margin-bottom: 24px;
-                    color: var(--color-accent); /* Red "POWERING" */
+                    margin-bottom: var(--space-6);
                 }
 
-                .text-white {
-                    color: white;
-                }
-
-                .hero-subtitle {
-                    font-size: 18px;
-                    line-height: 1.6;
-                    color: #e0e0e0;
-                    margin-bottom: 40px;
-                    font-weight: 300;
-                    border-left: 3px solid var(--color-accent);
-                    padding-left: 20px;
+                .hero-desc {
+                    font-size: 1.125rem;
+                    color: rgba(255, 255, 255, 0.8);
+                    line-height: 1.7;
+                    margin-bottom: var(--space-8);
                 }
 
                 .hero-actions {
                     display: flex;
-                    gap: 20px;
+                    gap: var(--space-4);
+                    flex-wrap: wrap;
                 }
 
-                .btn-outline {
-                    border: 1px solid white;
-                    color: white;
-                    padding: 12px 32px;
-                    text-transform: uppercase;
-                    font-weight: 600;
-                    font-size: 14px;
-                }
-                
-                .btn-outline:hover {
-                    background: white;
-                    color: #111;
+                .hero-stats {
+                    background: var(--color-white);
+                    border-top: 3px solid var(--color-accent);
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
                 }
 
-                /* Stats Strip */
-                .stats-strip {
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    width: 100%;
-                    background: var(--color-bg-body); /* White strip sitting on image bottom or below? */
-                    background: rgba(255, 255, 255, 0.95); /* Clean white strip */
-                    z-index: 5;
-                    padding: 30px 0;
-                    border-top: 4px solid var(--color-accent);
-                }
-
-                .stats-grid {
-                    display: flex;
-                    justify-content: space-around;
-                    align-items: center;
-                }
-
-                .stat-item {
+                .stat {
+                    padding: var(--space-6) var(--space-4);
                     text-align: center;
+                    border-right: 1px solid var(--color-gray-200);
+                }
+
+                .stat:last-child {
+                    border-right: none;
                 }
 
                 .stat-value {
                     display: block;
-                    font-size: 32px;
+                    font-size: 1.75rem;
                     font-weight: 700;
-                    color: var(--color-text-primary);
-                    margin-bottom: 5px;
+                    color: var(--color-gray-900);
+                    margin-bottom: var(--space-1);
                 }
 
                 .stat-label {
-                    font-size: 13px;
+                    font-size: 0.75rem;
+                    color: var(--color-gray-500);
                     text-transform: uppercase;
-                    letter-spacing: 1px;
-                    color: var(--color-text-secondary);
-                    font-weight: 600;
+                    letter-spacing: 0.05em;
                 }
 
                 @media (max-width: 768px) {
-                    .hero-title { font-size: 42px; }
-                    .stats-grid { flex-wrap: wrap; gap: 20px; }
-                    .stat-item { width: 45%; }
+                    .hero-content {
+                        padding-top: calc(var(--header-height) + var(--space-8));
+                        padding-bottom: var(--space-16);
+                    }
+
+                    .hero-actions {
+                        flex-direction: column;
+                    }
+
+                    .hero-actions .btn {
+                        width: 100%;
+                        justify-content: center;
+                    }
+
+                    .hero-stats {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+
+                    .stat {
+                        border-bottom: 1px solid var(--color-gray-200);
+                    }
+
+                    .stat:nth-child(2) {
+                        border-right: none;
+                    }
+
+                    .stat:nth-last-child(-n+2) {
+                        border-bottom: none;
+                    }
                 }
             `}</style>
         </section>

@@ -1,210 +1,166 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import iecLogo from '../assets/iec-logo.png';
+import logo from '../assets/iec-logo.png';
 
 const Header = () => {
     const [scrolled, setScrolled] = useState(false);
-    const [mobileOpen, setMobileOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 20);
+        const handleScroll = () => setScrolled(window.scrollY > 10);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navLinks = [
-        { name: 'About Us', path: '/about' },
-        { name: 'Services', path: '/services' },
-        { name: 'Infrastructure', path: '/infrastructure' },
-        { name: 'Contact', path: '/contact' },
+    const links = [
+        { to: '/about', label: 'About' },
+        { to: '/services', label: 'Services' },
+        { to: '/infrastructure', label: 'Infrastructure' },
+        { to: '/contact', label: 'Contact' },
     ];
 
     return (
         <header className={`header ${scrolled ? 'scrolled' : ''}`}>
-            <div className="container header-content">
-                {/* Logo Section */}
-                <Link to="/" className="brand" onClick={() => setMobileOpen(false)}>
-                    <img src={iecLogo} alt="IEC Logo" className="logo-img" />
-                    <div className="brand-text">
-                        <span className="name">Indian Engineering Company</span>
-                        <span className="tagline">SINCE 1974</span>
-                    </div>
+            <div className="header-inner">
+                <Link to="/" className="logo">
+                    <img src={logo} alt="Indian Engineering Company" />
                 </Link>
 
-                {/* Desktop Navigation */}
-                <nav className="desktop-nav">
-                    {navLinks.map((link) => (
-                        <NavLink
-                            key={link.name}
-                            to={link.path}
-                            className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+                <nav className={`nav ${menuOpen ? 'open' : ''}`}>
+                    {links.map(link => (
+                        <NavLink 
+                            key={link.to}
+                            to={link.to}
+                            className={({ isActive }) => isActive ? 'active' : ''}
+                            onClick={() => setMenuOpen(false)}
                         >
-                            {link.name}
+                            {link.label}
                         </NavLink>
                     ))}
-                    <Link to="/contact" className="btn btn-primary header-cta">Request Quote</Link>
+                    <Link to="/contact" className="btn btn-primary nav-cta" onClick={() => setMenuOpen(false)}>
+                        Get Quote
+                    </Link>
                 </nav>
 
-                {/* Mobile Toggle */}
-                <button
-                    className={`mobile-toggle ${mobileOpen ? 'open' : ''}`}
-                    onClick={() => setMobileOpen(!mobileOpen)}
-                    aria-label="Toggle Menu"
+                <button 
+                    className={`menu-btn ${menuOpen ? 'open' : ''}`}
+                    onClick={() => setMenuOpen(!menuOpen)}
+                    aria-label="Menu"
                 >
-                    <span className="bar"></span>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
+                    <span />
+                    <span />
                 </button>
-
-                {/* Mobile Menu */}
-                <div className={`mobile-menu ${mobileOpen ? 'active' : ''}`}>
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            to={link.path}
-                            className="mobile-link"
-                            onClick={() => setMobileOpen(false)}
-                        >
-                            {link.name}
-                        </Link>
-                    ))}
-                    <Link to="/contact" className="btn btn-primary mobile-btn" onClick={() => setMobileOpen(false)}>
-                        Request Quote
-                    </Link>
-                </div>
             </div>
 
             <style>{`
-                /* Header Base */
                 .header {
                     position: fixed;
                     top: 0;
                     left: 0;
-                    width: 100%;
-                    background: white;
+                    right: 0;
                     z-index: 1000;
-                    border-bottom: 1px solid #f0f0f0;
-                    transition: all 0.3s ease;
-                    height: 80px;
-                    display: flex;
-                    align-items: center;
+                    background: var(--color-white);
+                    transition: box-shadow var(--transition);
                 }
 
                 .header.scrolled {
-                    height: 70px;
-                    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+                    box-shadow: 0 1px 0 var(--color-gray-200);
                 }
 
-                .header-content {
+                .header-inner {
+                    max-width: var(--max-width);
+                    margin: 0 auto;
+                    padding: 0 var(--space-6);
+                    height: var(--header-height);
                     display: flex;
+                    align-items: center;
                     justify-content: space-between;
-                    align-items: center;
-                    width: 100%;
                 }
 
-                /* Brand */
-                .brand {
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                }
-
-                .logo-img {
-                    height: 50px;
+                .logo img {
+                    height: 44px;
                     width: auto;
-                    object-fit: contain;
                 }
 
-                .brand-text {
-                    display: flex;
-                    flex-direction: column;
-                }
-
-                .brand-text .name {
-                    font-size: 18px;
-                    font-weight: 700;
-                    color: var(--color-text-primary);
-                    text-transform: uppercase;
-                    line-height: 1.1;
-                }
-
-                .brand-text .tagline {
-                    font-size: 11px;
-                    font-weight: 600;
-                    color: var(--color-accent);
-                    letter-spacing: 1px;
-                }
-
-                /* Desktop Nav */
-                .desktop-nav {
+                .nav {
                     display: flex;
                     align-items: center;
-                    gap: 40px;
+                    gap: var(--space-8);
                 }
 
-                .nav-link {
-                    font-size: 15px;
+                .nav a:not(.nav-cta) {
+                    font-size: 0.9375rem;
                     font-weight: 500;
-                    color: var(--color-text-secondary);
-                    text-transform: uppercase;
-                    letter-spacing: 0.5px;
-                    position: relative;
+                    color: var(--color-gray-600);
+                    transition: color var(--transition);
                 }
 
-                .nav-link:hover, .nav-link.active {
-                    color: var(--color-accent);
+                .nav a:not(.nav-cta):hover,
+                .nav a:not(.nav-cta).active {
+                    color: var(--color-gray-900);
                 }
 
-                .header-cta {
-                    padding: 10px 24px;
-                    font-size: 14px;
+                .nav-cta {
+                    margin-left: var(--space-4);
                 }
 
-                /* Mobile Toggle */
-                .mobile-toggle {
+                .menu-btn {
                     display: none;
                     flex-direction: column;
-                    gap: 5px;
-                    background: none;
-                    border: none;
-                    cursor: pointer;
+                    gap: 6px;
+                    padding: 4px;
                 }
 
-                .bar {
-                    width: 25px;
+                .menu-btn span {
+                    width: 24px;
                     height: 2px;
-                    background: #333;
-                    transition: 0.3s;
+                    background: var(--color-gray-800);
+                    transition: var(--transition);
                 }
 
-                /* Mobile Menu */
-                .mobile-menu {
-                    position: fixed;
-                    top: 80px;
-                    left: 0;
-                    width: 100%;
-                    background: white;
-                    padding: 20px;
-                    display: none;
-                    flex-direction: column;
-                    gap: 20px;
-                    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                .menu-btn.open span:first-child {
+                    transform: rotate(45deg) translate(3px, 3px);
                 }
 
-                .mobile-menu.active {
-                    display: flex;
+                .menu-btn.open span:last-child {
+                    transform: rotate(-45deg) translate(3px, -3px);
                 }
 
-                .mobile-link {
-                    font-size: 16px;
-                    font-weight: 600;
-                    color: #333;
-                }
+                @media (max-width: 768px) {
+                    .menu-btn {
+                        display: flex;
+                    }
 
-                @media (max-width: 900px) {
-                    .desktop-nav { display: none; }
-                    .mobile-toggle { display: flex; }
-                    .brand-text .name { font-size: 14px; }
+                    .nav {
+                        position: fixed;
+                        top: var(--header-height);
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: var(--color-white);
+                        flex-direction: column;
+                        padding: var(--space-8);
+                        gap: var(--space-4);
+                        opacity: 0;
+                        visibility: hidden;
+                        transition: var(--transition);
+                    }
+
+                    .nav.open {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+
+                    .nav a:not(.nav-cta) {
+                        font-size: 1.25rem;
+                        padding: var(--space-2) 0;
+                    }
+
+                    .nav-cta {
+                        margin: var(--space-4) 0 0;
+                        width: 100%;
+                        justify-content: center;
+                    }
                 }
             `}</style>
         </header>
