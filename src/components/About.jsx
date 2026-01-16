@@ -125,7 +125,7 @@ const About = () => {
             <style>{`
                 .about {
                     background: var(--color-white);
-                    padding-bottom: 0;
+                    padding-bottom: var(--space-3xl);
                 }
 
                 .about-grid {
