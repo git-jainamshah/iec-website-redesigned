@@ -1055,8 +1055,20 @@ const Header = () => {
                         padding: 0 20px;
                     }
 
+                    .brand {
+                        gap: 10px;
+                    }
+
                     .brand-text {
-                        display: none;
+                        display: flex;
+                    }
+
+                    .brand-name {
+                        font-size: 0.875rem;
+                    }
+
+                    .brand-cert {
+                        font-size: 0.625rem;
                     }
 
                     .nav,
@@ -1076,12 +1088,24 @@ const Header = () => {
                         padding: 0 16px;
                     }
 
+                    .brand {
+                        gap: 8px;
+                    }
+
                     .brand-logo {
                         height: 56px;
                     }
 
                     .header.scrolled .brand-logo {
                         height: 52px;
+                    }
+
+                    .brand-name {
+                        font-size: 0.8125rem;
+                    }
+
+                    .brand-cert {
+                        font-size: 0.5625rem;
                     }
 
                     .mobile-menu {
