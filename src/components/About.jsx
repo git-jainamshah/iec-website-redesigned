@@ -14,9 +14,17 @@ const About = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentImage((prev) => (prev + 1) % images.length);
-        }, 4000);
+        }, 5000);
         return () => clearInterval(interval);
     }, []);
+
+    const goToPrev = () => {
+        setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+    };
+
+    const goToNext = () => {
+        setCurrentImage((prev) => (prev + 1) % images.length);
+    };
 
     return (
         <section className="about section">
@@ -69,16 +77,33 @@ const About = () => {
                     {/* Right - Image Gallery */}
                     <div className="about-visual">
                         <div className="gallery-frame">
-                            {images.map((img, idx) => (
-                                <div 
-                                    key={idx}
-                                    className={`gallery-slide ${idx === currentImage ? 'active' : ''}`}
-                                >
-                                    <img src={img.src} alt={img.caption} />
-                                </div>
-                            ))}
+                            {/* Image Container */}
+                            <div className="gallery-images">
+                                {images.map((img, idx) => (
+                                    <div 
+                                        key={idx}
+                                        className={`gallery-slide ${idx === currentImage ? 'active' : ''}`}
+                                    >
+                                        <img src={img.src} alt={img.caption} />
+                                    </div>
+                                ))}
+
+                                {/* Navigation Arrows */}
+                                <button className="gallery-nav prev" onClick={goToPrev} aria-label="Previous image">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                        <path d="M15 18l-6-6 6-6"/>
+                                    </svg>
+                                </button>
+                                <button className="gallery-nav next" onClick={goToNext} aria-label="Next image">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                        <path d="M9 18l6-6-6-6"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            {/* Caption Bar - Always Visible */}
                             <div className="gallery-caption">
-                                <span>{images[currentImage].caption}</span>
+                                <span className="caption-text">{images[currentImage].caption}</span>
                                 <div className="gallery-dots">
                                     {images.map((_, idx) => (
                                         <button 
@@ -188,17 +213,22 @@ const About = () => {
                     margin-top: var(--space-xs);
                 }
 
-                /* Gallery Frame - Simple elevated design */
+                /* Gallery Frame */
                 .about-visual {
                     position: relative;
                 }
 
                 .gallery-frame {
-                    position: relative;
                     background: var(--color-white);
                     border-radius: 8px;
                     overflow: hidden;
                     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+                }
+
+                .gallery-images {
+                    position: relative;
+                    aspect-ratio: 4/3;
+                    overflow: hidden;
                 }
 
                 .gallery-slide {
@@ -219,10 +249,60 @@ const About = () => {
                 .gallery-slide img {
                     width: 100%;
                     height: 100%;
-                    aspect-ratio: 4/3;
                     object-fit: cover;
                 }
 
+                /* Navigation Arrows */
+                .gallery-nav {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 44px;
+                    height: 44px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: var(--color-white);
+                    border: none;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    opacity: 0;
+                    transition: all 0.3s var(--ease-out);
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                    z-index: 2;
+                }
+
+                .gallery-images:hover .gallery-nav {
+                    opacity: 1;
+                }
+
+                .gallery-nav:hover {
+                    background: var(--color-accent);
+                    color: var(--color-white);
+                    transform: translateY(-50%) scale(1.1);
+                }
+
+                .gallery-nav.prev {
+                    left: var(--space-md);
+                }
+
+                .gallery-nav.next {
+                    right: var(--space-md);
+                }
+
+                .gallery-nav svg {
+                    transition: transform 0.2s;
+                }
+
+                .gallery-nav.prev:hover svg {
+                    transform: translateX(-2px);
+                }
+
+                .gallery-nav.next:hover svg {
+                    transform: translateX(2px);
+                }
+
+                /* Caption Bar - Always Visible */
                 .gallery-caption {
                     display: flex;
                     align-items: center;
@@ -232,7 +312,7 @@ const About = () => {
                     border-top: 1px solid var(--color-border);
                 }
 
-                .gallery-caption span {
+                .caption-text {
                     font-size: 0.875rem;
                     font-weight: 500;
                     color: var(--color-text);
@@ -329,6 +409,10 @@ const About = () => {
                     .about-visual {
                         order: -1;
                     }
+
+                    .gallery-nav {
+                        opacity: 1;
+                    }
                 }
 
                 @media (max-width: 768px) {
@@ -353,6 +437,19 @@ const About = () => {
 
                     .cert-divider {
                         display: none;
+                    }
+
+                    .gallery-nav {
+                        width: 36px;
+                        height: 36px;
+                    }
+
+                    .gallery-nav.prev {
+                        left: var(--space-sm);
+                    }
+
+                    .gallery-nav.next {
+                        right: var(--space-sm);
                     }
                 }
             `}</style>
