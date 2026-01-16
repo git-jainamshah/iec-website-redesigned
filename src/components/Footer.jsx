@@ -117,7 +117,6 @@ const Footer = () => {
                 /* CTA Section */
                 .footer-cta {
                     position: relative;
-                    background: var(--color-cream);
                     background-image: url(${projectBannerBg});
                     background-size: cover;
                     background-position: center;
@@ -134,8 +133,7 @@ const Footer = () => {
                     left: 0;
                     right: 0;
                     bottom: 0;
-                    background: var(--color-cream);
-                    opacity: 0.85;
+                    background: rgba(0, 0, 0, 0.3);
                     z-index: 0;
                 }
 
@@ -154,7 +152,7 @@ const Footer = () => {
                 .cta-text h3 {
                     font-size: clamp(1.5rem, 3vw, 2rem);
                     font-weight: 400;
-                    color: var(--color-text);
+                    color: var(--color-white);
                     margin-bottom: var(--space-sm);
                 }
 
@@ -164,7 +162,7 @@ const Footer = () => {
 
                 .cta-text p {
                     font-size: 0.9375rem;
-                    color: var(--color-text-light);
+                    color: rgba(255, 255, 255, 0.8);
                 }
 
                 .cta-actions {
@@ -206,15 +204,15 @@ const Footer = () => {
 
                 .cta-divider {
                     font-size: 0.75rem;
-                    color: var(--color-muted);
+                    color: rgba(255, 255, 255, 0.6);
                 }
 
                 .cta-phone {
                     font-size: 1rem;
                     font-weight: 600;
-                    color: var(--color-text);
+                    color: var(--color-white);
                     padding: 14px 24px;
-                    border: 2px solid var(--color-border);
+                    border: 2px solid rgba(255, 255, 255, 0.4);
                     border-radius: 4px;
                     transition: all 0.3s;
                 }
@@ -222,6 +220,7 @@ const Footer = () => {
                 .cta-phone:hover {
                     border-color: var(--color-accent);
                     color: var(--color-accent);
+                    background: rgba(255, 255, 255, 0.1);
                 }
 
                 /* Main Footer */

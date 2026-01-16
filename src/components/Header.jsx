@@ -753,6 +753,7 @@ const Header = () => {
                     visibility: hidden;
                     transition: all 0.3s ease;
                     overflow-y: auto;
+                    margin-top: 0;
                     border-top: 1px solid var(--color-border);
                 }
 
@@ -1058,6 +1059,7 @@ const Header = () => {
 
                     .mobile-menu {
                         top: 64px;
+                        border-top: 1px solid var(--color-border);
                     }
                 }
             `}</style>
