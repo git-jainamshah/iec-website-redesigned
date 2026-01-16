@@ -217,6 +217,17 @@ const Header = () => {
 
             {/* Mobile Menu */}
             <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
+                {/* Mobile Brand Section */}
+                <div className="mobile-brand-section">
+                    <Link to="/" className="mobile-brand" onClick={() => setMenuOpen(false)}>
+                        <img src={logo} alt="IEC" className="mobile-brand-logo" />
+                        <div className="mobile-brand-text">
+                            <span className="mobile-brand-name">Indian Engineering Company</span>
+                            <span className="mobile-brand-cert">EASA Certified</span>
+                        </div>
+                    </Link>
+                </div>
+
                 {/* Mobile Actions Bar - Search, Language, Call */}
                 <div className="mobile-actions-bar">
                     {/* Mobile Search */}
@@ -348,7 +359,7 @@ const Header = () => {
                 }
 
                 .brand-logo {
-                    height: 56px;
+                    height: 64px;
                     width: auto;
                     object-fit: contain;
                     transition: all 0.3s ease;
@@ -356,7 +367,7 @@ const Header = () => {
                 }
 
                 .header.scrolled .brand-logo {
-                    height: 46px;
+                    height: 56px;
                     filter: none; /* Original logo colors on white bg */
                 }
 
@@ -760,6 +771,48 @@ const Header = () => {
                     visibility: visible;
                 }
 
+                /* Mobile Brand Section */
+                .mobile-brand-section {
+                    padding-bottom: 20px;
+                    margin-bottom: 20px;
+                    border-bottom: 1px solid var(--color-border);
+                }
+
+                .mobile-brand {
+                    display: flex;
+                    align-items: center;
+                    gap: 14px;
+                }
+
+                .mobile-brand-logo {
+                    height: 52px;
+                    width: auto;
+                    object-fit: contain;
+                    flex-shrink: 0;
+                }
+
+                .mobile-brand-text {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2px;
+                    line-height: 1.15;
+                }
+
+                .mobile-brand-name {
+                    font-size: 1rem;
+                    font-weight: 700;
+                    color: var(--color-text);
+                    letter-spacing: -0.01em;
+                }
+
+                .mobile-brand-cert {
+                    font-size: 0.6875rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.08em;
+                    color: var(--color-accent);
+                }
+
                 .mobile-nav {
                     display: flex;
                     flex-direction: column;
@@ -980,6 +1033,14 @@ const Header = () => {
                         margin-left: 32px;
                     }
 
+                    .brand-logo {
+                        height: 60px;
+                    }
+
+                    .header.scrolled .brand-logo {
+                        height: 52px;
+                    }
+
                     .brand-name {
                         font-size: 1rem;
                     }
@@ -1016,11 +1077,23 @@ const Header = () => {
                     }
 
                     .brand-logo {
-                        height: 36px;
+                        height: 48px;
+                    }
+
+                    .header.scrolled .brand-logo {
+                        height: 44px;
                     }
 
                     .mobile-menu {
                         top: 64px;
+                    }
+
+                    .mobile-brand-logo {
+                        height: 44px;
+                    }
+
+                    .mobile-brand-name {
+                        font-size: 0.9375rem;
                     }
                 }
             `}</style>
