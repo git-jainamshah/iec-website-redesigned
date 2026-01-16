@@ -23,69 +23,96 @@ const Hero = () => {
         window.addEventListener('resize', resize);
         resize();
 
-        // Floating wave mesh animation
+        // Vibrant rainbow wave colors like the reference
+        const colors = [
+            { r: 255, g: 220, b: 0 },    // Yellow
+            { r: 255, g: 150, b: 50 },   // Orange
+            { r: 255, g: 80, b: 120 },   // Pink/Coral
+            { r: 200, g: 50, b: 150 },   // Magenta
+            { r: 100, g: 100, b: 255 },  // Blue
+            { r: 50, g: 200, b: 150 },   // Teal
+            { r: 100, g: 255, b: 100 },  // Green
+        ];
+
+        // Floating colorful wave mesh animation
         const drawWaveMesh = () => {
             const width = canvas.offsetWidth;
             const height = canvas.offsetHeight;
             
             ctx.clearRect(0, 0, width, height);
             
-            // Wave parameters
-            const waves = [
-                { amplitude: 30, frequency: 0.008, speed: 0.015, color: 'rgba(200, 16, 46, 0.4)', yOffset: 0.3 },
-                { amplitude: 25, frequency: 0.012, speed: 0.02, color: 'rgba(200, 16, 46, 0.3)', yOffset: 0.35 },
-                { amplitude: 35, frequency: 0.006, speed: 0.01, color: 'rgba(255, 100, 100, 0.25)', yOffset: 0.4 },
-                { amplitude: 20, frequency: 0.015, speed: 0.025, color: 'rgba(200, 16, 46, 0.2)', yOffset: 0.45 },
-            ];
-
-            // Draw flowing mesh lines
-            const numLines = 12;
-            const lineSpacing = 15;
+            const numLines = 20;
+            const lineSpacing = 8;
             
             for (let l = 0; l < numLines; l++) {
-                const baseY = height * 0.5 + l * lineSpacing;
-                const phaseOffset = l * 0.3;
+                const baseY = height * 0.15 + l * lineSpacing;
+                const phaseOffset = l * 0.4;
                 
                 ctx.beginPath();
-                ctx.moveTo(0, baseY);
                 
-                for (let x = 0; x <= width; x += 3) {
+                // Start from right side, flowing left
+                for (let x = 0; x <= width; x += 2) {
                     let y = baseY;
                     
-                    // Combine multiple sine waves for organic movement
-                    y += Math.sin(x * 0.01 + time * 0.8 + phaseOffset) * (20 + l * 2);
-                    y += Math.sin(x * 0.02 + time * 1.2 + phaseOffset * 0.5) * (10 + l);
-                    y += Math.sin(x * 0.005 + time * 0.5) * 15;
+                    // Multiple sine waves for flowing cloth effect
+                    y += Math.sin(x * 0.008 + time * 1.5 + phaseOffset) * (25 + l * 1.5);
+                    y += Math.sin(x * 0.015 + time * 2 + phaseOffset * 0.7) * (15 + l * 0.8);
+                    y += Math.sin(x * 0.003 + time * 0.8) * 20;
                     
-                    ctx.lineTo(x, y);
+                    if (x === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
                 }
                 
-                // Gradient effect based on line position
+                // Create vibrant gradient across the line
                 const gradient = ctx.createLinearGradient(0, 0, width, 0);
-                const alpha = 0.15 - (l * 0.01);
-                gradient.addColorStop(0, `rgba(200, 16, 46, ${alpha * 0.5})`);
-                gradient.addColorStop(0.3, `rgba(200, 16, 46, ${alpha})`);
-                gradient.addColorStop(0.6, `rgba(255, 80, 80, ${alpha})`);
-                gradient.addColorStop(1, `rgba(200, 16, 46, ${alpha * 0.3})`);
+                
+                // Rainbow gradient effect
+                const colorIndex = (l / numLines) * (colors.length - 1);
+                const c1 = colors[Math.floor(colorIndex) % colors.length];
+                const c2 = colors[Math.ceil(colorIndex) % colors.length];
+                const t = colorIndex % 1;
+                
+                const r = Math.round(c1.r + (c2.r - c1.r) * t);
+                const g = Math.round(c1.g + (c2.g - c1.g) * t);
+                const b = Math.round(c1.b + (c2.b - c1.b) * t);
+                
+                const alpha = 0.7 - (l * 0.025);
+                gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${alpha * 0.3})`);
+                gradient.addColorStop(0.3, `rgba(${r}, ${g}, ${b}, ${alpha * 0.8})`);
+                gradient.addColorStop(0.6, `rgba(${r}, ${g}, ${b}, ${alpha})`);
+                gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, ${alpha * 0.5})`);
                 
                 ctx.strokeStyle = gradient;
-                ctx.lineWidth = 1.5;
+                ctx.lineWidth = 2;
                 ctx.stroke();
             }
 
-            // Draw connecting vertical lines for mesh effect
-            for (let x = 0; x < width; x += 40) {
-                const wobble = Math.sin(x * 0.02 + time) * 20;
+            // Add some cross-lines for mesh texture
+            for (let x = width * 0.3; x < width; x += 25) {
+                const wobbleX = Math.sin(time + x * 0.01) * 15;
+                const startY = height * 0.15;
+                const endY = height * 0.15 + numLines * lineSpacing;
                 
                 ctx.beginPath();
-                ctx.moveTo(x + wobble, height * 0.5);
-                ctx.lineTo(x + wobble + Math.sin(time + x * 0.01) * 10, height * 0.5 + numLines * lineSpacing);
-                ctx.strokeStyle = `rgba(200, 16, 46, ${0.05 + Math.sin(x * 0.01 + time) * 0.02})`;
-                ctx.lineWidth = 0.5;
+                ctx.moveTo(x + wobbleX, startY);
+                
+                // Wavy vertical line
+                for (let y = startY; y <= endY; y += 5) {
+                    const wobble = Math.sin(y * 0.05 + time * 2 + x * 0.01) * 8;
+                    ctx.lineTo(x + wobbleX + wobble, y);
+                }
+                
+                const colorIdx = Math.floor((x / width) * colors.length) % colors.length;
+                const c = colors[colorIdx];
+                ctx.strokeStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.3)`;
+                ctx.lineWidth = 1;
                 ctx.stroke();
             }
 
-            time += 0.02;
+            time += 0.025;
             animationId = requestAnimationFrame(drawWaveMesh);
         };
 
@@ -198,10 +225,10 @@ const Hero = () => {
                 /* Wave Mesh Canvas - positioned at bottom */
                 .hero-canvas {
                     position: absolute;
-                    bottom: 80px;
+                    bottom: 70px;
                     left: 0;
                     right: 0;
-                    height: 200px;
+                    height: 250px;
                     z-index: 1;
                     pointer-events: none;
                 }
@@ -286,28 +313,25 @@ const Hero = () => {
                     transform: translateX(4px);
                 }
 
-                /* EASA Badge - Minimal circular style */
+                /* EASA Badge - Circular with actual logo */
                 .easa-badge {
                     position: relative;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    width: 90px;
-                    height: 90px;
+                    width: 80px;
+                    height: 80px;
                     border-radius: 50%;
-                    border: 2px solid rgba(255, 255, 255, 0.3);
-                    background: rgba(255, 255, 255, 0.1);
-                    backdrop-filter: blur(8px);
+                    background: white;
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
                     flex-shrink: 0;
                     margin-right: var(--space-2xl);
                 }
 
                 .easa-badge img {
-                    width: 54px;
-                    height: 54px;
+                    width: 50px;
+                    height: 50px;
                     object-fit: contain;
-                    filter: brightness(0) invert(1);
-                    opacity: 0.9;
                 }
 
                 /* Stats Strip */
@@ -373,19 +397,19 @@ const Hero = () => {
                         position: absolute;
                         top: calc(var(--header-height) + var(--space-md));
                         right: var(--space-md);
-                        width: 64px;
-                        height: 64px;
+                        width: 56px;
+                        height: 56px;
                         margin-right: 0;
                     }
 
                     .easa-badge img {
-                        width: 36px;
-                        height: 36px;
+                        width: 34px;
+                        height: 34px;
                     }
 
                     .hero-canvas {
-                        height: 150px;
-                        bottom: 70px;
+                        height: 200px;
+                        bottom: 65px;
                     }
 
                     .stats-container {
@@ -419,8 +443,8 @@ const Hero = () => {
                     }
 
                     .hero-canvas {
-                        height: 120px;
-                        bottom: 60px;
+                        height: 160px;
+                        bottom: 55px;
                     }
 
                     .stat-value {
