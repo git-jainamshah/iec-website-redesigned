@@ -36,10 +36,10 @@ const Hero = () => {
                         </Link>
                     </div>
                 </div>
-
-                {/* EASA Logo - Simple */}
-                <img src={easaLogo} alt="EASA Accredited Member" className="easa-logo" />
             </div>
+
+            {/* EASA Logo - Stamped look, bottom right */}
+            <img src={easaLogo} alt="EASA Accredited Member" className="easa-logo" />
 
             {/* Stats Strip */}
             <div className="hero-stats">
@@ -175,12 +175,15 @@ const Hero = () => {
                     transform: translateX(4px);
                 }
 
-                /* EASA Logo - Simple, no borders, no background */
+                /* EASA Logo - Simple image, stamped look */
                 .easa-logo {
-                    width: 80px;
+                    position: absolute;
+                    bottom: var(--space-xl);
+                    right: var(--space-2xl);
+                    width: 90px;
                     height: auto;
-                    flex-shrink: 0;
-                    margin-right: var(--space-xl);
+                    transform: rotate(-12deg);
+                    opacity: 0.9;
                 }
 
                 /* Stats Strip */
@@ -244,11 +247,9 @@ const Hero = () => {
 
                     /* EASA logo on tablet */
                     .easa-logo {
-                        position: absolute;
-                        top: calc(var(--header-height) + var(--space-lg));
+                        bottom: var(--space-lg);
                         right: var(--space-lg);
-                        width: 70px;
-                        margin-right: 0;
+                        width: 75px;
                     }
 
                     .stats-container {
@@ -279,9 +280,9 @@ const Hero = () => {
 
                     /* EASA logo on mobile */
                     .easa-logo {
-                        top: calc(var(--header-height) + var(--space-sm));
+                        bottom: var(--space-md);
                         right: var(--space-md);
-                        width: 55px;
+                        width: 60px;
                     }
 
                     .stat-value {
