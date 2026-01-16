@@ -1,15 +1,23 @@
 import React from 'react';
+import abbLogo from '../assets/clientel-logos/abb-logo.png';
+import ansaldoLogo from '../assets/clientel-logos/ansaldo-logo.png';
+import bhelLogo from '../assets/clientel-logos/bhel-logo.png';
+import cgPowerLogo from '../assets/clientel-logos/cg-power-group-logo.png';
+import kirloskarLogo from '../assets/clientel-logos/kirloskar-group-logo.png';
+import marelliLogo from '../assets/clientel-logos/marelli-logo.png';
+import marthonLogo from '../assets/clientel-logos/marthon-energy-logo.png';
+import tecoLogo from '../assets/clientel-logos/teco-logo.png';
 
-// Client logos - using placeholder names for now
+// Client logos
 const clients = [
-    { name: 'Reliance Industries', short: 'RIL' },
-    { name: 'Tata Steel', short: 'TATA' },
-    { name: 'ONGC', short: 'ONGC' },
-    { name: 'NTPC', short: 'NTPC' },
-    { name: 'Indian Oil', short: 'IOCL' },
-    { name: 'BHEL', short: 'BHEL' },
-    { name: 'Adani Group', short: 'ADANI' },
-    { name: 'Ultratech Cement', short: 'ULTRATECH' },
+    { name: 'ABB', logo: abbLogo },
+    { name: 'Ansaldo', logo: ansaldoLogo },
+    { name: 'BHEL', logo: bhelLogo },
+    { name: 'CG Power Group', logo: cgPowerLogo },
+    { name: 'Kirloskar Group', logo: kirloskarLogo },
+    { name: 'Marelli', logo: marelliLogo },
+    { name: 'Marthon Energy', logo: marthonLogo },
+    { name: 'TECO', logo: tecoLogo },
 ];
 
 const Clients = () => {
@@ -17,7 +25,7 @@ const Clients = () => {
         <section className="clients">
             <div className="clients-inner">
                 <div className="clients-label">
-                    <span>Trusted by India's leading industries</span>
+                    <span>Trusted by India & International leading industries</span>
                 </div>
                 
                 <div className="clients-marquee">
@@ -25,13 +33,13 @@ const Clients = () => {
                         {/* First set */}
                         {clients.map((client, idx) => (
                             <div key={idx} className="client-logo">
-                                <span className="client-name">{client.short}</span>
+                                <img src={client.logo} alt={client.name} />
                             </div>
                         ))}
                         {/* Duplicate for seamless loop */}
                         {clients.map((client, idx) => (
                             <div key={`dup-${idx}`} className="client-logo">
-                                <span className="client-name">{client.short}</span>
+                                <img src={client.logo} alt={client.name} />
                             </div>
                         ))}
                     </div>
@@ -99,19 +107,20 @@ const Clients = () => {
                     justify-content: center;
                     height: 48px;
                     padding: 0 var(--space-lg);
+                    opacity: 0.4;
+                    transition: opacity 0.3s;
                 }
 
-                .client-name {
-                    font-size: 1.125rem;
-                    font-weight: 700;
-                    letter-spacing: 0.1em;
-                    color: rgba(255, 255, 255, 0.25);
-                    transition: color 0.3s;
-                    white-space: nowrap;
+                .client-logo:hover {
+                    opacity: 0.7;
                 }
 
-                .client-logo:hover .client-name {
-                    color: rgba(255, 255, 255, 0.5);
+                .client-logo img {
+                    height: 100%;
+                    width: auto;
+                    max-width: 120px;
+                    object-fit: contain;
+                    filter: brightness(0) invert(1);
                 }
 
                 @media (max-width: 768px) {
@@ -129,8 +138,12 @@ const Clients = () => {
                         gap: var(--space-2xl);
                     }
 
-                    .client-name {
-                        font-size: 0.9375rem;
+                    .client-logo {
+                        height: 40px;
+                    }
+
+                    .client-logo img {
+                        max-width: 100px;
                     }
                 }
             `}</style>
