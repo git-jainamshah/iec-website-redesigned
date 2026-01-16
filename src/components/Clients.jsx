@@ -8,46 +8,35 @@ import marelliLogo from '../assets/clientel-logos/marelli-logo.png';
 import marthonLogo from '../assets/clientel-logos/marthon-energy-logo.png';
 import tecoLogo from '../assets/clientel-logos/teco-logo.png';
 
-// Client logos
-// Note: Logos that are already white/light need to be inverted differently
 const clients = [
-    { name: 'ABB', logo: abbLogo, invert: false },
-    { name: 'Ansaldo', logo: ansaldoLogo, invert: false },
-    { name: 'BHEL', logo: bhelLogo, invert: false },
-    { name: 'CG Power Group', logo: cgPowerLogo, invert: false },
-    { name: 'Kirloskar Group', logo: kirloskarLogo, invert: false },
-    { name: 'Marelli', logo: marelliLogo, invert: true }, // Likely white
-    { name: 'Marthon Energy', logo: marthonLogo, invert: true }, // Likely white
-    { name: 'TECO', logo: tecoLogo, invert: false },
+    { name: 'ABB', logo: abbLogo },
+    { name: 'Ansaldo', logo: ansaldoLogo },
+    { name: 'BHEL', logo: bhelLogo },
+    { name: 'CG Power Group', logo: cgPowerLogo },
+    { name: 'Kirloskar Group', logo: kirloskarLogo },
+    { name: 'Marelli', logo: marelliLogo, invert: true },
+    { name: 'Marthon Energy', logo: marthonLogo, invert: true },
+    { name: 'TECO', logo: tecoLogo },
 ];
 
 const Clients = () => {
     return (
         <section className="clients">
-            <div className="clients-inner">
-                <div className="clients-label">
-                    <span>Trusted Globally</span>
+            <div className="container clients-container">
+                <div className="clients-header">
+                    <span className="clients-label">Trusted Globally by Industry Leaders</span>
+                    <div className="clients-divider"></div>
                 </div>
-                
+
                 <div className="clients-marquee">
                     <div className="clients-track">
-                        {/* First set */}
-                        {clients.map((client, idx) => (
-                            <div key={idx} className="client-logo">
-                                <img 
-                                    src={client.logo} 
+                        {/* Triple set for smoother infinite loop on wide screens */}
+                        {[...clients, ...clients, ...clients].map((client, idx) => (
+                            <div key={idx} className="client-logo-wrapper">
+                                <img
+                                    src={client.logo}
                                     alt={client.name}
-                                    className={client.invert ? 'logo-invert' : ''}
-                                />
-                            </div>
-                        ))}
-                        {/* Duplicate for seamless loop */}
-                        {clients.map((client, idx) => (
-                            <div key={`dup-${idx}`} className="client-logo">
-                                <img 
-                                    src={client.logo} 
-                                    alt={client.name}
-                                    className={client.invert ? 'logo-invert' : ''}
+                                    className={`client-logo-img ${client.invert ? 'invert-on-light' : ''}`}
                                 />
                             </div>
                         ))}
@@ -57,48 +46,44 @@ const Clients = () => {
 
             <style>{`
                 .clients {
-                    background: linear-gradient(to right, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
-                    padding: var(--space-lg) 0;
-                    overflow: hidden;
-                    position: relative;
+                    background: var(--color-white);
+                    padding: var(--space-2xl) 0;
+                    border-bottom: 1px solid var(--color-border);
                 }
 
-                .clients::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    height: 50%;
-                    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
-                    pointer-events: none;
+                .clients-container {
+                    display: flex;
+                    flex-direction: column;
+                    gap: var(--space-lg);
                 }
 
-                .clients-inner {
+                .clients-header {
                     display: flex;
                     align-items: center;
-                    gap: var(--space-2xl);
-                    position: relative;
-                    z-index: 1;
+                    gap: var(--space-lg);
+                    margin-bottom: var(--space-md);
                 }
 
                 .clients-label {
-                    flex-shrink: 0;
-                    padding-left: var(--space-2xl);
-                }
-
-                .clients-label span {
-                    font-size: 0.6875rem;
+                    font-size: 0.75rem;
                     font-weight: 600;
                     text-transform: uppercase;
                     letter-spacing: 0.12em;
-                    color: rgba(255, 255, 255, 0.8);
+                    color: var(--color-muted);
                     white-space: nowrap;
                 }
 
+                .clients-divider {
+                    height: 1px;
+                    width: 100%;
+                    background: var(--color-border);
+                    opacity: 0.5;
+                }
+
                 .clients-marquee {
-                    flex: 1;
+                    position: relative;
                     overflow: hidden;
+                    padding: var(--space-md) 0;
                     mask-image: linear-gradient(
                         to right,
                         transparent,
@@ -110,68 +95,69 @@ const Clients = () => {
 
                 .clients-track {
                     display: flex;
-                    gap: var(--space-3xl);
-                    animation: marquee 30s linear infinite;
+                    gap: var(--space-4xl);
+                    width: max-content;
+                    animation: marquee 60s linear infinite;
+                }
+
+                .clients-track:hover {
+                    animation-play-state: paused;
                 }
 
                 @keyframes marquee {
-                    0% {
-                        transform: translateX(0);
-                    }
-                    100% {
-                        transform: translateX(-50%);
-                    }
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-33.33%); }
                 }
 
-                .client-logo {
-                    flex-shrink: 0;
+                .client-logo-wrapper {
+                    width: 140px;
+                    height: 60px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    width: 180px;
-                    height: 64px;
-                    padding: 0 var(--space-lg);
-                    transition: all 0.3s;
-                    opacity: 0.9;
+                    transition: all 0.3s ease;
+                    filter: brightness(0);
+                    opacity: 0.8;
                 }
 
-                .client-logo:hover {
+                .client-logo-wrapper:hover {
+                    filter: none;
                     opacity: 1;
-                    transform: translateY(-2px);
+                    transform: scale(1.05);
+                    cursor: pointer;
                 }
 
-                .client-logo img {
-                    width: 100%;
-                    height: 100%;
+                .client-logo-img {
+                    max-width: 100%;
+                    max-height: 100%;
                     object-fit: contain;
-                    object-position: center;
-                    filter: brightness(0) invert(1) contrast(1.8) saturate(0);
                 }
 
-                .client-logo img.logo-invert {
-                    /* For logos with white elements, just invert (white becomes visible, black becomes white) */
-                    filter: invert(1) contrast(2) saturate(0);
+                /* 
+                   If a logo is white-on-transparent (e.g. Marelli was 'invert:true' for dark bg),
+                   it is naturally white. On a white background, it's invisible.
+                   We need to invert it to make it black. 
+                */
+                .invert-on-light {
+                    filter: invert(1);
                 }
 
                 @media (max-width: 768px) {
-                    .clients-inner {
-                        flex-direction: column;
-                        gap: var(--space-lg);
+                    .clients-header {
+                        justify-content: center;
                     }
-
-                    .clients-label {
-                        padding-left: 0;
-                        text-align: center;
+                    
+                    .clients-divider {
+                        display: none;
                     }
 
                     .clients-track {
-                        gap: var(--space-2xl);
+                        gap: var(--space-3xl);
                     }
 
-                    .client-logo {
-                        width: 150px;
-                        height: 56px;
-                        padding: 0 var(--space-md);
+                    .client-logo-wrapper {
+                        width: 110px;
+                        height: 48px;
                     }
                 }
             `}</style>
