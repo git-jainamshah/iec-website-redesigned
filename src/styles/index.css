@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* --- Corporate Palette (Linde Inspired) --- */
+    /* Primary: Clean Whites & Off-Whites */
+    --color-bg-body: #FFFFFF;
+    --color-bg-light: #F8F9FA;
+    /* Very subtle grey for contrast sections */
+
+    /* Accent: IEC Engineering Red */
+    --color-accent: #D32F2F;
+    --color-accent-dark: #B71C1C;
+
+    /* Typography: High Contrast Greys */
+    --color-text-primary: #222222;
+    /* Charcoal - Softer than pure black */
+    --color-text-secondary: #555555;
+    /* Slate Grey */
+    --color-text-light: #FFFFFF;
+
+    /* Layout & Spacing */
+    --max-width: 1400px;
+    /* Wide industrial standard */
+    --container-padding: 40px;
+
+    /* Fonts */
+    --font-primary: 'Outfit', sans-serif;
+}
+
+/* --- Global Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-bg-body);
+    font-family: var(--font-primary);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- Typography System --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* --- Layout Utility --- */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+/* --- Buttons (Corporate Style) --- */
+.btn {
+    display: inline-block;
+    padding: 12px 32px;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--color-accent);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-accent-dark);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+}
+
+.btn-outline:hover {
+    background: var(--color-accent);
+    color: white;
+}
+
+/* --- Utilities --- */
+.text-center {
+    text-align: center;
+}
+
+.section-padding {
+    padding: 100px 0;
+}
