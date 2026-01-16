@@ -208,6 +208,74 @@ const Header = () => {
 
             {/* Mobile Menu */}
             <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
+                {/* Mobile Actions Bar - Search, Language, Call */}
+                <div className="mobile-actions-bar">
+                    {/* Mobile Search */}
+                    <div className="mobile-search">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                        <input type="search" placeholder="Search..." />
+                    </div>
+
+                    <div className="mobile-actions-row">
+                        {/* Mobile Language Selector */}
+                        <div className="mobile-lang-wrapper">
+                            <button 
+                                className={`mobile-lang-btn ${langOpen ? 'active' : ''}`}
+                                onClick={() => setLangOpen(!langOpen)}
+                            >
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                </svg>
+                                {currentLang.toUpperCase()}
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M6 9l6 6 6-6"/>
+                                </svg>
+                            </button>
+                            
+                            {langOpen && (
+                                <div className="mobile-lang-dropdown">
+                                    <div className="mobile-lang-section">
+                                        <span className="mobile-lang-title">Indian Languages</span>
+                                        {languages.indian.map(lang => (
+                                            <button 
+                                                key={lang.code}
+                                                className={`mobile-lang-option ${currentLang === lang.code ? 'active' : ''}`}
+                                                onClick={() => { setCurrentLang(lang.code); setLangOpen(false); }}
+                                            >
+                                                {lang.name}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <div className="mobile-lang-section">
+                                        <span className="mobile-lang-title">International</span>
+                                        {languages.international.map(lang => (
+                                            <button 
+                                                key={lang.code}
+                                                className={`mobile-lang-option ${currentLang === lang.code ? 'active' : ''}`}
+                                                onClick={() => { setCurrentLang(lang.code); setLangOpen(false); }}
+                                            >
+                                                {lang.name}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Mobile Call Button */}
+                        <a href="tel:+919824214839" className="mobile-call-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                            Call Now
+                        </a>
+                    </div>
+                </div>
+
                 <nav className="mobile-nav">
                     {navItems.map(item => (
                         <div key={item.label} className="mobile-nav-item">
@@ -684,6 +752,144 @@ const Header = () => {
                     color: var(--color-white);
                     background: var(--color-accent);
                     border-radius: 4px;
+                }
+
+                /* ========== MOBILE ACTIONS BAR ========== */
+                .mobile-actions-bar {
+                    padding-bottom: 20px;
+                    margin-bottom: 20px;
+                    border-bottom: 1px solid var(--color-border);
+                }
+
+                .mobile-search {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 10px 14px;
+                    background: var(--color-light);
+                    border-radius: 6px;
+                    margin-bottom: 12px;
+                }
+
+                .mobile-search svg {
+                    color: var(--color-muted);
+                    flex-shrink: 0;
+                }
+
+                .mobile-search input {
+                    flex: 1;
+                    border: none;
+                    background: transparent;
+                    font-size: 0.875rem;
+                    color: var(--color-text);
+                    outline: none;
+                }
+
+                .mobile-search input::placeholder {
+                    color: var(--color-muted);
+                }
+
+                .mobile-actions-row {
+                    display: flex;
+                    gap: 10px;
+                }
+
+                .mobile-lang-wrapper {
+                    position: relative;
+                    flex: 1;
+                }
+
+                .mobile-lang-btn {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 6px;
+                    width: 100%;
+                    padding: 10px 14px;
+                    font-size: 0.8125rem;
+                    font-weight: 500;
+                    color: var(--color-text);
+                    background: var(--color-light);
+                    border: 1px solid var(--color-border);
+                    border-radius: 6px;
+                    transition: all 0.2s;
+                }
+
+                .mobile-lang-btn.active,
+                .mobile-lang-btn:hover {
+                    border-color: var(--color-text-light);
+                }
+
+                .mobile-lang-dropdown {
+                    position: absolute;
+                    top: calc(100% + 8px);
+                    left: 0;
+                    right: 0;
+                    background: var(--color-white);
+                    border: 1px solid var(--color-border);
+                    border-radius: 6px;
+                    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+                    z-index: 10;
+                    max-height: 280px;
+                    overflow-y: auto;
+                }
+
+                .mobile-lang-section {
+                    padding: 10px;
+                }
+
+                .mobile-lang-section:first-child {
+                    border-bottom: 1px solid var(--color-border);
+                }
+
+                .mobile-lang-title {
+                    display: block;
+                    font-size: 0.625rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: var(--color-muted);
+                    margin-bottom: 8px;
+                }
+
+                .mobile-lang-option {
+                    display: block;
+                    width: 100%;
+                    text-align: left;
+                    padding: 8px 10px;
+                    font-size: 0.8125rem;
+                    color: var(--color-text-light);
+                    border-radius: 4px;
+                    transition: all 0.15s;
+                }
+
+                .mobile-lang-option:hover {
+                    background: var(--color-light);
+                    color: var(--color-text);
+                }
+
+                .mobile-lang-option.active {
+                    color: var(--color-accent);
+                    font-weight: 600;
+                }
+
+                .mobile-call-btn {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 6px;
+                    flex: 1;
+                    padding: 10px 14px;
+                    font-size: 0.8125rem;
+                    font-weight: 600;
+                    color: var(--color-white);
+                    background: var(--color-accent);
+                    border-radius: 6px;
+                    transition: all 0.2s;
+                }
+
+                .mobile-call-btn:hover {
+                    background: var(--color-accent-hover);
                 }
 
                 /* ========== RESPONSIVE ========== */

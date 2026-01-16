@@ -34,12 +34,32 @@ const Hero = () => {
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
                         </Link>
+                        
+                        {/* Call Number */}
+                        <a href="tel:+919824214839" className="hero-phone">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                            +91 98242 14839
+                        </a>
                     </div>
                 </div>
             </div>
 
-            {/* EASA Logo - Stamped look, bottom right */}
-            <img src={easaLogo} alt="EASA Accredited Member" className="easa-logo" />
+            {/* EASA Badge with circular text */}
+            <div className="easa-badge">
+                <svg className="easa-text-circle" viewBox="0 0 100 100">
+                    <defs>
+                        <path id="circle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/>
+                    </defs>
+                    <text>
+                        <textPath href="#circle" startOffset="0%">
+                            • ACCREDITED MEMBER • ACCREDITED MEMBER 
+                        </textPath>
+                    </text>
+                </svg>
+                <img src={easaLogo} alt="EASA" className="easa-logo" />
+            </div>
 
             {/* Stats Strip */}
             <div className="hero-stats">
@@ -103,7 +123,7 @@ const Hero = () => {
                     align-items: center;
                     justify-content: space-between;
                     padding-top: calc(var(--header-height) + var(--space-lg));
-                    padding-bottom: var(--space-xl);
+                    padding-bottom: var(--space-3xl);
                 }
 
                 .hero-text {
@@ -145,6 +165,9 @@ const Hero = () => {
                 }
 
                 .hero-actions {
+                    display: flex;
+                    align-items: center;
+                    gap: var(--space-xl);
                     opacity: 0;
                 }
 
@@ -175,15 +198,65 @@ const Hero = () => {
                     transform: translateX(4px);
                 }
 
-                /* EASA Logo - Simple image, stamped look */
+                /* Phone number on banner */
+                .hero-phone {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: var(--space-sm);
+                    font-size: 0.875rem;
+                    font-weight: 500;
+                    color: rgba(255, 255, 255, 0.8);
+                    transition: color 0.2s;
+                }
+
+                .hero-phone:hover {
+                    color: var(--color-white);
+                }
+
+                .hero-phone svg {
+                    color: var(--color-accent);
+                }
+
+                /* EASA Badge with circular text */
+                .easa-badge {
+                    position: absolute;
+                    bottom: 100px;
+                    right: var(--space-2xl);
+                    width: 110px;
+                    height: 110px;
+                    z-index: 2;
+                    transform: rotate(-12deg);
+                }
+
+                .easa-text-circle {
+                    position: absolute;
+                    inset: 0;
+                    width: 100%;
+                    height: 100%;
+                    animation: rotate-text 20s linear infinite;
+                }
+
+                .easa-text-circle text {
+                    font-size: 8px;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.15em;
+                    fill: rgba(255, 255, 255, 0.7);
+                }
+
+                @keyframes rotate-text {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+
                 .easa-logo {
                     position: absolute;
-                    bottom: var(--space-xl);
-                    right: var(--space-2xl);
-                    width: 90px;
-                    height: auto;
-                    transform: rotate(-12deg);
-                    opacity: 0.9;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 55px;
+                    height: 55px;
+                    object-fit: contain;
                 }
 
                 /* Stats Strip */
@@ -243,13 +316,29 @@ const Hero = () => {
                         flex-direction: column;
                         align-items: flex-start;
                         gap: var(--space-lg);
+                        padding-bottom: var(--space-2xl);
                     }
 
-                    /* EASA logo on tablet */
-                    .easa-logo {
-                        bottom: var(--space-lg);
+                    .hero-actions {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        gap: var(--space-md);
+                    }
+
+                    .easa-badge {
+                        bottom: 90px;
                         right: var(--space-lg);
-                        width: 75px;
+                        width: 90px;
+                        height: 90px;
+                    }
+
+                    .easa-logo {
+                        width: 45px;
+                        height: 45px;
+                    }
+
+                    .easa-text-circle text {
+                        font-size: 7px;
                     }
 
                     .stats-container {
@@ -276,13 +365,27 @@ const Hero = () => {
 
                     .hero-content {
                         padding-top: calc(var(--header-height) + var(--space-md));
+                        padding-bottom: var(--space-xl);
                     }
 
-                    /* EASA logo on mobile */
-                    .easa-logo {
-                        bottom: var(--space-md);
+                    .easa-badge {
+                        bottom: 80px;
                         right: var(--space-md);
-                        width: 60px;
+                        width: 75px;
+                        height: 75px;
+                    }
+
+                    .easa-logo {
+                        width: 38px;
+                        height: 38px;
+                    }
+
+                    .easa-text-circle text {
+                        font-size: 6px;
+                    }
+
+                    .hero-phone {
+                        font-size: 0.8125rem;
                     }
 
                     .stat-value {
