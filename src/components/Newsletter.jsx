@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Newsletter = () => {
     const [email, setEmail] = useState('');
+    const [termsAgreed, setTermsAgreed] = useState(false);
     const [status, setStatus] = useState('idle'); // idle, loading, success, error
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!email) return;
-        
+        if (!email || !termsAgreed) return;
+
         setStatus('loading');
         // Simulate API call
         setTimeout(() => {
             setStatus('success');
             setEmail('');
+            setTermsAgreed(false);
         }, 1000);
     };
 
@@ -40,9 +43,9 @@ const Newsletter = () => {
                                 required
                                 disabled={status === 'loading' || status === 'success'}
                             />
-                            <button 
-                                type="submit" 
-                                disabled={status === 'loading' || status === 'success'}
+                            <button
+                                type="submit"
+                                disabled={status === 'loading' || status === 'success' || !termsAgreed}
                                 className={status === 'success' ? 'success' : ''}
                             >
                                 {status === 'loading' ? (
@@ -50,7 +53,7 @@ const Newsletter = () => {
                                 ) : status === 'success' ? (
                                     <>
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                            <polyline points="20 6 9 17 4 12"/>
+                                            <polyline points="20 6 9 17 4 12" />
                                         </svg>
                                         Subscribed
                                     </>
@@ -58,12 +61,17 @@ const Newsletter = () => {
                                     <>
                                         Subscribe
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                                            <path d="M5 12h14M12 5l7 7-7 7" />
                                         </svg>
                                     </>
                                 )}
                             </button>
                         </div>
+                        <label className="nl-terms">
+                            <input type="checkbox" checked={termsAgreed} onChange={(e) => setTermsAgreed(e.target.checked)} />
+                            <span className="nl-checkmark" />
+                            <span>I agree to the <Link to="/terms">Terms</Link> & <Link to="/privacy">Privacy Policy</Link></span>
+                        </label>
                         <p className="form-note">
                             No spam, unsubscribe anytime. We respect your privacy.
                         </p>
@@ -180,6 +188,47 @@ const Newsletter = () => {
 
                 .loading {
                     opacity: 0.8;
+                }
+
+                .nl-terms {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    font-size: 0.8125rem;
+                    color: rgba(255,255,255,0.7);
+                    cursor: pointer;
+                    margin-top: var(--space-md);
+                }
+                .nl-terms input { display: none; }
+                .nl-checkmark {
+                    width: 16px;
+                    height: 16px;
+                    border: 1.5px solid rgba(255,255,255,0.4);
+                    border-radius: 3px;
+                    flex-shrink: 0;
+                    position: relative;
+                    transition: all 0.2s;
+                }
+                .nl-terms input:checked + .nl-checkmark {
+                    background: var(--color-accent);
+                    border-color: var(--color-accent);
+                }
+                .nl-terms input:checked + .nl-checkmark::after {
+                    content: '';
+                    position: absolute;
+                    left: 4px;
+                    top: 1px;
+                    width: 5px;
+                    height: 9px;
+                    border: solid white;
+                    border-width: 0 2px 2px 0;
+                    transform: rotate(45deg);
+                }
+                .nl-terms a {
+                    color: var(--color-accent);
+                }
+                .nl-terms a:hover {
+                    text-decoration: underline;
                 }
 
                 .form-note {

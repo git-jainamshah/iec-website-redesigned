@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PageHero from '../components/PageHero';
 
 const services = [
     {
@@ -45,20 +46,20 @@ const services = [
 
 const ServicesPage = () => {
     return (
-        <div className="page">
-            <div className="page-hero">
-                <div className="container">
-                    <h1>Our Services</h1>
-                    <p>Comprehensive repair solutions for industrial rotating machinery</p>
-                </div>
-            </div>
+        <div className="services-page">
+            <PageHero
+                label="What We Do"
+                title="Our Services"
+                subtitle="Comprehensive repair solutions for industrial rotating machinery."
+                breadcrumbs={[{ label: 'Services' }]}
+            />
 
             <section className="section">
                 <div className="container">
                     {services.map((service, index) => (
                         <div key={service.id} id={service.id} className="service-block">
                             <div className="service-number">0{index + 1}</div>
-                            <div className="service-content">
+                            <div className="service-body">
                                 <h2>{service.title}</h2>
                                 <p className="service-desc">{service.desc}</p>
                                 <div className="service-features">
@@ -76,27 +77,16 @@ const ServicesPage = () => {
             </section>
 
             <style>{`
-                .page-hero {
-                    background: var(--color-gray-900);
-                    padding: calc(var(--header-height) + var(--space-16)) 0 var(--space-16);
-                }
-
-                .page-hero h1 {
-                    color: var(--color-white);
-                    margin-bottom: var(--space-2);
-                }
-
-                .page-hero p {
-                    color: var(--color-gray-400);
-                    font-size: 1.125rem;
+                .services-page {
+                    min-height: 100vh;
                 }
 
                 .service-block {
                     display: grid;
                     grid-template-columns: 80px 1fr;
-                    gap: var(--space-8);
-                    padding: var(--space-12) 0;
-                    border-bottom: 1px solid var(--color-gray-200);
+                    gap: var(--space-xl);
+                    padding: var(--space-3xl) 0;
+                    border-bottom: 1px solid var(--color-border);
                 }
 
                 .service-block:last-child {
@@ -104,44 +94,56 @@ const ServicesPage = () => {
                 }
 
                 .service-number {
-                    font-size: 3rem;
+                    font-size: 3.5rem;
                     font-weight: 700;
-                    color: var(--color-gray-200);
+                    color: var(--color-border);
                     line-height: 1;
+                    font-family: var(--font-serif);
                 }
 
-                .service-content h2 {
-                    margin-bottom: var(--space-4);
+                .service-body h2 {
+                    font-size: 1.5rem;
+                    margin-bottom: var(--space-md);
                 }
 
                 .service-desc {
                     font-size: 1.0625rem;
-                    line-height: 1.7;
-                    margin-bottom: var(--space-6);
+                    line-height: 1.8;
+                    margin-bottom: var(--space-xl);
+                    max-width: 640px;
                 }
 
                 .service-features {
                     display: flex;
                     flex-wrap: wrap;
-                    gap: var(--space-2);
-                    margin-bottom: var(--space-6);
+                    gap: var(--space-sm);
+                    margin-bottom: var(--space-xl);
                 }
 
                 .feature-tag {
-                    background: var(--color-gray-100);
-                    padding: var(--space-2) var(--space-3);
+                    background: var(--color-cream);
+                    border: 1px solid var(--color-border);
+                    padding: 6px 14px;
                     font-size: 0.8125rem;
-                    color: var(--color-gray-700);
+                    color: var(--color-text-light);
+                    border-radius: 3px;
+                    transition: all 0.2s;
+                }
+
+                .feature-tag:hover {
+                    border-color: var(--color-accent);
+                    color: var(--color-accent);
                 }
 
                 @media (max-width: 768px) {
                     .service-block {
                         grid-template-columns: 1fr;
-                        gap: var(--space-4);
+                        gap: var(--space-md);
+                        padding: var(--space-2xl) 0;
                     }
 
                     .service-number {
-                        font-size: 2rem;
+                        font-size: 2.5rem;
                     }
                 }
             `}</style>

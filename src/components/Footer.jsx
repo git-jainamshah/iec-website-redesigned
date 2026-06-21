@@ -20,7 +20,7 @@ const Footer = () => {
                             </Link>
                             <p className="footer-tagline">Our Repairs Run the Industries</p>
                             <p className="footer-desc">
-                                India's premier engineering company for industrial motor 
+                                India's premier engineering company for industrial motor
                                 and generator repair services.
                             </p>
                         </div>

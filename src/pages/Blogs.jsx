@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PageHero from '../components/PageHero';
 
 const blogs = [
     {
         id: 1,
         title: 'Understanding High Voltage Motor Maintenance',
         excerpt: 'Learn the essential maintenance practices for high voltage motors to ensure optimal performance and longevity.',
-        content: 'Full article content here...',
         date: 'January 15, 2024',
         category: 'Maintenance',
         readTime: '5 min read'
@@ -15,7 +15,6 @@ const blogs = [
         id: 2,
         title: 'The Future of Industrial Motor Repair',
         excerpt: 'Exploring emerging technologies and trends shaping the industrial motor repair industry.',
-        content: 'Full article content here...',
         date: 'January 10, 2024',
         category: 'Industry',
         readTime: '7 min read'
@@ -24,7 +23,6 @@ const blogs = [
         id: 3,
         title: 'EASA Certification: What It Means for Your Equipment',
         excerpt: 'Understanding the importance of EASA certification and how it ensures quality in motor repair services.',
-        content: 'Full article content here...',
         date: 'January 5, 2024',
         category: 'Certification',
         readTime: '4 min read'
@@ -33,7 +31,6 @@ const blogs = [
         id: 4,
         title: 'Preventive Maintenance Strategies for Generators',
         excerpt: 'Key strategies to prevent generator failures and extend equipment lifespan through proactive maintenance.',
-        content: 'Full article content here...',
         date: 'December 28, 2023',
         category: 'Maintenance',
         readTime: '6 min read'
@@ -43,20 +40,13 @@ const blogs = [
 const Blogs = () => {
     return (
         <div className="blogs-page">
-            {/* Hero */}
-            <section className="page-hero">
-                <div className="container">
-                    <span className="label">Insights</span>
-                    <h1 className="display-title">
-                        Our Blog
-                    </h1>
-                    <p className="page-subtitle">
-                        Industry insights, maintenance tips, and expert advice from our engineering team.
-                    </p>
-                </div>
-            </section>
+            <PageHero
+                label="Insights"
+                title="Our Blog"
+                subtitle="Industry insights, maintenance tips, and expert advice from our engineering team."
+                breadcrumbs={[{ label: 'Blog' }]}
+            />
 
-            {/* Blogs Grid */}
             <section className="section">
                 <div className="container">
                     <div className="blogs-grid">
@@ -75,7 +65,7 @@ const Blogs = () => {
                                     <Link to={`/blogs/${blog.id}`} className="blog-read-more">
                                         Read More
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                                            <path d="M5 12h14M12 5l7 7-7 7" />
                                         </svg>
                                     </Link>
                                 </div>
@@ -90,40 +80,20 @@ const Blogs = () => {
                     min-height: 100vh;
                 }
 
-                .page-hero {
-                    background: var(--color-primary);
-                    padding: calc(var(--header-height) + var(--space-4xl)) 0 var(--space-4xl);
-                }
-
-                .page-hero .label {
-                    color: var(--color-accent);
-                    margin-bottom: var(--space-md);
-                }
-
-                .page-hero .display-title {
-                    color: var(--color-white);
-                    margin-bottom: var(--space-md);
-                }
-
-                .page-subtitle {
-                    font-size: 1.125rem;
-                    color: rgba(255, 255, 255, 0.6);
-                    max-width: 600px;
-                }
-
                 .blogs-grid {
                     display: grid;
-                    grid-template-columns: repeat(3, 1fr);
+                    grid-template-columns: repeat(2, 1fr);
                     gap: var(--space-2xl);
                 }
 
                 .blog-card {
                     display: flex;
                     flex-direction: column;
-                    padding: var(--space-xl);
+                    padding: var(--space-2xl);
                     border: 1px solid var(--color-border);
-                    border-radius: 8px;
+                    border-radius: 6px;
                     transition: all 0.3s var(--ease-out);
+                    background: var(--color-white);
                 }
 
                 .blog-card:hover {
@@ -136,7 +106,7 @@ const Blogs = () => {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    margin-bottom: var(--space-md);
+                    margin-bottom: var(--space-lg);
                 }
 
                 .blog-category {
@@ -145,13 +115,13 @@ const Blogs = () => {
                     text-transform: uppercase;
                     letter-spacing: 0.08em;
                     color: var(--color-accent);
-                    padding: 4px 10px;
-                    background: rgba(200, 16, 46, 0.08);
+                    padding: 4px 12px;
+                    background: rgba(200, 16, 46, 0.06);
                     border-radius: 3px;
                 }
 
                 .blog-read-time {
-                    font-size: 0.6875rem;
+                    font-size: 0.75rem;
                     color: var(--color-muted);
                 }
 
@@ -175,7 +145,7 @@ const Blogs = () => {
                     font-size: 0.9375rem;
                     line-height: 1.7;
                     color: var(--color-text-light);
-                    margin-bottom: var(--space-lg);
+                    margin-bottom: var(--space-xl);
                     flex: 1;
                 }
 
@@ -217,12 +187,6 @@ const Blogs = () => {
                     transform: translateX(3px);
                 }
 
-                @media (max-width: 1024px) {
-                    .blogs-grid {
-                        grid-template-columns: repeat(2, 1fr);
-                    }
-                }
-
                 @media (max-width: 768px) {
                     .blogs-grid {
                         grid-template-columns: 1fr;
@@ -234,4 +198,3 @@ const Blogs = () => {
 };
 
 export default Blogs;
-

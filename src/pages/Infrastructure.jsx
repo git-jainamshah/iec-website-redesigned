@@ -1,67 +1,105 @@
 import React from 'react';
+import PageHero from '../components/PageHero';
+
+const stats = [
+    { value: '300,000', label: 'Sq.Ft Total Land' },
+    { value: '75,000', label: 'Sq.Ft Shop Floor' },
+    { value: '300', label: 'Ton Crane Capacity' },
+    { value: '5 MW', label: 'Captive Power' },
+];
 
 const facilities = [
     {
         title: 'HV Coils Making',
-        desc: 'State-of-the-art coil manufacturing facility for high voltage applications'
+        desc: 'State-of-the-art coil manufacturing facility for high voltage applications',
+        icon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+            </svg>
+        ),
     },
     {
         title: 'Heating Oven',
-        desc: 'Industrial ovens for curing and heat treatment processes'
+        desc: 'Industrial ovens for curing and heat treatment processes',
+        icon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M12 2v10m0 0l3-3m-3 3l-3-3M5 21h14a2 2 0 002-2v-5a2 2 0 00-2-2H5a2 2 0 00-2 2v5a2 2 0 002 2z" />
+            </svg>
+        ),
     },
     {
         title: 'Mechanical Workshop',
-        desc: 'Fully equipped workshop for precision mechanical repairs'
+        desc: 'Fully equipped workshop for precision mechanical repairs',
+        icon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
+            </svg>
+        ),
     },
     {
         title: 'Dynamic Balancing',
-        desc: 'Advanced balancing machines for rotors and shafts'
+        desc: 'Advanced balancing machines for rotors and shafts',
+        icon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="3" />
+            </svg>
+        ),
     },
     {
         title: 'Testing Lab',
-        desc: 'Complete testing facilities for quality assurance'
+        desc: 'Complete testing facilities for quality assurance',
+        icon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M9 3v7.5L6 18h12l-3-7.5V3M9 3h6M12 7h.01" />
+            </svg>
+        ),
     },
     {
         title: 'Crane System',
-        desc: 'Heavy-duty cranes from 10 to 300 ton capacity'
-    }
+        desc: 'Heavy-duty cranes from 10 to 300 ton capacity',
+        icon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" /><path d="M16 3h-8l-2 4h12l-2-4z" />
+            </svg>
+        ),
+    },
 ];
 
 const InfrastructurePage = () => {
     return (
-        <div className="page">
-            <div className="page-hero">
-                <div className="container">
-                    <h1>Infrastructure</h1>
-                    <p>State-of-the-art facilities for world-class repairs</p>
-                </div>
-            </div>
+        <div className="infra-page">
+            <PageHero
+                label="Facilities"
+                title="Infrastructure"
+                subtitle="State-of-the-art facilities for world-class repairs."
+                breadcrumbs={[{ label: 'Infrastructure' }]}
+            />
 
+            {/* Key Stats */}
             <section className="section">
                 <div className="container">
                     <div className="infra-stats">
-                        <div className="infra-stat">
-                            <span className="value">300,000</span>
-                            <span className="label">Sq.Ft Total Land</span>
-                        </div>
-                        <div className="infra-stat">
-                            <span className="value">75,000</span>
-                            <span className="label">Sq.Ft Shop Floor</span>
-                        </div>
-                        <div className="infra-stat">
-                            <span className="value">300</span>
-                            <span className="label">Ton Crane Capacity</span>
-                        </div>
-                        <div className="infra-stat">
-                            <span className="value">5 MW</span>
-                            <span className="label">Captive Power</span>
-                        </div>
+                        {stats.map((stat, i) => (
+                            <div key={i} className="infra-stat-card">
+                                <span className="infra-stat-value">{stat.value}</span>
+                                <span className="infra-stat-label">{stat.label}</span>
+                            </div>
+                        ))}
                     </div>
+                </div>
+            </section>
 
-                    <h2 className="facilities-title">Our Facilities</h2>
+            {/* Facilities */}
+            <section className="section bg-light">
+                <div className="container">
+                    <div className="text-center" style={{ marginBottom: 'var(--space-3xl)' }}>
+                        <span className="label text-accent">Capabilities</span>
+                        <h2 style={{ marginTop: 'var(--space-md)' }}>Our Facilities</h2>
+                    </div>
                     <div className="facilities-grid">
-                        {facilities.map((facility, index) => (
-                            <div key={index} className="facility-card">
+                        {facilities.map((facility, i) => (
+                            <div key={i} className="facility-card">
+                                <div className="facility-icon">{facility.icon}</div>
                                 <h3>{facility.title}</h3>
                                 <p>{facility.desc}</p>
                             </div>
@@ -71,78 +109,89 @@ const InfrastructurePage = () => {
             </section>
 
             <style>{`
-                .page-hero {
-                    background: var(--color-gray-900);
-                    padding: calc(var(--header-height) + var(--space-16)) 0 var(--space-16);
+                .infra-page {
+                    min-height: 100vh;
                 }
 
-                .page-hero h1 {
-                    color: var(--color-white);
-                    margin-bottom: var(--space-2);
-                }
-
-                .page-hero p {
-                    color: var(--color-gray-400);
-                    font-size: 1.125rem;
-                }
-
+                /* Stats */
                 .infra-stats {
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
-                    gap: var(--space-6);
-                    margin-bottom: var(--space-16);
+                    gap: var(--space-lg);
                 }
 
-                .infra-stat {
+                .infra-stat-card {
                     text-align: center;
-                    padding: var(--space-8);
-                    background: var(--color-gray-50);
+                    padding: var(--space-2xl) var(--space-xl);
+                    background: var(--color-white);
                     border-top: 3px solid var(--color-accent);
+                    box-shadow: var(--shadow-sm);
+                    transition: all 0.3s var(--ease-out);
                 }
 
-                .infra-stat .value {
+                .infra-stat-card:hover {
+                    transform: translateY(-4px);
+                    box-shadow: var(--shadow-md);
+                }
+
+                .infra-stat-value {
                     display: block;
                     font-size: 2.5rem;
                     font-weight: 700;
-                    color: var(--color-gray-900);
-                    margin-bottom: var(--space-2);
+                    color: var(--color-text);
+                    margin-bottom: 4px;
+                    font-family: var(--font-serif);
                 }
 
-                .infra-stat .label {
-                    font-size: 0.8125rem;
-                    color: var(--color-gray-500);
+                .infra-stat-label {
+                    font-size: 0.75rem;
                     text-transform: uppercase;
-                    letter-spacing: 0.05em;
+                    letter-spacing: 0.08em;
+                    color: var(--color-muted);
                 }
 
-                .facilities-title {
-                    margin-bottom: var(--space-8);
-                }
-
+                /* Facilities */
                 .facilities-grid {
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
-                    gap: var(--space-6);
+                    gap: var(--space-xl);
                 }
 
                 .facility-card {
-                    padding: var(--space-6);
+                    padding: var(--space-2xl);
                     background: var(--color-white);
-                    border: 1px solid var(--color-gray-200);
-                    transition: var(--transition);
+                    border: 1px solid var(--color-border);
+                    border-radius: 4px;
+                    transition: all 0.3s var(--ease-out);
                 }
 
                 .facility-card:hover {
                     border-color: var(--color-accent);
+                    box-shadow: var(--shadow-md);
+                    transform: translateY(-2px);
+                }
+
+                .facility-icon {
+                    width: 44px;
+                    height: 44px;
+                    border-radius: 8px;
+                    background: rgba(200, 16, 46, 0.06);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: var(--color-accent);
+                    margin-bottom: var(--space-lg);
                 }
 
                 .facility-card h3 {
-                    font-size: 1rem;
-                    margin-bottom: var(--space-2);
+                    font-size: 1.0625rem;
+                    font-weight: 600;
+                    margin-bottom: var(--space-sm);
                 }
 
                 .facility-card p {
                     font-size: 0.9375rem;
+                    line-height: 1.65;
                 }
 
                 @media (max-width: 900px) {

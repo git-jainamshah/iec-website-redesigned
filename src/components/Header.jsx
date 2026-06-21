@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import logo from '../assets/iec-logo.png';
+import translateService from '../utils/translateService';
 
 const languages = {
     indian: [
@@ -17,6 +18,7 @@ const languages = {
         { code: 'fr', name: 'Français' },
         { code: 'es', name: 'Español' },
         { code: 'de', name: 'Deutsch' },
+        { code: 'zh-CN', name: '中文' },
     ]
 };
 
@@ -26,7 +28,7 @@ const Header = () => {
     const [activeDropdown, setActiveDropdown] = useState(null);
     const [searchOpen, setSearchOpen] = useState(false);
     const [langOpen, setLangOpen] = useState(false);
-    const [currentLang, setCurrentLang] = useState('en');
+    const [currentLang, setCurrentLang] = useState(() => translateService.getCurrentLanguage());
     const location = useLocation();
     const searchRef = useRef(null);
     const langRef = useRef(null);
@@ -38,11 +40,17 @@ const Header = () => {
     }, []);
 
     useEffect(() => {
-        setMenuOpen(false);
-        setActiveDropdown(null);
-        setSearchOpen(false);
-        setLangOpen(false);
-    }, [location]);
+        translateService.onRouteChange();
+
+        const timeoutId = window.setTimeout(() => {
+            setMenuOpen(false);
+            setActiveDropdown(null);
+            setSearchOpen(false);
+            setLangOpen(false);
+        }, 0);
+
+        return () => window.clearTimeout(timeoutId);
+    }, [location.pathname, location.search, location.hash]);
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -60,8 +68,8 @@ const Header = () => {
     const navItems = [
         { label: 'About', path: '/about' },
         { label: 'Leadership', path: '/leadership' },
-        { 
-            label: 'Services', 
+        {
+            label: 'Services',
             path: '/services',
             dropdown: [
                 { label: 'Motors & Generators', path: '/services#motors' },
@@ -80,7 +88,7 @@ const Header = () => {
                 {/* Brand Lockup - Logo + Stacked Name */}
                 <Link to="/" className="brand">
                     <img src={logo} alt="IEC" className="brand-logo" />
-                    <div className="brand-text">
+                    <div className="brand-text notranslate" translate="no">
                         <span className="brand-name">Indian Engineering Company</span>
                         <span className="brand-cert">EASA Certified</span>
                     </div>
@@ -89,24 +97,24 @@ const Header = () => {
                 {/* Navigation */}
                 <nav className="nav">
                     {navItems.map((item, idx) => (
-                        <div 
+                        <div
                             key={item.label}
                             className="nav-item"
                             onMouseEnter={() => item.dropdown && setActiveDropdown(idx)}
                             onMouseLeave={() => setActiveDropdown(null)}
                         >
-                            <NavLink 
+                            <NavLink
                                 to={item.path}
                                 className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
                             >
                                 {item.label}
                                 {item.dropdown && (
                                     <svg className="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M6 9l6 6 6-6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                        <path d="M6 9l6 6 6-6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
                                 )}
                             </NavLink>
-                            
+
                             {item.dropdown && (
                                 <div className={`dropdown ${activeDropdown === idx ? 'active' : ''}`}>
                                     <div className="dropdown-inner">
@@ -134,35 +142,35 @@ const Header = () => {
 
                     {/* Search */}
                     <div className="search-wrapper" ref={searchRef}>
-                        <button 
-                            className="icon-btn" 
+                        <button
+                            className="icon-btn"
                             onClick={() => setSearchOpen(!searchOpen)}
                             aria-label="Search"
                         >
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <circle cx="11" cy="11" r="8"/>
-                                <path d="m21 21-4.35-4.35"/>
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="m21 21-4.35-4.35" />
                             </svg>
                         </button>
-                        
+
                         <div className={`search-dropdown ${searchOpen ? 'active' : ''}`}>
-                            <input 
-                                type="search" 
-                                placeholder="Search..." 
+                            <input
+                                type="search"
+                                placeholder="Search..."
                                 autoFocus={searchOpen}
                             />
                         </div>
                     </div>
 
                     {/* Language Switcher */}
-                    <div className="lang-wrapper" ref={langRef}>
-                        <button 
-                            className="lang-btn" 
+                    <div className="lang-wrapper notranslate" ref={langRef} translate="no">
+                        <button
+                            className="lang-btn"
                             onClick={() => setLangOpen(!langOpen)}
                         >
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                             </svg>
                             <span>{currentLang.toUpperCase()}</span>
                         </button>
@@ -171,10 +179,10 @@ const Header = () => {
                             <div className="lang-section">
                                 <span className="lang-section-title">Indian Languages</span>
                                 {languages.indian.map(lang => (
-                                    <button 
+                                    <button
                                         key={lang.code}
                                         className={`lang-option ${currentLang === lang.code ? 'active' : ''}`}
-                                        onClick={() => { setCurrentLang(lang.code); setLangOpen(false); }}
+                                        onClick={() => { setCurrentLang(lang.code); translateService.setLanguage(lang.code); setLangOpen(false); }}
                                     >
                                         {lang.name}
                                     </button>
@@ -183,10 +191,10 @@ const Header = () => {
                             <div className="lang-section">
                                 <span className="lang-section-title">International</span>
                                 {languages.international.map(lang => (
-                                    <button 
+                                    <button
                                         key={lang.code}
                                         className={`lang-option ${currentLang === lang.code ? 'active' : ''}`}
-                                        onClick={() => { setCurrentLang(lang.code); setLangOpen(false); }}
+                                        onClick={() => { setCurrentLang(lang.code); translateService.setLanguage(lang.code); setLangOpen(false); }}
                                     >
                                         {lang.name}
                                     </button>
@@ -199,13 +207,13 @@ const Header = () => {
                     <Link to="/contact" className="header-cta">
                         Connect
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                            <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
                     </Link>
                 </div>
 
                 {/* Mobile Toggle */}
-                <button 
+                <button
                     className={`menu-toggle ${menuOpen ? 'active' : ''}`}
                     onClick={() => setMenuOpen(!menuOpen)}
                     aria-label="Toggle menu"
@@ -223,38 +231,38 @@ const Header = () => {
                     {/* Mobile Search */}
                     <div className="mobile-search">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <circle cx="11" cy="11" r="8"/>
-                            <path d="m21 21-4.35-4.35"/>
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.35-4.35" />
                         </svg>
                         <input type="search" placeholder="Search..." />
                     </div>
 
                     <div className="mobile-actions-row">
                         {/* Mobile Language Selector */}
-                        <div className="mobile-lang-wrapper">
-                            <button 
+                        <div className="mobile-lang-wrapper notranslate" translate="no">
+                            <button
                                 className={`mobile-lang-btn ${langOpen ? 'active' : ''}`}
                                 onClick={() => setLangOpen(!langOpen)}
                             >
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                                 </svg>
                                 {currentLang.toUpperCase()}
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <path d="M6 9l6 6 6-6"/>
+                                    <path d="M6 9l6 6 6-6" />
                                 </svg>
                             </button>
-                            
+
                             {langOpen && (
                                 <div className="mobile-lang-dropdown">
                                     <div className="mobile-lang-section">
                                         <span className="mobile-lang-title">Indian Languages</span>
                                         {languages.indian.map(lang => (
-                                            <button 
+                                            <button
                                                 key={lang.code}
                                                 className={`mobile-lang-option ${currentLang === lang.code ? 'active' : ''}`}
-                                                onClick={() => { setCurrentLang(lang.code); setLangOpen(false); }}
+                                                onClick={() => { setCurrentLang(lang.code); translateService.setLanguage(lang.code); setLangOpen(false); }}
                                             >
                                                 {lang.name}
                                             </button>
@@ -263,10 +271,10 @@ const Header = () => {
                                     <div className="mobile-lang-section">
                                         <span className="mobile-lang-title">International</span>
                                         {languages.international.map(lang => (
-                                            <button 
+                                            <button
                                                 key={lang.code}
                                                 className={`mobile-lang-option ${currentLang === lang.code ? 'active' : ''}`}
-                                                onClick={() => { setCurrentLang(lang.code); setLangOpen(false); }}
+                                                onClick={() => { setCurrentLang(lang.code); translateService.setLanguage(lang.code); setLangOpen(false); }}
                                             >
                                                 {lang.name}
                                             </button>
@@ -281,7 +289,7 @@ const Header = () => {
                             <div className="mobile-call-content">
                                 <span className="mobile-call-text">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                                     </svg>
                                     Call Now
                                 </span>
@@ -309,7 +317,7 @@ const Header = () => {
                     <Link to="/contact" className="mobile-cta">
                         Connect Now
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                            <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
                     </Link>
                 </nav>

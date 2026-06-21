@@ -1,80 +1,94 @@
 import React from 'react';
+import PageHero from '../components/PageHero';
+
+const leaders = [
+    {
+        name: 'Mr. Anil Patel',
+        role: 'Founder & Managing Director',
+        bio: 'With over 26 years of experience in industrial motor repair, Mr. Anil Patel founded Indian Engineering Company in 1998. Under his leadership, IEC has grown to become one of India\'s largest and most trusted repair facilities.',
+        featured: true,
+    },
+    {
+        name: 'Coming Soon',
+        role: 'Technical Director',
+        bio: '',
+        featured: false,
+    },
+    {
+        name: 'Coming Soon',
+        role: 'Operations Head',
+        bio: '',
+        featured: false,
+    },
+    {
+        name: 'Coming Soon',
+        role: 'Quality Assurance',
+        bio: '',
+        featured: false,
+    },
+];
 
 const Leadership = () => {
+    const featured = leaders.find(l => l.featured);
+    const team = leaders.filter(l => !l.featured);
+
     return (
         <div className="leadership-page">
-            {/* Hero */}
-            <section className="page-hero">
+            <PageHero
+                label="Our People"
+                title="Leadership"
+                subtitle="Meet the team driving India's industrial engineering excellence."
+                breadcrumbs={[{ label: 'Leadership' }]}
+            />
+
+            {/* Featured Leader */}
+            <section className="section">
                 <div className="container">
-                    <span className="label">Our People</span>
-                    <h1 className="display-title">
-                        Leadership
-                    </h1>
-                    <p className="page-subtitle">
-                        Meet the team driving India's industrial engineering excellence.
-                    </p>
+                    {featured && (
+                        <div className="featured-leader">
+                            <div className="featured-image">
+                                <div className="image-placeholder">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                        <circle cx="12" cy="7" r="4" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div className="featured-info">
+                                <span className="leader-role-tag">{featured.role}</span>
+                                <h2 className="display-title">{featured.name}</h2>
+                                <div className="divider" style={{ margin: 'var(--space-lg) 0' }} />
+                                <p>{featured.bio}</p>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </section>
 
-            {/* Leadership Grid */}
-            <section className="section">
+            {/* Team Grid */}
+            <section className="section bg-light">
                 <div className="container">
-                    <div className="leadership-grid">
-                        {/* Founder */}
-                        <div className="leader-card featured">
-                            <div className="leader-image">
-                                <div className="image-placeholder">
-                                    <span>Photo</span>
+                    <div className="text-center" style={{ marginBottom: 'var(--space-3xl)' }}>
+                        <span className="label text-accent">The Team</span>
+                        <h2 style={{ marginTop: 'var(--space-md)' }}>Our Experts</h2>
+                    </div>
+                    <div className="team-grid">
+                        {team.map((person, i) => (
+                            <div key={i} className="team-card">
+                                <div className="team-image">
+                                    <div className="image-placeholder">
+                                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                            <circle cx="12" cy="7" r="4" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div className="team-info">
+                                    <span className="leader-role-tag">{person.role}</span>
+                                    <h3>{person.name}</h3>
                                 </div>
                             </div>
-                            <div className="leader-info">
-                                <span className="leader-role">Founder & Managing Director</span>
-                                <h3 className="leader-name">Mr. Anil Patel</h3>
-                                <p className="leader-bio">
-                                    With over 26 years of experience in industrial motor repair, 
-                                    Mr. Anil Patel founded Indian Engineering Company in 1998. 
-                                    Under his leadership, IEC has grown to become one of India's 
-                                    largest and most trusted repair facilities.
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Other Leaders */}
-                        <div className="leader-card">
-                            <div className="leader-image">
-                                <div className="image-placeholder">
-                                    <span>Photo</span>
-                                </div>
-                            </div>
-                            <div className="leader-info">
-                                <span className="leader-role">Technical Director</span>
-                                <h3 className="leader-name">Coming Soon</h3>
-                            </div>
-                        </div>
-
-                        <div className="leader-card">
-                            <div className="leader-image">
-                                <div className="image-placeholder">
-                                    <span>Photo</span>
-                                </div>
-                            </div>
-                            <div className="leader-info">
-                                <span className="leader-role">Operations Head</span>
-                                <h3 className="leader-name">Coming Soon</h3>
-                            </div>
-                        </div>
-
-                        <div className="leader-card">
-                            <div className="leader-image">
-                                <div className="image-placeholder">
-                                    <span>Photo</span>
-                                </div>
-                            </div>
-                            <div className="leader-info">
-                                <span className="leader-role">Quality Assurance</span>
-                                <h3 className="leader-name">Coming Soon</h3>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -84,62 +98,19 @@ const Leadership = () => {
                     min-height: 100vh;
                 }
 
-                .page-hero {
-                    background: var(--color-primary);
-                    padding: calc(var(--header-height) + var(--space-4xl)) 0 var(--space-4xl);
-                }
-
-                .page-hero .label {
-                    color: var(--color-accent);
-                    margin-bottom: var(--space-md);
-                }
-
-                .page-hero .display-title {
-                    color: var(--color-white);
-                    margin-bottom: var(--space-md);
-                }
-
-                .page-subtitle {
-                    font-size: 1.125rem;
-                    color: rgba(255, 255, 255, 0.6);
-                    max-width: 500px;
-                }
-
-                /* Leadership Grid */
-                .leadership-grid {
+                /* Featured leader */
+                .featured-leader {
                     display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: var(--space-2xl);
+                    grid-template-columns: 320px 1fr;
+                    gap: var(--space-3xl);
+                    align-items: center;
                 }
 
-                .leader-card {
-                    background: var(--color-white);
-                    border: 1px solid var(--color-border);
+                .featured-image {
+                    aspect-ratio: 3/4;
+                    background: var(--color-cream);
                     border-radius: 8px;
                     overflow: hidden;
-                    transition: all 0.3s var(--ease-out);
-                }
-
-                .leader-card:hover {
-                    box-shadow: var(--shadow-lg);
-                    transform: translateY(-4px);
-                }
-
-                .leader-card.featured {
-                    grid-column: span 3;
-                    display: grid;
-                    grid-template-columns: 300px 1fr;
-                }
-
-                .leader-image {
-                    aspect-ratio: 1;
-                    background: var(--color-light);
-                    overflow: hidden;
-                }
-
-                .leader-card.featured .leader-image {
-                    aspect-ratio: auto;
-                    height: 100%;
                 }
 
                 .image-placeholder {
@@ -148,26 +119,21 @@ const Leadership = () => {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    background: var(--color-cream);
                     color: var(--color-muted);
-                    font-size: 0.875rem;
-                    text-transform: uppercase;
-                    letter-spacing: 0.1em;
                 }
 
-                .leader-info {
-                    padding: var(--space-xl);
+                .featured-info .display-title {
+                    color: var(--color-text);
+                    font-size: clamp(1.75rem, 3vw, 2.5rem);
                 }
 
-                .leader-card.featured .leader-info {
-                    padding: var(--space-2xl);
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
+                .featured-info p {
+                    font-size: 1.0625rem;
+                    line-height: 1.85;
                 }
 
-                .leader-role {
-                    display: block;
+                .leader-role-tag {
+                    display: inline-block;
                     font-size: 0.6875rem;
                     font-weight: 600;
                     text-transform: uppercase;
@@ -176,47 +142,54 @@ const Leadership = () => {
                     margin-bottom: var(--space-sm);
                 }
 
-                .leader-name {
-                    font-size: 1.25rem;
+                /* Team grid */
+                .team-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: var(--space-2xl);
+                }
+
+                .team-card {
+                    background: var(--color-white);
+                    border: 1px solid var(--color-border);
+                    border-radius: 8px;
+                    overflow: hidden;
+                    transition: all 0.3s var(--ease-out);
+                }
+
+                .team-card:hover {
+                    box-shadow: var(--shadow-lg);
+                    transform: translateY(-4px);
+                }
+
+                .team-image {
+                    aspect-ratio: 1;
+                    background: var(--color-cream);
+                }
+
+                .team-info {
+                    padding: var(--space-xl);
+                }
+
+                .team-info h3 {
+                    font-size: 1.125rem;
                     font-weight: 600;
-                    color: var(--color-text);
-                    margin-bottom: var(--space-sm);
+                    margin-bottom: 0;
                 }
 
-                .leader-card.featured .leader-name {
-                    font-family: var(--font-serif);
-                    font-size: 1.75rem;
-                    font-weight: 500;
-                }
-
-                .leader-bio {
-                    font-size: 1rem;
-                    line-height: 1.8;
-                    color: var(--color-text-light);
-                }
-
-                @media (max-width: 1024px) {
-                    .leadership-grid {
-                        grid-template-columns: repeat(2, 1fr);
-                    }
-
-                    .leader-card.featured {
-                        grid-column: span 2;
-                    }
-                }
-
-                @media (max-width: 768px) {
-                    .leadership-grid {
+                @media (max-width: 900px) {
+                    .featured-leader {
                         grid-template-columns: 1fr;
+                        gap: var(--space-xl);
                     }
 
-                    .leader-card.featured {
-                        grid-column: span 1;
+                    .featured-image {
+                        aspect-ratio: 16/9;
+                        max-height: 280px;
+                    }
+
+                    .team-grid {
                         grid-template-columns: 1fr;
-                    }
-
-                    .leader-card.featured .leader-image {
-                        aspect-ratio: 4/3;
                     }
                 }
             `}</style>
@@ -225,4 +198,3 @@ const Leadership = () => {
 };
 
 export default Leadership;
-

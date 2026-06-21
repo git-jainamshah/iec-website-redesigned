@@ -16,32 +16,32 @@ const Hero = () => {
             <div className="container hero-content">
                 <div className="hero-text">
                     <span className="hero-label animate-fade-up">Since 1998 · ISO 9001 Certified</span>
-                    
+
                     <h1 className="hero-title display-title animate-fade-up delay-1">
                         Your trusted partner for<br />
                         <em>industrial excellence.</em>
                     </h1>
-                    
+
                     <p className="hero-desc animate-fade-up delay-2">
-                        India's premier engineering company specializing in high voltage motor 
+                        India's premier engineering company specializing in high voltage motor
                         and generator repair. Powering industries with precision and reliability.
                     </p>
-                    
+
                     <div className="hero-actions animate-fade-up delay-3">
-                        <Link to="/contact" className="hero-cta">
-                            Connect Now
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </Link>
-                        
                         {/* Call CTA */}
                         <a href="tel:+919824214839" className="hero-call-cta">
                             Call Us Now
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                             </svg>
                         </a>
+
+                        <Link to="/contact" className="hero-cta">
+                            Connect Now
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -50,11 +50,11 @@ const Hero = () => {
             <div className="easa-badge">
                 <svg className="easa-text-circle" viewBox="0 0 100 100">
                     <defs>
-                        <path id="circle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/>
+                        <path id="circle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
                     </defs>
                     <text>
                         <textPath href="#circle" startOffset="0%">
-                            • ACCREDITED MEMBER • ACCREDITED MEMBER 
+                            • ACCREDITED MEMBER • ACCREDITED MEMBER
                         </textPath>
                     </text>
                 </svg>
@@ -159,7 +159,7 @@ const Hero = () => {
                     text-transform: uppercase;
                     letter-spacing: 0.08em;
                     color: var(--color-white);
-                    padding-bottom: 4px;
+                    padding: 10px 10px;
                     border-bottom: 2px solid var(--color-accent);
                     transition: all 0.3s var(--ease-out);
                 }
@@ -257,15 +257,26 @@ const Hero = () => {
 
                     .hero-content {
                         flex-direction: column;
-                        align-items: flex-start;
+                        align-items: center;
                         gap: var(--space-lg);
                         padding-bottom: var(--space-2xl);
+                        text-align: center;
+                    }
+
+                    .hero-text {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                    }
+
+                    .hero-desc {
+                        max-width: 100%;
                     }
 
                     .hero-actions {
                         flex-direction: column;
-                        align-items: flex-start;
-                        gap: var(--space-md);
+                        align-items: center;
+                        gap: var(--space-sm);
                     }
 
                     .easa-badge {

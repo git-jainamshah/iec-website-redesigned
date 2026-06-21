@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import motorImg from '../assets/motors-and-generators.jpg';
-import pumpImg from '../assets/industrial-pump.jpg';
-import spareImg from '../assets/spare-parts.jpg';
+import iecLogo from '../assets/iec-logo.png';
+// import motorImg from '../assets/motors-and-generators.jpg';
+// import pumpImg from '../assets/industrial-pump.jpg';
+// import spareImg from '../assets/spare-parts.jpg';
 
 const Services = () => {
     const services = [
@@ -12,7 +13,7 @@ const Services = () => {
             capacity: 'Up to 250MW',
             desc: 'Complete repair and rewinding for HV motors, generators, alternators, and DC machines. We handle the giants of the industry with precision engineering.',
             tags: ['Stator Rewinding', 'Rotor Repair', 'VPI'],
-            image: motorImg
+            image: iecLogo // motorImg
         },
         {
             id: 'pumps',
@@ -20,7 +21,7 @@ const Services = () => {
             capacity: 'All Capacities',
             desc: 'Comprehensive maintenance, repair, and refurbishment for all pump types including centrifugal, submersible, and vertical turbine units.',
             tags: ['Centrifugal', 'Submersible', 'Vertical Turbine'],
-            image: pumpImg
+            image: iecLogo // pumpImg
         },
         {
             id: 'spares',
@@ -28,7 +29,7 @@ const Services = () => {
             capacity: 'OEM Quality',
             desc: 'Genuine components with complete technical support. From bearings to windings, we ensure your equipment runs with original performance.',
             tags: ['Bearings', 'Seals', 'Impellers'],
-            image: spareImg
+            image: iecLogo // spareImg
         }
     ];
 
