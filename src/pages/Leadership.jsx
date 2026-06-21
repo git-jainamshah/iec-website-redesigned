@@ -3,9 +3,9 @@ import PageHero from '../components/PageHero';
 
 const leaders = [
     {
-        name: 'Mr. Anil Patel',
+        name: 'Mr. Anil Bhardwaj',
         role: 'Founder & Managing Director',
-        bio: 'With over 26 years of experience in industrial motor repair, Mr. Anil Patel founded Indian Engineering Company in 1998. Under his leadership, IEC has grown to become one of India\'s largest and most trusted repair facilities.',
+        bio: 'With over 26 years of experience in industrial motor repair, Mr. Anil Bhardwaj founded Indian Engineering Company in 1998. Under his leadership, IEC has grown to become one of India\'s largest and most trusted repair facilities, serving leading private and government clients across the country.',
         featured: true,
     },
     {
