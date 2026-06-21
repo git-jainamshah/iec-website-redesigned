@@ -20,20 +20,23 @@ const AboutPage = () => {
                             <h2>Built on precision.<br />Driven by trust.</h2>
                             <div className="divider" style={{ marginBottom: 'var(--space-xl)' }} />
                             <p>
-                                Established in 1998, Indian Engineering Company has grown to become
-                                one of India's largest and most trusted facilities for industrial
-                                motor and generator repair.
+                                Founded in 1998 by Mr. Anil Bhardwaj and backed by over 40 years of
+                                industry experience, Indian Engineering Company has grown into one of
+                                Gujarat's largest and most trusted facilities for heavy industrial motor
+                                and generator repair — serving an estimated 95% of the state's HV
+                                motor/generator repair industry, alongside clients across Maharashtra,
+                                Madhya Pradesh, Rajasthan, Karnataka and beyond.
                             </p>
                             <p>
                                 Our commitment to quality and reliability has earned us the trust
-                                of leading industries across India. With ISO 9001:2008 certification
-                                and EASA membership since 2014, we maintain the highest international
-                                standards in every repair.
+                                of power plants, dams, cement and petrochemical industries across India.
+                                With ISO 9001:2008 certification and EASA membership since 2014, we
+                                maintain the highest international standards in every repair.
                             </p>
                             <p>
-                                Our sprawling facility spans 300,000 sq.ft with a dedicated 75,000 sq.ft
-                                shop floor, equipped with heavy-duty cranes (10–300 tons) and 5 MW
-                                captive power generation for uninterrupted operations.
+                                Our facility spans 300,000 sq.ft across our Ranoli and Raika works, with
+                                a dedicated 75,000 sq.ft shop floor, heavy-duty cranes (10–300 tons) and
+                                5 MW captive power generation for uninterrupted operations.
                             </p>
                         </div>
                         <div className="about-stats">
@@ -42,16 +45,16 @@ const AboutPage = () => {
                                 <span className="stat-label">Year Established</span>
                             </div>
                             <div className="stat-card">
-                                <span className="stat-value">250MW</span>
-                                <span className="stat-label">Max Repair Capacity</span>
+                                <span className="stat-value">20,000 HP</span>
+                                <span className="stat-label">Max Motor Rewinding Capacity</span>
                             </div>
                             <div className="stat-card">
                                 <span className="stat-value">300K</span>
                                 <span className="stat-label">Sq.Ft Total Area</span>
                             </div>
                             <div className="stat-card">
-                                <span className="stat-value">26+</span>
-                                <span className="stat-label">Years of Excellence</span>
+                                <span className="stat-value">40+</span>
+                                <span className="stat-label">Years of Industry Experience</span>
                             </div>
                         </div>
                     </div>

@@ -4,14 +4,16 @@ import PageHero from '../components/PageHero';
 const stats = [
     { value: '300,000', label: 'Sq.Ft Total Land' },
     { value: '75,000', label: 'Sq.Ft Shop Floor' },
-    { value: '300', label: 'Ton Crane Capacity' },
-    { value: '5 MW', label: 'Captive Power' },
+    { value: '300 Ton', label: 'Crane Capacity' },
+    { value: '20 MW', label: 'No-Load Testing Capacity' },
+    { value: '5 MW', label: 'Captive Power Generation' },
+    { value: '27', label: 'Vehicle Fleet' },
 ];
 
 const facilities = [
     {
-        title: 'HV Coils Making',
-        desc: 'State-of-the-art coil manufacturing facility for high voltage applications',
+        title: 'HV Coil Manufacturing',
+        desc: 'In-house manufacturing of high-voltage coils for stator and field rewinding, supporting motors and generators up to 13.8 kV.',
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
@@ -19,8 +21,8 @@ const facilities = [
         ),
     },
     {
-        title: 'Heating Oven',
-        desc: 'Industrial ovens for curing and heat treatment processes',
+        title: 'Heating Ovens',
+        desc: '3 industrial ovens, with a maximum volume of 3,000 cubic ft., for VPI curing and insulation heat treatment.',
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M12 2v10m0 0l3-3m-3 3l-3-3M5 21h14a2 2 0 002-2v-5a2 2 0 00-2-2H5a2 2 0 00-2 2v5a2 2 0 002 2z" />
@@ -29,7 +31,7 @@ const facilities = [
     },
     {
         title: 'Mechanical Workshop',
-        desc: 'Fully equipped workshop for precision mechanical repairs',
+        desc: 'Fully equipped workshop for shaft fabrication, bearing housing repair, commutator work and spares fabrication.',
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
@@ -38,7 +40,7 @@ const facilities = [
     },
     {
         title: 'Dynamic Balancing',
-        desc: 'Advanced balancing machines for rotors and shafts',
+        desc: 'Balancing machines rated up to 25-ton and 45-ton rotor capacity for precision rotor and shaft balancing.',
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="3" />
@@ -46,8 +48,8 @@ const facilities = [
         ),
     },
     {
-        title: 'Testing Lab',
-        desc: 'Complete testing facilities for quality assurance',
+        title: 'Testing & Control Room',
+        desc: 'Centralized testing bed for no-load testing up to 20 MW, full-load testing up to 5 MW, and DC motor testing.',
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M9 3v7.5L6 18h12l-3-7.5V3M9 3h6M12 7h.01" />
@@ -56,7 +58,7 @@ const facilities = [
     },
     {
         title: 'Crane System',
-        desc: 'Heavy-duty cranes from 10 to 300 ton capacity',
+        desc: 'Heavy-duty overhead cranes from 10 to 300 ton capacity for handling large rotors, stators and generator frames.',
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <rect x="2" y="7" width="20" height="14" rx="2" ry="2" /><path d="M16 3h-8l-2 4h12l-2-4z" />
@@ -71,7 +73,7 @@ const InfrastructurePage = () => {
             <PageHero
                 label="Facilities"
                 title="Infrastructure"
-                subtitle="State-of-the-art facilities for world-class repairs."
+                subtitle="300,000 sq.ft of works across Ranoli and Raika, built for high-voltage repair at scale."
                 breadcrumbs={[{ label: 'Infrastructure' }]}
             />
 
@@ -116,7 +118,7 @@ const InfrastructurePage = () => {
                 /* Stats */
                 .infra-stats {
                     display: grid;
-                    grid-template-columns: repeat(4, 1fr);
+                    grid-template-columns: repeat(3, 1fr);
                     gap: var(--space-lg);
                 }
 

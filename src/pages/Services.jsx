@@ -5,41 +5,65 @@ import PageHero from '../components/PageHero';
 const services = [
     {
         id: 'motors',
-        title: 'Motors / Generators / Alternators / DC',
-        desc: 'Complete repair and rewinding services for high voltage motors, generators, alternators, and DC machines up to 250MW capacity.',
+        title: 'Motor, Generator, Alternator & DC Motor Repair',
+        desc: 'Rewinding and repair of AC induction, synchronous, and wound-rotor/slip-ring motors up to 20,000 HP and 13.8 kV, plus hydro, turbo, gas and wind generators and DC motors. Full-load testing up to 5 MW, no-load testing up to 20 MW.',
         features: [
-            'HV Motor Rewinding',
-            'Generator Overhaul',
-            'Alternator Repair',
-            'DC Machine Servicing',
-            'Stator & Rotor Repairs',
-            'Bearing Replacement'
+            'VPI (Vacuum Pressure Impregnation)',
+            'Rotor Rebarring / Re-caging',
+            'Synchronous Field Coil Rewinding',
+            'Pole Piece Rebuilding',
+            'Stator Core Restacking',
+            'Thermal Imaging & Surge Testing',
+            'Dielectric & Hi-Pot Testing'
+        ]
+    },
+    {
+        id: 'mechanical',
+        title: 'Mechanical Repair',
+        desc: 'Precision mechanical rebuild work on the rotating and structural components that keep a machine in tolerance — from shafts to bearing housings to commutators.',
+        features: [
+            'Shaft Fabrication & Replacement',
+            'Shaft Metalizing',
+            'Bearing Housing Repair & Manufacturing',
+            'Stator & Rotor Core Repair',
+            'Commutator Repair & Replacement',
+            'Sleeve Bearing Re-Babbitting',
+            'Spares Fabrication'
         ]
     },
     {
         id: 'pumps',
-        title: 'Industrial Pumps',
-        desc: 'Comprehensive pump maintenance, repair, and refurbishment services for all industrial applications.',
+        title: 'Pumps',
+        desc: 'Repair and overhaul of industrial pumps, including high-voltage cryogenic submersible pumps such as Ebara-make 6.6 kV units.',
         features: [
-            'Centrifugal Pumps',
-            'Submersible Pumps',
-            'Vertical Turbine Pumps',
-            'Slurry Pumps',
-            'Impeller Balancing',
-            'Seal Replacement'
+            'Cryogenic Submersible Pumps',
+            'HV Pump Rewinding',
+            'Impeller & Seal Service',
+            'Full Testing & Commissioning'
         ]
     },
     {
         id: 'spares',
-        title: 'Spare Parts',
-        desc: 'Genuine spare parts and components from reputed manufacturers with complete technical support.',
+        title: 'Spares Fabrication',
+        desc: 'In-house fabrication of critical rotating-machine spares for fast turnaround on failures and planned overhauls.',
         features: [
-            'OEM Spare Parts',
-            'Bearings & Seals',
-            'Windings & Coils',
-            'Insulation Materials',
-            'Cooling Systems',
-            'Control Components'
+            'Rotor Shafts',
+            'End Shield Covers',
+            'Bearing Housings & Covers',
+            'Heat Exchangers',
+            'Cooling Fans, Fan Covers & Grills',
+            'Commutators'
+        ]
+    },
+    {
+        id: 'maintenance',
+        title: 'Preventive Maintenance / Overhauling',
+        desc: 'Scheduled maintenance and overhauling at IEC’s Vadodara works or in-situ at the client site, sized to the plant’s outage window.',
+        features: [
+            'On-Site & In-Works Service',
+            'Condition Monitoring',
+            'Planned Outage Overhauls',
+            'Emergency Breakdown Response'
         ]
     }
 ];
@@ -50,7 +74,7 @@ const ServicesPage = () => {
             <PageHero
                 label="What We Do"
                 title="Our Services"
-                subtitle="Comprehensive repair solutions for industrial rotating machinery."
+                subtitle="Heavy industrial repair and rewinding for high-voltage motors, generators, alternators, DC motors and rotating-machine spares."
                 breadcrumbs={[{ label: 'Services' }]}
             />
 

@@ -15,16 +15,17 @@ const Hero = () => {
             {/* Content */}
             <div className="container hero-content">
                 <div className="hero-text">
-                    <span className="hero-label animate-fade-up">Since 1998 · ISO 9001 Certified</span>
+                    <span className="hero-label animate-fade-up">Est. 1998 · Vadodara, Gujarat · ISO 9001 Certified</span>
 
                     <h1 className="hero-title display-title animate-fade-up delay-1">
-                        Your trusted partner for<br />
-                        <em>industrial excellence.</em>
+                        Engineered to keep<br />
+                        <em>power plants running.</em>
                     </h1>
 
                     <p className="hero-desc animate-fade-up delay-2">
-                        India's premier engineering company specializing in high voltage motor
-                        and generator repair. Powering industries with precision and reliability.
+                        Rewinding and repair for high-voltage motors, generators, alternators
+                        and DC motors up to 20,000 HP and 13.8 kV — trusted by power plants,
+                        cement and petrochemical industries across India.
                     </p>
 
                     <div className="hero-actions animate-fade-up delay-3">
@@ -59,6 +60,32 @@ const Hero = () => {
                     </text>
                 </svg>
                 <img src={easaLogo} alt="EASA" className="easa-logo" />
+            </div>
+
+            {/* Capability strip */}
+            <div className="capability-strip">
+                <div className="container capability-strip-inner">
+                    <div className="cap-item">
+                        <span className="cap-value">20,000 HP</span>
+                        <span className="cap-label">Motor Rewinding Capacity</span>
+                    </div>
+                    <div className="cap-item">
+                        <span className="cap-value">13.8 kV</span>
+                        <span className="cap-label">Max Voltage Rating</span>
+                    </div>
+                    <div className="cap-item">
+                        <span className="cap-value">20 MW</span>
+                        <span className="cap-label">No-Load Testing</span>
+                    </div>
+                    <div className="cap-item">
+                        <span className="cap-value">300 Ton</span>
+                        <span className="cap-label">Crane Capacity</span>
+                    </div>
+                    <div className="cap-item">
+                        <span className="cap-value">5 MW</span>
+                        <span className="cap-label">Captive Power Generation</span>
+                    </div>
+                </div>
             </div>
 
             <style>{`
@@ -320,6 +347,70 @@ const Hero = () => {
 
                     .easa-text-circle text {
                         font-size: 6px;
+                    }
+                }
+
+                /* Capability strip */
+                .capability-strip {
+                    position: relative;
+                    z-index: 2;
+                    background: var(--color-primary);
+                    border-top: 1px solid rgba(255, 255, 255, 0.1);
+                }
+
+                .capability-strip-inner {
+                    display: grid;
+                    grid-template-columns: repeat(5, 1fr);
+                }
+
+                .cap-item {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+                    padding: var(--space-lg) var(--space-md);
+                    border-left: 1px solid rgba(255, 255, 255, 0.1);
+                }
+
+                .cap-item:first-child {
+                    border-left: none;
+                    padding-left: 0;
+                }
+
+                .cap-value {
+                    font-family: var(--font-mono);
+                    font-size: 1.25rem;
+                    font-weight: 600;
+                    color: var(--color-white);
+                    letter-spacing: 0.02em;
+                }
+
+                .cap-label {
+                    font-size: 0.6875rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.08em;
+                    color: rgba(255, 255, 255, 0.5);
+                }
+
+                @media (max-width: 900px) {
+                    .capability-strip-inner {
+                        grid-template-columns: repeat(3, 1fr);
+                    }
+
+                    .cap-item:nth-child(4) {
+                        border-left: none;
+                        padding-left: 0;
+                    }
+                }
+
+                @media (max-width: 600px) {
+                    .capability-strip-inner {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+
+                    .cap-item:nth-child(odd) {
+                        border-left: none;
+                        padding-left: 0;
                     }
                 }
             `}</style>
