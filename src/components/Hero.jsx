@@ -295,25 +295,28 @@ const Hero = () => {
 
                 @media (max-width: 900px) {
                     .hero {
-                        min-height: 85vh;
+                        min-height: auto;
                     }
 
+                    /* Image + headline occupy a tall, deliberate band; text sits at
+                       the bottom edge just above the capability strip. */
                     .hero-content {
                         flex-direction: column;
-                        align-items: center;
-                        gap: var(--space-lg);
+                        align-items: flex-start;
+                        justify-content: flex-end;
+                        min-height: 86vh;
+                        gap: var(--space-md);
+                        padding-top: calc(var(--header-height) + var(--space-2xl));
                         padding-bottom: var(--space-2xl);
-                        text-align: center;
+                        text-align: left;
                     }
 
-                    .scroll-cue {
-                        display: none;
-                    }
-
+                    .scroll-cue,
                     .easa-badge {
                         display: none;
                     }
 
+                    /* Strip drops into normal flow directly beneath the hero image */
                     .capability-strip {
                         position: relative;
                     }
@@ -321,7 +324,8 @@ const Hero = () => {
                     .hero-text {
                         display: flex;
                         flex-direction: column;
-                        align-items: center;
+                        align-items: flex-start;
+                        max-width: 100%;
                     }
 
                     .hero-desc {
@@ -329,52 +333,29 @@ const Hero = () => {
                     }
 
                     .hero-actions {
-                        flex-direction: column;
-                        align-items: center;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        justify-content: flex-start;
                         gap: var(--space-sm);
-                    }
-
-                    .easa-badge {
-                        bottom: var(--space-lg);
-                        right: var(--space-lg);
-                        width: 90px;
-                        height: 90px;
-                    }
-
-                    .easa-logo {
-                        width: 45px;
-                        height: 45px;
-                    }
-
-                    .easa-text-circle text {
-                        font-size: 7px;
+                        width: 100%;
                     }
                 }
 
                 @media (max-width: 600px) {
-                    .hero {
-                        min-height: 60vh;
-                    }
-
                     .hero-content {
-                        padding-top: calc(var(--header-height) + var(--space-md));
-                        padding-bottom: var(--space-xl);
+                        min-height: 80vh;
+                        padding-top: calc(var(--header-height) + var(--space-xl));
                     }
 
-                    .easa-badge {
-                        bottom: var(--space-md);
-                        right: var(--space-md);
-                        width: 75px;
-                        height: 75px;
+                    .hero-actions {
+                        flex-direction: column;
+                        align-items: stretch;
                     }
 
-                    .easa-logo {
-                        width: 38px;
-                        height: 38px;
-                    }
-
-                    .easa-text-circle text {
-                        font-size: 6px;
+                    .hero-call-cta,
+                    .hero-cta {
+                        justify-content: center;
+                        width: 100%;
                     }
                 }
 
@@ -483,13 +464,25 @@ const Hero = () => {
                 }
 
                 @media (max-width: 600px) {
+                    .capability-strip {
+                        background: rgba(10, 13, 18, 0.72);
+                    }
+
                     .capability-strip-inner {
                         grid-template-columns: repeat(2, 1fr);
+                    }
+
+                    .cap-item {
+                        padding: var(--space-md) var(--space-md);
                     }
 
                     .cap-item:nth-child(odd) {
                         border-left: none;
                         padding-left: 0;
+                    }
+
+                    .cap-value {
+                        font-size: 1.0625rem;
                     }
 
                     .cap-item:last-child {
@@ -498,7 +491,7 @@ const Hero = () => {
                         text-align: center;
                         border-left: none;
                         border-top: 1px solid rgba(255, 255, 255, 0.15);
-                        padding-top: var(--space-lg);
+                        padding-top: var(--space-md);
                     }
                 }
             `}</style>

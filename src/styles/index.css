@@ -87,6 +87,12 @@ body {
     overflow-x: hidden;
 }
 
+/* Hide the floating chatbot while a full-screen nav/search panel is open */
+body.nav-locked .chatbot-trigger,
+body.nav-locked .chatbot-panel {
+    display: none !important;
+}
+
 img {
     max-width: 100%;
     display: block;
