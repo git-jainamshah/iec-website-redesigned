@@ -62,7 +62,13 @@ const Hero = () => {
                 <img src={easaLogo} alt="EASA" className="easa-logo" />
             </div>
 
-            {/* Capability strip */}
+            {/* Scroll cue */}
+            <div className="scroll-cue">
+                <span className="scroll-cue-label">Scroll</span>
+                <span className="scroll-cue-line" />
+            </div>
+
+            {/* Capability strip — glass overlay anchored to hero bottom */}
             <div className="capability-strip">
                 <div className="container capability-strip-inner">
                     <div className="cap-item">
@@ -91,7 +97,7 @@ const Hero = () => {
             <style>{`
                 .hero {
                     position: relative;
-                    min-height: 70vh;
+                    min-height: 100vh;
                     display: flex;
                     flex-direction: column;
                     overflow: hidden;
@@ -108,6 +114,16 @@ const Hero = () => {
                     height: 100%;
                     object-fit: cover;
                     filter: grayscale(100%) contrast(1.1) brightness(0.9);
+                    animation: kenburns 24s ease-out forwards;
+                }
+
+                @keyframes kenburns {
+                    from {
+                        transform: scale(1);
+                    }
+                    to {
+                        transform: scale(1.12);
+                    }
                 }
 
                 .hero-overlay {
@@ -129,7 +145,7 @@ const Hero = () => {
                     align-items: center;
                     justify-content: space-between;
                     padding-top: calc(var(--header-height) + var(--space-lg));
-                    padding-bottom: var(--space-3xl);
+                    padding-bottom: calc(var(--space-3xl) + 90px);
                 }
 
                 .hero-text {
@@ -238,11 +254,11 @@ const Hero = () => {
                 /* EASA Badge with circular text */
                 .easa-badge {
                     position: absolute;
-                    bottom: var(--space-2xl);
+                    bottom: calc(90px + var(--space-2xl));
                     right: var(--space-2xl);
                     width: 110px;
                     height: 110px;
-                    z-index: 2;
+                    z-index: 3;
                     transform: rotate(-12deg);
                 }
 
@@ -279,7 +295,7 @@ const Hero = () => {
 
                 @media (max-width: 900px) {
                     .hero {
-                        min-height: 65vh;
+                        min-height: 85vh;
                     }
 
                     .hero-content {
@@ -288,6 +304,14 @@ const Hero = () => {
                         gap: var(--space-lg);
                         padding-bottom: var(--space-2xl);
                         text-align: center;
+                    }
+
+                    .scroll-cue {
+                        display: none;
+                    }
+
+                    .capability-strip {
+                        position: relative;
                     }
 
                     .hero-text {
@@ -350,12 +374,63 @@ const Hero = () => {
                     }
                 }
 
-                /* Capability strip */
-                .capability-strip {
-                    position: relative;
+                /* Scroll cue */
+                .scroll-cue {
+                    position: absolute;
+                    left: 50%;
+                    bottom: 140px;
                     z-index: 2;
-                    background: var(--color-primary);
-                    border-top: 1px solid rgba(255, 255, 255, 0.1);
+                    transform: translateX(-50%);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: var(--space-sm);
+                }
+
+                .scroll-cue-label {
+                    font-family: var(--font-mono);
+                    font-size: 0.6875rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.15em;
+                    color: rgba(255, 255, 255, 0.6);
+                }
+
+                .scroll-cue-line {
+                    width: 1px;
+                    height: 32px;
+                    background: rgba(255, 255, 255, 0.4);
+                    overflow: hidden;
+                    position: relative;
+                }
+
+                .scroll-cue-line::after {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: -100%;
+                    width: 100%;
+                    height: 100%;
+                    background: var(--color-accent);
+                    animation: scrollCue 2s ease-in-out infinite;
+                }
+
+                @keyframes scrollCue {
+                    0% { top: -100%; }
+                    60% { top: 100%; }
+                    100% { top: 100%; }
+                }
+
+                /* Capability strip — glass overlay anchored to hero bottom edge */
+                .capability-strip {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    z-index: 2;
+                    background: rgba(10, 13, 18, 0.55);
+                    backdrop-filter: blur(16px);
+                    -webkit-backdrop-filter: blur(16px);
+                    border-top: 1px solid rgba(255, 255, 255, 0.15);
                 }
 
                 .capability-strip-inner {
@@ -368,7 +443,7 @@ const Hero = () => {
                     flex-direction: column;
                     gap: 4px;
                     padding: var(--space-lg) var(--space-md);
-                    border-left: 1px solid rgba(255, 255, 255, 0.1);
+                    border-left: 1px solid rgba(255, 255, 255, 0.15);
                 }
 
                 .cap-item:first-child {

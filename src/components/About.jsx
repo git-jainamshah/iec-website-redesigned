@@ -31,7 +31,7 @@ const About = () => {
             <div className="container">
                 <div className="about-grid">
                     {/* Left Content */}
-                    <div className="about-content">
+                    <div className="about-content" data-aos="fade-right">
                         <span className="label">About Us</span>
                         <h2 className="display-title">
                             A legacy of<br />
@@ -75,7 +75,7 @@ const About = () => {
                     </div>
 
                     {/* Right - Image Gallery */}
-                    <div className="about-visual">
+                    <div className="about-visual" data-aos="fade-left">
                         <div className="gallery-frame">
                             {/* Image Container */}
                             <div className="gallery-images">

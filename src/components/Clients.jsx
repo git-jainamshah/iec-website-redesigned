@@ -227,7 +227,7 @@ const Clients = () => {
             <div className="container">
                 <div className="module-content">
                     {/* Heading Side */}
-                    <div className="module-header">
+                    <div className="module-header" data-aos="fade-up">
                         <span className="module-label" style={{ color: activeText, opacity: 0.6 }}>Proven Excellence</span>
                         <h2 className="module-title" style={{ color: activeText }}>
                             Trusted by<br />Global Giants

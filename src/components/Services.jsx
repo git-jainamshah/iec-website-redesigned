@@ -37,7 +37,7 @@ const Services = () => {
         <section className="services section">
             <div className="container">
                 {/* Header */}
-                <div className="services-header">
+                <div className="services-header" data-aos="fade-up">
                     <span className="label">Our Expertise</span>
                     <h2 className="services-title">
                         What we <em className="accent-text">repair.</em>
@@ -47,7 +47,7 @@ const Services = () => {
                 {/* Horizontal Features List */}
                 <div className="services-list">
                     {services.map((service, idx) => (
-                        <div key={service.id} className={`service-row ${idx % 2 !== 0 ? 'reverse' : ''}`}>
+                        <div key={service.id} className={`service-row ${idx % 2 !== 0 ? 'reverse' : ''}`} data-aos="fade-up">
                             {/* Visual Side */}
                             <div className="service-visual">
                                 <img src={service.image} alt={service.title} className="service-img" />

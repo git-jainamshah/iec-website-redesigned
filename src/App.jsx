@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -20,13 +22,30 @@ import TermsOfService from './pages/TermsOfService';
 import translateService from './utils/translateService';
 import './styles/index.css';
 
+const ScrollRevealRefresh = () => {
+    const location = useLocation();
+
+    useEffect(() => {
+        AOS.refresh();
+    }, [location.pathname]);
+
+    return null;
+};
+
 function App() {
     useEffect(() => {
         translateService.init();
+        AOS.init({
+            duration: 700,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 60,
+        });
     }, []);
 
     return (
         <BrowserRouter>
+            <ScrollRevealRefresh />
             <Header />
             <main>
                 <Routes>

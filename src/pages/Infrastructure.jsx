@@ -82,7 +82,7 @@ const InfrastructurePage = () => {
                 <div className="container">
                     <div className="infra-stats">
                         {stats.map((stat, i) => (
-                            <div key={i} className="infra-stat-card">
+                            <div key={i} className="infra-stat-card" data-aos="fade-up" data-aos-delay={i * 80}>
                                 <span className="infra-stat-value">{stat.value}</span>
                                 <span className="infra-stat-label">{stat.label}</span>
                             </div>
@@ -100,7 +100,7 @@ const InfrastructurePage = () => {
                     </div>
                     <div className="facilities-grid">
                         {facilities.map((facility, i) => (
-                            <div key={i} className="facility-card">
+                            <div key={i} className="facility-card" data-aos="fade-up" data-aos-delay={i * 80}>
                                 <div className="facility-icon">{facility.icon}</div>
                                 <h3>{facility.title}</h3>
                                 <p>{facility.desc}</p>

@@ -6,7 +6,7 @@ const CTA = () => {
     return (
         <section className="cta-section">
             <div className="container">
-                <div className="cta-content">
+                <div className="cta-content" data-aos="fade-up">
                     <div className="cta-text">
                         <h3 className="display-title">
                             Ready to discuss your<br />

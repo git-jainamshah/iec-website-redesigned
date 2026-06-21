@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/iec-logo.png';
 import translateService from '../utils/translateService';
 
@@ -22,15 +22,22 @@ const languages = {
     ]
 };
 
+const navItems = [
+    { label: 'About', path: '/about', index: '01' },
+    { label: 'Leadership', path: '/leadership', index: '02' },
+    { label: 'Services', path: '/services', index: '03' },
+    { label: 'Infrastructure', path: '/infrastructure', index: '04' },
+    { label: 'Blogs', path: '/blogs', index: '05' },
+    { label: 'Careers', path: '/careers', index: '06' },
+    { label: 'Contact', path: '/contact', index: '07' },
+];
+
 const Header = () => {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
-    const [activeDropdown, setActiveDropdown] = useState(null);
-    const [searchOpen, setSearchOpen] = useState(false);
     const [langOpen, setLangOpen] = useState(false);
     const [currentLang, setCurrentLang] = useState(() => translateService.getCurrentLanguage());
     const location = useLocation();
-    const searchRef = useRef(null);
     const langRef = useRef(null);
 
     useEffect(() => {
@@ -44,8 +51,6 @@ const Header = () => {
 
         const timeoutId = window.setTimeout(() => {
             setMenuOpen(false);
-            setActiveDropdown(null);
-            setSearchOpen(false);
             setLangOpen(false);
         }, 0);
 
@@ -53,10 +58,12 @@ const Header = () => {
     }, [location.pathname, location.search, location.hash]);
 
     useEffect(() => {
+        document.body.style.overflow = menuOpen ? 'hidden' : '';
+        return () => { document.body.style.overflow = ''; };
+    }, [menuOpen]);
+
+    useEffect(() => {
         const handleClickOutside = (e) => {
-            if (searchRef.current && !searchRef.current.contains(e.target)) {
-                setSearchOpen(false);
-            }
             if (langRef.current && !langRef.current.contains(e.target)) {
                 setLangOpen(false);
             }
@@ -65,27 +72,9 @@ const Header = () => {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
-    const navItems = [
-        { label: 'About', path: '/about' },
-        { label: 'Leadership', path: '/leadership' },
-        {
-            label: 'Services',
-            path: '/services',
-            dropdown: [
-                { label: 'Motors & Generators', path: '/services#motors' },
-                { label: 'Industrial Pumps', path: '/services#pumps' },
-                { label: 'Spare Parts', path: '/services#spares' },
-            ]
-        },
-        { label: 'Infrastructure', path: '/infrastructure' },
-        { label: 'Blogs', path: '/blogs' },
-        { label: 'Contact', path: '/contact' },
-    ];
-
     return (
         <>
             <header className={`header ${scrolled ? 'scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`}>
-                {/* Brand Lockup - Logo + Stacked Name */}
                 <Link to="/" className="brand">
                     <img src={logo} alt="IEC" className="brand-logo" />
                     <div className="brand-text notranslate" translate="no">
@@ -94,80 +83,13 @@ const Header = () => {
                     </div>
                 </Link>
 
-                {/* Navigation */}
-                <nav className="nav">
-                    {navItems.map((item, idx) => (
-                        <div
-                            key={item.label}
-                            className="nav-item"
-                            onMouseEnter={() => item.dropdown && setActiveDropdown(idx)}
-                            onMouseLeave={() => setActiveDropdown(null)}
-                        >
-                            <NavLink
-                                to={item.path}
-                                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-                            >
-                                {item.label}
-                                {item.dropdown && (
-                                    <svg className="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M6 9l6 6 6-6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                )}
-                            </NavLink>
-
-                            {item.dropdown && (
-                                <div className={`dropdown ${activeDropdown === idx ? 'active' : ''}`}>
-                                    <div className="dropdown-inner">
-                                        {item.dropdown.map(sub => (
-                                            <Link key={sub.label} to={sub.path} className="dropdown-link">
-                                                {sub.label}
-                                            </Link>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                    ))}
-                </nav>
-
-                {/* Actions - Right aligned */}
                 <div className="header-actions">
-                    {/* Phone Number */}
-                    <div className="header-phone-block">
-                        <a href="tel:+919824214839" className="header-phone">
-                            +91 98242 14839
-                        </a>
-                        <span className="header-phone-hours">Contact 9AM – 5PM</span>
-                    </div>
+                    <a href="tel:+919824214839" className="header-phone">
+                        +91 98242 14839
+                    </a>
 
-                    {/* Search */}
-                    <div className="search-wrapper" ref={searchRef}>
-                        <button
-                            className="icon-btn"
-                            onClick={() => setSearchOpen(!searchOpen)}
-                            aria-label="Search"
-                        >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <circle cx="11" cy="11" r="8" />
-                                <path d="m21 21-4.35-4.35" />
-                            </svg>
-                        </button>
-
-                        <div className={`search-dropdown ${searchOpen ? 'active' : ''}`}>
-                            <input
-                                type="search"
-                                placeholder="Search..."
-                                autoFocus={searchOpen}
-                            />
-                        </div>
-                    </div>
-
-                    {/* Language Switcher */}
                     <div className="lang-wrapper notranslate" ref={langRef} translate="no">
-                        <button
-                            className="lang-btn"
-                            onClick={() => setLangOpen(!langOpen)}
-                        >
+                        <button className="lang-btn" onClick={() => setLangOpen(!langOpen)}>
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <circle cx="12" cy="12" r="10" />
                                 <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
@@ -203,128 +125,58 @@ const Header = () => {
                         </div>
                     </div>
 
-                    {/* CTA */}
-                    <Link to="/contact" className="header-cta">
-                        Connect
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </Link>
+                    <button
+                        className={`menu-toggle ${menuOpen ? 'active' : ''}`}
+                        onClick={() => setMenuOpen(!menuOpen)}
+                        aria-label="Toggle menu"
+                        aria-expanded={menuOpen}
+                    >
+                        <span className="menu-toggle-label">{menuOpen ? 'Close' : 'Menu'}</span>
+                        <span className="menu-toggle-icon">
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </button>
                 </div>
-
-                {/* Mobile Toggle */}
-                <button
-                    className={`menu-toggle ${menuOpen ? 'active' : ''}`}
-                    onClick={() => setMenuOpen(!menuOpen)}
-                    aria-label="Toggle menu"
-                >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
             </header>
 
-            {/* Mobile Menu */}
-            <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-                {/* Mobile Actions Bar - Search, Language, Call */}
-                <div className="mobile-actions-bar">
-                    {/* Mobile Search */}
-                    <div className="mobile-search">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <circle cx="11" cy="11" r="8" />
-                            <path d="m21 21-4.35-4.35" />
-                        </svg>
-                        <input type="search" placeholder="Search..." />
-                    </div>
-
-                    <div className="mobile-actions-row">
-                        {/* Mobile Language Selector */}
-                        <div className="mobile-lang-wrapper notranslate" translate="no">
-                            <button
-                                className={`mobile-lang-btn ${langOpen ? 'active' : ''}`}
-                                onClick={() => setLangOpen(!langOpen)}
+            {/* Full-screen overlay menu */}
+            <div className={`menu-overlay ${menuOpen ? 'open' : ''}`}>
+                <div className="menu-overlay-grid container">
+                    <nav className="menu-overlay-nav">
+                        {navItems.map((item, i) => (
+                            <Link
+                                key={item.label}
+                                to={item.path}
+                                className="menu-overlay-link"
+                                style={{ transitionDelay: menuOpen ? `${i * 0.05 + 0.1}s` : '0s' }}
                             >
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                                </svg>
-                                {currentLang.toUpperCase()}
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <path d="M6 9l6 6 6-6" />
-                                </svg>
-                            </button>
+                                <span className="menu-overlay-index">{item.index}</span>
+                                <span className="menu-overlay-label">{item.label}</span>
+                            </Link>
+                        ))}
+                    </nav>
 
-                            {langOpen && (
-                                <div className="mobile-lang-dropdown">
-                                    <div className="mobile-lang-section">
-                                        <span className="mobile-lang-title">Indian Languages</span>
-                                        {languages.indian.map(lang => (
-                                            <button
-                                                key={lang.code}
-                                                className={`mobile-lang-option ${currentLang === lang.code ? 'active' : ''}`}
-                                                onClick={() => { setCurrentLang(lang.code); translateService.setLanguage(lang.code); setLangOpen(false); }}
-                                            >
-                                                {lang.name}
-                                            </button>
-                                        ))}
-                                    </div>
-                                    <div className="mobile-lang-section">
-                                        <span className="mobile-lang-title">International</span>
-                                        {languages.international.map(lang => (
-                                            <button
-                                                key={lang.code}
-                                                className={`mobile-lang-option ${currentLang === lang.code ? 'active' : ''}`}
-                                                onClick={() => { setCurrentLang(lang.code); translateService.setLanguage(lang.code); setLangOpen(false); }}
-                                            >
-                                                {lang.name}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Mobile Call Button */}
-                        <a href="tel:+919824214839" className="mobile-call-btn">
-                            <div className="mobile-call-content">
-                                <span className="mobile-call-text">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                                    </svg>
-                                    Call Now
-                                </span>
-                                <span className="mobile-call-hours">9AM – 5PM</span>
-                            </div>
-                        </a>
+                    <div className="menu-overlay-aside">
+                        <span className="menu-overlay-aside-label">Get in touch</span>
+                        <a href="tel:+919824214839" className="menu-overlay-phone">+91 98242 14839</a>
+                        <a href="mailto:anil@iecindia.co.in" className="menu-overlay-email">anil@iecindia.co.in</a>
+                        <span className="menu-overlay-aside-label">Works</span>
+                        <p className="menu-overlay-address">
+                            Plot No. 613, GIDC Estate, Ranoli<br />
+                            Dist. Vadodara – 391350, Gujarat
+                        </p>
+                        <Link to="/contact" className="menu-overlay-cta">
+                            Connect Now
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </Link>
                     </div>
                 </div>
-
-                <nav className="mobile-nav">
-                    {navItems.map(item => (
-                        <div key={item.label} className="mobile-nav-item">
-                            <Link to={item.path} className="mobile-link">{item.label}</Link>
-                            {item.dropdown && (
-                                <div className="mobile-sub">
-                                    {item.dropdown.map(sub => (
-                                        <Link key={sub.label} to={sub.path} className="mobile-sub-link">
-                                            {sub.label}
-                                        </Link>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    ))}
-                    <Link to="/contact" className="mobile-cta">
-                        Connect Now
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </Link>
-                </nav>
             </div>
 
             <style>{`
-                /* ========== JP MORGAN STYLE HEADER ========== */
                 .header {
                     position: fixed;
                     top: 0;
@@ -334,26 +186,32 @@ const Header = () => {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    height: 80px;
+                    height: 88px;
                     padding: 0 40px;
                     background: transparent;
                     border-bottom: 1px solid transparent;
-                    transition: all 0.4s ease;
+                    transition: all 0.4s var(--ease-out);
                 }
 
                 .header.scrolled {
                     height: 72px;
-                    background: var(--color-white);
-                    border-bottom: 1px solid var(--color-border);
-                    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+                    background: rgba(10, 13, 18, 0.92);
+                    backdrop-filter: blur(12px);
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
                 }
 
-                /* ========== BRAND LOCKUP ========== */
+                .header.menu-open {
+                    background: transparent;
+                    border-bottom-color: transparent;
+                }
+
                 .brand {
                     display: flex;
                     align-items: center;
                     gap: 12px;
                     flex-shrink: 0;
+                    position: relative;
+                    z-index: 1100;
                 }
 
                 .brand-logo {
@@ -361,12 +219,11 @@ const Header = () => {
                     width: auto;
                     object-fit: contain;
                     transition: all 0.3s ease;
-                    filter: brightness(0) invert(1); /* White logo on dark bg */
+                    filter: brightness(0) invert(1);
                 }
 
                 .header.scrolled .brand-logo {
-                    height: 64px;
-                    filter: none; /* Original logo colors on white bg */
+                    height: 56px;
                 }
 
                 .brand-text {
@@ -377,16 +234,11 @@ const Header = () => {
                 }
 
                 .brand-name {
-                    font-size: 1.125rem;
+                    font-size: 1.0625rem;
                     font-weight: 700;
                     color: var(--color-white);
                     letter-spacing: -0.01em;
                     white-space: nowrap;
-                    transition: color 0.3s ease;
-                }
-
-                .header.scrolled .brand-name {
-                    color: var(--color-text);
                 }
 
                 .brand-cert {
@@ -394,213 +246,31 @@ const Header = () => {
                     font-weight: 500;
                     text-transform: uppercase;
                     letter-spacing: 0.08em;
-                    color: rgba(255, 255, 255, 0.7);
+                    color: rgba(255, 255, 255, 0.65);
                     white-space: nowrap;
-                    transition: color 0.3s ease;
                 }
 
-                .header.scrolled .brand-cert {
-                    color: var(--color-accent);
-                }
-
-                /* ========== NAVIGATION ========== */
-                .nav {
-                    display: flex;
-                    align-items: center;
-                    gap: 32px;
-                    margin-left: 48px;
-                }
-
-                .nav-item {
-                    position: relative;
-                }
-
-                .nav-link {
-                    display: flex;
-                    align-items: center;
-                    gap: 4px;
-                    font-size: 0.8125rem;
-                    font-weight: 500;
-                    color: rgba(255, 255, 255, 0.85);
-                    text-transform: uppercase;
-                    letter-spacing: 0.04em;
-                    padding: 8px 0;
-                    transition: color 0.2s;
-                }
-
-                .header.scrolled .nav-link {
-                    color: var(--color-text-light);
-                }
-
-                .nav-link:hover,
-                .nav-link.active {
-                    color: var(--color-white);
-                }
-
-                .header.scrolled .nav-link:hover,
-                .header.scrolled .nav-link.active {
-                    color: var(--color-accent);
-                }
-
-                .chevron {
-                    width: 12px;
-                    height: 12px;
-                    transition: transform 0.2s;
-                }
-
-                .nav-item:hover .chevron {
-                    transform: rotate(180deg);
-                }
-
-                /* Dropdown */
-                .dropdown {
-                    position: absolute;
-                    top: 100%;
-                    left: -16px;
-                    padding-top: 8px;
-                    opacity: 0;
-                    visibility: hidden;
-                    transform: translateY(4px);
-                    transition: all 0.2s ease;
-                }
-
-                .dropdown.active {
-                    opacity: 1;
-                    visibility: visible;
-                    transform: translateY(0);
-                }
-
-                .dropdown-inner {
-                    background: var(--color-white);
-                    border: 1px solid var(--color-border);
-                    border-radius: 4px;
-                    padding: 8px;
-                    min-width: 180px;
-                    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-                }
-
-                .dropdown-link {
-                    display: block;
-                    padding: 10px 12px;
-                    font-size: 0.8125rem;
-                    color: var(--color-text-light);
-                    border-radius: 3px;
-                    transition: all 0.15s;
-                }
-
-                .dropdown-link:hover {
-                    background: var(--color-light);
-                    color: var(--color-text);
-                }
-
-                /* ========== HEADER ACTIONS ========== */
                 .header-actions {
                     display: flex;
                     align-items: center;
-                    gap: 12px;
-                    margin-left: auto;
-                }
-
-                .header-phone-block {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-end;
-                    line-height: 1.2;
+                    gap: 20px;
+                    position: relative;
+                    z-index: 1100;
                 }
 
                 .header-phone {
+                    font-family: var(--font-mono);
                     font-size: 0.8125rem;
-                    font-weight: 600;
-                    color: rgba(255, 255, 255, 0.9);
+                    font-weight: 500;
+                    color: rgba(255, 255, 255, 0.85);
+                    letter-spacing: 0.02em;
                     transition: color 0.2s;
-                }
-
-                .header.scrolled .header-phone {
-                    color: var(--color-text);
                 }
 
                 .header-phone:hover {
                     color: var(--color-accent);
                 }
 
-                .header-phone-hours {
-                    font-size: 0.5625rem;
-                    font-weight: 500;
-                    text-transform: uppercase;
-                    letter-spacing: 0.06em;
-                    color: rgba(255, 255, 255, 0.5);
-                    transition: color 0.2s;
-                }
-
-                .header.scrolled .header-phone-hours {
-                    color: var(--color-muted);
-                }
-
-                .icon-btn {
-                    width: 32px;
-                    height: 32px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: rgba(255, 255, 255, 0.8);
-                    border-radius: 4px;
-                    transition: all 0.15s;
-                }
-
-                .header.scrolled .icon-btn {
-                    color: var(--color-text-light);
-                }
-
-                .icon-btn:hover {
-                    background: rgba(255, 255, 255, 0.1);
-                    color: var(--color-white);
-                }
-
-                .header.scrolled .icon-btn:hover {
-                    background: var(--color-light);
-                    color: var(--color-text);
-                }
-
-                /* Search */
-                .search-wrapper {
-                    position: relative;
-                }
-
-                .search-dropdown {
-                    position: absolute;
-                    top: calc(100% + 8px);
-                    right: 0;
-                    background: var(--color-white);
-                    border: 1px solid var(--color-border);
-                    border-radius: 4px;
-                    padding: 8px;
-                    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-                    opacity: 0;
-                    visibility: hidden;
-                    transform: translateY(4px);
-                    transition: all 0.2s ease;
-                }
-
-                .search-dropdown.active {
-                    opacity: 1;
-                    visibility: visible;
-                    transform: translateY(0);
-                }
-
-                .search-dropdown input {
-                    width: 220px;
-                    padding: 8px 12px;
-                    font-size: 0.8125rem;
-                    border: 1px solid var(--color-border);
-                    border-radius: 3px;
-                    outline: none;
-                }
-
-                .search-dropdown input:focus {
-                    border-color: var(--color-accent);
-                }
-
-                /* Language Switcher */
                 .lang-wrapper {
                     position: relative;
                 }
@@ -613,24 +283,14 @@ const Header = () => {
                     font-size: 0.6875rem;
                     font-weight: 600;
                     color: rgba(255, 255, 255, 0.8);
-                    border: 1px solid rgba(255, 255, 255, 0.3);
-                    border-radius: 4px;
+                    border: 1px solid rgba(255, 255, 255, 0.25);
+                    border-radius: 2px;
                     transition: all 0.15s;
-                }
-
-                .header.scrolled .lang-btn {
-                    color: var(--color-text-light);
-                    border-color: var(--color-border);
                 }
 
                 .lang-btn:hover {
                     border-color: rgba(255, 255, 255, 0.6);
                     color: var(--color-white);
-                }
-
-                .header.scrolled .lang-btn:hover {
-                    border-color: var(--color-text-light);
-                    color: var(--color-text);
                 }
 
                 .lang-dropdown {
@@ -639,9 +299,9 @@ const Header = () => {
                     right: 0;
                     background: var(--color-white);
                     border: 1px solid var(--color-border);
-                    border-radius: 4px;
+                    border-radius: 2px;
                     padding: 8px;
-                    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+                    box-shadow: var(--shadow-lg);
                     opacity: 0;
                     visibility: hidden;
                     transform: translateY(4px);
@@ -683,7 +343,7 @@ const Header = () => {
                     padding: 6px 8px;
                     font-size: 0.75rem;
                     color: var(--color-text-light);
-                    border-radius: 3px;
+                    border-radius: 2px;
                     transition: all 0.15s;
                 }
 
@@ -697,327 +357,191 @@ const Header = () => {
                     font-weight: 600;
                 }
 
-                /* Header CTA - matches language button size */
-                .header-cta {
+                /* Menu toggle */
+                .menu-toggle {
                     display: flex;
                     align-items: center;
-                    gap: 4px;
-                    padding: 6px 12px;
-                    font-size: 0.6875rem;
+                    gap: 12px;
+                    padding: 8px 4px;
+                }
+
+                .menu-toggle-label {
+                    font-size: 0.75rem;
                     font-weight: 600;
                     text-transform: uppercase;
-                    letter-spacing: 0.04em;
+                    letter-spacing: 0.1em;
                     color: var(--color-white);
-                    background: var(--color-accent);
-                    border-radius: 4px;
-                    transition: all 0.2s ease;
                 }
 
-                .header-cta:hover {
-                    background: var(--color-accent-hover);
-                }
-
-                /* Menu Toggle */
-                .menu-toggle {
-                    display: none;
+                .menu-toggle-icon {
+                    display: flex;
                     flex-direction: column;
-                    gap: 4px;
-                    padding: 8px;
+                    justify-content: center;
+                    gap: 6px;
+                    width: 28px;
+                    height: 18px;
                 }
 
-                .menu-toggle span {
-                    width: 18px;
+                .menu-toggle-icon span {
+                    width: 100%;
                     height: 2px;
                     background: var(--color-white);
-                    transition: all 0.3s ease;
+                    transition: all 0.3s var(--ease-out);
                 }
 
-                .header.scrolled .menu-toggle span {
-                    background: var(--color-text);
+                .menu-toggle.active .menu-toggle-icon span:nth-child(1) {
+                    transform: translateY(4px) rotate(45deg);
                 }
 
-                .menu-toggle.active span:nth-child(1) {
-                    transform: rotate(45deg) translate(4px, 4px);
+                .menu-toggle.active .menu-toggle-icon span:nth-child(2) {
+                    transform: translateY(-4px) rotate(-45deg);
                 }
 
-                .menu-toggle.active span:nth-child(2) {
-                    opacity: 0;
-                }
-
-                .menu-toggle.active span:nth-child(3) {
-                    transform: rotate(-45deg) translate(4px, -4px);
-                }
-
-                /* ========== MOBILE MENU ========== */
-                .mobile-menu {
+                /* ========== FULL-SCREEN OVERLAY MENU ========== */
+                .menu-overlay {
                     position: fixed;
-                    top: 80px;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: var(--color-white);
-                    z-index: 999;
-                    padding: 0 24px 24px 24px;
+                    inset: 0;
+                    z-index: 1050;
+                    background: var(--color-primary);
                     opacity: 0;
                     visibility: hidden;
-                    transition: all 0.3s ease;
-                    overflow-y: auto;
+                    transition: opacity 0.5s var(--ease-out), visibility 0.5s;
+                    display: flex;
+                    align-items: center;
                 }
 
-                .mobile-menu.open {
+                .menu-overlay.open {
                     opacity: 1;
                     visibility: visible;
                 }
 
-                .mobile-nav {
+                .menu-overlay-grid {
+                    display: grid;
+                    grid-template-columns: 1.4fr 1fr;
+                    gap: var(--space-4xl);
+                    width: 100%;
+                }
+
+                .menu-overlay-nav {
                     display: flex;
                     flex-direction: column;
-                    gap: 8px;
                 }
 
-                .mobile-link {
-                    font-size: 1rem;
-                    font-weight: 500;
-                    color: var(--color-text);
-                    padding: 12px 0;
-                    border-bottom: 1px solid var(--color-border);
-                }
-
-                .mobile-sub {
-                    padding: 8px 0 16px 20px;
+                .menu-overlay-link {
                     display: flex;
-                    flex-direction: column;
-                    gap: 4px;
+                    align-items: baseline;
+                    gap: var(--space-lg);
+                    padding: var(--space-md) 0;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                    opacity: 0;
+                    transform: translateY(16px);
+                    transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out), color 0.2s;
                 }
 
-                .mobile-sub-link {
-                    font-size: 0.875rem;
-                    color: var(--color-text-light);
-                    padding: 8px 0;
+                .menu-overlay.open .menu-overlay-link {
+                    opacity: 1;
+                    transform: translateY(0);
                 }
 
-                .mobile-cta {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 8px;
-                    margin-top: 24px;
-                    padding: 14px;
+                .menu-overlay-index {
+                    font-family: var(--font-mono);
                     font-size: 0.8125rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 0.04em;
-                    color: var(--color-white);
-                    background: var(--color-accent);
-                    border-radius: 4px;
-                }
-
-                /* ========== MOBILE ACTIONS BAR ========== */
-                .mobile-actions-bar {
-                    padding-top: 24px;
-                    padding-bottom: 20px;
-                    margin-bottom: 20px;
-                    border-bottom: 1px solid var(--color-border);
-                }
-
-                .mobile-search {
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    padding: 10px 14px;
-                    background: var(--color-light);
-                    border-radius: 6px;
-                    margin-bottom: 12px;
-                }
-
-                .mobile-search svg {
-                    color: var(--color-muted);
-                    flex-shrink: 0;
-                }
-
-                .mobile-search input {
-                    flex: 1;
-                    border: none;
-                    background: transparent;
-                    font-size: 0.875rem;
-                    color: var(--color-text);
-                    outline: none;
-                }
-
-                .mobile-search input::placeholder {
-                    color: var(--color-muted);
-                }
-
-                .mobile-actions-row {
-                    display: flex;
-                    gap: 10px;
-                }
-
-                .mobile-lang-wrapper {
-                    position: relative;
-                    flex: 1;
-                }
-
-                .mobile-lang-btn {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 6px;
-                    width: 100%;
-                    height: 52px;
-                    padding: 0 14px;
-                    font-size: 0.8125rem;
-                    font-weight: 600;
-                    color: var(--color-text);
-                    background: var(--color-light);
-                    border: 1px solid var(--color-border);
-                    border-radius: 6px;
-                    transition: all 0.2s;
-                }
-
-                .mobile-lang-btn.active,
-                .mobile-lang-btn:hover {
-                    border-color: var(--color-text-light);
-                }
-
-                .mobile-lang-dropdown {
-                    position: absolute;
-                    top: calc(100% + 8px);
-                    left: 0;
-                    right: 0;
-                    background: var(--color-white);
-                    border: 1px solid var(--color-border);
-                    border-radius: 6px;
-                    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-                    z-index: 10;
-                    max-height: 280px;
-                    overflow-y: auto;
-                }
-
-                .mobile-lang-section {
-                    padding: 10px;
-                }
-
-                .mobile-lang-section:first-child {
-                    border-bottom: 1px solid var(--color-border);
-                }
-
-                .mobile-lang-title {
-                    display: block;
-                    font-size: 0.625rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 0.1em;
-                    color: var(--color-muted);
-                    margin-bottom: 8px;
-                }
-
-                .mobile-lang-option {
-                    display: block;
-                    width: 100%;
-                    text-align: left;
-                    padding: 8px 10px;
-                    font-size: 0.8125rem;
-                    color: var(--color-text-light);
-                    border-radius: 4px;
-                    transition: all 0.15s;
-                }
-
-                .mobile-lang-option:hover {
-                    background: var(--color-light);
-                    color: var(--color-text);
-                }
-
-                .mobile-lang-option.active {
                     color: var(--color-accent);
-                    font-weight: 600;
                 }
 
-                .mobile-call-btn {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex: 1;
-                    height: 52px;
-                    padding: 0 14px;
+                .menu-overlay-label {
+                    font-family: var(--font-serif);
+                    font-size: clamp(1.75rem, 4vw, 3.25rem);
+                    font-weight: 400;
                     color: var(--color-white);
-                    background: var(--color-accent);
-                    border-radius: 6px;
-                    transition: all 0.2s;
+                    letter-spacing: -0.01em;
+                    transition: color 0.2s;
                 }
 
-                .mobile-call-btn:hover {
-                    background: var(--color-accent-hover);
+                .menu-overlay-link:hover .menu-overlay-label {
+                    color: var(--color-accent);
                 }
 
-                .mobile-call-content {
+                .menu-overlay-aside {
                     display: flex;
                     flex-direction: column;
-                    align-items: center;
-                    gap: 2px;
-                }
-
-                .mobile-call-text {
-                    display: flex;
-                    align-items: center;
                     gap: 6px;
-                    font-size: 0.8125rem;
+                    padding-left: var(--space-2xl);
+                    border-left: 1px solid rgba(255, 255, 255, 0.08);
+                }
+
+                .menu-overlay-aside-label {
+                    font-size: 0.6875rem;
                     font-weight: 600;
-                }
-
-                .mobile-call-hours {
-                    font-size: 0.5625rem;
-                    font-weight: 500;
                     text-transform: uppercase;
-                    letter-spacing: 0.06em;
-                    opacity: 0.8;
+                    letter-spacing: 0.12em;
+                    color: rgba(255, 255, 255, 0.4);
+                    margin-top: var(--space-lg);
                 }
 
-                /* ========== RESPONSIVE ========== */
-                @media (max-width: 1200px) {
-                    .header-phone-block {
-                        display: none;
-                    }
+                .menu-overlay-aside-label:first-child {
+                    margin-top: 0;
                 }
 
-                @media (max-width: 1100px) {
-                    .header {
-                        padding: 0 24px;
-                    }
+                .menu-overlay-phone {
+                    font-family: var(--font-mono);
+                    font-size: 1.125rem;
+                    color: var(--color-white);
+                }
 
-                    .nav {
-                        gap: 24px;
-                        margin-left: 32px;
-                    }
+                .menu-overlay-phone:hover,
+                .menu-overlay-email:hover {
+                    color: var(--color-accent);
+                }
 
-                    .brand-logo {
-                        height: 68px;
-                    }
+                .menu-overlay-email {
+                    font-size: 0.875rem;
+                    color: rgba(255, 255, 255, 0.7);
+                }
 
-                    .header.scrolled .brand-logo {
-                        height: 60px;
-                    }
+                .menu-overlay-address {
+                    font-size: 0.875rem;
+                    color: rgba(255, 255, 255, 0.6);
+                    line-height: 1.6;
+                }
 
-                    .brand-name {
-                        font-size: 1rem;
-                    }
+                .menu-overlay-cta {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: var(--space-sm);
+                    margin-top: var(--space-xl);
+                    padding: 0.875rem 1.75rem;
+                    font-size: 0.8125rem;
+                    font-weight: 500;
+                    letter-spacing: 0.04em;
+                    text-transform: uppercase;
+                    color: var(--color-white);
+                    background: var(--color-accent);
+                    border-radius: 2px;
+                    width: fit-content;
+                    transition: background 0.2s;
+                }
 
-                    .brand-cert {
-                        font-size: 0.8125rem;
-                    }
+                .menu-overlay-cta:hover {
+                    background: var(--color-accent-hover);
                 }
 
                 @media (max-width: 900px) {
                     .header {
                         padding: 0 20px;
+                        height: 76px;
                     }
 
-                    .brand {
-                        gap: 10px;
+                    .header.scrolled {
+                        height: 64px;
                     }
 
-                    .brand-text {
-                        display: flex;
+                    .brand-logo {
+                        height: 56px;
+                    }
+
+                    .header.scrolled .brand-logo {
+                        height: 46px;
                     }
 
                     .brand-name {
@@ -1028,14 +552,25 @@ const Header = () => {
                         font-size: 0.625rem;
                     }
 
-                    .nav,
-                    .header-actions {
+                    .header-phone,
+                    .lang-wrapper {
                         display: none;
                     }
 
-                    .menu-toggle {
-                        display: flex;
-                        margin-left: auto;
+                    .menu-overlay-grid {
+                        grid-template-columns: 1fr;
+                        gap: var(--space-2xl);
+                    }
+
+                    .menu-overlay-aside {
+                        padding-left: 0;
+                        border-left: none;
+                        padding-top: var(--space-lg);
+                        border-top: 1px solid rgba(255, 255, 255, 0.08);
+                    }
+
+                    .menu-overlay-label {
+                        font-size: clamp(1.5rem, 7vw, 2.25rem);
                     }
                 }
 
@@ -1045,29 +580,16 @@ const Header = () => {
                         padding: 0 16px;
                     }
 
-                    .brand {
-                        gap: 8px;
-                    }
-
                     .brand-logo {
-                        height: 56px;
+                        height: 48px;
                     }
 
                     .header.scrolled .brand-logo {
-                        height: 52px;
+                        height: 40px;
                     }
 
-                    .brand-name {
-                        font-size: 0.8125rem;
-                    }
-
-                    .brand-cert {
-                        font-size: 0.5625rem;
-                    }
-
-                    .mobile-menu {
-                        top: 64px;
-                        border-top: 1px solid var(--color-border);
+                    .menu-toggle-label {
+                        display: none;
                     }
                 }
             `}</style>
