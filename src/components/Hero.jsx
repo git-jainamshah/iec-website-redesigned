@@ -298,16 +298,28 @@ const Hero = () => {
                         min-height: auto;
                     }
 
-                    /* Image + headline occupy a tall, deliberate band; text sits at
-                       the bottom edge just above the capability strip. */
+                    /* Lighter, vignette-style overlay — more of the photo shows through
+                       up top, with just enough darkening behind the text block to
+                       stay legible. Mirrors the airy reference treatment rather than
+                       the heavy flat-dark wash used on desktop. */
+                    .hero-overlay {
+                        background: linear-gradient(
+                            180deg,
+                            rgba(5, 7, 10, 0.55) 0%,
+                            rgba(5, 7, 10, 0.22) 38%,
+                            rgba(5, 7, 10, 0.32) 60%,
+                            rgba(5, 7, 10, 0.82) 100%
+                        );
+                    }
+
                     .hero-content {
                         flex-direction: column;
                         align-items: flex-start;
                         justify-content: flex-end;
-                        min-height: 86vh;
-                        gap: var(--space-md);
-                        padding-top: calc(var(--header-height) + var(--space-2xl));
-                        padding-bottom: var(--space-2xl);
+                        min-height: 92vh;
+                        gap: var(--space-lg);
+                        padding-top: calc(76px + var(--space-2xl));
+                        padding-bottom: var(--space-3xl);
                         text-align: left;
                     }
 
@@ -316,9 +328,14 @@ const Hero = () => {
                         display: none;
                     }
 
-                    /* Strip drops into normal flow directly beneath the hero image */
+                    /* Strip drops into normal flow directly beneath the hero image,
+                       restyled light so the seam into the testimonials below is clean. */
                     .capability-strip {
                         position: relative;
+                        background: var(--color-white);
+                        backdrop-filter: none;
+                        -webkit-backdrop-filter: none;
+                        border-top: none;
                     }
 
                     .hero-text {
@@ -328,34 +345,58 @@ const Hero = () => {
                         max-width: 100%;
                     }
 
+                    .hero-label {
+                        color: var(--color-white);
+                        border: 1px solid rgba(255, 255, 255, 0.35);
+                        border-radius: 100px;
+                        padding: 6px 14px;
+                        font-size: 0.625rem;
+                    }
+
+                    .hero-title {
+                        font-size: clamp(1.875rem, 8vw, 2.5rem);
+                    }
+
                     .hero-desc {
                         max-width: 100%;
+                        color: rgba(255, 255, 255, 0.78);
                     }
 
                     .hero-actions {
                         flex-direction: row;
                         flex-wrap: wrap;
+                        align-items: center;
                         justify-content: flex-start;
-                        gap: var(--space-sm);
+                        gap: var(--space-lg);
                         width: 100%;
+                    }
+
+                    .hero-call-cta {
+                        border-color: rgba(255, 255, 255, 0.55);
+                        border-radius: 100px;
+                        padding: 12px 22px;
                     }
                 }
 
                 @media (max-width: 600px) {
                     .hero-content {
-                        min-height: 80vh;
-                        padding-top: calc(var(--header-height) + var(--space-xl));
+                        min-height: 88vh;
+                        padding-top: calc(64px + var(--space-2xl));
                     }
 
                     .hero-actions {
-                        flex-direction: column;
-                        align-items: stretch;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        gap: var(--space-md);
                     }
 
-                    .hero-call-cta,
+                    .hero-call-cta {
+                        width: auto;
+                    }
+
                     .hero-cta {
-                        justify-content: center;
-                        width: 100%;
+                        padding: 10px 0;
                     }
                 }
 
@@ -457,23 +498,31 @@ const Hero = () => {
                         grid-template-columns: repeat(3, 1fr);
                     }
 
+                    .cap-item {
+                        border-left-color: var(--color-border);
+                    }
+
                     .cap-item:nth-child(4) {
                         border-left: none;
                         padding-left: 0;
                     }
+
+                    .cap-value {
+                        color: var(--color-text);
+                    }
+
+                    .cap-label {
+                        color: var(--color-muted);
+                    }
                 }
 
                 @media (max-width: 600px) {
-                    .capability-strip {
-                        background: rgba(10, 13, 18, 0.72);
-                    }
-
                     .capability-strip-inner {
                         grid-template-columns: repeat(2, 1fr);
                     }
 
                     .cap-item {
-                        padding: var(--space-md) var(--space-md);
+                        padding: var(--space-lg) var(--space-md);
                     }
 
                     .cap-item:nth-child(odd) {
@@ -490,7 +539,7 @@ const Hero = () => {
                         align-items: center;
                         text-align: center;
                         border-left: none;
-                        border-top: 1px solid rgba(255, 255, 255, 0.15);
+                        border-top: 1px solid var(--color-border);
                         padding-top: var(--space-md);
                     }
                 }

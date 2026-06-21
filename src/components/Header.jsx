@@ -357,6 +357,14 @@ const Header = () => {
                     z-index: 2;
                 }
 
+                /* Hide brand wordmark while a full-screen panel is open so it can
+                   never visually collide with the overlay's nav links underneath. */
+                .header.panel-open .brand-text {
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: opacity 0.15s, visibility 0.15s;
+                }
+
                 .brand-logo {
                     height: 72px;
                     width: auto;
@@ -950,7 +958,7 @@ const Header = () => {
                         grid-template-columns: 1fr;
                         gap: var(--space-xl);
                         align-content: start;
-                        padding-top: calc(var(--header-height) + var(--space-xl));
+                        padding-top: calc(76px + var(--space-2xl));
                     }
 
                     .menu-overlay-link {
