@@ -58,11 +58,11 @@ const About = () => {
                                 <span className="stat-label">Sq.Ft Workshop</span>
                             </div>
                             <div className="stat">
-                                <span className="stat-value">250</span>
-                                <span className="stat-label">MW Capacity</span>
+                                <span className="stat-value">20,000</span>
+                                <span className="stat-label">HP Capacity</span>
                             </div>
                             <div className="stat">
-                                <span className="stat-value">26+</span>
+                                <span className="stat-value">40+</span>
                                 <span className="stat-label">Years Experience</span>
                             </div>
                         </div>

@@ -69,6 +69,7 @@ ABB, Ansaldo, BHEL, CG Power Group, Kirloskar Group, Marelli, Marathon Energy, T
 High Voltage Motor Repair, HT Motor Rewinding, Generator Rewinding, Alternator Repair, DC Motor Repair, Rotating Machine Repair, Industrial Motor Overhauling, Synchronous Motor Repair, Rotor Dynamic Balancing, HV Coil Manufacturing, Cryogenic Pump Repair, Motor Testing Facility, Generator Testing Facility, Industrial Spare Fabrication, Heavy Electrical Repair Workshop, Vadodara Motor Repair, Gujarat Industrial Electrical Services.
 
 ## Open gaps (flagged, not fabricated)
+- Homepage testimonials (`src/components/Clients.jsx`) previously had fabricated named individuals (e.g. "Sarah Jenkins, ABB Global", quotes attributed to Tata Motors/Reliance — neither a verified client) — replaced with role-only attribution against verified client logos (ABB, BHEL, Kirloskar Group). Still **not real quotes** — swap in actual client testimonials if/when the client provides them.
 - Leadership page has 3 "Coming Soon" team slots beyond the founder — needs real names/bios from the client before publishing.
 - No live domain decided yet for this premium rebuild — `index.html` canonical/OG currently point at `https://www.iecindia.co.in/`; update if this ships elsewhere.
 - "40+ years" framing above is an editorial reconciliation, not a verified fact — confirm with client before using in press/legal contexts.

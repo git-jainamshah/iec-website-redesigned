@@ -8,7 +8,7 @@ const openings = [
         department: 'Operations',
         type: 'Full-time',
         location: 'Vadodara, Gujarat',
-        desc: 'Experienced technician for HV motor rewinding and stator/rotor repair work on machines up to 250MW.',
+        desc: 'Experienced technician for HV motor rewinding and stator/rotor repair work on machines up to 20,000 HP.',
     },
     {
         title: 'Quality Control Engineer',
@@ -56,7 +56,7 @@ const Careers = () => {
                         {[
                             { icon: '📈', title: 'Growth', desc: 'Clear career progression and skill development programs' },
                             { icon: '🏗️', title: 'World-class Facility', desc: '300,000 sq.ft campus with modern equipment' },
-                            { icon: '🤝', title: 'Expert Team', desc: 'Learn from 26+ years of industry experience' },
+                            { icon: '🤝', title: 'Expert Team', desc: 'Learn from 40+ years of industry experience' },
                             { icon: '⚡', title: 'Impactful Work', desc: 'Repair critical machinery for India\'s top industries' },
                         ].map((perk, i) => (
                             <div key={i} className="perk-card">

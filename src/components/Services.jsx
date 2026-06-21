@@ -9,27 +9,27 @@ const Services = () => {
     const services = [
         {
             id: 'motors',
-            title: 'Motors & Generators',
-            capacity: 'Up to 250MW',
-            desc: 'Complete repair and rewinding for HV motors, generators, alternators, and DC machines. We handle the giants of the industry with precision engineering.',
-            tags: ['Stator Rewinding', 'Rotor Repair', 'VPI'],
+            title: 'Motors, Generators & Alternators',
+            capacity: 'Up to 20,000 HP / 13.8 kV',
+            desc: 'Rewinding and repair for AC induction, synchronous and wound-rotor motors, hydro/turbo/gas generators and DC motors. We handle the giants of the industry with precision engineering.',
+            tags: ['Stator Rewinding', 'Rotor Rebarring', 'VPI'],
             image: iecLogo // motorImg
         },
         {
-            id: 'pumps',
-            title: 'Industrial Pumps',
-            capacity: 'All Capacities',
-            desc: 'Comprehensive maintenance, repair, and refurbishment for all pump types including centrifugal, submersible, and vertical turbine units.',
-            tags: ['Centrifugal', 'Submersible', 'Vertical Turbine'],
-            image: iecLogo // pumpImg
+            id: 'mechanical',
+            title: 'Mechanical Repair',
+            capacity: 'Shafts to Commutators',
+            desc: 'Precision mechanical rebuild work — shaft fabrication, bearing housing repair, commutator service and spares fabrication, in-house.',
+            tags: ['Shaft Fabrication', 'Bearing Housings', 'Commutators'],
+            image: iecLogo
         },
         {
-            id: 'spares',
-            title: 'Spare Parts',
-            capacity: 'OEM Quality',
-            desc: 'Genuine components with complete technical support. From bearings to windings, we ensure your equipment runs with original performance.',
-            tags: ['Bearings', 'Seals', 'Impellers'],
-            image: iecLogo // spareImg
+            id: 'pumps',
+            title: 'Pumps',
+            capacity: 'Incl. Cryogenic',
+            desc: 'Repair and overhaul for industrial pumps, including high-voltage cryogenic submersible pumps such as Ebara-make 6.6kV units.',
+            tags: ['Cryogenic Pumps', 'Impellers', 'Seals'],
+            image: iecLogo // pumpImg
         }
     ];
 

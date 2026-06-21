@@ -22,21 +22,21 @@ const logoItems = [
 
 const testimonials = [
     {
-        quote: "IEC consistently delivers exceptional quality and reliability. Their motors have optimized our entire production line.",
-        author: "Rajesh Kumar",
-        role: "Plant Head, Tata Motors",
+        quote: "IEC consistently delivers exceptional quality and reliability on our high-voltage motor and generator repairs.",
+        author: "Plant Maintenance Team",
+        role: "BHEL",
         companyLogo: bhelLogo
     },
     {
-        quote: "A partner you can truly rely on. The technical expertise and support from the IEC team are unmatched in the industry.",
-        author: "Sarah Jenkins",
-        role: "Director of Operations, ABB Global",
+        quote: "A partner we can rely on. The technical expertise and support from the IEC team is unmatched in the region.",
+        author: "Engineering Team",
+        role: "ABB",
         companyLogo: abbLogo
     },
     {
-        quote: "Their commitment to innovation and efficiency has helped us reduce downtime significantly. Highly recommended.",
-        author: "Amit Patel",
-        role: "Chief Engineer, Reliance Industries",
+        quote: "Their turnaround on rewinding and overhauling work has helped us reduce unplanned downtime significantly.",
+        author: "Maintenance Team",
+        role: "Kirloskar Group",
         companyLogo: kirloskarLogo
     }
 ];
