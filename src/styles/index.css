@@ -1,34 +1,38 @@
-/* 
- * Indian Engineering Company - v3.0.0
- * Premium Enterprise Design System
- * Inspired by J.P. Morgan & Hardrock Hotels
+/*
+ * Indian Engineering Company - v4.0.0
+ * Heavy-Industrial Premium Design System
+ * Aerospace/defense-contractor restraint (Boeing/Lockheed/NASA) meets precision engineering red
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* ===== Premium CSS Variables ===== */
 :root {
     /* Brand Colors */
-    --color-primary: #0a1628;
-    --color-secondary: #1a2d4a;
+    --color-primary: #0a0d12;
+    --color-secondary: #161b22;
     --color-accent: #c8102e;
     --color-accent-hover: #a00d24;
     --color-gold: #b8860b;
+    --color-amber: #ffb400;
 
-    /* Neutral Palette */
+    /* Neutral Palette (cool graphite/steel, not warm cream) */
     --color-white: #ffffff;
-    --color-cream: #faf9f7;
-    --color-light: #f5f4f2;
-    --color-border: #e8e6e3;
-    --color-muted: #9a9590;
-    --color-text: #2c2825;
-    --color-text-light: #6b6560;
-    --color-dark: #1a1714;
+    --color-cream: #f4f5f7;
+    --color-light: #eef0f3;
+    --color-border: #dfe2e7;
+    --color-muted: #888e98;
+    --color-text: #161b22;
+    --color-text-light: #5c6370;
+    --color-dark: #05070a;
+    --color-steel: #2d3748;
 
     /* Typography */
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-serif: 'Space Grotesk', 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
 
     /* Spacing Scale */
     --space-xs: 0.25rem;
@@ -198,7 +202,7 @@ p {
     font-weight: 500;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    border-radius: 100px;
+    border-radius: 2px;
     transition: all var(--duration-normal) var(--ease-out);
     cursor: pointer;
 }

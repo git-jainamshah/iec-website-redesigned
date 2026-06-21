@@ -394,7 +394,7 @@ const Contact = () => {
                 .dept-card:last-child { border-bottom: none; }
                 
                 .dept-title {
-                    font-family: var(--font-serif); /* Playfair */
+                    font-family: var(--font-serif);
                     font-size: 1.25rem;
                     font-weight: 700;
                     color: var(--color-primary);

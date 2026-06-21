@@ -247,7 +247,7 @@ const Services = () => {
                     color: var(--color-text);
                     background: var(--color-light);
                     padding: 6px 12px;
-                    border-radius: 100px;
+                    border-radius: 2px;
                     border: 1px solid transparent;
                 }
 
