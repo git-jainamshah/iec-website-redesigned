@@ -310,6 +310,10 @@ const Hero = () => {
                         display: none;
                     }
 
+                    .easa-badge {
+                        display: none;
+                    }
+
                     .capability-strip {
                         position: relative;
                     }
@@ -486,6 +490,15 @@ const Hero = () => {
                     .cap-item:nth-child(odd) {
                         border-left: none;
                         padding-left: 0;
+                    }
+
+                    .cap-item:last-child {
+                        grid-column: span 2;
+                        align-items: center;
+                        text-align: center;
+                        border-left: none;
+                        border-top: 1px solid rgba(255, 255, 255, 0.15);
+                        padding-top: var(--space-lg);
                     }
                 }
             `}</style>

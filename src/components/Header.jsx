@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../assets/iec-logo.png';
 import translateService from '../utils/translateService';
 
@@ -36,9 +36,14 @@ const Header = () => {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [langOpen, setLangOpen] = useState(false);
+    const [searchOpen, setSearchOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
     const [currentLang, setCurrentLang] = useState(() => translateService.getCurrentLanguage());
     const location = useLocation();
+    const navigate = useNavigate();
     const langRef = useRef(null);
+    const searchRef = useRef(null);
+    const searchInputRef = useRef(null);
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -52,6 +57,7 @@ const Header = () => {
         const timeoutId = window.setTimeout(() => {
             setMenuOpen(false);
             setLangOpen(false);
+            setSearchOpen(false);
         }, 0);
 
         return () => window.clearTimeout(timeoutId);
@@ -67,10 +73,28 @@ const Header = () => {
             if (langRef.current && !langRef.current.contains(e.target)) {
                 setLangOpen(false);
             }
+            if (searchRef.current && !searchRef.current.contains(e.target)) {
+                setSearchOpen(false);
+            }
         };
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
+
+    useEffect(() => {
+        if (searchOpen) {
+            searchInputRef.current?.focus();
+        }
+    }, [searchOpen]);
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        if (!searchQuery.trim()) return;
+        navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+        setSearchQuery('');
+        setSearchOpen(false);
+        setMenuOpen(false);
+    };
 
     return (
         <>
@@ -87,6 +111,35 @@ const Header = () => {
                     <a href="tel:+919824214839" className="header-phone">
                         +91 98242 14839
                     </a>
+
+                    <div className="search-wrapper" ref={searchRef}>
+                        <button
+                            className="search-btn"
+                            onClick={() => setSearchOpen(!searchOpen)}
+                            aria-label="Toggle search"
+                            aria-expanded={searchOpen}
+                        >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="M21 21l-4.35-4.35" />
+                            </svg>
+                        </button>
+
+                        <form className={`search-dropdown ${searchOpen ? 'active' : ''}`} onSubmit={handleSearchSubmit}>
+                            <input
+                                ref={searchInputRef}
+                                type="text"
+                                placeholder="Search the site..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                            <button type="submit" aria-label="Submit search">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
 
                     <div className="lang-wrapper notranslate" ref={langRef} translate="no">
                         <button className="lang-btn" onClick={() => setLangOpen(!langOpen)}>
@@ -158,6 +211,35 @@ const Header = () => {
                     </nav>
 
                     <div className="menu-overlay-aside">
+                        <span className="menu-overlay-aside-label">Search</span>
+                        <form className="menu-overlay-search" onSubmit={handleSearchSubmit}>
+                            <input
+                                type="text"
+                                placeholder="Search the site..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                            <button type="submit" aria-label="Submit search">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="M21 21l-4.35-4.35" />
+                                </svg>
+                            </button>
+                        </form>
+
+                        <span className="menu-overlay-aside-label">Language</span>
+                        <div className="menu-overlay-langs notranslate" translate="no">
+                            {[...languages.indian, ...languages.international].map(lang => (
+                                <button
+                                    key={lang.code}
+                                    className={`menu-overlay-lang-option ${currentLang === lang.code ? 'active' : ''}`}
+                                    onClick={() => { setCurrentLang(lang.code); translateService.setLanguage(lang.code); }}
+                                >
+                                    {lang.name}
+                                </button>
+                            ))}
+                        </div>
+
                         <span className="menu-overlay-aside-label">Get in touch</span>
                         <a href="tel:+919824214839" className="menu-overlay-phone">+91 98242 14839</a>
                         <a href="mailto:anil@iecindia.co.in" className="menu-overlay-email">anil@iecindia.co.in</a>
@@ -182,7 +264,7 @@ const Header = () => {
                     top: 0;
                     left: 0;
                     right: 0;
-                    z-index: 1000;
+                    z-index: 1100;
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
@@ -271,8 +353,73 @@ const Header = () => {
                     color: var(--color-accent);
                 }
 
+                .search-wrapper,
                 .lang-wrapper {
                     position: relative;
+                }
+
+                .search-btn {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 32px;
+                    height: 32px;
+                    color: rgba(255, 255, 255, 0.85);
+                    border: 1px solid rgba(255, 255, 255, 0.25);
+                    border-radius: 2px;
+                    transition: all 0.15s;
+                }
+
+                .search-btn:hover {
+                    border-color: rgba(255, 255, 255, 0.6);
+                    color: var(--color-white);
+                }
+
+                .search-dropdown {
+                    position: absolute;
+                    top: calc(100% + 8px);
+                    right: 0;
+                    display: flex;
+                    align-items: center;
+                    background: var(--color-white);
+                    border: 1px solid var(--color-border);
+                    border-radius: 2px;
+                    padding: 6px;
+                    box-shadow: var(--shadow-lg);
+                    opacity: 0;
+                    visibility: hidden;
+                    transform: translateY(4px);
+                    transition: all 0.2s ease;
+                    width: 220px;
+                }
+
+                .search-dropdown.active {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                }
+
+                .search-dropdown input {
+                    flex: 1;
+                    border: none;
+                    outline: none;
+                    font-size: 0.8125rem;
+                    padding: 6px 8px;
+                    color: var(--color-text);
+                }
+
+                .search-dropdown button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 28px;
+                    height: 28px;
+                    color: var(--color-muted);
+                    flex-shrink: 0;
+                }
+
+                .search-dropdown button:hover {
+                    color: var(--color-accent);
                 }
 
                 .lang-btn {
@@ -483,6 +630,71 @@ const Header = () => {
                     margin-top: 0;
                 }
 
+                .menu-overlay-search {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-radius: 2px;
+                    padding: 4px 4px 4px 12px;
+                }
+
+                .menu-overlay-search input {
+                    flex: 1;
+                    background: transparent;
+                    border: none;
+                    outline: none;
+                    color: var(--color-white);
+                    font-size: 0.875rem;
+                    padding: 8px 0;
+                }
+
+                .menu-overlay-search input::placeholder {
+                    color: rgba(255, 255, 255, 0.4);
+                }
+
+                .menu-overlay-search button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 32px;
+                    height: 32px;
+                    flex-shrink: 0;
+                    color: rgba(255, 255, 255, 0.6);
+                    transition: color 0.2s;
+                }
+
+                .menu-overlay-search button:hover {
+                    color: var(--color-accent);
+                }
+
+                .menu-overlay-langs {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 6px;
+                }
+
+                .menu-overlay-lang-option {
+                    font-size: 0.75rem;
+                    font-weight: 500;
+                    color: rgba(255, 255, 255, 0.6);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-radius: 2px;
+                    padding: 5px 10px;
+                    transition: all 0.15s;
+                }
+
+                .menu-overlay-lang-option:hover {
+                    border-color: rgba(255, 255, 255, 0.5);
+                    color: var(--color-white);
+                }
+
+                .menu-overlay-lang-option.active {
+                    background: var(--color-accent);
+                    border-color: var(--color-accent);
+                    color: var(--color-white);
+                }
+
                 .menu-overlay-phone {
                     font-family: var(--font-mono);
                     font-size: 1.125rem;
@@ -553,6 +765,7 @@ const Header = () => {
                     }
 
                     .header-phone,
+                    .search-wrapper,
                     .lang-wrapper {
                         display: none;
                     }
