@@ -2,28 +2,28 @@ import React from 'react';
 
 const metrics = [
     {
-        value: '250',
-        unit: 'MW',
-        label: 'Repair Capacity',
-        desc: 'High voltage machinery'
+        value: '20,000',
+        unit: 'HP',
+        label: 'Motor Rewinding Capacity',
+        desc: 'Up to 13.8 kV'
     },
     {
-        value: '400',
-        unit: '+',
-        label: 'Annual Projects',
-        desc: 'Delivered on time'
+        value: '20',
+        unit: 'MW',
+        label: 'No-Load Testing',
+        desc: 'Centralized control room'
     },
     {
         value: '75',
         unit: 'K',
-        label: 'Sq.Ft Facility',
-        desc: 'State-of-the-art'
+        label: 'Sq.Ft Shop Floor',
+        desc: '300K sq.ft total works'
     },
     {
-        value: '26',
+        value: '40',
         unit: '+',
-        label: 'Years Experience',
-        desc: 'Since 1998'
+        label: 'Years Industry Experience',
+        desc: 'Established 1998'
     }
 ];
 
