@@ -4,59 +4,145 @@ import heroBg from '../assets/iec-hero-bg.jpeg';
 import easaLogo from '../assets/easa-logo.png';
 
 /* ─────────────────────────────────────────────────────────────
- * DEV ONLY — TINT PALETTE SWITCHER
+ * DEV ONLY — HERO TINT COLOR PICKER
  * Remove this block (and <TintPicker /> below) before final launch
  * ───────────────────────────────────────────────────────────── */
-const TINTS = [
-    { label: 'Near-black',    rgb: '5,7,10',    hex: '#050709' },
-    { label: 'Navy blue',     rgb: '10,20,50',   hex: '#0a1432' },
-    { label: 'Charcoal grey', rgb: '28,28,35',   hex: '#1c1c23' },
-    { label: 'Deep teal',     rgb: '5,22,28',    hex: '#05161c' },
-    { label: 'Forest',        rgb: '8,20,12',    hex: '#08140c' },
-    { label: 'Deep purple',   rgb: '18,10,40',   hex: '#120a28' },
-    { label: 'Warm black',    rgb: '15,10,8',    hex: '#0f0a08' },
-    { label: 'Slate',         rgb: '16,22,32',   hex: '#101620' },
-];
+function _rgbToHsv(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    const max = Math.max(r,g,b), min = Math.min(r,g,b), d = max - min;
+    let h = 0;
+    const s = max === 0 ? 0 : d / max;
+    const v = max;
+    if (d) {
+        if (max === r) h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+        else if (max === g) h = ((b - r) / d + 2) / 6;
+        else h = ((r - g) / d + 4) / 6;
+    }
+    return [h * 360, s * 100, v * 100];
+}
+function _hsvToRgb(h, s, v) {
+    s /= 100; v /= 100;
+    const i = Math.floor(h / 60) % 6;
+    const f = h / 60 - Math.floor(h / 60);
+    const p = v*(1-s), q = v*(1-f*s), t = v*(1-(1-f)*s);
+    return [[v,t,p],[q,v,p],[p,v,t],[p,q,v],[t,p,v],[v,p,q]][i].map(x => Math.round(x*255));
+}
+function _toHex(r, g, b) {
+    return '#' + [r,g,b].map(x => x.toString(16).padStart(2,'0')).join('');
+}
 
-const TintPicker = ({ current, onChange }) => (
-    <div style={{
-        position: 'fixed', bottom: 24, right: 24, zIndex: 9999,
-        background: 'rgba(10,13,18,0.92)', backdropFilter: 'blur(12px)',
-        border: '1px solid rgba(255,255,255,0.12)',
-        borderRadius: 6, padding: '14px 16px', minWidth: 200,
-        fontFamily: 'monospace', fontSize: 11,
-    }}>
-        <div style={{ color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 10 }}>
-            DEV · Hero Tint
+const TintPicker = ({ current, onChange }) => {
+    const [r0, g0, b0] = current.split(',').map(Number);
+    const [h0, s0, v0] = _rgbToHsv(r0, g0, b0);
+    const [hue, setHue] = React.useState(h0);
+    const [sat, setSat] = React.useState(s0);
+    const [bri, setBri] = React.useState(v0);
+    const svRef  = React.useRef(null);
+    const hueRef = React.useRef(null);
+    const dragging = React.useRef(null);
+    // keep a ref always pointing at latest hsv so the effect handler never goes stale
+    const hsvRef = React.useRef({ hue, sat, bri });
+    hsvRef.current = { hue, sat, bri };
+
+    const cl = x => Math.max(0, Math.min(1, x));
+
+    React.useEffect(() => {
+        const move = (e) => {
+            if (!dragging.current) return;
+            const { hue: ch, sat: cs, bri: cv } = hsvRef.current;
+            if (dragging.current === 'sv' && svRef.current) {
+                const rc = svRef.current.getBoundingClientRect();
+                const ns = cl((e.clientX - rc.left) / rc.width) * 100;
+                const nv = (1 - cl((e.clientY - rc.top) / rc.height)) * 100;
+                setSat(ns); setBri(nv);
+                const [r,g,b] = _hsvToRgb(ch, ns, nv);
+                onChange(`${r},${g},${b}`);
+            }
+            if (dragging.current === 'hue' && hueRef.current) {
+                const rc = hueRef.current.getBoundingClientRect();
+                const nh = cl((e.clientX - rc.left) / rc.width) * 360;
+                setHue(nh);
+                const [r,g,b] = _hsvToRgb(nh, cs, cv);
+                onChange(`${r},${g},${b}`);
+            }
+        };
+        const up = () => { dragging.current = null; };
+        window.addEventListener('pointermove', move);
+        window.addEventListener('pointerup', up);
+        return () => {
+            window.removeEventListener('pointermove', move);
+            window.removeEventListener('pointerup', up);
+        };
+    }, [onChange]);
+
+    const [rr, gg, bb] = _hsvToRgb(hue, sat, bri);
+    const hex = _toHex(rr, gg, bb);
+    const cursorStyle = { position:'absolute', width:16, height:16, borderRadius:'50%', border:'2.5px solid #fff', boxShadow:'0 0 0 1.5px rgba(0,0,0,0.35)', pointerEvents:'none', transform:'translate(-50%,-50%)' };
+
+    return (
+        <div style={{
+            position:'fixed', bottom:24, right:24, zIndex:9999,
+            background:'#fff', borderRadius:14, padding:16, width:268,
+            boxShadow:'0 8px 40px rgba(0,0,0,0.22)', fontFamily:'-apple-system,sans-serif',
+            userSelect:'none',
+        }}>
+            {/* Header */}
+            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:12 }}>
+                <span style={{ fontWeight:600, fontSize:14, color:'#1a1a1a' }}>Color picker</span>
+                <span style={{ fontSize:10, color:'#aaa', background:'#f2f2f2', padding:'2px 6px', borderRadius:4 }}>DEV ONLY</span>
+            </div>
+
+            {/* SV canvas */}
+            <div
+                ref={svRef}
+                onPointerDown={e => { dragging.current = 'sv'; e.currentTarget.setPointerCapture(e.pointerId); }}
+                style={{
+                    position:'relative', height:160, borderRadius:10, overflow:'hidden',
+                    cursor:'crosshair', marginBottom:12,
+                    background:`hsl(${hue},100%,50%)`,
+                }}
+            >
+                <div style={{ position:'absolute', inset:0, background:'linear-gradient(to right, #fff, transparent)' }} />
+                <div style={{ position:'absolute', inset:0, background:'linear-gradient(to bottom, transparent, #000)' }} />
+                <div style={{ ...cursorStyle, left:`${sat}%`, top:`${100-bri}%` }} />
+            </div>
+
+            {/* Hue slider */}
+            <div
+                ref={hueRef}
+                onPointerDown={e => { dragging.current = 'hue'; e.currentTarget.setPointerCapture(e.pointerId); }}
+                style={{
+                    position:'relative', height:16, borderRadius:8, cursor:'pointer', marginBottom:14,
+                    background:'linear-gradient(to right,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00)',
+                }}
+            >
+                <div style={{
+                    position:'absolute', top:'50%', left:`${hue/360*100}%`,
+                    width:22, height:22, borderRadius:'50%', transform:'translate(-50%,-50%)',
+                    border:'2.5px solid #fff', boxShadow:'0 0 0 1.5px rgba(0,0,0,0.25)',
+                    background:`hsl(${hue},100%,50%)`, pointerEvents:'none',
+                }} />
+            </div>
+
+            {/* HEX display */}
+            <div style={{
+                display:'flex', alignItems:'center', gap:10,
+                background:'#f7f7f7', borderRadius:10, padding:'9px 12px', marginBottom:8,
+            }}>
+                <div style={{ width:28, height:28, borderRadius:6, background:hex, border:'1px solid rgba(0,0,0,0.1)', flexShrink:0 }} />
+                <div style={{ flex:1, textAlign:'center' }}>
+                    <div style={{ fontSize:10, color:'#999', textTransform:'uppercase', letterSpacing:'0.08em', marginBottom:2 }}>HEX</div>
+                    <div style={{ fontWeight:700, fontSize:14, color:'#111' }}>{hex}</div>
+                </div>
+            </div>
+
+            {/* RGB */}
+            <div style={{ textAlign:'center', fontSize:11, color:'#888' }}>
+                RGB &nbsp; {rr}, {gg}, {bb}
+            </div>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            {TINTS.map(t => (
-                <button
-                    key={t.rgb}
-                    onClick={() => onChange(t.rgb)}
-                    style={{
-                        display: 'flex', alignItems: 'center', gap: 10,
-                        background: current === t.rgb ? 'rgba(255,255,255,0.1)' : 'transparent',
-                        border: current === t.rgb ? '1px solid rgba(255,255,255,0.25)' : '1px solid transparent',
-                        borderRadius: 4, padding: '5px 8px', cursor: 'pointer',
-                        color: 'rgba(255,255,255,0.8)', fontSize: 11, textAlign: 'left',
-                        transition: 'all 0.15s',
-                    }}
-                >
-                    <span style={{
-                        width: 18, height: 18, borderRadius: 3, flexShrink: 0,
-                        background: t.hex, border: '1px solid rgba(255,255,255,0.15)',
-                    }} />
-                    <span style={{ flex: 1 }}>{t.label}</span>
-                    {current === t.rgb && <span style={{ color: '#c8102e', fontSize: 10 }}>●</span>}
-                </button>
-            ))}
-        </div>
-        <div style={{ marginTop: 10, paddingTop: 10, borderTop: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.3)', fontSize: 10 }}>
-            rgb({current})
-        </div>
-    </div>
-);
+    );
+};
 /* ─── END DEV BLOCK ─────────────────────────────────────────── */
 
 const capabilities = [
