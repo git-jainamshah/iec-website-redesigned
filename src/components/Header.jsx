@@ -449,8 +449,10 @@ const Header = () => {
                 .lang-btn {
                     display: flex;
                     align-items: center;
+                    justify-content: center;
                     gap: 4px;
-                    padding: 8px 10px;
+                    height: 36px;
+                    padding: 0 10px;
                     font-size: 0.6875rem;
                     font-weight: 600;
                     color: rgba(255, 255, 255, 0.8);
