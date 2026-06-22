@@ -97,8 +97,6 @@ const Services = () => {
                         <div
                             key={service.id}
                             className={`service-row ${hoveredId === service.id ? 'hovered' : ''}`}
-                            data-aos="fade-up"
-                            data-aos-delay={idx * 50}
                             onMouseEnter={() => setHoveredId(service.id)}
                             onMouseLeave={() => setHoveredId(null)}
                         >
