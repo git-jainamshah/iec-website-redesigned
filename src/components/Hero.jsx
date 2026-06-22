@@ -99,7 +99,7 @@ const Hero = () => {
                     height: 100%;
                     object-fit: cover;
                     object-position: center 30%;
-                    filter: grayscale(20%) brightness(0.7);
+                    filter: brightness(0.88);
                     animation: kenburns 28s ease-out forwards;
                 }
 
@@ -108,22 +108,32 @@ const Hero = () => {
                     to   { transform: scale(1.05); }
                 }
 
-                /* Overlay — black bottom fade + left edge */
+                /*
+                 * ─── OVERLAY COLOUR ───────────────────────────────────────
+                 * To swap tint colour (dark blue, grey, etc.) change ONE line:
+                 *   --hero-tint: 5,7,10;        ← near-black (current)
+                 *   --hero-tint: 10,20,50;       ← dark navy blue
+                 *   --hero-tint: 28,28,35;       ← dark charcoal grey
+                 * ──────────────────────────────────────────────────────────
+                 */
                 .hero-overlay {
+                    --hero-tint: 5,7,10;
                     position: absolute;
                     inset: 0;
                     background:
-                        linear-gradient(
-                            to top,
-                            rgba(5,7,10,0.92) 0%,
-                            rgba(5,7,10,0.55) 28%,
-                            rgba(5,7,10,0.10) 55%,
-                            rgba(5,7,10,0) 100%
-                        ),
+                        /* Left → right: dark to transparent */
                         linear-gradient(
                             to right,
-                            rgba(5,7,10,0.40) 0%,
-                            rgba(5,7,10,0) 38%
+                            rgba(var(--hero-tint), 0.96) 0%,
+                            rgba(var(--hero-tint), 0.80) 28%,
+                            rgba(var(--hero-tint), 0.35) 55%,
+                            rgba(var(--hero-tint), 0) 72%
+                        ),
+                        /* Bottom strip: keep text area readable */
+                        linear-gradient(
+                            to top,
+                            rgba(var(--hero-tint), 0.70) 0%,
+                            rgba(var(--hero-tint), 0) 28%
                         );
                 }
 
