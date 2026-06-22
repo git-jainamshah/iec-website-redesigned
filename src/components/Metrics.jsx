@@ -5,42 +5,52 @@ const metrics = [
         value: '20,000',
         unit: 'HP',
         label: 'Motor Rewinding Capacity',
-        desc: 'Up to 13.8 kV'
+        sub: 'Up to 13.8 kV'
     },
     {
         value: '20',
         unit: 'MW',
-        label: 'No-Load Testing',
-        desc: 'Centralized control room'
+        label: 'No-Load Testing Bed',
+        sub: 'Centralized control room'
     },
     {
-        value: '75',
-        unit: 'K',
+        value: '75K',
+        unit: '',
         label: 'Sq.Ft Shop Floor',
-        desc: '300K sq.ft total works'
+        sub: '300K sq.ft total works'
     },
     {
-        value: '40',
-        unit: '+',
+        value: '40+',
+        unit: '',
         label: 'Years Industry Experience',
-        desc: 'Established 1998'
+        sub: 'Est. 1998 · Vadodara'
     }
 ];
 
 const Metrics = () => {
     return (
-        <section className="metrics">
+        <section className="metrics-section">
+            {/* Thin accent top border */}
+            <div className="metrics-accent-line" aria-hidden="true" />
+
             <div className="container">
                 <div className="metrics-grid">
                     {metrics.map((metric, idx) => (
-                        <div key={idx} className="metric-item">
+                        <div
+                            key={idx}
+                            className="metric-item"
+                            data-aos="fade-up"
+                            data-aos-delay={idx * 80}
+                        >
                             <div className="metric-number">
-                                <span className="metric-value">{metric.value}</span>
-                                <span className="metric-unit">{metric.unit}</span>
+                                <span className="metric-val">{metric.value}</span>
+                                {metric.unit && (
+                                    <span className="metric-unit">{metric.unit}</span>
+                                )}
                             </div>
                             <div className="metric-info">
                                 <span className="metric-label">{metric.label}</span>
-                                <span className="metric-desc">{metric.desc}</span>
+                                <span className="metric-sub">{metric.sub}</span>
                             </div>
                         </div>
                     ))}
@@ -48,97 +58,139 @@ const Metrics = () => {
             </div>
 
             <style>{`
-                .metrics {
-                    background: var(--color-cream);
-                    padding: var(--space-2xl) 0;
-                    border-bottom: 1px solid var(--color-border);
+                .metrics-section {
+                    background: var(--color-dark);
+                    padding: var(--space-4xl) 0;
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .metrics-section::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    background-image:
+                        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+                    background-size: 80px 80px;
+                    pointer-events: none;
+                }
+
+                .metrics-accent-line {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 1px;
+                    background: linear-gradient(90deg, transparent, var(--color-accent) 40%, var(--color-accent) 60%, transparent);
                 }
 
                 .metrics-grid {
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
-                    gap: var(--space-xl);
+                    position: relative;
+                    z-index: 1;
                 }
 
                 .metric-item {
                     display: flex;
-                    align-items: flex-start;
+                    flex-direction: column;
                     gap: var(--space-md);
-                    padding: var(--space-lg);
-                    background: var(--color-white);
-                    border-left: 3px solid var(--color-accent);
-                    transition: all 0.3s var(--ease-out);
+                    padding: var(--space-xl) var(--space-xl);
+                    border-left: 1px solid rgba(255, 255, 255, 0.08);
+                    transition: background 0.3s var(--ease-out);
+                    position: relative;
+                }
+
+                .metric-item::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 0;
+                    height: 2px;
+                    background: var(--color-accent);
+                    transition: width 0.4s var(--ease-out);
+                }
+
+                .metric-item:hover::before {
+                    width: 100%;
+                }
+
+                .metric-item:first-child {
+                    border-left: none;
                 }
 
                 .metric-item:hover {
-                    transform: translateY(-4px);
-                    box-shadow: var(--shadow-lg);
+                    background: rgba(255, 255, 255, 0.02);
                 }
 
                 .metric-number {
                     display: flex;
                     align-items: baseline;
-                    flex-shrink: 0;
+                    gap: 4px;
                 }
 
-                .metric-value {
-                    font-family: var(--font-serif);
-                    font-size: 2.5rem;
-                    font-weight: 400;
-                    color: var(--color-text);
+                .metric-val {
+                    font-family: var(--font-mono);
+                    font-size: clamp(2.5rem, 4.5vw, 3.5rem);
+                    font-weight: 600;
+                    color: var(--color-white);
                     line-height: 1;
+                    letter-spacing: -0.02em;
                 }
 
                 .metric-unit {
-                    font-family: var(--font-serif);
-                    font-size: 1.25rem;
-                    font-weight: 400;
+                    font-family: var(--font-mono);
+                    font-size: clamp(1.25rem, 2vw, 1.75rem);
+                    font-weight: 500;
                     color: var(--color-accent);
-                    margin-left: 2px;
+                    line-height: 1;
                 }
 
                 .metric-info {
                     display: flex;
                     flex-direction: column;
-                    padding-top: 4px;
+                    gap: 4px;
                 }
 
                 .metric-label {
                     font-size: 0.8125rem;
                     font-weight: 600;
-                    color: var(--color-text);
-                    margin-bottom: 2px;
-                }
-
-                .metric-desc {
-                    font-size: 0.6875rem;
-                    color: var(--color-muted);
+                    color: rgba(255, 255, 255, 0.75);
                     text-transform: uppercase;
-                    letter-spacing: 0.05em;
+                    letter-spacing: 0.06em;
                 }
 
-                @media (max-width: 1024px) {
+                .metric-sub {
+                    font-family: var(--font-mono);
+                    font-size: 0.6875rem;
+                    color: rgba(255, 255, 255, 0.35);
+                    letter-spacing: 0.04em;
+                }
+
+                @media (max-width: 900px) {
                     .metrics-grid {
                         grid-template-columns: repeat(2, 1fr);
                     }
-                }
 
-                @media (max-width: 600px) {
-                    .metrics {
-                        padding: var(--space-2xl) 0;
+                    .metric-item:nth-child(3) {
+                        border-left: none;
                     }
 
+                    .metric-item:nth-child(3),
+                    .metric-item:nth-child(4) {
+                        border-top: 1px solid rgba(255, 255, 255, 0.08);
+                    }
+                }
+
+                @media (max-width: 480px) {
                     .metrics-grid {
-                        grid-template-columns: 1fr;
-                        gap: var(--space-md);
+                        grid-template-columns: repeat(2, 1fr);
                     }
 
                     .metric-item {
-                        padding: var(--space-md);
-                    }
-
-                    .metric-value {
-                        font-size: 2rem;
+                        padding: var(--space-lg) var(--space-md);
                     }
                 }
             `}</style>
@@ -147,4 +199,3 @@ const Metrics = () => {
 };
 
 export default Metrics;
-

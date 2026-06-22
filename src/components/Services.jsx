@@ -1,103 +1,166 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import iecLogo from '../assets/iec-logo.png';
-// import motorImg from '../assets/motors-and-generators.jpg';
-// import pumpImg from '../assets/industrial-pump.jpg';
-// import spareImg from '../assets/spare-parts.jpg';
+
+const services = [
+    {
+        id: '01',
+        title: 'Motors, Generators & Alternators',
+        subtitle: 'Electrical Repair & Rewinding',
+        capacity: 'Up to 20,000 HP · 13.8 kV',
+        desc: 'Complete rewinding and repair for AC induction motors, synchronous motors, wound-rotor/slip-ring machines, hydro/turbo/gas generators, and DC machines. VPI, rotor rebarring, field coil rewinding, stator core restacking — we handle the machinery that powers India.',
+        specs: [
+            { label: 'Max Power', value: '20,000 HP' },
+            { label: 'Max Voltage', value: '13.8 kV' },
+            { label: 'Testing', value: '20 MW' },
+        ],
+        tags: ['Stator Rewinding', 'VPI Treatment', 'Rotor Rebarring', 'HV Coil Making', 'Hi-Pot Testing'],
+    },
+    {
+        id: '02',
+        title: 'Mechanical Repair',
+        subtitle: 'Precision Machine Work',
+        capacity: 'Shafts · Bearings · Commutators',
+        desc: 'Precision mechanical rebuild — shaft fabrication and replacement, shaft metalizing, bearing housing repair and manufacturing, commutator service, sleeve bearing re-babbitting, rotor core repair, and all critical rotating machine spares fabricated in-house.',
+        specs: [
+            { label: 'Crane Capacity', value: '300 T' },
+            { label: 'Balancing', value: '45 T Rotor' },
+            { label: 'Shop Floor', value: '75,000 sqft' },
+        ],
+        tags: ['Shaft Fabrication', 'Bearing Housings', 'Commutator Service', 'Sleeve Re-babbitting', 'Spares Fabrication'],
+    },
+    {
+        id: '03',
+        title: 'Cryogenic & Industrial Pumps',
+        subtitle: 'Pump Overhaul & Repair',
+        capacity: '6.6 kV Cryogenic Submersible',
+        desc: 'Repair and overhaul for industrial pumps including specialist high-voltage cryogenic submersible pumps. Certified in Ebara-make 6.6 kV cryogenic units used in LNG terminals and petrochemical applications — one of very few facilities in India with this capability.',
+        specs: [
+            { label: 'Cryogenic Rating', value: '6.6 kV' },
+            { label: 'Type', value: 'Submersible' },
+            { label: 'Application', value: 'LNG / Petrochem' },
+        ],
+        tags: ['Cryogenic Pumps', 'LNG Applications', 'Impeller Service', 'Seal Replacement'],
+    },
+    {
+        id: '04',
+        title: 'Spares Fabrication',
+        subtitle: 'In-House Manufactured Components',
+        capacity: 'Zero Outsourcing. Zero Delays.',
+        desc: 'Full in-house fabrication of rotor shafts, end shield covers, bearing housings, heat exchangers, cooling fans, commutators, and all related components. Our machining floor operates from the same site as the repair bay — meaning faster turnaround and complete quality control.',
+        specs: [
+            { label: 'Ovens', value: '3 Units' },
+            { label: 'Oven Volume', value: '3,000 cu.ft' },
+            { label: 'Captive Power', value: '5 MW' },
+        ],
+        tags: ['Rotor Shafts', 'End Shields', 'Heat Exchangers', 'Cooling Fans', 'Commutators'],
+    },
+    {
+        id: '05',
+        title: 'Preventive Maintenance & Overhauling',
+        subtitle: 'Workshop & In-Situ Services',
+        capacity: 'Pan-India · Emergency Response',
+        desc: 'Scheduled preventive maintenance, complete machine overhauling, and emergency breakdown response — at our Vadodara works or in-situ at your plant anywhere in India. 19 transport vehicles. 8 specialized crew and testing vehicles. We come to you when it counts most.',
+        specs: [
+            { label: 'Fleet', value: '27 Vehicles' },
+            { label: 'Coverage', value: 'Pan-India' },
+            { label: 'Response', value: 'Emergency 24/7' },
+        ],
+        tags: ['Thermal Imaging', 'Dielectric Testing', 'Surge Testing', 'Hi-Pot Testing', 'Emergency Callout'],
+    },
+];
 
 const Services = () => {
-    const services = [
-        {
-            id: 'motors',
-            title: 'Motors, Generators & Alternators',
-            capacity: 'Up to 20,000 HP / 13.8 kV',
-            desc: 'Rewinding and repair for AC induction, synchronous and wound-rotor motors, hydro/turbo/gas generators and DC motors. We handle the giants of the industry with precision engineering.',
-            tags: ['Stator Rewinding', 'Rotor Rebarring', 'VPI'],
-            image: iecLogo // motorImg
-        },
-        {
-            id: 'mechanical',
-            title: 'Mechanical Repair',
-            capacity: 'Shafts to Commutators',
-            desc: 'Precision mechanical rebuild work — shaft fabrication, bearing housing repair, commutator service and spares fabrication, in-house.',
-            tags: ['Shaft Fabrication', 'Bearing Housings', 'Commutators'],
-            image: iecLogo
-        },
-        {
-            id: 'pumps',
-            title: 'Pumps',
-            capacity: 'Incl. Cryogenic',
-            desc: 'Repair and overhaul for industrial pumps, including high-voltage cryogenic submersible pumps such as Ebara-make 6.6kV units.',
-            tags: ['Cryogenic Pumps', 'Impellers', 'Seals'],
-            image: iecLogo // pumpImg
-        }
-    ];
+    const [hoveredId, setHoveredId] = useState(null);
 
     return (
-        <section className="services section">
-            <div className="container">
-                {/* Header */}
-                <div className="services-header" data-aos="fade-up">
-                    <span className="label">Our Expertise</span>
-                    <h2 className="services-title">
-                        What we <em className="accent-text">repair.</em>
-                    </h2>
+        <section className="services-section">
+            {/* Section Header */}
+            <div className="services-header" data-aos="fade-up">
+                <div className="container">
+                    <div className="services-header-inner">
+                        <span className="services-eyebrow">Our Expertise</span>
+                        <h2 className="services-main-title display-title">
+                            What we <em>repair.</em>
+                        </h2>
+                        <p className="services-subtitle">
+                            Five core service lines. One workshop complex.
+                            Every capability verified and in-house.
+                        </p>
+                    </div>
                 </div>
+            </div>
 
-                {/* Horizontal Features List */}
-                <div className="services-list">
+            {/* Service Lines */}
+            <div className="services-list">
+                <div className="container">
                     {services.map((service, idx) => (
-                        <div key={service.id} className={`service-row ${idx % 2 !== 0 ? 'reverse' : ''}`} data-aos="fade-up">
-                            {/* Visual Side */}
-                            <div className="service-visual">
-                                <img src={service.image} alt={service.title} className="service-img" />
-                                <div className="service-visual-overlay"></div>
-                                <div className="service-capacity">{service.capacity}</div>
+                        <div
+                            key={service.id}
+                            className={`service-row ${hoveredId === service.id ? 'hovered' : ''}`}
+                            data-aos="fade-up"
+                            data-aos-delay={idx * 50}
+                            onMouseEnter={() => setHoveredId(service.id)}
+                            onMouseLeave={() => setHoveredId(null)}
+                        >
+                            {/* Number */}
+                            <div className="service-num">
+                                <span>{service.id}</span>
                             </div>
 
-                            {/* Content Side */}
-                            <div className="service-content">
-                                <div className="service-content-inner">
-                                    <h3 className="service-name">{service.title}</h3>
-                                    <p className="service-desc">{service.desc}</p>
-
-                                    <div className="service-tags">
-                                        {service.tags.map(tag => (
-                                            <span key={tag} className="tag">{tag}</span>
-                                        ))}
-                                    </div>
-
-                                    <Link to="/services" className="service-link">
-                                        Explore Service
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                            <path d="M5 12h14M12 5l7 7-7 7" />
-                                        </svg>
-                                    </Link>
+                            {/* Main Content */}
+                            <div className="service-body">
+                                <div className="service-meta">
+                                    <span className="service-subtitle-tag">{service.subtitle}</span>
+                                    <span className="service-capacity">{service.capacity}</span>
                                 </div>
+                                <h3 className="service-name">{service.title}</h3>
+                                <p className="service-desc">{service.desc}</p>
+                                <div className="service-tags">
+                                    {service.tags.map(tag => (
+                                        <span key={tag} className="service-tag">{tag}</span>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Specs + CTA */}
+                            <div className="service-aside">
+                                <div className="service-specs">
+                                    {service.specs.map(spec => (
+                                        <div key={spec.label} className="spec-item">
+                                            <span className="spec-value">{spec.value}</span>
+                                            <span className="spec-label">{spec.label}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <Link to="/services" className="service-cta">
+                                    <span>Explore Service</span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                    </svg>
+                                </Link>
                             </div>
                         </div>
                     ))}
                 </div>
+            </div>
 
-                {/* Bottom CTA Section */}
-                <div className="services-footer-cta">
-                    <div className="cta-block">
-                        <h3 className="cta-title">Not sure what you need?</h3>
-                        <p className="cta-subtitle">Our engineers are ready to diagnose your industrial challenges.</p>
-
-                        <div className="cta-actions">
+            {/* Footer CTA */}
+            <div className="services-footer" data-aos="fade-up">
+                <div className="container">
+                    <div className="services-footer-inner">
+                        <div className="services-footer-text">
+                            <h3>Not sure what you need?</h3>
+                            <p>Our engineers are ready to assess your machinery and provide a detailed repair scope.</p>
+                        </div>
+                        <div className="services-footer-actions">
                             <Link to="/contact" className="btn btn-primary">
                                 Connect Now
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                     <path d="M5 12h14M12 5l7 7-7 7" />
                                 </svg>
                             </Link>
-
-                            <a href="tel:+919824214839" className="btn btn-outline">
-                                Call Us Now
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                                </svg>
+                            <a href="tel:+919824214839" className="services-phone">
+                                +91 98242 14839
                             </a>
                         </div>
                     </div>
@@ -105,224 +168,378 @@ const Services = () => {
             </div>
 
             <style>{`
-                .services {
+                .services-section {
                     background: var(--color-white);
-                    padding: var(--space-4xl) 0;
+                    padding: var(--space-5xl) 0 0;
                 }
 
-                /* Header */
+                /* ── Header ── */
                 .services-header {
-                    margin-bottom: var(--space-3xl);
-                    text-align: left;
+                    padding-bottom: var(--space-3xl);
+                    border-bottom: 1px solid var(--color-border);
                 }
 
-                .label {
-                    display: block;
-                    font-size: 0.75rem;
+                .services-header-inner {
+                    display: grid;
+                    grid-template-columns: auto 1fr auto;
+                    align-items: end;
+                    gap: var(--space-xl);
+                }
+
+                .services-eyebrow {
+                    font-size: 0.6875rem;
                     font-weight: 600;
                     text-transform: uppercase;
-                    letter-spacing: 0.12em;
+                    letter-spacing: 0.14em;
                     color: var(--color-muted);
-                    margin-bottom: var(--space-sm);
+                    writing-mode: vertical-rl;
+                    transform: rotate(180deg);
+                    align-self: center;
                 }
 
-                .services-title {
-                    font-family: var(--font-serif);
-                    font-size: clamp(2.5rem, 5vw, 3.5rem);
+                .services-main-title {
+                    font-size: clamp(2.5rem, 5vw, 4rem);
                     font-weight: 400;
-                    line-height: 1;
                     color: var(--color-text);
+                    line-height: 1;
+                    letter-spacing: -0.02em;
                 }
 
-                .services-title em {
-                    font-family: var(--font-serif);
+                .services-main-title em {
+                    color: var(--color-accent);
                     font-style: italic;
-                    color: var(--color-accent); /* Ensuring Red Color */
                 }
 
-                /* List Layout */
+                .services-subtitle {
+                    font-size: 0.9375rem;
+                    color: var(--color-muted);
+                    line-height: 1.6;
+                    max-width: 260px;
+                    text-align: right;
+                    align-self: end;
+                }
+
+                /* ── Service Rows ── */
                 .services-list {
-                    display: flex;
-                    flex-direction: column;
-                    gap: var(--space-3xl);
+                    padding: 0;
                 }
 
                 .service-row {
                     display: grid;
-                    grid-template-columns: 1.2fr 1fr; /* Image larger than text */
+                    grid-template-columns: 80px 1fr 280px;
                     gap: var(--space-2xl);
+                    padding: var(--space-2xl) 0;
+                    border-bottom: 1px solid var(--color-border);
+                    transition: background 0.25s var(--ease-out);
+                    cursor: default;
+                    align-items: start;
+                }
+
+                .service-row:hover {
+                    background: var(--color-cream);
+                }
+
+                /* Number */
+                .service-num {
+                    display: flex;
+                    align-items: flex-start;
+                    padding-top: 6px;
+                }
+
+                .service-num span {
+                    font-family: var(--font-mono);
+                    font-size: 0.8125rem;
+                    font-weight: 600;
+                    color: var(--color-accent);
+                    letter-spacing: 0.04em;
+                    transition: transform 0.3s var(--ease-out);
+                }
+
+                .service-row:hover .service-num span {
+                    transform: scale(1.1);
+                }
+
+                /* Body */
+                .service-meta {
+                    display: flex;
                     align-items: center;
+                    gap: var(--space-md);
+                    margin-bottom: var(--space-sm);
                 }
 
-                .service-row.reverse {
-                    grid-template-columns: 1fr 1.2fr;
-                    direction: rtl; /* Trick to swap columns visually */
-                }
-                
-                .service-row.reverse .service-content {
-                    direction: ltr; /* Reset text direction */
-                }
-
-                /* Visual Side */
-                .service-visual {
-                    height: 400px;
-                    border-radius: 4px;
-                    position: relative;
-                    overflow: hidden;
-                    box-shadow: var(--shadow-md);
-                }
-
-                .service-img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    transition: transform 0.6s var(--ease-out);
-                }
-                
-                .service-row:hover .service-img {
-                    transform: scale(1.05); /* Subtle zoom on hover */
-                }
-
-                .service-visual-overlay {
-                    position: absolute;
-                    inset: 0;
-                    background: rgba(0,0,0,0.2); /* Slight darkening for text readability */
-                    transition: background 0.3s;
-                }
-                
-                .service-row:hover .service-visual-overlay {
-                    background: rgba(0,0,0,0.1);
+                .service-subtitle-tag {
+                    font-size: 0.6875rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: var(--color-muted);
                 }
 
                 .service-capacity {
-                    position: absolute;
-                    top: var(--space-lg);
-                    left: var(--space-lg); /* In reverse mode this stays correct relative to visual container */
-                    font-size: 0.75rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 0.08em;
-                    color: var(--color-white);
-                    background: rgba(0,0,0,0.6);
-                    backdrop-filter: blur(8px);
-                    padding: 8px 14px;
-                    border-radius: 4px;
-                    border: 1px solid rgba(255,255,255,0.2);
-                }
-
-                /* Content Side */
-                .service-content {
-                    padding: var(--space-lg);
-                }
-
-                .service-content-inner {
-                    max-width: 480px;
+                    font-family: var(--font-mono);
+                    font-size: 0.6875rem;
+                    font-weight: 500;
+                    color: var(--color-accent);
+                    letter-spacing: 0.04em;
+                    padding: 3px 8px;
+                    border: 1px solid rgba(200, 16, 46, 0.25);
+                    border-radius: 2px;
+                    background: rgba(200, 16, 46, 0.04);
                 }
 
                 .service-name {
                     font-family: var(--font-serif);
-                    font-size: 2rem;
-                    font-weight: 400;
+                    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+                    font-weight: 500;
                     color: var(--color-text);
+                    letter-spacing: -0.01em;
                     margin-bottom: var(--space-md);
+                    transition: color 0.2s;
+                    line-height: 1.2;
+                }
+
+                .service-row:hover .service-name {
+                    color: var(--color-accent);
                 }
 
                 .service-desc {
-                    font-size: 1rem;
-                    line-height: 1.6;
+                    font-size: 0.9375rem;
+                    line-height: 1.75;
                     color: var(--color-text-light);
                     margin-bottom: var(--space-lg);
+                    max-width: 600px;
                 }
 
                 .service-tags {
                     display: flex;
                     flex-wrap: wrap;
-                    gap: 8px;
-                    margin-bottom: var(--space-xl);
+                    gap: 6px;
                 }
 
-                .tag {
-                    font-size: 0.75rem;
+                .service-tag {
+                    font-size: 0.6875rem;
                     font-weight: 500;
-                    color: var(--color-text);
+                    color: var(--color-text-light);
                     background: var(--color-light);
-                    padding: 6px 12px;
+                    border: 1px solid var(--color-border);
+                    padding: 4px 10px;
                     border-radius: 2px;
-                    border: 1px solid transparent;
+                    text-transform: uppercase;
+                    letter-spacing: 0.04em;
+                    transition: all 0.2s;
                 }
 
-                .service-link {
+                .service-row:hover .service-tag {
+                    border-color: rgba(200, 16, 46, 0.2);
+                    color: var(--color-text);
+                }
+
+                /* Aside */
+                .service-aside {
+                    display: flex;
+                    flex-direction: column;
+                    gap: var(--space-xl);
+                    align-items: flex-end;
+                    padding-top: 6px;
+                }
+
+                .service-specs {
+                    display: flex;
+                    flex-direction: column;
+                    gap: var(--space-md);
+                    width: 100%;
+                }
+
+                .spec-item {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2px;
+                    padding-bottom: var(--space-md);
+                    border-bottom: 1px solid var(--color-border);
+                }
+
+                .spec-item:last-child {
+                    border-bottom: none;
+                    padding-bottom: 0;
+                }
+
+                .spec-value {
+                    font-family: var(--font-mono);
+                    font-size: 1.25rem;
+                    font-weight: 600;
+                    color: var(--color-text);
+                    letter-spacing: -0.01em;
+                    line-height: 1;
+                }
+
+                .spec-label {
+                    font-size: 0.625rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: var(--color-muted);
+                }
+
+                .service-cta {
                     display: inline-flex;
                     align-items: center;
                     gap: 8px;
-                    font-size: 0.8125rem;
+                    font-size: 0.75rem;
                     font-weight: 600;
                     text-transform: uppercase;
-                    letter-spacing: 0.05em;
-                    color: var(--color-primary);
-                    transition: all 0.3s;
-                    border-bottom: 2px solid transparent;
-                    padding-bottom: 2px;
-                }
-
-                .service-link:hover {
-                    gap: 12px;
-                    border-color: var(--color-accent);
-                }
-
-                /* Footer CTA */
-                .services-footer-cta {
-                    margin-top: var(--space-xl);
-                    border-top: 1px solid var(--color-border);
-                    padding-top: var(--space-xl);
-                    text-align: center;
-                }
-
-                .cta-block {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: var(--space-md);
-                }
-
-                .cta-title {
-                    font-family: var(--font-serif);
-                    font-size: 2rem;
-                    font-weight: 400;
+                    letter-spacing: 0.1em;
                     color: var(--color-text);
+                    padding-bottom: 2px;
+                    border-bottom: 1px solid var(--color-border);
+                    transition: all 0.25s var(--ease-out);
+                    white-space: nowrap;
                 }
 
-                .cta-subtitle {
-                    font-size: 1rem;
-                    color: var(--color-text-light);
-                    margin-bottom: var(--space-lg);
+                .service-cta:hover {
+                    color: var(--color-accent);
+                    border-color: var(--color-accent);
+                    gap: 12px;
                 }
 
-                .cta-actions {
+                .service-cta svg {
+                    transition: transform 0.25s var(--ease-out);
+                    flex-shrink: 0;
+                }
+
+                .service-cta:hover svg {
+                    transform: translateX(4px);
+                }
+
+                /* ── Footer CTA ── */
+                .services-footer {
+                    background: var(--color-primary);
+                    padding: var(--space-3xl) 0;
+                    margin-top: 0;
+                }
+
+                .services-footer-inner {
                     display: flex;
-                    gap: var(--space-xl);
                     align-items: center;
+                    justify-content: space-between;
+                    gap: var(--space-3xl);
                 }
 
+                .services-footer-text h3 {
+                    font-family: var(--font-serif);
+                    font-size: clamp(1.5rem, 3vw, 2.25rem);
+                    font-weight: 400;
+                    color: var(--color-white);
+                    letter-spacing: -0.01em;
+                    margin-bottom: var(--space-sm);
+                }
 
+                .services-footer-text p {
+                    font-size: 0.9375rem;
+                    color: rgba(255, 255, 255, 0.6);
+                    line-height: 1.6;
+                }
 
-                @media (max-width: 900px) {
-                    .services-list {
-                        gap: var(--space-2xl);
-                    }
-                    
-                    .service-row, .service-row.reverse {
+                .services-footer-actions {
+                    display: flex;
+                    align-items: center;
+                    gap: var(--space-xl);
+                    flex-shrink: 0;
+                }
+
+                .services-phone {
+                    font-family: var(--font-mono);
+                    font-size: 0.9375rem;
+                    font-weight: 500;
+                    color: rgba(255, 255, 255, 0.8);
+                    letter-spacing: 0.02em;
+                    transition: color 0.2s;
+                }
+
+                .services-phone:hover {
+                    color: var(--color-accent);
+                }
+
+                /* ── Tablet ── */
+                @media (max-width: 1024px) {
+                    .services-header-inner {
                         grid-template-columns: 1fr;
-                        gap: var(--space-lg);
-                        direction: ltr; /* Reset visual trick on mobile */
-                    }
-                    
-                    .service-visual {
-                        height: 280px;
+                        gap: var(--space-md);
                     }
 
-                    .service-name {
-                        font-size: 1.5rem;
+                    .services-eyebrow {
+                        writing-mode: horizontal-tb;
+                        transform: none;
+                    }
+
+                    .services-subtitle {
+                        text-align: left;
+                        max-width: 100%;
+                    }
+
+                    .service-row {
+                        grid-template-columns: 48px 1fr;
+                        grid-template-rows: auto auto;
+                    }
+
+                    .service-aside {
+                        grid-column: 2;
+                        align-items: flex-start;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                    }
+
+                    .service-specs {
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        gap: var(--space-lg);
+                        width: auto;
+                    }
+
+                    .spec-item {
+                        border-bottom: none;
+                        padding-bottom: 0;
+                        padding-right: var(--space-lg);
+                        border-right: 1px solid var(--color-border);
+                    }
+
+                    .spec-item:last-child {
+                        border-right: none;
+                    }
+                }
+
+                @media (max-width: 768px) {
+                    .service-row {
+                        grid-template-columns: 1fr;
+                        gap: var(--space-md);
+                    }
+
+                    .service-num {
+                        padding-top: 0;
+                    }
+
+                    .service-aside {
+                        grid-column: 1;
+                        flex-direction: column;
+                    }
+
+                    .service-specs {
+                        flex-direction: row;
+                    }
+
+                    .services-footer-inner {
+                        flex-direction: column;
+                        align-items: flex-start;
+                    }
+
+                    .services-footer-actions {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        width: 100%;
+                    }
+
+                    .services-footer-actions .btn {
+                        width: 100%;
+                        justify-content: center;
                     }
                 }
             `}</style>
