@@ -163,6 +163,16 @@ const Hero = () => {
             {/* Background photo */}
             <div className="hero-bg">
                 <img src={heroBg} alt="" aria-hidden="true" />
+
+                {/* Colour-flame leaks — screen-blend over the photo, below the dark overlay */}
+                <div className="hero-leaks" aria-hidden="true">
+                    <div className="hero-leak hero-leak-1" />
+                    <div className="hero-leak hero-leak-2" />
+                    <div className="hero-leak hero-leak-3" />
+                    <div className="hero-leak hero-leak-4" />
+                    <div className="hero-leak hero-leak-5" />
+                </div>
+
                 {/* DEV ONLY — style prop removed when TintPicker is removed */}
                 <div className="hero-overlay" style={{ '--hero-tint': tint }} />
             </div>
@@ -285,6 +295,72 @@ const Hero = () => {
                             rgba(var(--hero-tint), 0) 28%
                         );
                 }
+
+                /* ── Colour-flame leaks ──────────────────────────────── */
+                .hero-leaks {
+                    position: absolute;
+                    inset: 0;
+                    z-index: 1;
+                    overflow: hidden;
+                    pointer-events: none;
+                    mix-blend-mode: screen;
+                }
+
+                .hero-leak {
+                    position: absolute;
+                    border-radius: 50%;
+                    filter: blur(72px);
+                    will-change: transform, opacity;
+                }
+
+                /* Crimson — brand red, left anchor */
+                .hero-leak-1 {
+                    width: 360px; height: 520px;
+                    background: radial-gradient(ellipse at 50% 70%, rgba(210,20,45,0.85) 0%, transparent 68%);
+                    bottom: -120px; left: 0%;
+                    animation: leak-rise 10s cubic-bezier(.45,.05,.55,.95) infinite;
+                }
+
+                /* Amber/gold — warmth, slightly right */
+                .hero-leak-2 {
+                    width: 300px; height: 440px;
+                    background: radial-gradient(ellipse at 50% 70%, rgba(230,110,30,0.7) 0%, transparent 66%);
+                    bottom: -90px; left: 9%;
+                    animation: leak-rise 12s cubic-bezier(.45,.05,.55,.95) infinite 2.4s;
+                }
+
+                /* Rose/magenta — colour variety */
+                .hero-leak-3 {
+                    width: 280px; height: 400px;
+                    background: radial-gradient(ellipse at 50% 70%, rgba(185,30,90,0.65) 0%, transparent 65%);
+                    bottom: -80px; left: 18%;
+                    animation: leak-rise 14s cubic-bezier(.45,.05,.55,.95) infinite 5s;
+                }
+
+                /* Deep orange — between 1 and 2 */
+                .hero-leak-4 {
+                    width: 240px; height: 380px;
+                    background: radial-gradient(ellipse at 50% 70%, rgba(255,75,20,0.6) 0%, transparent 64%);
+                    bottom: -70px; left: 5%;
+                    animation: leak-rise 11s cubic-bezier(.45,.05,.55,.95) infinite 0.8s;
+                }
+
+                /* Warm coral — far left edge */
+                .hero-leak-5 {
+                    width: 200px; height: 340px;
+                    background: radial-gradient(ellipse at 50% 70%, rgba(200,50,60,0.55) 0%, transparent 62%);
+                    bottom: -60px; left: 25%;
+                    animation: leak-rise 9.5s cubic-bezier(.45,.05,.55,.95) infinite 3.7s;
+                }
+
+                @keyframes leak-rise {
+                    0%   { transform: translateY(0)       scaleX(1.0);  opacity: 0;   }
+                    12%  {                                               opacity: 0.9; }
+                    45%  { transform: translateY(-38vh)   scaleX(0.80); opacity: 0.7; }
+                    80%  { transform: translateY(-70vh)   scaleX(0.55); opacity: 0.2; }
+                    100% { transform: translateY(-90vh)   scaleX(0.40); opacity: 0;   }
+                }
+                /* ────────────────────────────────────────────────────── */
 
                 /* Body: full-height, content pushed to bottom */
                 .hero-body {
