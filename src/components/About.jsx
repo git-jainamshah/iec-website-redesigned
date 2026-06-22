@@ -1,84 +1,62 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const stats = [
-    { value: '300K', label: 'sq. ft. facility', note: 'Total works area, Vadodara' },
-    { value: '75K',  label: 'sq. ft. shop floor', note: 'Active repair bays' },
-    { value: '20 MW', label: 'no-load test capacity', note: 'Centralized test bed' },
-    { value: '300 T', label: 'crane capacity', note: 'Heaviest single lift' },
-    { value: '27',   label: 'fleet vehicles', note: 'Transport and field crew' },
-    { value: '5 MW', label: 'captive power', note: 'Zero grid dependency during test' },
+const keyStats = [
+    { value: '300K', unit: 'sq ft', label: 'Total facility' },
+    { value: '20',   unit: 'MW',   label: 'No-load test bed' },
+    { value: '300',  unit: 'T',    label: 'Crane capacity' },
+    { value: '40+',  unit: 'yrs',  label: 'In operation' },
 ];
 
 const About = () => {
     return (
         <section className="about">
-            <div className="container about-inner">
+            <div className="container">
 
-                {/* Left: text */}
-                <div className="about-left" data-aos="fade-up">
-                    <p className="about-eyebrow">About IEC</p>
+                {/* Top row: headline left, blurb + CTA right */}
+                <div className="about-top" data-aos="fade-up">
 
-                    <h2 className="about-heading">
-                        A single workshop.<br />
-                        Every capability<br />
-                        under one roof.
-                    </h2>
-
-                    <p className="about-body">
-                        Since 1998, Indian Engineering Company has grown into one of India's
-                        largest facilities for industrial motor and generator repair. Our workshop
-                        in Vadodara handles everything in-house: HV coil making, dynamic
-                        balancing, mechanical machining, and high-voltage testing.
-                    </p>
-
-                    <p className="about-body">
-                        We serve power generation companies, cement plants, petrochemical
-                        refineries, and manufacturing facilities across Gujarat and beyond.
-                        Every repair is handled by experienced engineers, backed by ISO 9001
-                        quality systems and EASA accreditation.
-                    </p>
-
-                    <div className="about-facts">
-                        <div className="about-fact">
-                            <span className="fact-label">Certifications</span>
-                            <span className="fact-value">ISO 9001 certified. EASA member since 2014.</span>
-                        </div>
-                        <div className="about-fact">
-                            <span className="fact-label">Geographic reach</span>
-                            <span className="fact-value">Serving most of Gujarat's HV repair market and pan-India clients.</span>
-                        </div>
-                        <div className="about-fact">
-                            <span className="fact-label">Founded</span>
-                            <span className="fact-value">1998 in Vadodara, Gujarat.</span>
-                        </div>
+                    <div className="about-headline">
+                        <p className="about-eyebrow">About IEC</p>
+                        <h2 className="about-heading">
+                            A single workshop.<br />
+                            Every capability<br />
+                            under one roof.
+                        </h2>
                     </div>
 
-                    <Link to="/about" className="about-link">
-                        Our full story
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </Link>
+                    <div className="about-side">
+                        <p className="about-blurb">
+                            Since 1998, one facility in Vadodara has handled the motor
+                            and generator repairs keeping Gujarat's power plants, cement
+                            works, and petrochemical plants running.
+                        </p>
+                        <div className="about-creds">
+                            <span className="about-cred">ISO 9001</span>
+                            <span className="about-cred about-cred-accent">EASA Member</span>
+                            <span className="about-cred">Est. 1998</span>
+                        </div>
+                        <Link to="/about" className="about-link">
+                            Our full story
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </Link>
+                    </div>
+
                 </div>
 
-                {/* Right: numbers */}
-                <div className="about-right" data-aos="fade-up" data-aos-delay="80">
-                    <div className="about-stats">
-                        {stats.map((s, i) => (
-                            <div className="about-stat" key={i}>
-                                <span className="stat-num">{s.value}</span>
-                                <div className="stat-text">
-                                    <span className="stat-label">{s.label}</span>
-                                    <span className="stat-note">{s.note}</span>
-                                </div>
+                {/* Bottom: 4 dramatic stat cells */}
+                <div className="about-stats" data-aos="fade-up" data-aos-delay="60">
+                    {keyStats.map((s, i) => (
+                        <div className="about-stat" key={i}>
+                            <div className="stat-number">
+                                <span className="stat-val">{s.value}</span>
+                                <span className="stat-unit">{s.unit}</span>
                             </div>
-                        ))}
-                    </div>
-
-                    <p className="about-established">
-                        Established 1998
-                    </p>
+                            <span className="stat-label">{s.label}</span>
+                        </div>
+                    ))}
                 </div>
 
             </div>
@@ -87,18 +65,20 @@ const About = () => {
 
                 .about {
                     background: var(--color-white);
-                    padding: var(--space-5xl) 0;
+                    padding: var(--space-5xl) 0 0;
                     border-top: 1px solid var(--color-border);
                 }
 
-                .about-inner {
+                /* ── Top row ── */
+                .about-top {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     gap: var(--space-5xl);
-                    align-items: start;
+                    align-items: end;
+                    padding-bottom: var(--space-4xl);
+                    border-bottom: 1px solid var(--color-border);
                 }
 
-                /* Left */
                 .about-eyebrow {
                     font-family: var(--font-mono);
                     font-size: 0.6875rem;
@@ -111,54 +91,48 @@ const About = () => {
 
                 .about-heading {
                     font-family: var(--font-serif);
-                    font-size: clamp(2rem, 4vw, 3.25rem);
+                    font-size: clamp(2.25rem, 4.5vw, 3.75rem);
                     font-weight: 700;
                     color: var(--color-text);
-                    line-height: 1.05;
-                    letter-spacing: -0.025em;
-                    margin-bottom: var(--space-xl);
+                    line-height: 1.02;
+                    letter-spacing: -0.03em;
                 }
 
-                .about-body {
-                    font-size: 1rem;
-                    color: var(--color-text-light);
-                    line-height: 1.8;
-                    margin-bottom: var(--space-lg);
-                }
-
-                .about-facts {
-                    margin: var(--space-2xl) 0;
+                /* Side column */
+                .about-side {
                     display: flex;
                     flex-direction: column;
-                    gap: 0;
+                    gap: var(--space-xl);
+                    padding-bottom: 4px;
                 }
 
-                .about-fact {
-                    display: grid;
-                    grid-template-columns: 140px 1fr;
-                    gap: var(--space-lg);
-                    padding: var(--space-md) 0;
-                    border-top: 1px solid var(--color-border);
-                    align-items: baseline;
+                .about-blurb {
+                    font-size: 1.0625rem;
+                    color: var(--color-text-light);
+                    line-height: 1.75;
+                    max-width: 460px;
                 }
 
-                .about-fact:last-child {
-                    border-bottom: 1px solid var(--color-border);
+                .about-creds {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
                 }
 
-                .fact-label {
+                .about-cred {
                     font-family: var(--font-mono);
-                    font-size: 0.625rem;
+                    font-size: 0.5625rem;
                     font-weight: 600;
                     text-transform: uppercase;
                     letter-spacing: 0.12em;
-                    color: var(--color-muted);
+                    color: rgba(10,13,18,0.45);
+                    padding: 5px 10px;
+                    border: 1px solid var(--color-border);
                 }
 
-                .fact-value {
-                    font-size: 0.9375rem;
-                    color: var(--color-text);
-                    line-height: 1.5;
+                .about-cred-accent {
+                    color: var(--color-accent);
+                    border-color: rgba(200,16,46,0.25);
                 }
 
                 .about-link {
@@ -172,99 +146,103 @@ const About = () => {
                     text-underline-offset: 4px;
                     text-decoration-color: var(--color-accent);
                     transition: color 0.2s, gap 0.2s;
-                    margin-top: var(--space-xl);
+                    width: fit-content;
                 }
 
                 .about-link:hover {
                     color: var(--color-accent);
-                    gap: 12px;
+                    gap: 13px;
                 }
 
-                /* Right: stats */
-                .about-right {
-                    padding-top: var(--space-xl);
-                }
-
+                /* ── Stats rail ── */
                 .about-stats {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0;
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
                 }
 
                 .about-stat {
                     display: flex;
-                    align-items: baseline;
-                    gap: var(--space-xl);
-                    padding: var(--space-lg) 0;
-                    border-bottom: 1px solid var(--color-border);
+                    flex-direction: column;
+                    gap: var(--space-sm);
+                    padding: var(--space-2xl) var(--space-xl);
+                    border-right: 1px solid var(--color-border);
+                    transition: background 0.2s;
                 }
 
                 .about-stat:first-child {
-                    border-top: 1px solid var(--color-border);
+                    padding-left: 0;
                 }
 
-                .stat-num {
+                .about-stat:last-child {
+                    border-right: none;
+                }
+
+                .about-stat:hover {
+                    background: var(--color-cream);
+                }
+
+                .stat-number {
+                    display: flex;
+                    align-items: baseline;
+                    gap: 6px;
+                    line-height: 1;
+                }
+
+                .stat-val {
                     font-family: var(--font-mono);
-                    font-size: clamp(1.5rem, 2.5vw, 2rem);
+                    font-size: clamp(2.5rem, 4vw, 3.75rem);
                     font-weight: 700;
                     color: var(--color-text);
-                    letter-spacing: -0.02em;
-                    flex-shrink: 0;
-                    min-width: 90px;
+                    letter-spacing: -0.03em;
                 }
 
-                .stat-text {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 2px;
+                .stat-unit {
+                    font-family: var(--font-mono);
+                    font-size: clamp(1rem, 1.5vw, 1.375rem);
+                    font-weight: 500;
+                    color: var(--color-accent);
+                    letter-spacing: -0.01em;
                 }
 
                 .stat-label {
-                    font-size: 0.9375rem;
+                    font-size: 0.8125rem;
                     font-weight: 500;
-                    color: var(--color-text);
-                    line-height: 1.3;
-                }
-
-                .stat-note {
-                    font-size: 0.75rem;
                     color: var(--color-muted);
-                    line-height: 1.4;
-                }
-
-                .about-established {
-                    margin-top: var(--space-2xl);
-                    font-family: var(--font-mono);
-                    font-size: 0.6875rem;
                     text-transform: uppercase;
-                    letter-spacing: 0.14em;
-                    color: var(--color-muted);
+                    letter-spacing: 0.06em;
                 }
 
-                /* Responsive */
+                /* ── Responsive ── */
                 @media (max-width: 1024px) {
-                    .about-inner {
+                    .about-top {
                         grid-template-columns: 1fr;
-                        gap: var(--space-3xl);
-                    }
-                    .about-right {
-                        padding-top: 0;
+                        gap: var(--space-2xl);
                     }
                 }
 
                 @media (max-width: 768px) {
                     .about {
-                        padding: var(--space-4xl) 0;
+                        padding-top: var(--space-4xl);
                     }
-                    .about-fact {
-                        grid-template-columns: 1fr;
-                        gap: 4px;
+                    .about-stats {
+                        grid-template-columns: repeat(2, 1fr);
                     }
-                    .about-stat {
-                        gap: var(--space-lg);
+                    .about-stat:nth-child(2) {
+                        border-right: none;
                     }
-                    .stat-num {
-                        min-width: 70px;
+                    .about-stat:nth-child(3) {
+                        border-top: 1px solid var(--color-border);
+                        padding-left: 0;
+                    }
+                    .about-stat:nth-child(4) {
+                        border-right: none;
+                        border-top: 1px solid var(--color-border);
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    .about-stats {
+                        grid-template-columns: repeat(2, 1fr);
                     }
                 }
             `}</style>
