@@ -4,108 +4,162 @@ import heroBg from '../assets/iec-hero-bg.jpeg';
 import easaLogo from '../assets/easa-logo.png';
 
 const capabilities = [
-    { value: '20,000 HP', label: 'Motor Rewinding Capacity' },
-    { value: '13.8 kV', label: 'Max Voltage Rating' },
-    { value: '20 MW', label: 'No-Load Testing' },
-    { value: '300 Ton', label: 'Crane Capacity' },
-    { value: '5 MW', label: 'Captive Power Generation' },
+    { value: '20,000 HP', label: 'Motor Rewinding' },
+    { value: '13.8 kV', label: 'Max Voltage' },
+    { value: '20 MW', label: 'No-Load Test' },
+    { value: '300 T', label: 'Crane Capacity' },
+    { value: '40+', label: 'Years Running' },
 ];
 
 const Hero = () => {
     return (
         <section className="hero">
-            {/* ===== Visual band: background + content live together, isolated ===== */}
-            <div className="hero-visual">
-                <div className="hero-bg">
-                    <img src={heroBg} alt="" aria-hidden="true" />
-                    <div className="hero-overlay" />
-                    <div className="hero-grid-lines" aria-hidden="true" />
-                </div>
 
-                <div className="container hero-content">
-                    <div className="hero-text">
-                        <span className="hero-label animate-fade-up">
-                            <span className="hero-label-dot" />
-                            Est. 1998 · Vadodara · ISO 9001 Certified
-                        </span>
+            {/* ── One-shot scan line on load ── */}
+            <div className="hero-scan" aria-hidden="true" />
 
-                        <h1 className="hero-title display-title animate-fade-up delay-1">
-                            Engineered to keep<br />
-                            <em>power plants running.</em>
-                        </h1>
+            {/* ── Background imagery ── */}
+            <div className="hero-bg">
+                <img src={heroBg} alt="" aria-hidden="true" />
+                <div className="hero-overlay" />
+            </div>
 
-                        <p className="hero-desc animate-fade-up delay-2">
-                            Rewinding and repair for high-voltage motors, generators,
-                            alternators and DC motors up to 20,000&nbsp;HP and 13.8&nbsp;kV —
-                            trusted by power, cement and petrochemical industries across India.
-                        </p>
+            {/* ── Engineering grid (masked to left content zone) ── */}
+            <div className="hero-texture" aria-hidden="true" />
 
-                        <div className="hero-actions animate-fade-up delay-3">
-                            <Link to="/contact" className="hero-cta-primary">
-                                Connect Now
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                </svg>
-                            </Link>
+            {/* ── Red left-edge accent pillar ── */}
+            <div className="hero-pillar" aria-hidden="true" />
 
-                            <a href="tel:+919824214839" className="hero-cta-call">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                                </svg>
-                                <span>+91 98242 14839</span>
-                            </a>
-                        </div>
+            {/* ── Body grid ── */}
+            <div className="container hero-body">
+
+                {/* ── Left: editorial content ── */}
+                <div className="hero-left">
+                    <div className="hero-ghost" aria-hidden="true">IEC</div>
+
+                    <p className="hero-eyebrow animate-fade-up">
+                        <span className="hero-eyebrow-rule" />
+                        Est. 1998 · Vadodara, Gujarat · ISO 9001
+                    </p>
+
+                    <h1 className="hero-title animate-fade-up delay-1">
+                        Heavy<br />
+                        Industrial<br />
+                        <em>Rewinding.</em>
+                    </h1>
+
+                    <p className="hero-desc animate-fade-up delay-2">
+                        India's most trusted rewinding house — high-voltage motors,
+                        generators &amp; alternators up to 20,000&nbsp;HP and 13.8&nbsp;kV,
+                        serving power, cement and petrochemical sectors.
+                    </p>
+
+                    <div className="hero-actions animate-fade-up delay-3">
+                        <Link to="/contact" className="hero-btn-primary">
+                            Request a Quote
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </Link>
+                        <Link to="/services" className="hero-btn-ghost">
+                            View Services
+                        </Link>
                     </div>
 
-                    {/* EASA accreditation seal */}
-                    <div className="easa-badge" aria-hidden="true">
-                        <svg className="easa-text-circle" viewBox="0 0 100 100">
+                    <div className="hero-trust animate-fade-up delay-4">
+                        <span className="hero-trust-pill">ISO 9001</span>
+                        <span className="hero-trust-sep" aria-hidden="true" />
+                        <span className="hero-trust-pill">EASA Member 2014</span>
+                        <span className="hero-trust-sep" aria-hidden="true" />
+                        <span className="hero-trust-pill">Est. 1998</span>
+                    </div>
+                </div>
+
+                {/* ── Right: decorative / technical ── */}
+                <div className="hero-right" aria-hidden="true">
+
+                    {/* Targeting reticle */}
+                    <div className="hero-reticle">
+                        <div className="reticle-ring reticle-ring--outer" />
+                        <div className="reticle-ring reticle-ring--mid" />
+                        <div className="reticle-ring reticle-ring--inner" />
+                        <div className="reticle-cross" />
+                        <div className="reticle-dot" />
+                        <span className="reticle-label reticle-label--top">VADODARA · GJ</span>
+                        <span className="reticle-label reticle-label--bottom">22.30°N · 73.18°E</span>
+                    </div>
+
+                    {/* EASA spinning badge */}
+                    <div className="hero-easa">
+                        <svg className="easa-ring" viewBox="0 0 100 100">
                             <defs>
-                                <path id="circle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
+                                <path id="easa-arc" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
                             </defs>
                             <text>
-                                <textPath href="#circle" startOffset="0%">
+                                <textPath href="#easa-arc" startOffset="0%">
                                     • ACCREDITED MEMBER • ACCREDITED MEMBER
                                 </textPath>
                             </text>
                         </svg>
-                        <img src={easaLogo} alt="EASA" className="easa-logo" />
+                        <img src={easaLogo} alt="EASA" className="easa-img" />
                     </div>
-                </div>
 
-                <div className="scroll-cue" aria-hidden="true">
-                    <span className="scroll-cue-label">Scroll</span>
-                    <span className="scroll-cue-line" />
                 </div>
             </div>
 
-            {/* ===== Capability strip: a distinct band, never overlapping ===== */}
-            <div className="capability-strip">
-                <div className="container capability-strip-inner">
-                    {capabilities.map((cap) => (
-                        <div className="cap-item" key={cap.value}>
-                            <span className="cap-value">{cap.value}</span>
-                            <span className="cap-label">{cap.label}</span>
+            {/* ── Scroll cue ── */}
+            <div className="hero-scroll" aria-hidden="true">
+                <span className="hero-scroll-label">Scroll</span>
+                <span className="hero-scroll-line" />
+            </div>
+
+            {/* ── Capability strip ── */}
+            <div className="hero-caps">
+                <div className="container hero-caps-inner">
+                    {capabilities.map((cap, i) => (
+                        <div className="cap-item" key={i}>
+                            <span className="cap-val">{cap.value}</span>
+                            <span className="cap-lbl">{cap.label}</span>
                         </div>
                     ))}
                 </div>
             </div>
 
             <style>{`
+
+                /* ════════════════════════════════
+                   HERO SECTION
+                ════════════════════════════════ */
                 .hero {
                     position: relative;
                     display: flex;
                     flex-direction: column;
-                }
-
-                /* ---------- Visual band ---------- */
-                .hero-visual {
-                    position: relative;
-                    min-height: 100vh;
-                    display: flex;
+                    background: var(--color-primary);
                     overflow: hidden;
                 }
 
+                /* ── Scan line ── */
+                .hero-scan {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 2px;
+                    background: linear-gradient(90deg, transparent 0%, var(--color-accent) 40%, rgba(200,16,46,0.6) 60%, transparent 100%);
+                    z-index: 10;
+                    animation: heroScan 2.2s cubic-bezier(0.4, 0, 0.6, 1) 0.3s 1 forwards;
+                    opacity: 0;
+                    pointer-events: none;
+                }
+
+                @keyframes heroScan {
+                    0%   { top: 0%;   opacity: 0; }
+                    5%   { opacity: 1; }
+                    90%  { opacity: 0.4; }
+                    100% { top: 100%; opacity: 0; }
+                }
+
+                /* ── Background ── */
                 .hero-bg {
                     position: absolute;
                     inset: 0;
@@ -116,249 +170,448 @@ const Hero = () => {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
-                    filter: grayscale(100%) contrast(1.08) brightness(0.85);
-                    animation: kenburns 24s ease-out forwards;
+                    object-position: center 25%;
+                    filter: grayscale(75%) brightness(0.55);
+                    animation: kenburns 30s ease-out forwards;
                 }
 
                 @keyframes kenburns {
-                    from { transform: scale(1.02); }
-                    to { transform: scale(1.14); }
+                    from { transform: scale(1.0) translateX(0); }
+                    to   { transform: scale(1.07) translateX(-1%); }
                 }
 
-                /* Directional gradient: anchored dark bottom-left where the copy sits,
-                   opening up toward the top-right so the machinery stays visible. */
+                /* Strong directional gradient: opaque dark on left, opens on right */
                 .hero-overlay {
                     position: absolute;
                     inset: 0;
                     background:
-                        linear-gradient(105deg,
-                            rgba(5, 7, 10, 0.92) 0%,
-                            rgba(5, 7, 10, 0.72) 38%,
-                            rgba(5, 7, 10, 0.35) 70%,
-                            rgba(5, 7, 10, 0.20) 100%),
-                        linear-gradient(0deg,
-                            rgba(5, 7, 10, 0.55) 0%,
-                            rgba(5, 7, 10, 0) 35%);
+                        linear-gradient(112deg,
+                            rgba(5,7,10,0.98) 0%,
+                            rgba(5,7,10,0.95) 28%,
+                            rgba(5,7,10,0.78) 48%,
+                            rgba(5,7,10,0.30) 68%,
+                            rgba(5,7,10,0.06) 100%
+                        ),
+                        linear-gradient(180deg,
+                            rgba(5,7,10,0) 45%,
+                            rgba(5,7,10,0.55) 100%
+                        );
                 }
 
-                /* Faint engineering grid for texture */
-                .hero-grid-lines {
+                /* ── Engineering grid texture (masked to content zone) ── */
+                .hero-texture {
                     position: absolute;
                     inset: 0;
+                    z-index: 1;
+                    pointer-events: none;
                     background-image:
-                        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-                    background-size: 64px 64px;
-                    mask-image: radial-gradient(circle at 80% 30%, rgba(0,0,0,0.9), transparent 70%);
-                    -webkit-mask-image: radial-gradient(circle at 80% 30%, rgba(0,0,0,0.9), transparent 70%);
+                        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+                    background-size: 72px 72px;
+                    mask-image: radial-gradient(ellipse 55% 90% at 10% 50%, rgba(0,0,0,0.9), transparent 80%);
+                    -webkit-mask-image: radial-gradient(ellipse 55% 90% at 10% 50%, rgba(0,0,0,0.9), transparent 80%);
                 }
 
-                .hero-content {
+                /* ── Red left pillar ── */
+                .hero-pillar {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 3px;
+                    height: 100%;
+                    z-index: 4;
+                    background: linear-gradient(
+                        180deg,
+                        transparent 0%,
+                        var(--color-accent) 15%,
+                        var(--color-accent) 85%,
+                        transparent 100%
+                    );
+                }
+
+                /* ════════════════════════════════
+                   BODY GRID
+                ════════════════════════════════ */
+                .hero-body {
                     position: relative;
                     z-index: 2;
-                    flex: 1;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: var(--space-4xl);
+                    align-items: center;
+                    min-height: 100vh;
+                    padding-top: calc(var(--header-height) + var(--space-3xl));
+                    padding-bottom: var(--space-5xl);
+                }
+
+                /* ════════════════════════════════
+                   LEFT CONTENT
+                ════════════════════════════════ */
+                .hero-left {
+                    position: relative;
+                }
+
+                /* Ghost "IEC" behind the title */
+                .hero-ghost {
+                    position: absolute;
+                    top: -0.25em;
+                    left: -0.08em;
+                    font-family: var(--font-serif);
+                    font-size: clamp(7rem, 16vw, 15rem);
+                    font-weight: 800;
+                    color: transparent;
+                    -webkit-text-stroke: 1px rgba(255,255,255,0.045);
+                    line-height: 1;
+                    pointer-events: none;
+                    user-select: none;
+                    white-space: nowrap;
+                    z-index: 0;
+                }
+
+                /* Eyebrow */
+                .hero-eyebrow {
+                    position: relative;
+                    z-index: 1;
                     display: flex;
                     align-items: center;
-                    padding-top: calc(88px + var(--space-2xl));
-                    padding-bottom: var(--space-4xl);
-                }
-
-                .hero-text {
-                    max-width: 640px;
-                }
-
-                .hero-label {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 10px;
+                    gap: var(--space-md);
+                    font-family: var(--font-mono);
                     font-size: 0.6875rem;
-                    font-weight: 600;
+                    font-weight: 500;
                     text-transform: uppercase;
-                    letter-spacing: 0.14em;
-                    color: rgba(255, 255, 255, 0.75);
-                    padding: 8px 16px;
-                    border: 1px solid rgba(255, 255, 255, 0.2);
-                    border-radius: 100px;
-                    background: rgba(255, 255, 255, 0.04);
-                    backdrop-filter: blur(6px);
-                    -webkit-backdrop-filter: blur(6px);
-                    margin-bottom: var(--space-lg);
+                    letter-spacing: 0.18em;
+                    color: rgba(255,255,255,0.5);
+                    margin-bottom: var(--space-xl);
                     opacity: 0;
                 }
 
-                .hero-label-dot {
-                    width: 6px;
-                    height: 6px;
-                    border-radius: 50%;
+                .hero-eyebrow-rule {
+                    display: inline-block;
+                    width: 36px;
+                    height: 2px;
                     background: var(--color-accent);
-                    box-shadow: 0 0 0 0 rgba(200, 16, 46, 0.6);
-                    animation: pulse 2.4s ease-out infinite;
+                    flex-shrink: 0;
+                    border-radius: 1px;
                 }
 
-                @keyframes pulse {
-                    0% { box-shadow: 0 0 0 0 rgba(200, 16, 46, 0.6); }
-                    70% { box-shadow: 0 0 0 8px rgba(200, 16, 46, 0); }
-                    100% { box-shadow: 0 0 0 0 rgba(200, 16, 46, 0); }
-                }
-
+                /* Title */
                 .hero-title {
-                    font-size: clamp(2.25rem, 5.5vw, 4.25rem);
-                    font-weight: 400;
+                    position: relative;
+                    z-index: 1;
+                    font-family: var(--font-serif);
+                    font-size: clamp(2.75rem, 6.5vw, 5.25rem);
+                    font-weight: 700;
                     color: var(--color-white);
-                    line-height: 1.08;
-                    letter-spacing: -0.02em;
-                    margin-bottom: var(--space-lg);
+                    line-height: 0.96;
+                    letter-spacing: -0.035em;
+                    margin-bottom: var(--space-xl);
                     opacity: 0;
                 }
 
                 .hero-title em {
                     font-style: italic;
+                    font-weight: 400;
                     color: var(--color-accent);
+                    letter-spacing: -0.02em;
                 }
 
+                /* Desc */
                 .hero-desc {
-                    font-size: clamp(0.9375rem, 1.4vw, 1.0625rem);
-                    line-height: 1.7;
-                    color: rgba(255, 255, 255, 0.72);
-                    margin-bottom: var(--space-xl);
-                    max-width: 520px;
+                    position: relative;
+                    z-index: 1;
+                    font-size: clamp(0.9375rem, 1.3vw, 1.0625rem);
+                    color: rgba(255,255,255,0.58);
+                    line-height: 1.78;
+                    max-width: 480px;
+                    margin-bottom: var(--space-2xl);
                     opacity: 0;
                 }
 
+                /* Actions */
                 .hero-actions {
+                    position: relative;
+                    z-index: 1;
                     display: flex;
                     align-items: center;
-                    gap: var(--space-xl);
+                    gap: var(--space-lg);
+                    flex-wrap: wrap;
+                    margin-bottom: var(--space-2xl);
+                    opacity: 0;
+                }
+
+                /* Primary button — angular notch at top-right */
+                .hero-btn-primary {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 17px 34px;
+                    background: var(--color-accent);
+                    color: var(--color-white);
+                    font-size: 0.8125rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+                    transition: all 0.3s var(--ease-out);
+                }
+
+                .hero-btn-primary:hover {
+                    background: var(--color-accent-hover);
+                    gap: 14px;
+                    box-shadow: 0 20px 60px rgba(200,16,46,0.45);
+                    transform: translateY(-2px);
+                }
+
+                .hero-btn-primary svg {
+                    flex-shrink: 0;
+                    transition: transform 0.3s var(--ease-out);
+                }
+
+                .hero-btn-primary:hover svg {
+                    transform: translateX(4px);
+                }
+
+                /* Ghost button */
+                .hero-btn-ghost {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    padding: 16px 28px;
+                    border: 1px solid rgba(255,255,255,0.22);
+                    color: rgba(255,255,255,0.82);
+                    font-size: 0.8125rem;
+                    font-weight: 500;
+                    letter-spacing: 0.06em;
+                    transition: all 0.3s var(--ease-out);
+                }
+
+                .hero-btn-ghost:hover {
+                    border-color: rgba(255,255,255,0.5);
+                    background: rgba(255,255,255,0.06);
+                    color: var(--color-white);
+                }
+
+                /* Trust pills */
+                .hero-trust {
+                    position: relative;
+                    z-index: 1;
+                    display: flex;
+                    align-items: center;
+                    gap: var(--space-md);
                     flex-wrap: wrap;
                     opacity: 0;
                 }
 
-                .hero-cta-primary {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: var(--space-sm);
-                    font-size: 0.8125rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 0.08em;
-                    color: var(--color-white);
-                    background: var(--color-accent);
-                    padding: 16px 32px;
-                    border-radius: 4px;
-                    transition: all 0.3s var(--ease-out);
-                }
-
-                .hero-cta-primary:hover {
-                    background: var(--color-accent-hover);
-                    transform: translateY(-2px);
-                    box-shadow: 0 12px 32px rgba(200, 16, 46, 0.35);
-                }
-
-                .hero-cta-primary svg {
-                    transition: transform 0.3s var(--ease-out);
-                }
-
-                .hero-cta-primary:hover svg {
-                    transform: translateX(4px);
-                }
-
-                .hero-cta-call {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 10px;
+                .hero-trust-pill {
                     font-family: var(--font-mono);
-                    font-size: 0.9375rem;
+                    font-size: 0.5625rem;
                     font-weight: 500;
-                    color: rgba(255, 255, 255, 0.9);
-                    letter-spacing: 0.02em;
-                    transition: color 0.2s;
-                }
-
-                .hero-cta-call svg {
-                    color: var(--color-accent);
-                    transition: transform 0.3s var(--ease-out);
-                }
-
-                .hero-cta-call:hover {
-                    color: var(--color-white);
-                }
-
-                .hero-cta-call:hover svg {
-                    transform: rotate(12deg);
-                }
-
-                /* ---------- EASA seal ---------- */
-                .easa-badge {
-                    position: absolute;
-                    top: 50%;
-                    right: 0;
-                    transform: translateY(-50%) rotate(-10deg);
-                    width: 132px;
-                    height: 132px;
-                    z-index: 2;
-                }
-
-                .easa-text-circle {
-                    position: absolute;
-                    inset: 0;
-                    width: 100%;
-                    height: 100%;
-                    animation: rotate-text 22s linear infinite;
-                }
-
-                .easa-text-circle text {
-                    font-size: 7.5px;
-                    font-weight: 700;
                     text-transform: uppercase;
-                    letter-spacing: 0.15em;
-                    fill: rgba(255, 255, 255, 0.65);
+                    letter-spacing: 0.14em;
+                    color: rgba(255,255,255,0.4);
+                    padding: 5px 10px;
+                    border: 1px solid rgba(255,255,255,0.1);
                 }
 
-                @keyframes rotate-text {
-                    from { transform: rotate(0deg); }
-                    to { transform: rotate(360deg); }
+                .hero-trust-sep {
+                    display: inline-block;
+                    width: 1px;
+                    height: 14px;
+                    background: rgba(255,255,255,0.15);
                 }
 
-                .easa-logo {
+                /* ════════════════════════════════
+                   RIGHT: RETICLE + EASA
+                ════════════════════════════════ */
+                .hero-right {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 500px;
+                }
+
+                /* Targeting reticle */
+                .hero-reticle {
+                    position: relative;
+                    width: 320px;
+                    height: 320px;
+                }
+
+                .reticle-ring {
                     position: absolute;
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
-                    width: 66px;
-                    height: 66px;
+                    border-radius: 50%;
+                    border: 1px solid rgba(200,16,46,0.22);
+                }
+
+                .reticle-ring--outer {
+                    width: 320px;
+                    height: 320px;
+                    border-style: dashed;
+                    border-width: 1px;
+                    animation: reticle-spin 60s linear infinite;
+                }
+
+                .reticle-ring--mid {
+                    width: 220px;
+                    height: 220px;
+                    border-color: rgba(200,16,46,0.32);
+                    animation: reticle-spin 35s linear infinite reverse;
+                }
+
+                .reticle-ring--inner {
+                    width: 120px;
+                    height: 120px;
+                    border-color: rgba(200,16,46,0.45);
+                    border-style: dashed;
+                    animation: reticle-spin 20s linear infinite;
+                }
+
+                @keyframes reticle-spin {
+                    from { transform: translate(-50%, -50%) rotate(0deg); }
+                    to   { transform: translate(-50%, -50%) rotate(360deg); }
+                }
+
+                /* Cross lines */
+                .reticle-cross {
+                    position: absolute;
+                    inset: -24px;
+                    pointer-events: none;
+                }
+
+                .reticle-cross::before,
+                .reticle-cross::after {
+                    content: '';
+                    position: absolute;
+                    background: rgba(200,16,46,0.18);
+                }
+
+                .reticle-cross::before {
+                    /* vertical */
+                    left: 50%;
+                    top: 0;
+                    bottom: 0;
+                    width: 1px;
+                    transform: translateX(-50%);
+                }
+
+                .reticle-cross::after {
+                    /* horizontal */
+                    top: 50%;
+                    left: 0;
+                    right: 0;
+                    height: 1px;
+                    transform: translateY(-50%);
+                }
+
+                /* Center dot */
+                .reticle-dot {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background: var(--color-accent);
+                    transform: translate(-50%, -50%);
+                    box-shadow: 0 0 0 0 rgba(200,16,46,0.6);
+                    animation: reticle-pulse 3s ease-out infinite;
+                }
+
+                @keyframes reticle-pulse {
+                    0%   { box-shadow: 0 0 0 0   rgba(200,16,46,0.7); }
+                    70%  { box-shadow: 0 0 0 18px rgba(200,16,46,0);   }
+                    100% { box-shadow: 0 0 0 0   rgba(200,16,46,0);   }
+                }
+
+                /* Reticle text labels */
+                .reticle-label {
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    font-family: var(--font-mono);
+                    font-size: 0.5625rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.18em;
+                    color: rgba(255,255,255,0.3);
+                    white-space: nowrap;
+                }
+
+                .reticle-label--top    { top: -32px; }
+                .reticle-label--bottom { bottom: -32px; }
+
+                /* EASA badge — top-right of the right panel */
+                .hero-easa {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 126px;
+                    height: 126px;
+                }
+
+                .easa-ring {
+                    position: absolute;
+                    inset: 0;
+                    animation: easa-rotate 22s linear infinite;
+                }
+
+                .easa-ring text {
+                    font-size: 7.5px;
+                    font-weight: 600;
+                    letter-spacing: 0.15em;
+                    fill: rgba(255,255,255,0.55);
+                }
+
+                @keyframes easa-rotate {
+                    from { transform: rotate(0deg); }
+                    to   { transform: rotate(360deg); }
+                }
+
+                .easa-img {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 62px;
+                    height: 62px;
                     object-fit: contain;
                 }
 
-                /* ---------- Scroll cue ---------- */
-                .scroll-cue {
+                /* ════════════════════════════════
+                   SCROLL CUE
+                ════════════════════════════════ */
+                .hero-scroll {
                     position: absolute;
+                    bottom: 90px;
                     left: 50%;
-                    bottom: var(--space-xl);
-                    z-index: 2;
                     transform: translateX(-50%);
+                    z-index: 3;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     gap: var(--space-sm);
                 }
 
-                .scroll-cue-label {
+                .hero-scroll-label {
                     font-family: var(--font-mono);
-                    font-size: 0.625rem;
+                    font-size: 0.5625rem;
                     text-transform: uppercase;
-                    letter-spacing: 0.2em;
-                    color: rgba(255, 255, 255, 0.55);
+                    letter-spacing: 0.22em;
+                    color: rgba(255,255,255,0.38);
                 }
 
-                .scroll-cue-line {
+                .hero-scroll-line {
                     width: 1px;
-                    height: 36px;
-                    background: rgba(255, 255, 255, 0.25);
+                    height: 40px;
+                    background: rgba(255,255,255,0.14);
                     overflow: hidden;
                     position: relative;
                 }
 
-                .scroll-cue-line::after {
+                .hero-scroll-line::after {
                     content: '';
                     position: absolute;
                     left: 0;
@@ -366,24 +619,26 @@ const Hero = () => {
                     width: 100%;
                     height: 100%;
                     background: var(--color-accent);
-                    animation: scrollCue 2s ease-in-out infinite;
+                    animation: scroll-drop 2.2s ease-in-out infinite;
                 }
 
-                @keyframes scrollCue {
-                    0% { top: -100%; }
-                    60% { top: 100%; }
-                    100% { top: 100%; }
+                @keyframes scroll-drop {
+                    0%   { top: -100%; }
+                    60%  { top: 100%;  }
+                    100% { top: 100%;  }
                 }
 
-                /* ---------- Capability strip (separate band) ---------- */
-                .capability-strip {
+                /* ════════════════════════════════
+                   CAPABILITY STRIP
+                ════════════════════════════════ */
+                .hero-caps {
                     position: relative;
                     z-index: 3;
                     background: var(--color-primary);
-                    border-top: 1px solid rgba(255, 255, 255, 0.08);
+                    border-top: 1px solid rgba(255,255,255,0.08);
                 }
 
-                .capability-strip-inner {
+                .hero-caps-inner {
                     display: grid;
                     grid-template-columns: repeat(5, 1fr);
                 }
@@ -391,9 +646,13 @@ const Hero = () => {
                 .cap-item {
                     display: flex;
                     flex-direction: column;
-                    gap: 6px;
+                    gap: 5px;
                     padding: var(--space-xl) var(--space-lg);
-                    border-left: 1px solid rgba(255, 255, 255, 0.08);
+                    border-left: 1px solid rgba(255,255,255,0.07);
+                    position: relative;
+                    overflow: hidden;
+                    transition: background 0.3s var(--ease-out);
+                    cursor: default;
                 }
 
                 .cap-item:first-child {
@@ -401,115 +660,99 @@ const Hero = () => {
                     padding-left: 0;
                 }
 
-                .cap-value {
-                    font-family: var(--font-mono);
-                    font-size: 1.375rem;
-                    font-weight: 600;
-                    color: var(--color-white);
-                    letter-spacing: 0.01em;
+                /* Red accent line that sweeps in on hover */
+                .cap-item::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 2px;
+                    background: var(--color-accent);
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    transition: transform 0.4s var(--ease-out);
                 }
 
-                .cap-label {
+                .cap-item:hover::before {
+                    transform: scaleX(1);
+                }
+
+                .cap-item:hover {
+                    background: rgba(255,255,255,0.025);
+                }
+
+                .cap-val {
+                    font-family: var(--font-mono);
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                    color: var(--color-white);
+                    letter-spacing: -0.01em;
+                    line-height: 1;
+                }
+
+                .cap-lbl {
                     font-size: 0.6875rem;
                     font-weight: 500;
                     text-transform: uppercase;
                     letter-spacing: 0.08em;
-                    color: rgba(255, 255, 255, 0.5);
+                    color: rgba(255,255,255,0.42);
                 }
 
-                /* ---------- Tablet ---------- */
-                @media (max-width: 1024px) {
-                    .easa-badge {
-                        width: 110px;
-                        height: 110px;
-                        top: auto;
-                        bottom: var(--space-2xl);
-                        transform: rotate(-10deg);
+                /* ════════════════════════════════
+                   RESPONSIVE
+                ════════════════════════════════ */
+                @media (max-width: 1100px) {
+                    .hero-body {
+                        grid-template-columns: 1fr;
                     }
-
-                    .easa-logo {
-                        width: 56px;
-                        height: 56px;
+                    .hero-right {
+                        display: none;
                     }
-
-                    .capability-strip-inner {
+                    .hero-caps-inner {
                         grid-template-columns: repeat(3, 1fr);
                     }
-
                     .cap-item:nth-child(4) {
                         border-left: none;
                         padding-left: 0;
                     }
                 }
 
-                /* ---------- Mobile ---------- */
                 @media (max-width: 768px) {
-                    .hero-visual {
-                        min-height: 88vh;
+                    .hero-body {
+                        min-height: 90vh;
+                        padding-top: calc(var(--header-height) + var(--space-2xl));
+                        padding-bottom: var(--space-4xl);
                     }
-
-                    .hero-content {
-                        align-items: flex-end;
-                        padding-top: calc(76px + var(--space-2xl));
-                        padding-bottom: var(--space-3xl);
+                    .hero-title {
+                        font-size: clamp(2.5rem, 12vw, 3.5rem);
                     }
-
-                    .hero-text {
-                        max-width: 100%;
-                    }
-
-                    .easa-badge,
-                    .scroll-cue {
+                    .hero-scroll {
                         display: none;
                     }
-
-                    .hero-desc {
-                        max-width: 100%;
-                    }
-
-                    .hero-actions {
-                        gap: var(--space-lg);
-                    }
-
-                    .cap-item {
-                        padding: var(--space-lg) var(--space-md);
-                    }
-
-                    .cap-value {
-                        font-size: 1.1875rem;
-                    }
-                }
-
-                @media (max-width: 600px) {
-                    .hero-visual {
-                        min-height: 86vh;
-                    }
-
-                    .hero-content {
-                        padding-top: calc(64px + var(--space-2xl));
-                    }
-
-                    .hero-cta-primary {
-                        flex: 1;
-                        justify-content: center;
-                        min-width: 160px;
-                    }
-
-                    .capability-strip-inner {
+                    .hero-caps-inner {
                         grid-template-columns: repeat(2, 1fr);
                     }
-
                     .cap-item:nth-child(odd) {
                         border-left: none;
                         padding-left: 0;
                     }
-
                     .cap-item:last-child {
                         grid-column: span 2;
-                        align-items: center;
-                        text-align: center;
                         border-left: none;
-                        border-top: 1px solid rgba(255, 255, 255, 0.08);
+                        border-top: 1px solid rgba(255,255,255,0.07);
+                        text-align: center;
+                        align-items: center;
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    .hero-btn-primary {
+                        flex: 1;
+                        justify-content: center;
+                    }
+                    .hero-trust {
+                        gap: var(--space-sm);
                     }
                 }
             `}</style>
