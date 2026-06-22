@@ -1,7 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import heroBg from '../assets/iec-hero-bg.jpeg';
 import easaLogo from '../assets/easa-logo.png';
+
+/* ─────────────────────────────────────────────────────────────
+ * DEV ONLY — TINT PALETTE SWITCHER
+ * Remove this block (and <TintPicker /> below) before final launch
+ * ───────────────────────────────────────────────────────────── */
+const TINTS = [
+    { label: 'Near-black',    rgb: '5,7,10',    hex: '#050709' },
+    { label: 'Navy blue',     rgb: '10,20,50',   hex: '#0a1432' },
+    { label: 'Charcoal grey', rgb: '28,28,35',   hex: '#1c1c23' },
+    { label: 'Deep teal',     rgb: '5,22,28',    hex: '#05161c' },
+    { label: 'Forest',        rgb: '8,20,12',    hex: '#08140c' },
+    { label: 'Deep purple',   rgb: '18,10,40',   hex: '#120a28' },
+    { label: 'Warm black',    rgb: '15,10,8',    hex: '#0f0a08' },
+    { label: 'Slate',         rgb: '16,22,32',   hex: '#101620' },
+];
+
+const TintPicker = ({ current, onChange }) => (
+    <div style={{
+        position: 'fixed', bottom: 24, right: 24, zIndex: 9999,
+        background: 'rgba(10,13,18,0.92)', backdropFilter: 'blur(12px)',
+        border: '1px solid rgba(255,255,255,0.12)',
+        borderRadius: 6, padding: '14px 16px', minWidth: 200,
+        fontFamily: 'monospace', fontSize: 11,
+    }}>
+        <div style={{ color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 10 }}>
+            DEV · Hero Tint
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            {TINTS.map(t => (
+                <button
+                    key={t.rgb}
+                    onClick={() => onChange(t.rgb)}
+                    style={{
+                        display: 'flex', alignItems: 'center', gap: 10,
+                        background: current === t.rgb ? 'rgba(255,255,255,0.1)' : 'transparent',
+                        border: current === t.rgb ? '1px solid rgba(255,255,255,0.25)' : '1px solid transparent',
+                        borderRadius: 4, padding: '5px 8px', cursor: 'pointer',
+                        color: 'rgba(255,255,255,0.8)', fontSize: 11, textAlign: 'left',
+                        transition: 'all 0.15s',
+                    }}
+                >
+                    <span style={{
+                        width: 18, height: 18, borderRadius: 3, flexShrink: 0,
+                        background: t.hex, border: '1px solid rgba(255,255,255,0.15)',
+                    }} />
+                    <span style={{ flex: 1 }}>{t.label}</span>
+                    {current === t.rgb && <span style={{ color: '#c8102e', fontSize: 10 }}>●</span>}
+                </button>
+            ))}
+        </div>
+        <div style={{ marginTop: 10, paddingTop: 10, borderTop: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.3)', fontSize: 10 }}>
+            rgb({current})
+        </div>
+    </div>
+);
+/* ─── END DEV BLOCK ─────────────────────────────────────────── */
 
 const capabilities = [
     { value: '20,000 HP', label: 'Motor Rewinding' },
@@ -12,13 +68,17 @@ const capabilities = [
 ];
 
 const Hero = () => {
+    /* DEV ONLY — remove this line when removing the TintPicker */
+    const [tint, setTint] = useState('10,20,50');
+
     return (
         <section className="hero">
 
             {/* Background photo */}
             <div className="hero-bg">
                 <img src={heroBg} alt="" aria-hidden="true" />
-                <div className="hero-overlay" />
+                {/* DEV ONLY — style prop removed when TintPicker is removed */}
+                <div className="hero-overlay" style={{ '--hero-tint': tint }} />
             </div>
 
             {/* Main body — content anchored to bottom */}
@@ -78,6 +138,9 @@ const Hero = () => {
                 </div>
             </div>
 
+            {/* DEV ONLY — remove this line when removing TintPicker */}
+            <TintPicker current={tint} onChange={setTint} />
+
             <style>{`
 
                 .hero {
@@ -117,7 +180,7 @@ const Hero = () => {
                  * ──────────────────────────────────────────────────────────
                  */
                 .hero-overlay {
-                    --hero-tint: 10,20,50;
+                    --hero-tint: 10,20,50; /* fallback — overridden by inline style when TintPicker active */
                     position: absolute;
                     inset: 0;
                     background:
