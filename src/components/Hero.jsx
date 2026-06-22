@@ -108,27 +108,21 @@ const Hero = () => {
                     to   { transform: scale(1.05); }
                 }
 
-                /* Overlay — red brand fade on top, then dark base layers */
+                /* Overlay — black bottom fade + left edge */
                 .hero-overlay {
                     position: absolute;
                     inset: 0;
                     background:
                         linear-gradient(
                             to top,
-                            rgba(200,16,46,0.42) 0%,
-                            rgba(200,16,46,0.12) 35%,
-                            rgba(200,16,46,0) 60%
-                        ),
-                        linear-gradient(
-                            to top,
-                            rgba(5,7,10,0.88) 0%,
-                            rgba(5,7,10,0.45) 28%,
-                            rgba(5,7,10,0.06) 55%,
+                            rgba(5,7,10,0.92) 0%,
+                            rgba(5,7,10,0.55) 28%,
+                            rgba(5,7,10,0.10) 55%,
                             rgba(5,7,10,0) 100%
                         ),
                         linear-gradient(
                             to right,
-                            rgba(5,7,10,0.35) 0%,
+                            rgba(5,7,10,0.40) 0%,
                             rgba(5,7,10,0) 38%
                         );
                 }
