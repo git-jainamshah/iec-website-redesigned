@@ -125,7 +125,12 @@ const Hero = () => {
                             rgba(5,7,10,0.40) 0%,
                             rgba(5,7,10,0) 38%
                         ),
-                        rgba(200,16,46,0.10);
+                        linear-gradient(
+                            to top,
+                            rgba(200,16,46,0.22) 0%,
+                            rgba(200,16,46,0.08) 40%,
+                            rgba(200,16,46,0) 70%
+                        );
                 }
 
                 /* Body: full-height, content pushed to bottom */
