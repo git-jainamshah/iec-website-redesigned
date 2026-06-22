@@ -27,8 +27,6 @@ const Hero = () => {
 
                     {/* Left: headline block */}
                     <div className="hero-content">
-                        <div className="hero-accent-bar animate-fade-up" aria-hidden="true" />
-
                         <p className="hero-label animate-fade-up">
                             Est. 1998 · Vadodara, Gujarat · ISO 9001
                         </p>
@@ -36,7 +34,7 @@ const Hero = () => {
                         <h1 className="hero-title animate-fade-up delay-1">
                             Keeping India's<br />
                             biggest machines<br />
-                            <em>running.</em>
+                            running.
                         </h1>
 
                         <p className="hero-tagline animate-fade-up delay-1">
@@ -110,7 +108,7 @@ const Hero = () => {
                     to   { transform: scale(1.05); }
                 }
 
-                /* Minimal overlay — bottom fade + left edge only */
+                /* Overlay — bottom fade + left edge + subtle brand red cast */
                 .hero-overlay {
                     position: absolute;
                     inset: 0;
@@ -126,7 +124,8 @@ const Hero = () => {
                             to right,
                             rgba(5,7,10,0.40) 0%,
                             rgba(5,7,10,0) 38%
-                        );
+                        ),
+                        rgba(200,16,46,0.10);
                 }
 
                 /* Body: full-height, content pushed to bottom */
@@ -153,14 +152,6 @@ const Hero = () => {
                     max-width: 680px;
                 }
 
-                .hero-accent-bar {
-                    width: 48px;
-                    height: 3px;
-                    background: var(--color-accent);
-                    margin-bottom: var(--space-lg);
-                    opacity: 0;
-                }
-
                 .hero-label {
                     font-family: var(--font-mono);
                     font-size: 0.6875rem;
@@ -181,11 +172,6 @@ const Hero = () => {
                     letter-spacing: -0.03em;
                     margin-bottom: var(--space-md);
                     opacity: 0;
-                }
-
-                .hero-title em {
-                    font-style: italic;
-                    color: var(--color-accent);
                 }
 
                 .hero-tagline {
