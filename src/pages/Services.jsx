@@ -20,7 +20,7 @@ const services = [
     {
         id: 'mechanical',
         title: 'Mechanical Repair',
-        desc: 'Precision mechanical rebuild work on the rotating and structural components that keep a machine in tolerance — from shafts to bearing housings to commutators.',
+        desc: 'Precision mechanical rebuild work on the rotating and structural components that keep a machine in tolerance: shafts, bearing housings, commutators and more.',
         features: [
             'Shaft Fabrication & Replacement',
             'Shaft Metalizing',

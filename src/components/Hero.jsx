@@ -37,6 +37,10 @@ const Hero = () => {
                             running.
                         </h1>
 
+                        <p className="hero-tagline animate-fade-up delay-1">
+                            Our Repairs Run the Industries
+                        </p>
+
                         <div className="hero-actions animate-fade-up delay-2">
                             <Link to="/contact" className="hero-btn-primary">
                                 Contact Us
@@ -165,6 +169,17 @@ const Hero = () => {
                     color: var(--color-white);
                     line-height: 1.0;
                     letter-spacing: -0.03em;
+                    margin-bottom: var(--space-md);
+                    opacity: 0;
+                }
+
+                .hero-tagline {
+                    font-family: var(--font-mono);
+                    font-size: 0.625rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.2em;
+                    color: rgba(255,255,255,0.35);
                     margin-bottom: var(--space-xl);
                     opacity: 0;
                 }

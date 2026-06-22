@@ -7,7 +7,7 @@ const services = [
         title: 'Motors, Generators & Alternators',
         subtitle: 'Electrical Repair & Rewinding',
         capacity: 'Up to 20,000 HP · 13.8 kV',
-        desc: 'Complete rewinding and repair for AC induction motors, synchronous motors, wound-rotor/slip-ring machines, hydro/turbo/gas generators, and DC machines. VPI, rotor rebarring, field coil rewinding, stator core restacking — we handle the machinery that powers India.',
+        desc: 'Complete rewinding and repair for AC induction motors, synchronous motors, wound-rotor/slip-ring machines, hydro/turbo/gas generators, and DC machines. VPI, rotor rebarring, field coil rewinding, stator core restacking. We handle the machinery that powers India.',
         specs: [
             { label: 'Max Power', value: '20,000 HP' },
             { label: 'Max Voltage', value: '13.8 kV' },
@@ -20,7 +20,7 @@ const services = [
         title: 'Mechanical Repair',
         subtitle: 'Precision Machine Work',
         capacity: 'Shafts · Bearings · Commutators',
-        desc: 'Precision mechanical rebuild — shaft fabrication and replacement, shaft metalizing, bearing housing repair and manufacturing, commutator service, sleeve bearing re-babbitting, rotor core repair, and all critical rotating machine spares fabricated in-house.',
+        desc: 'Precision mechanical rebuild: shaft fabrication and replacement, shaft metalizing, bearing housing repair and manufacturing, commutator service, sleeve bearing re-babbitting, rotor core repair, and all critical rotating machine spares fabricated in-house.',
         specs: [
             { label: 'Crane Capacity', value: '300 T' },
             { label: 'Balancing', value: '45 T Rotor' },
@@ -33,7 +33,7 @@ const services = [
         title: 'Cryogenic & Industrial Pumps',
         subtitle: 'Pump Overhaul & Repair',
         capacity: '6.6 kV Cryogenic Submersible',
-        desc: 'Repair and overhaul for industrial pumps including specialist high-voltage cryogenic submersible pumps. Certified in Ebara-make 6.6 kV cryogenic units used in LNG terminals and petrochemical applications — one of very few facilities in India with this capability.',
+        desc: 'Repair and overhaul for industrial pumps including specialist high-voltage cryogenic submersible pumps. Certified in Ebara-make 6.6 kV cryogenic units used in LNG terminals and petrochemical applications. One of very few facilities in India with this capability.',
         specs: [
             { label: 'Cryogenic Rating', value: '6.6 kV' },
             { label: 'Type', value: 'Submersible' },
@@ -46,7 +46,7 @@ const services = [
         title: 'Spares Fabrication',
         subtitle: 'In-House Manufactured Components',
         capacity: 'Zero Outsourcing. Zero Delays.',
-        desc: 'Full in-house fabrication of rotor shafts, end shield covers, bearing housings, heat exchangers, cooling fans, commutators, and all related components. Our machining floor operates from the same site as the repair bay — meaning faster turnaround and complete quality control.',
+        desc: 'Full in-house fabrication of rotor shafts, end shield covers, bearing housings, heat exchangers, cooling fans, commutators, and all related components. Our machining floor operates from the same site as the repair bay, meaning faster turnaround and complete quality control.',
         specs: [
             { label: 'Ovens', value: '3 Units' },
             { label: 'Oven Volume', value: '3,000 cu.ft' },
@@ -59,7 +59,7 @@ const services = [
         title: 'Preventive Maintenance & Overhauling',
         subtitle: 'Workshop & In-Situ Services',
         capacity: 'Pan-India · Emergency Response',
-        desc: 'Scheduled preventive maintenance, complete machine overhauling, and emergency breakdown response — at our Vadodara works or in-situ at your plant anywhere in India. 19 transport vehicles. 8 specialized crew and testing vehicles. We come to you when it counts most.',
+        desc: 'Scheduled preventive maintenance, complete machine overhauling, and emergency breakdown response. At our Vadodara works or in-situ at your plant anywhere in India. 19 transport vehicles. 8 specialized crew and testing vehicles. We come to you when it counts most.',
         specs: [
             { label: 'Fleet', value: '27 Vehicles' },
             { label: 'Coverage', value: 'Pan-India' },
@@ -109,10 +109,6 @@ const Services = () => {
 
                             {/* Main Content */}
                             <div className="service-body">
-                                <div className="service-meta">
-                                    <span className="service-subtitle-tag">{service.subtitle}</span>
-                                    <span className="service-capacity">{service.capacity}</span>
-                                </div>
                                 <h3 className="service-name">{service.title}</h3>
                                 <p className="service-desc">{service.desc}</p>
                                 <div className="service-tags">
@@ -260,33 +256,6 @@ const Services = () => {
                 }
 
                 /* Body */
-                .service-meta {
-                    display: flex;
-                    align-items: center;
-                    gap: var(--space-md);
-                    margin-bottom: var(--space-sm);
-                }
-
-                .service-subtitle-tag {
-                    font-size: 0.6875rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 0.1em;
-                    color: var(--color-muted);
-                }
-
-                .service-capacity {
-                    font-family: var(--font-mono);
-                    font-size: 0.6875rem;
-                    font-weight: 500;
-                    color: var(--color-accent);
-                    letter-spacing: 0.04em;
-                    padding: 3px 8px;
-                    border: 1px solid rgba(200, 16, 46, 0.25);
-                    border-radius: 2px;
-                    background: rgba(200, 16, 46, 0.04);
-                }
-
                 .service-name {
                     font-family: var(--font-serif);
                     font-size: clamp(1.375rem, 2.5vw, 1.75rem);

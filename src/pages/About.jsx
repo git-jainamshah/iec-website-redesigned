@@ -23,7 +23,7 @@ const AboutPage = () => {
                                 Founded in 1998 by Mr. Anil Bhardwaj and backed by over 40 years of
                                 industry experience, Indian Engineering Company has grown into one of
                                 Gujarat's largest and most trusted facilities for heavy industrial motor
-                                and generator repair — serving an estimated 95% of the state's HV
+                                and generator repair, serving an estimated 95% of the state's HV
                                 motor/generator repair industry, alongside clients across Maharashtra,
                                 Madhya Pradesh, Rajasthan, Karnataka and beyond.
                             </p>

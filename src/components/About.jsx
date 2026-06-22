@@ -28,8 +28,8 @@ const About = () => {
                     <p className="about-body">
                         Since 1998, Indian Engineering Company has grown into one of India's
                         largest facilities for industrial motor and generator repair. Our workshop
-                        in Vadodara handles everything in-house — from HV coil making and dynamic
-                        balancing to mechanical machining and high-voltage testing.
+                        in Vadodara handles everything in-house: HV coil making, dynamic
+                        balancing, mechanical machining, and high-voltage testing.
                     </p>
 
                     <p className="about-body">

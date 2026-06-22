@@ -30,7 +30,7 @@ function init() {
     new window.google.translate.TranslateElement(
       {
         pageLanguage: 'en',
-        includedLanguages: 'hi,gu,mr,te,ta,ml,kn,fr,es,de,zh-CN',
+        includedLanguages: 'hi,gu,mr,te,ta,ml,kn,fr,es,de,zh-CN,ja',
         autoDisplay: false,
       },
       'google_translate_element'
