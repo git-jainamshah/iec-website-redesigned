@@ -117,7 +117,7 @@ const Hero = () => {
                  * ──────────────────────────────────────────────────────────
                  */
                 .hero-overlay {
-                    --hero-tint: 5,7,10;
+                    --hero-tint: 10,20,50;
                     position: absolute;
                     inset: 0;
                     background:
