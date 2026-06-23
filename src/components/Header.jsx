@@ -416,35 +416,34 @@ const Header = () => {
                 .header-phone {
                     display: inline-flex;
                     align-items: center;
-                    gap: 7px;
-                    padding: 7px 14px;
+                    gap: 8px;
                     font-family: var(--font-mono);
                     font-size: 0.8125rem;
                     font-weight: 500;
-                    color: var(--color-white);
+                    color: rgba(255, 255, 255, 0.88);
                     letter-spacing: 0.02em;
-                    border: 1px solid rgba(200, 16, 46, 0.55);
-                    background: rgba(200, 16, 46, 0.12);
-                    border-radius: 2px;
-                    transition: background 0.2s, border-color 0.2s;
+                    transition: color 0.2s;
                 }
 
                 .header-phone:hover {
-                    background: var(--color-accent);
-                    border-color: var(--color-accent);
                     color: var(--color-white);
                 }
 
                 .header-phone-icon {
                     flex-shrink: 0;
-                    animation: phone-ring 3s ease-in-out infinite;
+                    color: var(--color-accent);
+                    animation: phone-ring 3.5s ease-in-out infinite;
+                }
+
+                .header-phone:hover .header-phone-icon {
+                    color: var(--color-white);
                 }
 
                 @keyframes phone-ring {
-                    0%, 90%, 100% { transform: rotate(0deg); }
-                    93%           { transform: rotate(12deg); }
-                    96%           { transform: rotate(-10deg); }
-                    99%           { transform: rotate(6deg); }
+                    0%, 88%, 100% { transform: rotate(0deg) scale(1); }
+                    91%           { transform: rotate(14deg) scale(1.1); }
+                    94%           { transform: rotate(-11deg) scale(1.1); }
+                    97%           { transform: rotate(7deg) scale(1.05); }
                 }
 
                 /* Search + lang icon buttons */
@@ -968,11 +967,11 @@ const Header = () => {
                     }
 
                     .brand-name {
-                        font-size: 0.875rem;
+                        font-size: 0.9375rem;
                     }
 
                     .brand-cert {
-                        font-size: 0.625rem;
+                        font-size: 0.5625rem;
                     }
 
                     .header-phone,
@@ -1027,7 +1026,7 @@ const Header = () => {
                     }
 
                     .brand-cert {
-                        display: none;
+                        font-size: 0.5rem;
                     }
 
                     .menu-toggle-label {

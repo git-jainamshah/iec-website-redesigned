@@ -478,25 +478,29 @@ const Hero = () => {
                     .hl-5, .hl-6 { display: none; }
                 }
 
-                /* Mobile landscape / small tablet */
+                /* Mobile — NO full-height treatment; let content size the hero */
                 @media (max-width: 768px) {
-                    /* Flip overlay: top-to-bottom dark on mobile */
+                    /* Overlay: top-to-bottom on mobile (no left-to-right) */
                     .hero-overlay {
                         background:
                             linear-gradient(
                                 to bottom,
-                                rgba(var(--hero-tint), 0.92) 0%,
-                                rgba(var(--hero-tint), 0.48) 28%,
-                                rgba(var(--hero-tint), 0.60) 58%,
+                                rgba(var(--hero-tint), 0.88) 0%,
+                                rgba(var(--hero-tint), 0.44) 30%,
+                                rgba(var(--hero-tint), 0.58) 58%,
                                 rgba(var(--hero-tint), 0.94) 100%
                             );
                     }
-                    /* Shift photo to show the building sign — more visual interest */
+                    /* Show the building sign centred */
                     .hero-bg img {
                         object-position: 62% 42%;
                     }
+                    /* Drop the forced full-screen height; content drives the height */
                     .hero-body {
-                        padding-bottom: var(--space-2xl);
+                        min-height: unset;
+                        padding-top: calc(var(--header-height) + 32px);
+                        padding-bottom: 40px;
+                        justify-content: flex-start;
                     }
                     .hero-inner {
                         flex-direction: column;
@@ -517,14 +521,14 @@ const Hero = () => {
                         border-left: none;
                         padding-left: 0;
                     }
-                    /* Scale down flame blur for narrower screens */
                     .hero-leak { filter: blur(52px); }
                 }
 
                 /* Mobile portrait */
                 @media (max-width: 480px) {
                     .hero-body {
-                        padding-bottom: var(--space-xl);
+                        padding-top: calc(var(--header-height) + 20px);
+                        padding-bottom: 32px;
                     }
                     .hero-title {
                         font-size: clamp(2.1rem, 10vw, 2.75rem);
@@ -543,7 +547,6 @@ const Hero = () => {
                         justify-content: center;
                         padding: 15px 24px;
                     }
-                    /* Caps strip: 2 col scroll-free */
                     .hero-caps-inner {
                         grid-template-columns: repeat(2, 1fr);
                     }
@@ -560,15 +563,11 @@ const Hero = () => {
                     }
                     .cap-val { font-size: 1.2rem; }
                     .cap-lbl { font-size: 0.625rem; }
-                    /* Hide even-indexed flames on mobile for perf */
                     .hl-2, .hl-4, .hl-6, .hl-8 { display: none; }
                 }
 
-                /* Very small screens */
                 @media (max-width: 360px) {
-                    .hero-title {
-                        font-size: clamp(1.9rem, 10.5vw, 2.4rem);
-                    }
+                    .hero-title { font-size: clamp(1.9rem, 10.5vw, 2.4rem); }
                 }
 
             `}</style>
