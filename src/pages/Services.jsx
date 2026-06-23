@@ -68,7 +68,7 @@ const services = [
         num: '05',
         label: 'Site & Works',
         title: 'Preventive Maintenance & Overhauling',
-        desc: 'Scheduled maintenance and overhauling at IEC's Vadodara works or in-situ at the client site — sized to the plant's outage window with our own transport fleet and experienced field engineers.',
+        desc: "Scheduled maintenance and overhauling at IEC's Vadodara works or in-situ at the client site — sized to the plant's outage window with our own transport fleet and experienced field engineers.",
         features: [
             'On-Site & In-Works Service',
             'Condition Monitoring',
