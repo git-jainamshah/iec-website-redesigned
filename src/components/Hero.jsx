@@ -15,24 +15,23 @@ const Hero = () => {
     return (
         <section className="hero">
 
-            {/* Background photo */}
+            {/* Background photo + dark overlay */}
             <div className="hero-bg">
                 <img src={heroBg} alt="" aria-hidden="true" />
-
-                {/* Chromatic colour-flame leaks — screen-blend over the photo, below the dark overlay */}
-                <div className="hero-leaks" aria-hidden="true">
-                    <div className="hero-leak hl-1" />
-                    <div className="hero-leak hl-2" />
-                    <div className="hero-leak hl-3" />
-                    <div className="hero-leak hl-4" />
-                    <div className="hero-leak hl-5" />
-                    <div className="hero-leak hl-6" />
-                    <div className="hero-leak hl-7" />
-                    <div className="hero-leak hl-8" />
-                    <div className="hero-leak hl-9" />
-                </div>
-
                 <div className="hero-overlay" />
+            </div>
+
+            {/* Colour-flame leaks — ABOVE the dark overlay, below text (z-index 1→3) */}
+            <div className="hero-leaks" aria-hidden="true">
+                <div className="hero-leak hl-1" />
+                <div className="hero-leak hl-2" />
+                <div className="hero-leak hl-3" />
+                <div className="hero-leak hl-4" />
+                <div className="hero-leak hl-5" />
+                <div className="hero-leak hl-6" />
+                <div className="hero-leak hl-7" />
+                <div className="hero-leak hl-8" />
+                <div className="hero-leak hl-9" />
             </div>
 
             {/* Main body — content anchored to bottom */}
@@ -123,10 +122,12 @@ const Hero = () => {
                 }
 
                 /* ── Chromatic flame leaks ──────────────────────────── */
+                /* Sits ABOVE the dark overlay (hero-bg z:0) and BELOW the text (z:3)
+                   so flames glow visibly against the black background */
                 .hero-leaks {
                     position: absolute;
                     inset: 0;
-                    z-index: 1;
+                    z-index: 2;
                     overflow: hidden;
                     pointer-events: none;
                     mix-blend-mode: screen;
@@ -243,18 +244,18 @@ const Hero = () => {
                             rgba(var(--hero-tint), 0.80) 0%,
                             rgba(var(--hero-tint), 0) 18%
                         ),
-                        /* Left to right: dark (but not black enough to kill flames) → transparent */
+                        /* Left to right: pitch black → transparent */
                         linear-gradient(
                             to right,
-                            rgba(var(--hero-tint), 0.76) 0%,
-                            rgba(var(--hero-tint), 0.64) 28%,
-                            rgba(var(--hero-tint), 0.36) 56%,
-                            rgba(var(--hero-tint), 0.04) 72%
+                            rgba(var(--hero-tint), 0.97) 0%,
+                            rgba(var(--hero-tint), 0.85) 28%,
+                            rgba(var(--hero-tint), 0.42) 56%,
+                            rgba(var(--hero-tint), 0.05) 72%
                         ),
                         /* Bottom — content area readable */
                         linear-gradient(
                             to top,
-                            rgba(var(--hero-tint), 0.82) 0%,
+                            rgba(var(--hero-tint), 0.88) 0%,
                             rgba(var(--hero-tint), 0) 32%
                         );
                 }
