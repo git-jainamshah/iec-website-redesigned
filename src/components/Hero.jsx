@@ -230,24 +230,32 @@ const Hero = () => {
                     .hero-leak { animation: none !important; opacity: 0 !important; }
                 }
 
-                /* ── Overlay: pitch-black fade left-to-right ─────────── */
+                /* ── Overlay: pitch-black fade ───────────────────────── */
                 .hero-overlay {
                     --hero-tint: 0,0,0;
                     position: absolute;
                     inset: 0;
                     z-index: 2;
                     background:
+                        /* Top strip — ensures header row always has dark bg */
+                        linear-gradient(
+                            to bottom,
+                            rgba(var(--hero-tint), 0.80) 0%,
+                            rgba(var(--hero-tint), 0) 18%
+                        ),
+                        /* Left to right: dark to transparent */
                         linear-gradient(
                             to right,
                             rgba(var(--hero-tint), 0.97) 0%,
-                            rgba(var(--hero-tint), 0.84) 28%,
-                            rgba(var(--hero-tint), 0.38) 56%,
-                            rgba(var(--hero-tint), 0.04) 72%
+                            rgba(var(--hero-tint), 0.85) 28%,
+                            rgba(var(--hero-tint), 0.42) 56%,
+                            rgba(var(--hero-tint), 0.05) 72%
                         ),
+                        /* Bottom — content area readable */
                         linear-gradient(
                             to top,
-                            rgba(var(--hero-tint), 0.78) 0%,
-                            rgba(var(--hero-tint), 0) 30%
+                            rgba(var(--hero-tint), 0.88) 0%,
+                            rgba(var(--hero-tint), 0) 32%
                         );
                 }
 
@@ -472,6 +480,21 @@ const Hero = () => {
 
                 /* Mobile landscape / small tablet */
                 @media (max-width: 768px) {
+                    /* Flip overlay: top-to-bottom dark on mobile */
+                    .hero-overlay {
+                        background:
+                            linear-gradient(
+                                to bottom,
+                                rgba(var(--hero-tint), 0.92) 0%,
+                                rgba(var(--hero-tint), 0.48) 28%,
+                                rgba(var(--hero-tint), 0.60) 58%,
+                                rgba(var(--hero-tint), 0.94) 100%
+                            );
+                    }
+                    /* Shift photo to show the building sign — more visual interest */
+                    .hero-bg img {
+                        object-position: 62% 42%;
+                    }
                     .hero-body {
                         padding-bottom: var(--space-2xl);
                     }
@@ -494,7 +517,7 @@ const Hero = () => {
                         border-left: none;
                         padding-left: 0;
                     }
-                    /* Scale down flames for narrower screens */
+                    /* Scale down flame blur for narrower screens */
                     .hero-leak { filter: blur(52px); }
                 }
 

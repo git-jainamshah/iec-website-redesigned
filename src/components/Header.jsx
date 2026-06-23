@@ -142,6 +142,9 @@ const Header = () => {
 
                 <div className="header-actions">
                     <a href="tel:+919824214839" className="header-phone">
+                        <svg className="header-phone-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.17 6.17l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
                         +91 98242 14839
                     </a>
 
@@ -411,16 +414,37 @@ const Header = () => {
                 }
 
                 .header-phone {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 7px;
+                    padding: 7px 14px;
                     font-family: var(--font-mono);
                     font-size: 0.8125rem;
                     font-weight: 500;
-                    color: rgba(255, 255, 255, 0.85);
+                    color: var(--color-white);
                     letter-spacing: 0.02em;
-                    transition: color 0.2s;
+                    border: 1px solid rgba(200, 16, 46, 0.55);
+                    background: rgba(200, 16, 46, 0.12);
+                    border-radius: 2px;
+                    transition: background 0.2s, border-color 0.2s;
                 }
 
                 .header-phone:hover {
-                    color: var(--color-accent);
+                    background: var(--color-accent);
+                    border-color: var(--color-accent);
+                    color: var(--color-white);
+                }
+
+                .header-phone-icon {
+                    flex-shrink: 0;
+                    animation: phone-ring 3s ease-in-out infinite;
+                }
+
+                @keyframes phone-ring {
+                    0%, 90%, 100% { transform: rotate(0deg); }
+                    93%           { transform: rotate(12deg); }
+                    96%           { transform: rotate(-10deg); }
+                    99%           { transform: rotate(6deg); }
                 }
 
                 /* Search + lang icon buttons */
