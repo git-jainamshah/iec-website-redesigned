@@ -1,162 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import heroBg from '../assets/iec-hero-bg.jpeg';
 import easaLogo from '../assets/easa-logo.png';
 
-/* ─────────────────────────────────────────────────────────────
- * DEV ONLY — HERO TINT COLOR PICKER
- * Remove this block (and <TintPicker /> below) before final launch
- * ───────────────────────────────────────────────────────────── */
-function _rgbToHsv(r, g, b) {
-    r /= 255; g /= 255; b /= 255;
-    const max = Math.max(r,g,b), min = Math.min(r,g,b), d = max - min;
-    let h = 0;
-    const s = max === 0 ? 0 : d / max;
-    const v = max;
-    if (d) {
-        if (max === r) h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
-        else if (max === g) h = ((b - r) / d + 2) / 6;
-        else h = ((r - g) / d + 4) / 6;
-    }
-    return [h * 360, s * 100, v * 100];
-}
-function _hsvToRgb(h, s, v) {
-    s /= 100; v /= 100;
-    const i = Math.floor(h / 60) % 6;
-    const f = h / 60 - Math.floor(h / 60);
-    const p = v*(1-s), q = v*(1-f*s), t = v*(1-(1-f)*s);
-    return [[v,t,p],[q,v,p],[p,v,t],[p,q,v],[t,p,v],[v,p,q]][i].map(x => Math.round(x*255));
-}
-function _toHex(r, g, b) {
-    return '#' + [r,g,b].map(x => x.toString(16).padStart(2,'0')).join('');
-}
-
-const TintPicker = ({ current, onChange }) => {
-    const [r0, g0, b0] = current.split(',').map(Number);
-    const [h0, s0, v0] = _rgbToHsv(r0, g0, b0);
-    const [hue, setHue] = React.useState(h0);
-    const [sat, setSat] = React.useState(s0);
-    const [bri, setBri] = React.useState(v0);
-    const svRef  = React.useRef(null);
-    const hueRef = React.useRef(null);
-    const dragging = React.useRef(null);
-    // keep a ref always pointing at latest hsv so the effect handler never goes stale
-    const hsvRef = React.useRef({ hue, sat, bri });
-    hsvRef.current = { hue, sat, bri };
-
-    const cl = x => Math.max(0, Math.min(1, x));
-
-    React.useEffect(() => {
-        const move = (e) => {
-            if (!dragging.current) return;
-            const { hue: ch, sat: cs, bri: cv } = hsvRef.current;
-            if (dragging.current === 'sv' && svRef.current) {
-                const rc = svRef.current.getBoundingClientRect();
-                const ns = cl((e.clientX - rc.left) / rc.width) * 100;
-                const nv = (1 - cl((e.clientY - rc.top) / rc.height)) * 100;
-                setSat(ns); setBri(nv);
-                const [r,g,b] = _hsvToRgb(ch, ns, nv);
-                onChange(`${r},${g},${b}`);
-            }
-            if (dragging.current === 'hue' && hueRef.current) {
-                const rc = hueRef.current.getBoundingClientRect();
-                const nh = cl((e.clientX - rc.left) / rc.width) * 360;
-                setHue(nh);
-                const [r,g,b] = _hsvToRgb(nh, cs, cv);
-                onChange(`${r},${g},${b}`);
-            }
-        };
-        const up = () => { dragging.current = null; };
-        window.addEventListener('pointermove', move);
-        window.addEventListener('pointerup', up);
-        return () => {
-            window.removeEventListener('pointermove', move);
-            window.removeEventListener('pointerup', up);
-        };
-    }, [onChange]);
-
-    const [rr, gg, bb] = _hsvToRgb(hue, sat, bri);
-    const hex = _toHex(rr, gg, bb);
-    const cursorStyle = { position:'absolute', width:16, height:16, borderRadius:'50%', border:'2.5px solid #fff', boxShadow:'0 0 0 1.5px rgba(0,0,0,0.35)', pointerEvents:'none', transform:'translate(-50%,-50%)' };
-
-    return (
-        <div style={{
-            position:'fixed', bottom:24, right:24, zIndex:9999,
-            background:'#fff', borderRadius:14, padding:16, width:268,
-            boxShadow:'0 8px 40px rgba(0,0,0,0.22)', fontFamily:'-apple-system,sans-serif',
-            userSelect:'none',
-        }}>
-            {/* Header */}
-            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:12 }}>
-                <span style={{ fontWeight:600, fontSize:14, color:'#1a1a1a' }}>Color picker</span>
-                <span style={{ fontSize:10, color:'#aaa', background:'#f2f2f2', padding:'2px 6px', borderRadius:4 }}>DEV ONLY</span>
-            </div>
-
-            {/* SV canvas */}
-            <div
-                ref={svRef}
-                onPointerDown={e => { dragging.current = 'sv'; e.currentTarget.setPointerCapture(e.pointerId); }}
-                style={{
-                    position:'relative', height:160, borderRadius:10, overflow:'hidden',
-                    cursor:'crosshair', marginBottom:12,
-                    background:`hsl(${hue},100%,50%)`,
-                }}
-            >
-                <div style={{ position:'absolute', inset:0, background:'linear-gradient(to right, #fff, transparent)' }} />
-                <div style={{ position:'absolute', inset:0, background:'linear-gradient(to bottom, transparent, #000)' }} />
-                <div style={{ ...cursorStyle, left:`${sat}%`, top:`${100-bri}%` }} />
-            </div>
-
-            {/* Hue slider */}
-            <div
-                ref={hueRef}
-                onPointerDown={e => { dragging.current = 'hue'; e.currentTarget.setPointerCapture(e.pointerId); }}
-                style={{
-                    position:'relative', height:16, borderRadius:8, cursor:'pointer', marginBottom:14,
-                    background:'linear-gradient(to right,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00)',
-                }}
-            >
-                <div style={{
-                    position:'absolute', top:'50%', left:`${hue/360*100}%`,
-                    width:22, height:22, borderRadius:'50%', transform:'translate(-50%,-50%)',
-                    border:'2.5px solid #fff', boxShadow:'0 0 0 1.5px rgba(0,0,0,0.25)',
-                    background:`hsl(${hue},100%,50%)`, pointerEvents:'none',
-                }} />
-            </div>
-
-            {/* HEX display */}
-            <div style={{
-                display:'flex', alignItems:'center', gap:10,
-                background:'#f7f7f7', borderRadius:10, padding:'9px 12px', marginBottom:8,
-            }}>
-                <div style={{ width:28, height:28, borderRadius:6, background:hex, border:'1px solid rgba(0,0,0,0.1)', flexShrink:0 }} />
-                <div style={{ flex:1, textAlign:'center' }}>
-                    <div style={{ fontSize:10, color:'#999', textTransform:'uppercase', letterSpacing:'0.08em', marginBottom:2 }}>HEX</div>
-                    <div style={{ fontWeight:700, fontSize:14, color:'#111' }}>{hex}</div>
-                </div>
-            </div>
-
-            {/* RGB */}
-            <div style={{ textAlign:'center', fontSize:11, color:'#888' }}>
-                RGB &nbsp; {rr}, {gg}, {bb}
-            </div>
-        </div>
-    );
-};
-/* ─── END DEV BLOCK ─────────────────────────────────────────── */
-
 const capabilities = [
     { value: '20,000 HP', label: 'Motor Rewinding' },
-    { value: '13.8 kV', label: 'Max Voltage' },
-    { value: '20 MW', label: 'No-Load Testing' },
-    { value: '300 T', label: 'Crane Capacity' },
-    { value: '40+ Yrs', label: 'Experience' },
+    { value: '13.8 kV',   label: 'Max Voltage' },
+    { value: '20 MW',     label: 'No-Load Testing' },
+    { value: '300 T',     label: 'Crane Capacity' },
+    { value: '40+ Yrs',   label: 'Experience' },
 ];
 
 const Hero = () => {
-    /* DEV ONLY — remove this line when removing the TintPicker */
-    const [tint, setTint] = useState('10,20,50');
-
     return (
         <section className="hero">
 
@@ -164,17 +19,20 @@ const Hero = () => {
             <div className="hero-bg">
                 <img src={heroBg} alt="" aria-hidden="true" />
 
-                {/* Colour-flame leaks — screen-blend over the photo, below the dark overlay */}
+                {/* Chromatic colour-flame leaks — screen-blend over the photo, below the dark overlay */}
                 <div className="hero-leaks" aria-hidden="true">
-                    <div className="hero-leak hero-leak-1" />
-                    <div className="hero-leak hero-leak-2" />
-                    <div className="hero-leak hero-leak-3" />
-                    <div className="hero-leak hero-leak-4" />
-                    <div className="hero-leak hero-leak-5" />
+                    <div className="hero-leak hl-1" />
+                    <div className="hero-leak hl-2" />
+                    <div className="hero-leak hl-3" />
+                    <div className="hero-leak hl-4" />
+                    <div className="hero-leak hl-5" />
+                    <div className="hero-leak hl-6" />
+                    <div className="hero-leak hl-7" />
+                    <div className="hero-leak hl-8" />
+                    <div className="hero-leak hl-9" />
                 </div>
 
-                {/* DEV ONLY — style prop removed when TintPicker is removed */}
-                <div className="hero-overlay" style={{ '--hero-tint': tint }} />
+                <div className="hero-overlay" />
             </div>
 
             {/* Main body — content anchored to bottom */}
@@ -234,9 +92,6 @@ const Hero = () => {
                 </div>
             </div>
 
-            {/* DEV ONLY — remove this line when removing TintPicker */}
-            <TintPicker current={tint} onChange={setTint} />
-
             <style>{`
 
                 .hero {
@@ -246,7 +101,7 @@ const Hero = () => {
                     background: var(--color-primary);
                 }
 
-                /* Photo */
+                /* ── Photo layer ────────────────────────────────────── */
                 .hero-bg {
                     position: absolute;
                     inset: 0;
@@ -258,7 +113,7 @@ const Hero = () => {
                     height: 100%;
                     object-fit: cover;
                     object-position: center 30%;
-                    filter: brightness(0.88);
+                    filter: brightness(0.82);
                     animation: kenburns 28s ease-out forwards;
                 }
 
@@ -267,36 +122,7 @@ const Hero = () => {
                     to   { transform: scale(1.05); }
                 }
 
-                /*
-                 * ─── OVERLAY COLOUR ───────────────────────────────────────
-                 * To swap tint colour (dark blue, grey, etc.) change ONE line:
-                 *   --hero-tint: 5,7,10;        ← near-black (current)
-                 *   --hero-tint: 10,20,50;       ← dark navy blue
-                 *   --hero-tint: 28,28,35;       ← dark charcoal grey
-                 * ──────────────────────────────────────────────────────────
-                 */
-                .hero-overlay {
-                    --hero-tint: 10,20,50; /* fallback — overridden by inline style when TintPicker active */
-                    position: absolute;
-                    inset: 0;
-                    background:
-                        /* Left → right: dark to transparent */
-                        linear-gradient(
-                            to right,
-                            rgba(var(--hero-tint), 0.96) 0%,
-                            rgba(var(--hero-tint), 0.80) 28%,
-                            rgba(var(--hero-tint), 0.35) 55%,
-                            rgba(var(--hero-tint), 0) 72%
-                        ),
-                        /* Bottom strip: keep text area readable */
-                        linear-gradient(
-                            to top,
-                            rgba(var(--hero-tint), 0.70) 0%,
-                            rgba(var(--hero-tint), 0) 28%
-                        );
-                }
-
-                /* ── Colour-flame leaks ──────────────────────────────── */
+                /* ── Chromatic flame leaks ──────────────────────────── */
                 .hero-leaks {
                     position: absolute;
                     inset: 0;
@@ -309,64 +135,128 @@ const Hero = () => {
                 .hero-leak {
                     position: absolute;
                     border-radius: 50%;
-                    filter: blur(72px);
+                    filter: blur(68px);
                     will-change: transform, opacity;
                 }
 
-                /* Crimson — brand red, left anchor */
-                .hero-leak-1 {
-                    width: 360px; height: 520px;
-                    background: radial-gradient(ellipse at 50% 70%, rgba(210,20,45,0.85) 0%, transparent 68%);
+                /* 1 — Deep crimson — far left */
+                .hl-1 {
+                    width: 360px; height: 540px;
+                    background: radial-gradient(ellipse at 50% 70%, rgba(210,18,45,0.90) 0%, transparent 68%);
                     bottom: -120px; left: 0%;
-                    animation: leak-rise 10s cubic-bezier(.45,.05,.55,.95) infinite;
+                    animation: leak-a 10s cubic-bezier(.45,.05,.55,.95) infinite;
+                }
+                /* 2 — Burnt orange */
+                .hl-2 {
+                    width: 300px; height: 460px;
+                    background: radial-gradient(ellipse at 50% 70%, rgba(235,95,22,0.80) 0%, transparent 66%);
+                    bottom: -100px; left: 9%;
+                    animation: leak-c 12s cubic-bezier(.45,.05,.55,.95) infinite 2s;
+                }
+                /* 3 — Hot magenta */
+                .hl-3 {
+                    width: 275px; height: 440px;
+                    background: radial-gradient(ellipse at 50% 70%, rgba(195,25,105,0.78) 0%, transparent 65%);
+                    bottom: -90px; left: 19%;
+                    animation: leak-b 11s cubic-bezier(.45,.05,.55,.95) infinite 0.8s;
+                }
+                /* 4 — Deep purple */
+                .hl-4 {
+                    width: 310px; height: 490px;
+                    background: radial-gradient(ellipse at 50% 70%, rgba(115,18,178,0.75) 0%, transparent 66%);
+                    bottom: -110px; left: 29%;
+                    animation: leak-c 13s cubic-bezier(.45,.05,.55,.95) infinite 3.5s;
+                }
+                /* 5 — Indigo/violet — centre */
+                .hl-5 {
+                    width: 285px; height: 460px;
+                    background: radial-gradient(ellipse at 50% 70%, rgba(68,30,215,0.70) 0%, transparent 65%);
+                    bottom: -95px; left: 40%;
+                    animation: leak-a 14s cubic-bezier(.45,.05,.55,.95) infinite 1.5s;
+                }
+                /* 6 — Cobalt blue */
+                .hl-6 {
+                    width: 265px; height: 430px;
+                    background: radial-gradient(ellipse at 50% 70%, rgba(22,85,235,0.68) 0%, transparent 64%);
+                    bottom: -80px; left: 51%;
+                    animation: leak-b 11.5s cubic-bezier(.45,.05,.55,.95) infinite 4s;
+                }
+                /* 7 — Teal/cyan */
+                .hl-7 {
+                    width: 290px; height: 470px;
+                    background: radial-gradient(ellipse at 50% 70%, rgba(18,158,162,0.72) 0%, transparent 65%);
+                    bottom: -105px; left: 61%;
+                    animation: leak-c 12.5s cubic-bezier(.45,.05,.55,.95) infinite 0.4s;
+                }
+                /* 8 — Amber/gold */
+                .hl-8 {
+                    width: 245px; height: 400px;
+                    background: radial-gradient(ellipse at 50% 70%, rgba(215,152,28,0.76) 0%, transparent 64%);
+                    bottom: -85px; left: 72%;
+                    animation: leak-a 10.5s cubic-bezier(.45,.05,.55,.95) infinite 2.8s;
+                }
+                /* 9 — Rose coral — far right */
+                .hl-9 {
+                    width: 225px; height: 375px;
+                    background: radial-gradient(ellipse at 50% 70%, rgba(218,55,68,0.80) 0%, transparent 63%);
+                    bottom: -70px; left: 82%;
+                    animation: leak-b 9.5s cubic-bezier(.45,.05,.55,.95) infinite 1.2s;
                 }
 
-                /* Amber/gold — warmth, slightly right */
-                .hero-leak-2 {
-                    width: 300px; height: 440px;
-                    background: radial-gradient(ellipse at 50% 70%, rgba(230,110,30,0.7) 0%, transparent 66%);
-                    bottom: -90px; left: 9%;
-                    animation: leak-rise 12s cubic-bezier(.45,.05,.55,.95) infinite 2.4s;
+                /* Three rise variants: straight / drift-left / drift-right */
+                @keyframes leak-a {
+                    0%   { transform: translateY(0)       scaleX(1.00); opacity: 0;    }
+                    10%  {                                               opacity: 0.95; }
+                    50%  { transform: translateY(-40vh)   scaleX(0.80); opacity: 0.65; }
+                    85%  { transform: translateY(-78vh)   scaleX(0.54); opacity: 0.15; }
+                    100% { transform: translateY(-95vh)   scaleX(0.38); opacity: 0;    }
+                }
+                @keyframes leak-b {
+                    0%   { transform: translateY(0) translateX(0)    scaleX(1.00); opacity: 0;    }
+                    10%  {                                                          opacity: 0.95; }
+                    50%  { transform: translateY(-40vh) translateX(-28px) scaleX(0.78); opacity: 0.65; }
+                    85%  { transform: translateY(-76vh) translateX(-48px) scaleX(0.52); opacity: 0.15; }
+                    100% { transform: translateY(-94vh) translateX(-58px) scaleX(0.36); opacity: 0;    }
+                }
+                @keyframes leak-c {
+                    0%   { transform: translateY(0) translateX(0)    scaleX(1.00); opacity: 0;    }
+                    10%  {                                                          opacity: 0.95; }
+                    50%  { transform: translateY(-42vh) translateX(28px) scaleX(0.82); opacity: 0.65; }
+                    85%  { transform: translateY(-78vh) translateX(46px) scaleX(0.55); opacity: 0.15; }
+                    100% { transform: translateY(-96vh) translateX(58px) scaleX(0.40); opacity: 0;    }
                 }
 
-                /* Rose/magenta — colour variety */
-                .hero-leak-3 {
-                    width: 280px; height: 400px;
-                    background: radial-gradient(ellipse at 50% 70%, rgba(185,30,90,0.65) 0%, transparent 65%);
-                    bottom: -80px; left: 18%;
-                    animation: leak-rise 14s cubic-bezier(.45,.05,.55,.95) infinite 5s;
+                @media (prefers-reduced-motion: reduce) {
+                    .hero-leak { animation: none !important; opacity: 0 !important; }
                 }
 
-                /* Deep orange — between 1 and 2 */
-                .hero-leak-4 {
-                    width: 240px; height: 380px;
-                    background: radial-gradient(ellipse at 50% 70%, rgba(255,75,20,0.6) 0%, transparent 64%);
-                    bottom: -70px; left: 5%;
-                    animation: leak-rise 11s cubic-bezier(.45,.05,.55,.95) infinite 0.8s;
+                /* ── Overlay: pitch-black fade left-to-right ─────────── */
+                .hero-overlay {
+                    --hero-tint: 0,0,0;
+                    position: absolute;
+                    inset: 0;
+                    z-index: 2;
+                    background:
+                        linear-gradient(
+                            to right,
+                            rgba(var(--hero-tint), 0.97) 0%,
+                            rgba(var(--hero-tint), 0.84) 28%,
+                            rgba(var(--hero-tint), 0.38) 56%,
+                            rgba(var(--hero-tint), 0.04) 72%
+                        ),
+                        linear-gradient(
+                            to top,
+                            rgba(var(--hero-tint), 0.78) 0%,
+                            rgba(var(--hero-tint), 0) 30%
+                        );
                 }
 
-                /* Warm coral — far left edge */
-                .hero-leak-5 {
-                    width: 200px; height: 340px;
-                    background: radial-gradient(ellipse at 50% 70%, rgba(200,50,60,0.55) 0%, transparent 62%);
-                    bottom: -60px; left: 25%;
-                    animation: leak-rise 9.5s cubic-bezier(.45,.05,.55,.95) infinite 3.7s;
-                }
-
-                @keyframes leak-rise {
-                    0%   { transform: translateY(0)       scaleX(1.0);  opacity: 0;   }
-                    12%  {                                               opacity: 0.9; }
-                    45%  { transform: translateY(-38vh)   scaleX(0.80); opacity: 0.7; }
-                    80%  { transform: translateY(-70vh)   scaleX(0.55); opacity: 0.2; }
-                    100% { transform: translateY(-90vh)   scaleX(0.40); opacity: 0;   }
-                }
-                /* ────────────────────────────────────────────────────── */
-
-                /* Body: full-height, content pushed to bottom */
+                /* ── Body: full-height, content at bottom ────────────── */
                 .hero-body {
                     position: relative;
-                    z-index: 2;
+                    z-index: 3;
                     min-height: 100vh;
+                    min-height: 100svh;
                     display: flex;
                     flex-direction: column;
                     justify-content: flex-end;
@@ -384,6 +274,7 @@ const Hero = () => {
                 /* Headline block */
                 .hero-content {
                     max-width: 680px;
+                    min-width: 0;
                 }
 
                 .hero-label {
@@ -395,6 +286,9 @@ const Hero = () => {
                     color: rgba(255,255,255,0.55);
                     margin-bottom: var(--space-lg);
                     opacity: 0;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
 
                 .hero-title {
@@ -476,7 +370,7 @@ const Hero = () => {
                     align-items: center;
                     gap: 14px;
                     padding: 16px 20px;
-                    background: rgba(5,7,10,0.65);
+                    background: rgba(0,0,0,0.55);
                     backdrop-filter: blur(12px);
                     -webkit-backdrop-filter: blur(12px);
                     border: 1px solid rgba(255,255,255,0.14);
@@ -512,7 +406,7 @@ const Hero = () => {
                     color: rgba(255,255,255,0.5);
                 }
 
-                /* Capability strip */
+                /* ── Capability strip ────────────────────────────────── */
                 .hero-caps {
                     position: relative;
                     z-index: 3;
@@ -560,10 +454,38 @@ const Hero = () => {
                     color: rgba(255,255,255,0.42);
                 }
 
-                /* Responsive */
+                /* ── Responsive ──────────────────────────────────────── */
+
+                /* Tablet */
                 @media (max-width: 900px) {
-                    .hero-cred {
-                        display: none;
+                    .hero-cred { display: none; }
+                    .hero-caps-inner {
+                        grid-template-columns: repeat(3, 1fr);
+                    }
+                    .cap-item:nth-child(4) {
+                        border-left: none;
+                        padding-left: 0;
+                    }
+                    /* Fewer flames for perf */
+                    .hl-5, .hl-6 { display: none; }
+                }
+
+                /* Mobile landscape / small tablet */
+                @media (max-width: 768px) {
+                    .hero-body {
+                        padding-bottom: var(--space-2xl);
+                    }
+                    .hero-inner {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        gap: var(--space-lg);
+                    }
+                    .hero-title {
+                        font-size: clamp(2.4rem, 9.5vw, 3.5rem);
+                    }
+                    .hero-label {
+                        white-space: normal;
+                        font-size: 0.625rem;
                     }
                     .hero-caps-inner {
                         grid-template-columns: repeat(3, 1fr);
@@ -572,15 +494,33 @@ const Hero = () => {
                         border-left: none;
                         padding-left: 0;
                     }
+                    /* Scale down flames for narrower screens */
+                    .hero-leak { filter: blur(52px); }
                 }
 
-                @media (max-width: 768px) {
+                /* Mobile portrait */
+                @media (max-width: 480px) {
                     .hero-body {
-                        padding-bottom: var(--space-3xl);
+                        padding-bottom: var(--space-xl);
                     }
                     .hero-title {
-                        font-size: clamp(2.25rem, 10vw, 3.5rem);
+                        font-size: clamp(2.1rem, 10vw, 2.75rem);
                     }
+                    .hero-tagline {
+                        font-size: 0.5625rem;
+                        letter-spacing: 0.15em;
+                    }
+                    .hero-actions {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        gap: var(--space-md);
+                    }
+                    .hero-btn-primary {
+                        width: 100%;
+                        justify-content: center;
+                        padding: 15px 24px;
+                    }
+                    /* Caps strip: 2 col scroll-free */
                     .hero-caps-inner {
                         grid-template-columns: repeat(2, 1fr);
                     }
@@ -595,19 +535,19 @@ const Hero = () => {
                         text-align: center;
                         align-items: center;
                     }
+                    .cap-val { font-size: 1.2rem; }
+                    .cap-lbl { font-size: 0.625rem; }
+                    /* Hide even-indexed flames on mobile for perf */
+                    .hl-2, .hl-4, .hl-6, .hl-8 { display: none; }
                 }
 
-                @media (max-width: 480px) {
-                    .hero-actions {
-                        flex-direction: column;
-                        align-items: flex-start;
-                        gap: var(--space-md);
-                    }
-                    .hero-btn-primary {
-                        width: 100%;
-                        justify-content: center;
+                /* Very small screens */
+                @media (max-width: 360px) {
+                    .hero-title {
+                        font-size: clamp(1.9rem, 10.5vw, 2.4rem);
                     }
                 }
+
             `}</style>
         </section>
     );
