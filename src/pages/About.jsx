@@ -1,215 +1,374 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+
+const keyStats = [
+    { value: '1998', label: 'Year established' },
+    { value: '20K', unit: 'HP', label: 'Max motor rewinding' },
+    { value: '300K', unit: 'sq ft', label: 'Total facility area' },
+    { value: '40+', unit: 'yrs', label: 'Industry experience' },
+];
+
+const values = [
+    {
+        num: '01',
+        title: 'Quality Assurance',
+        desc: 'Every repair meets ISO 9001 and EASA international standards with rigorous in-process testing at every stage — from incoming inspection to final hi-pot and load testing.',
+    },
+    {
+        num: '02',
+        title: 'Timely Delivery',
+        desc: 'We understand that downtime costs more than the repair itself. Our streamlined workshop workflow and captive power ensure fast, reliable turnaround without compromising on quality.',
+    },
+    {
+        num: '03',
+        title: 'Client Partnership',
+        desc: 'From condition assessment to commissioning, we build lasting relationships through transparency, honest technical consultation, and dedicated project support on every job.',
+    },
+];
 
 const AboutPage = () => {
     return (
         <div className="about-page">
             <PageHero
                 label="Our Story"
-                title="About Us"
-                subtitle="India's trusted partner in industrial motor and generator repair since 1998."
+                title="About IEC"
+                subtitle="India's trusted partner in heavy industrial motor and generator repair since 1998."
                 breadcrumbs={[{ label: 'About' }]}
             />
 
-            {/* Our Story */}
-            <section className="section">
+            {/* ── Story — dark, flows from PageHero ──────────── */}
+            <section className="ap-story">
                 <div className="container">
-                    <div className="about-grid">
-                        <div className="about-narrative">
-                            <span className="label text-accent">Who We Are</span>
-                            <h2>Built on precision.<br />Driven by trust.</h2>
-                            <div className="divider" style={{ marginBottom: 'var(--space-xl)' }} />
+                    <div className="ap-story-grid">
+
+                        <div className="ap-story-left">
+                            <h2 className="ap-story-heading">
+                                Built on<br />
+                                precision.<br />
+                                Driven by<br />
+                                trust.
+                            </h2>
+                            <div className="ap-creds">
+                                <span className="ap-cred">ISO 9001:2008</span>
+                                <span className="ap-cred ap-cred-accent">EASA Member</span>
+                                <span className="ap-cred">Est. 1998</span>
+                            </div>
+                        </div>
+
+                        <div className="ap-story-right">
                             <p>
                                 Founded in 1998 by Mr. Anil Bhardwaj and backed by over 40 years of
                                 industry experience, Indian Engineering Company has grown into one of
                                 Gujarat's largest and most trusted facilities for heavy industrial motor
-                                and generator repair, serving an estimated 95% of the state's HV
+                                and generator repair. We serve an estimated 95% of the state's HV
                                 motor/generator repair industry, alongside clients across Maharashtra,
-                                Madhya Pradesh, Rajasthan, Karnataka and beyond.
+                                Madhya Pradesh, Rajasthan, Karnataka, and beyond.
                             </p>
                             <p>
-                                Our commitment to quality and reliability has earned us the trust
-                                of power plants, dams, cement and petrochemical industries across India.
-                                With ISO 9001:2008 certification and EASA membership since 2014, we
-                                maintain the highest international standards in every repair.
+                                Our commitment to quality and reliability has earned the trust of power
+                                plants, dams, cement works, and petrochemical industries across India.
+                                ISO 9001:2008 certified and an EASA member since 2014, we maintain the
+                                highest international standards on every repair that leaves our works.
                             </p>
                             <p>
-                                Our facility spans 300,000 sq.ft across our Ranoli and Raika works, with
-                                a dedicated 75,000 sq.ft shop floor, heavy-duty cranes (10–300 tons) and
-                                5 MW captive power generation for uninterrupted operations.
+                                Our facility spans 300,000 sq.ft across our Ranoli and Raika works,
+                                with a dedicated 75,000 sq.ft shop floor, heavy-duty cranes up to
+                                300 tons, and 5 MW captive power generation for uninterrupted operations.
                             </p>
+                            <Link to="/contact" className="ap-cta">
+                                Work with us
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </Link>
                         </div>
-                        <div className="about-stats">
-                            <div className="stat-card">
-                                <span className="stat-value">1998</span>
-                                <span className="stat-label">Year Established</span>
+
+                    </div>
+
+                    {/* Stat rail */}
+                    <div className="ap-stats">
+                        {keyStats.map((s, i) => (
+                            <div className="ap-stat" key={i}>
+                                <div className="ap-stat-num">
+                                    <span className="ap-stat-val">{s.value}</span>
+                                    {s.unit && <span className="ap-stat-unit">{s.unit}</span>}
+                                </div>
+                                <span className="ap-stat-label">{s.label}</span>
                             </div>
-                            <div className="stat-card">
-                                <span className="stat-value">20,000 HP</span>
-                                <span className="stat-label">Max Motor Rewinding Capacity</span>
-                            </div>
-                            <div className="stat-card">
-                                <span className="stat-value">300K</span>
-                                <span className="stat-label">Sq.Ft Total Area</span>
-                            </div>
-                            <div className="stat-card">
-                                <span className="stat-value">40+</span>
-                                <span className="stat-label">Years of Industry Experience</span>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* Mission & Values */}
-            <section className="section bg-light">
+            {/* ── Values — light, clean ───────────────────────── */}
+            <section className="ap-values">
                 <div className="container">
-                    <div className="text-center" style={{ marginBottom: 'var(--space-3xl)' }}>
-                        <span className="label text-accent">Our Foundation</span>
-                        <h2 style={{ marginTop: 'var(--space-md)' }}>Mission & Values</h2>
+                    <div className="ap-values-header">
+                        <p className="ap-values-eyebrow">Our Foundation</p>
+                        <h2 className="ap-values-heading">Mission &amp; Values</h2>
                     </div>
-                    <div className="values-grid">
-                        <div className="value-card">
-                            <div className="value-icon">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
-                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                                </svg>
+                    <div className="ap-values-grid">
+                        {values.map((v) => (
+                            <div className="ap-value" key={v.num}>
+                                <span className="ap-value-num">{v.num}</span>
+                                <h3 className="ap-value-title">{v.title}</h3>
+                                <p className="ap-value-desc">{v.desc}</p>
                             </div>
-                            <h4>Quality Assurance</h4>
-                            <p>Every repair meets ISO 9001 and EASA international standards with rigorous testing at every stage.</p>
-                        </div>
-                        <div className="value-card">
-                            <div className="value-icon">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
-                                    <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
-                                </svg>
-                            </div>
-                            <h4>Timely Delivery</h4>
-                            <p>We understand downtime costs. Our streamlined processes ensure fast turnaround without compromising quality.</p>
-                        </div>
-                        <div className="value-card">
-                            <div className="value-icon">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
-                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                                </svg>
-                            </div>
-                            <h4>Client Partnership</h4>
-                            <p>We build lasting relationships through transparency, expert consultation, and dedicated project support.</p>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
 
             <style>{`
-                .about-page {
-                    min-height: 100vh;
+
+                .about-page { min-height: 100vh; }
+
+                /* ── Story (dark) ─────────────────────────────── */
+                .ap-story {
+                    background: var(--color-primary);
+                    padding: var(--space-5xl) 0 0;
+                    border-top: 1px solid rgba(255,255,255,0.06);
                 }
 
-                .about-grid {
+                .ap-story-grid {
                     display: grid;
-                    grid-template-columns: 1.5fr 1fr;
-                    gap: var(--space-4xl);
+                    grid-template-columns: 1fr 1.4fr;
+                    gap: var(--space-5xl);
+                    padding-bottom: var(--space-4xl);
+                    border-bottom: 1px solid rgba(255,255,255,0.07);
                     align-items: start;
                 }
 
-                .about-narrative .label {
-                    display: block;
+                .ap-story-heading {
+                    font-family: var(--font-serif);
+                    font-size: clamp(2.25rem, 3.5vw, 3.25rem);
+                    font-weight: 700;
+                    color: var(--color-white);
+                    line-height: 1.08;
+                    letter-spacing: -0.03em;
+                    position: sticky;
+                    top: calc(var(--header-height) + 32px);
+                    margin-bottom: var(--space-2xl);
+                }
+
+                .ap-creds {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
+                    position: sticky;
+                    top: calc(var(--header-height) + 200px);
+                }
+
+                .ap-cred {
+                    font-family: var(--font-mono);
+                    font-size: 0.5625rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.12em;
+                    color: rgba(255,255,255,0.38);
+                    padding: 5px 10px;
+                    border: 1px solid rgba(255,255,255,0.1);
+                }
+
+                .ap-cred-accent {
+                    color: var(--color-accent);
+                    border-color: rgba(200,16,46,0.3);
+                }
+
+                .ap-story-right p {
+                    font-size: 1.0625rem;
+                    line-height: 1.88;
+                    color: rgba(255,255,255,0.58);
+                    margin-bottom: var(--space-xl);
+                }
+
+                .ap-cta {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    margin-top: var(--space-md);
+                    font-size: 0.875rem;
+                    font-weight: 600;
+                    color: var(--color-white);
+                    text-decoration: underline;
+                    text-underline-offset: 4px;
+                    text-decoration-color: var(--color-accent);
+                    transition: gap 0.2s, color 0.2s;
+                }
+
+                .ap-cta:hover {
+                    color: var(--color-accent);
+                    gap: 13px;
+                }
+
+                /* Stat rail */
+                .ap-stats {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                }
+
+                .ap-stat {
+                    display: flex;
+                    flex-direction: column;
+                    gap: var(--space-sm);
+                    padding: var(--space-2xl) var(--space-xl);
+                    border-right: 1px solid rgba(255,255,255,0.07);
+                }
+
+                .ap-stat:first-child { padding-left: 0; }
+                .ap-stat:last-child { border-right: none; }
+
+                .ap-stat-num {
+                    display: flex;
+                    align-items: baseline;
+                    gap: 6px;
+                    line-height: 1;
+                }
+
+                .ap-stat-val {
+                    font-family: var(--font-mono);
+                    font-size: clamp(2.5rem, 4vw, 3.5rem);
+                    font-weight: 700;
+                    color: var(--color-white);
+                    letter-spacing: -0.03em;
+                }
+
+                .ap-stat-unit {
+                    font-family: var(--font-mono);
+                    font-size: clamp(1rem, 1.5vw, 1.25rem);
+                    font-weight: 500;
+                    color: var(--color-accent);
+                    letter-spacing: -0.01em;
+                }
+
+                .ap-stat-label {
+                    font-size: 0.75rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.07em;
+                    color: rgba(255,255,255,0.32);
+                }
+
+                /* ── Values (light) ───────────────────────────── */
+                .ap-values {
+                    background: var(--color-white);
+                    padding: var(--space-5xl) 0 var(--space-5xl);
+                }
+
+                .ap-values-header {
+                    margin-bottom: var(--space-4xl);
+                }
+
+                .ap-values-eyebrow {
+                    font-family: var(--font-mono);
+                    font-size: 0.6875rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.14em;
+                    color: var(--color-accent);
                     margin-bottom: var(--space-md);
                 }
 
-                .about-narrative h2 {
-                    margin-bottom: var(--space-lg);
-                    line-height: 1.25;
-                }
-
-                .about-narrative p {
-                    margin-bottom: var(--space-lg);
-                    font-size: 1rem;
-                    line-height: 1.85;
-                }
-
-                .about-stats {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: var(--space-md);
-                }
-
-                .stat-card {
-                    background: var(--color-cream);
-                    padding: var(--space-xl) var(--space-lg);
-                    text-align: center;
-                    border-left: 3px solid var(--color-accent);
-                    transition: all 0.3s var(--ease-out);
-                }
-
-                .stat-card:hover {
-                    transform: translateY(-2px);
-                    box-shadow: var(--shadow-md);
-                }
-
-                .stat-value {
-                    display: block;
-                    font-size: 1.75rem;
+                .ap-values-heading {
+                    font-family: var(--font-serif);
+                    font-size: clamp(2rem, 3.5vw, 2.75rem);
                     font-weight: 700;
                     color: var(--color-text);
-                    margin-bottom: 4px;
+                    letter-spacing: -0.025em;
+                    line-height: 1.1;
                 }
 
-                .stat-label {
-                    font-size: 0.6875rem;
-                    text-transform: uppercase;
-                    letter-spacing: 0.06em;
-                    color: var(--color-muted);
-                }
-
-                /* Values */
-                .values-grid {
+                .ap-values-grid {
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
-                    gap: var(--space-2xl);
                 }
 
-                .value-card {
-                    text-align: center;
-                    padding: var(--space-2xl) var(--space-xl);
+                .ap-value {
+                    padding: var(--space-3xl) var(--space-2xl);
+                    border-top: 2px solid var(--color-border);
+                    border-right: 1px solid var(--color-border);
+                    transition: border-top-color 0.2s;
                 }
 
-                .value-icon {
-                    width: 56px;
-                    height: 56px;
-                    border-radius: 50%;
-                    background: rgba(200, 16, 46, 0.06);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin: 0 auto var(--space-lg);
+                .ap-value:first-child { padding-left: 0; }
+                .ap-value:last-child { border-right: none; }
+
+                .ap-value:hover {
+                    border-top-color: var(--color-accent);
                 }
 
-                .value-card h4 {
-                    margin-bottom: var(--space-sm);
+                .ap-value-num {
+                    font-family: var(--font-mono);
+                    font-size: 0.6875rem;
                     font-weight: 600;
+                    color: var(--color-accent);
+                    letter-spacing: 0.1em;
+                    display: block;
+                    margin-bottom: var(--space-lg);
                 }
 
-                .value-card p {
+                .ap-value-title {
+                    font-family: var(--font-serif);
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                    color: var(--color-text);
+                    letter-spacing: -0.02em;
+                    line-height: 1.2;
+                    margin-bottom: var(--space-md);
+                }
+
+                .ap-value-desc {
                     font-size: 0.9375rem;
-                    line-height: 1.7;
+                    line-height: 1.75;
+                    color: var(--color-text-light);
                 }
 
-                @media (max-width: 900px) {
-                    .about-grid {
+                /* ── Responsive ──────────────────────────────── */
+                @media (max-width: 1024px) {
+                    .ap-story-grid {
+                        grid-template-columns: 1fr 1fr;
+                        gap: var(--space-3xl);
+                    }
+                }
+
+                @media (max-width: 768px) {
+                    .ap-story-grid {
                         grid-template-columns: 1fr;
                         gap: var(--space-2xl);
                     }
-
-                    .about-stats {
+                    .ap-story-heading {
+                        position: static;
+                        font-size: clamp(2rem, 7vw, 2.75rem);
+                    }
+                    .ap-creds { position: static; }
+                    .ap-stats {
                         grid-template-columns: repeat(2, 1fr);
                     }
-
-                    .values-grid {
-                        grid-template-columns: 1fr;
-                        gap: var(--space-lg);
+                    .ap-stat:nth-child(2) { border-right: none; }
+                    .ap-stat:nth-child(3) {
+                        border-top: 1px solid rgba(255,255,255,0.07);
+                        padding-left: 0;
                     }
+                    .ap-stat:nth-child(4) {
+                        border-right: none;
+                        border-top: 1px solid rgba(255,255,255,0.07);
+                    }
+                    .ap-values-grid {
+                        grid-template-columns: 1fr;
+                    }
+                    .ap-value {
+                        border-right: none;
+                        border-top: 1px solid var(--color-border);
+                    }
+                    .ap-value:first-child { padding-left: var(--space-2xl); }
                 }
+
+                @media (max-width: 480px) {
+                    .ap-value:first-child { padding-left: 0; }
+                    .ap-values { padding: var(--space-4xl) 0; }
+                }
+
             `}</style>
         </div>
     );

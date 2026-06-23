@@ -2,68 +2,44 @@ import React from 'react';
 import PageHero from '../components/PageHero';
 
 const stats = [
-    { value: '300,000', label: 'Sq.Ft Total Land' },
-    { value: '75,000', label: 'Sq.Ft Shop Floor' },
-    { value: '300 Ton', label: 'Crane Capacity' },
-    { value: '20 MW', label: 'No-Load Testing Capacity' },
-    { value: '5 MW', label: 'Captive Power Generation' },
-    { value: '27', label: 'Vehicle Fleet' },
+    { value: '300K', unit: 'sq ft', label: 'Total land area', sub: 'Ranoli & Raika works' },
+    { value: '75K', unit: 'sq ft', label: 'Shop floor area', sub: 'Dedicated electrical & mechanical' },
+    { value: '300', unit: 'T', label: 'Max crane capacity', sub: 'Overhead crane systems' },
+    { value: '20', unit: 'MW', label: 'No-load testing', sub: 'Generator & motor test beds' },
+    { value: '5', unit: 'MW', label: 'Captive power', sub: 'Uninterrupted operations' },
+    { value: '27', unit: '+', label: 'Vehicle fleet', sub: 'Transport & field service' },
 ];
 
 const facilities = [
     {
+        num: '01',
         title: 'HV Coil Manufacturing',
         desc: 'In-house manufacturing of high-voltage coils for stator and field rewinding, supporting motors and generators up to 13.8 kV.',
-        icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-            </svg>
-        ),
     },
     {
+        num: '02',
         title: 'Heating Ovens',
-        desc: '3 industrial ovens, with a maximum volume of 3,000 cubic ft., for VPI curing and insulation heat treatment.',
-        icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M12 2v10m0 0l3-3m-3 3l-3-3M5 21h14a2 2 0 002-2v-5a2 2 0 00-2-2H5a2 2 0 00-2 2v5a2 2 0 002 2z" />
-            </svg>
-        ),
+        desc: '3 industrial ovens with a maximum volume of 3,000 cubic ft for VPI curing and insulation heat treatment at precise temperatures.',
     },
     {
+        num: '03',
         title: 'Mechanical Workshop',
-        desc: 'Fully equipped workshop for shaft fabrication, bearing housing repair, commutator work and spares fabrication.',
-        icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
-            </svg>
-        ),
+        desc: 'Fully equipped workshop for shaft fabrication, bearing housing repair, commutator work, and bespoke spares fabrication.',
     },
     {
+        num: '04',
         title: 'Dynamic Balancing',
-        desc: 'Balancing machines rated up to 25-ton and 45-ton rotor capacity for precision rotor and shaft balancing.',
-        icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="3" />
-            </svg>
-        ),
+        desc: 'Balancing machines rated up to 25-ton and 45-ton rotor capacity for precision rotor and shaft balancing to G-grade standards.',
     },
     {
+        num: '05',
         title: 'Testing & Control Room',
-        desc: 'Centralized testing bed for no-load testing up to 20 MW, full-load testing up to 5 MW, and DC motor testing.',
-        icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M9 3v7.5L6 18h12l-3-7.5V3M9 3h6M12 7h.01" />
-            </svg>
-        ),
+        desc: 'Centralised testing bed for no-load testing up to 20 MW, full-load testing up to 5 MW, and DC motor testing with data logging.',
     },
     {
+        num: '06',
         title: 'Crane System',
-        desc: 'Heavy-duty overhead cranes from 10 to 300 ton capacity for handling large rotors, stators and generator frames.',
-        icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" /><path d="M16 3h-8l-2 4h12l-2-4z" />
-            </svg>
-        ),
+        desc: 'Heavy-duty overhead cranes from 10 to 300 ton capacity for handling large rotors, stators and generator frames with full safety compliance.',
     },
 ];
 
@@ -77,33 +53,41 @@ const InfrastructurePage = () => {
                 breadcrumbs={[{ label: 'Infrastructure' }]}
             />
 
-            {/* Key Stats */}
-            <section className="section">
+            {/* ── Stats — dark, flows from PageHero ──────────── */}
+            <section className="ip-stats-section">
                 <div className="container">
-                    <div className="infra-stats">
-                        {stats.map((stat, i) => (
-                            <div key={i} className="infra-stat-card" data-aos="fade-up" data-aos-delay={i * 80}>
-                                <span className="infra-stat-value">{stat.value}</span>
-                                <span className="infra-stat-label">{stat.label}</span>
+                    <div className="ip-stats-grid">
+                        {stats.map((s, i) => (
+                            <div className="ip-stat" key={i}>
+                                <div className="ip-stat-num">
+                                    <span className="ip-stat-val">{s.value}</span>
+                                    <span className="ip-stat-unit">{s.unit}</span>
+                                </div>
+                                <span className="ip-stat-label">{s.label}</span>
+                                <span className="ip-stat-sub">{s.sub}</span>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Facilities */}
-            <section className="section bg-light">
+            {/* ── Facilities — light ───────────────────────────── */}
+            <section className="ip-facilities-section">
                 <div className="container">
-                    <div className="text-center" style={{ marginBottom: 'var(--space-3xl)' }}>
-                        <span className="label text-accent">Capabilities</span>
-                        <h2 style={{ marginTop: 'var(--space-md)' }}>Our Facilities</h2>
+                    <div className="ip-facilities-header">
+                        <p className="ip-fac-eyebrow">Capabilities</p>
+                        <h2 className="ip-fac-heading">Our Facilities</h2>
+                        <p className="ip-fac-sub">
+                            Every major function is handled in-house — no outsourcing, no delays,
+                            no compromises on quality or traceability.
+                        </p>
                     </div>
-                    <div className="facilities-grid">
-                        {facilities.map((facility, i) => (
-                            <div key={i} className="facility-card" data-aos="fade-up" data-aos-delay={i * 80}>
-                                <div className="facility-icon">{facility.icon}</div>
-                                <h3>{facility.title}</h3>
-                                <p>{facility.desc}</p>
+                    <div className="ip-fac-grid">
+                        {facilities.map((f) => (
+                            <div className="ip-fac-card" key={f.num}>
+                                <span className="ip-fac-num">{f.num}</span>
+                                <h3 className="ip-fac-title">{f.title}</h3>
+                                <p className="ip-fac-desc">{f.desc}</p>
                             </div>
                         ))}
                     </div>
@@ -111,110 +95,183 @@ const InfrastructurePage = () => {
             </section>
 
             <style>{`
-                .infra-page {
-                    min-height: 100vh;
+
+                .infra-page { min-height: 100vh; }
+
+                /* ── Stats section (dark) ─────────────────────── */
+                .ip-stats-section {
+                    background: var(--color-primary);
+                    padding: var(--space-5xl) 0;
+                    border-top: 1px solid rgba(255,255,255,0.06);
                 }
 
-                /* Stats */
-                .infra-stats {
+                .ip-stats-grid {
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
-                    gap: var(--space-lg);
+                    border-left: 1px solid rgba(255,255,255,0.07);
                 }
 
-                .infra-stat-card {
-                    text-align: center;
-                    padding: var(--space-2xl) var(--space-xl);
-                    background: var(--color-white);
-                    border-top: 3px solid var(--color-accent);
-                    box-shadow: var(--shadow-sm);
-                    transition: all 0.3s var(--ease-out);
-                }
-
-                .infra-stat-card:hover {
-                    transform: translateY(-4px);
-                    box-shadow: var(--shadow-md);
-                }
-
-                .infra-stat-value {
-                    display: block;
-                    font-size: 2.5rem;
-                    font-weight: 700;
-                    color: var(--color-text);
-                    margin-bottom: 4px;
-                    font-family: var(--font-serif);
-                }
-
-                .infra-stat-label {
-                    font-size: 0.75rem;
-                    text-transform: uppercase;
-                    letter-spacing: 0.08em;
-                    color: var(--color-muted);
-                }
-
-                /* Facilities */
-                .facilities-grid {
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: var(--space-xl);
-                }
-
-                .facility-card {
-                    padding: var(--space-2xl);
-                    background: var(--color-white);
-                    border: 1px solid var(--color-border);
-                    border-radius: 4px;
-                    transition: all 0.3s var(--ease-out);
-                }
-
-                .facility-card:hover {
-                    border-color: var(--color-accent);
-                    box-shadow: var(--shadow-md);
-                    transform: translateY(-2px);
-                }
-
-                .facility-icon {
-                    width: 44px;
-                    height: 44px;
-                    border-radius: 8px;
-                    background: rgba(200, 16, 46, 0.06);
+                .ip-stat {
+                    padding: var(--space-3xl) var(--space-2xl);
+                    border-right: 1px solid rgba(255,255,255,0.07);
+                    border-bottom: 1px solid rgba(255,255,255,0.07);
                     display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: var(--color-accent);
-                    margin-bottom: var(--space-lg);
+                    flex-direction: column;
+                    gap: 6px;
+                    transition: background 0.2s;
                 }
 
-                .facility-card h3 {
-                    font-size: 1.0625rem;
-                    font-weight: 600;
+                .ip-stat:hover {
+                    background: rgba(255,255,255,0.02);
+                }
+
+                .ip-stat-num {
+                    display: flex;
+                    align-items: baseline;
+                    gap: 5px;
+                    line-height: 1;
                     margin-bottom: var(--space-sm);
                 }
 
-                .facility-card p {
+                .ip-stat-val {
+                    font-family: var(--font-mono);
+                    font-size: clamp(2.75rem, 5vw, 4.5rem);
+                    font-weight: 700;
+                    color: var(--color-white);
+                    letter-spacing: -0.04em;
+                }
+
+                .ip-stat-unit {
+                    font-family: var(--font-mono);
+                    font-size: clamp(1.1rem, 2vw, 1.75rem);
+                    font-weight: 600;
+                    color: var(--color-accent);
+                    letter-spacing: -0.01em;
+                }
+
+                .ip-stat-label {
+                    font-size: 0.8125rem;
+                    font-weight: 600;
+                    color: rgba(255,255,255,0.75);
+                    text-transform: capitalize;
+                    letter-spacing: -0.01em;
+                }
+
+                .ip-stat-sub {
+                    font-family: var(--font-mono);
+                    font-size: 0.625rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: rgba(255,255,255,0.25);
+                }
+
+                /* ── Facilities section (light) ───────────────── */
+                .ip-facilities-section {
+                    background: var(--color-white);
+                    padding: var(--space-5xl) 0;
+                }
+
+                .ip-facilities-header {
+                    margin-bottom: var(--space-4xl);
+                    max-width: 680px;
+                }
+
+                .ip-fac-eyebrow {
+                    font-family: var(--font-mono);
+                    font-size: 0.6875rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.14em;
+                    color: var(--color-accent);
+                    margin-bottom: var(--space-md);
+                }
+
+                .ip-fac-heading {
+                    font-family: var(--font-serif);
+                    font-size: clamp(2rem, 3.5vw, 2.75rem);
+                    font-weight: 700;
+                    color: var(--color-text);
+                    letter-spacing: -0.025em;
+                    line-height: 1.1;
+                    margin-bottom: var(--space-md);
+                }
+
+                .ip-fac-sub {
+                    font-size: 1.0625rem;
+                    line-height: 1.7;
+                    color: var(--color-text-light);
+                }
+
+                .ip-fac-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    border-top: 1px solid var(--color-border);
+                    border-left: 1px solid var(--color-border);
+                }
+
+                .ip-fac-card {
+                    padding: var(--space-3xl) var(--space-2xl);
+                    border-right: 1px solid var(--color-border);
+                    border-bottom: 1px solid var(--color-border);
+                    transition: background 0.2s;
+                    position: relative;
+                }
+
+                .ip-fac-card::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 2px;
+                    background: var(--color-accent);
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    transition: transform 0.3s var(--ease-out);
+                }
+
+                .ip-fac-card:hover { background: rgba(200,16,46,0.02); }
+                .ip-fac-card:hover::before { transform: scaleX(1); }
+
+                .ip-fac-num {
+                    font-family: var(--font-mono);
+                    font-size: 0.6875rem;
+                    font-weight: 600;
+                    color: var(--color-accent);
+                    letter-spacing: 0.1em;
+                    display: block;
+                    margin-bottom: var(--space-lg);
+                }
+
+                .ip-fac-title {
+                    font-family: var(--font-serif);
+                    font-size: 1.1875rem;
+                    font-weight: 700;
+                    color: var(--color-text);
+                    letter-spacing: -0.02em;
+                    line-height: 1.2;
+                    margin-bottom: var(--space-md);
+                }
+
+                .ip-fac-desc {
                     font-size: 0.9375rem;
-                    line-height: 1.65;
+                    line-height: 1.72;
+                    color: var(--color-text-light);
                 }
 
-                @media (max-width: 900px) {
-                    .infra-stats {
-                        grid-template-columns: repeat(2, 1fr);
-                    }
-
-                    .facilities-grid {
-                        grid-template-columns: repeat(2, 1fr);
-                    }
+                /* ── Responsive ──────────────────────────────── */
+                @media (max-width: 1024px) {
+                    .ip-stats-grid { grid-template-columns: repeat(2, 1fr); }
+                    .ip-fac-grid { grid-template-columns: repeat(2, 1fr); }
                 }
 
-                @media (max-width: 600px) {
-                    .infra-stats {
-                        grid-template-columns: 1fr;
-                    }
-
-                    .facilities-grid {
-                        grid-template-columns: 1fr;
-                    }
+                @media (max-width: 640px) {
+                    .ip-stats-grid { grid-template-columns: 1fr; }
+                    .ip-fac-grid { grid-template-columns: 1fr; }
+                    .ip-stat { padding: var(--space-2xl) var(--space-lg); }
                 }
+
             `}</style>
         </div>
     );
