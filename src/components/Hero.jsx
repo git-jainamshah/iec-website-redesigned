@@ -243,18 +243,18 @@ const Hero = () => {
                             rgba(var(--hero-tint), 0.80) 0%,
                             rgba(var(--hero-tint), 0) 18%
                         ),
-                        /* Left to right: dark to transparent */
+                        /* Left to right: dark (but not black enough to kill flames) → transparent */
                         linear-gradient(
                             to right,
-                            rgba(var(--hero-tint), 0.97) 0%,
-                            rgba(var(--hero-tint), 0.85) 28%,
-                            rgba(var(--hero-tint), 0.42) 56%,
-                            rgba(var(--hero-tint), 0.05) 72%
+                            rgba(var(--hero-tint), 0.76) 0%,
+                            rgba(var(--hero-tint), 0.64) 28%,
+                            rgba(var(--hero-tint), 0.36) 56%,
+                            rgba(var(--hero-tint), 0.04) 72%
                         ),
                         /* Bottom — content area readable */
                         linear-gradient(
                             to top,
-                            rgba(var(--hero-tint), 0.88) 0%,
+                            rgba(var(--hero-tint), 0.82) 0%,
                             rgba(var(--hero-tint), 0) 32%
                         );
                 }
