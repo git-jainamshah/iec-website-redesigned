@@ -219,7 +219,7 @@ const WorkGallery = () => {
                     left: 0;
                     right: 0;
                     padding: var(--space-xl) var(--space-xl);
-                    background: linear-gradient(to top, rgba(5,7,10,0.85) 0%, rgba(5,7,10,0) 100%);
+                    background: linear-gradient(to top, rgba(13,17,24,0.85) 0%, rgba(13,17,24,0) 100%);
                     display: flex;
                     flex-direction: column;
                     gap: 4px;
@@ -246,7 +246,7 @@ const WorkGallery = () => {
                     display: flex;
                     align-items: baseline;
                     gap: 4px;
-                    background: rgba(5,7,10,0.6);
+                    background: rgba(13,17,24,0.6);
                     backdrop-filter: blur(8px);
                     padding: 6px 12px;
                     border: 1px solid rgba(255,255,255,0.1);

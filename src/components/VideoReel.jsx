@@ -217,8 +217,8 @@ const VideoReel = () => {
                     inset: 0;
                     background: linear-gradient(
                         to top,
-                        rgba(10,13,18,0.75) 0%,
-                        rgba(10,13,18,0) 50%
+                        rgba(22,28,40,0.75) 0%,
+                        rgba(22,28,40,0) 50%
                     );
                 }
 

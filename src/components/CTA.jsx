@@ -81,9 +81,9 @@ const CTA = () => {
                     inset: 0;
                     background:
                         linear-gradient(105deg,
-                            rgba(5, 7, 10, 0.92) 0%,
-                            rgba(5, 7, 10, 0.78) 45%,
-                            rgba(5, 7, 10, 0.55) 100%);
+                            rgba(13, 17, 24, 0.92) 0%,
+                            rgba(13, 17, 24, 0.78) 45%,
+                            rgba(13, 17, 24, 0.55) 100%);
                 }
 
                 .cta-grid-texture {

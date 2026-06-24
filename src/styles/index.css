@@ -11,8 +11,8 @@
 /* ===== Premium CSS Variables ===== */
 :root {
     /* Brand Colors */
-    --color-primary: #0a0d12;
-    --color-secondary: #161b22;
+    --color-primary: #161c28;
+    --color-secondary: #1e2638;
     --color-accent: #c8102e;
     --color-accent-hover: #a00d24;
     --color-gold: #b8860b;
@@ -26,7 +26,7 @@
     --color-muted: #888e98;
     --color-text: #161b22;
     --color-text-light: #5c6370;
-    --color-dark: #05070a;
+    --color-dark: #0d1118;
     --color-steel: #2d3748;
 
     /* Typography */
