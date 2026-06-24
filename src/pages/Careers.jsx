@@ -59,8 +59,6 @@ const Careers = () => {
                 subtitle="Build your career at India's leading industrial motor repair facility."
                 bgImage={imgHeroBg}
                 breadcrumbs={[{ label: 'Careers' }]}
-                compact={true}
-                sideImg={imgCraftSide2}
             />
 
             {/* ── Craft Statement ── */}

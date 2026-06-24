@@ -30,8 +30,6 @@ const Leadership = () => {
                 title="Leadership"
                 bgImage={imgHeroBg}
                 breadcrumbs={[{ label: 'Leadership' }]}
-                compact={true}
-                sideImg={imgFounderSide}
             />
 
             {/* ── Founder Feature ── */}

@@ -70,8 +70,6 @@ const Blogs = () => {
                 subtitle="Technical perspectives from IEC's repair engineers and industry specialists."
                 bgImage={imgHeroBg}
                 breadcrumbs={[{ label: 'Insights' }]}
-                compact={true}
-                sideImg={imgFeatured}
             />
 
             {/* ── Featured Article ── */}
