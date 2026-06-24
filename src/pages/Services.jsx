@@ -326,7 +326,7 @@ const ServicesPage = () => {
 
                 .sv-num {
                     font-family: var(--font-mono);
-                    font-size: 0.625rem;
+                    font-size: 0.75rem;
                     font-weight: 700;
                     color: var(--color-accent);
                     letter-spacing: 0.1em;
@@ -334,7 +334,7 @@ const ServicesPage = () => {
 
                 .sv-label-txt {
                     font-family: var(--font-mono);
-                    font-size: 0.5rem;
+                    font-size: 0.6875rem;
                     font-weight: 500;
                     text-transform: uppercase;
                     letter-spacing: 0.16em;
@@ -403,7 +403,7 @@ const ServicesPage = () => {
 
                 .sv-spec-label {
                     font-family: var(--font-mono);
-                    font-size: 0.5rem;
+                    font-size: 0.6875rem;
                     font-weight: 500;
                     text-transform: uppercase;
                     letter-spacing: 0.1em;
@@ -419,7 +419,7 @@ const ServicesPage = () => {
 
                 .sv-chip {
                     font-family: var(--font-mono);
-                    font-size: 0.5rem;
+                    font-size: 0.6875rem;
                     font-weight: 500;
                     letter-spacing: 0.06em;
                     color: rgba(255,255,255,0.38);
@@ -442,7 +442,7 @@ const ServicesPage = () => {
                     gap: 10px;
                     padding: 13px 28px;
                     font-family: var(--font-mono);
-                    font-size: 0.5625rem;
+                    font-size: 0.75rem;
                     font-weight: 500;
                     letter-spacing: 0.14em;
                     text-transform: uppercase;
@@ -493,7 +493,7 @@ const ServicesPage = () => {
 
                 .sv-ticker-track span {
                     font-family: var(--font-mono);
-                    font-size: 0.5625rem;
+                    font-size: 0.75rem;
                     font-weight: 500;
                     letter-spacing: 0.14em;
                     color: rgba(255,255,255,0.9);
@@ -527,7 +527,7 @@ const ServicesPage = () => {
 
                 .sv-stats-eyebrow {
                     font-family: var(--font-mono);
-                    font-size: 0.5rem;
+                    font-size: 0.6875rem;
                     font-weight: 500;
                     text-transform: uppercase;
                     letter-spacing: 0.18em;
@@ -579,7 +579,7 @@ const ServicesPage = () => {
 
                 .sv-stat-label {
                     font-family: var(--font-mono);
-                    font-size: 0.5rem;
+                    font-size: 0.6875rem;
                     font-weight: 500;
                     text-transform: uppercase;
                     letter-spacing: 0.1em;
@@ -719,7 +719,7 @@ const ServicesPage = () => {
                     align-items: center;
                     gap: 5px;
                     font-family: var(--font-mono);
-                    font-size: 0.5625rem;
+                    font-size: 0.75rem;
                     font-weight: 500;
                     letter-spacing: 0.1em;
                     text-transform: uppercase;
@@ -776,7 +776,7 @@ const ServicesPage = () => {
 
                 .sv-outro-eyebrow {
                     font-family: var(--font-mono);
-                    font-size: 0.5625rem;
+                    font-size: 0.75rem;
                     font-weight: 500;
                     text-transform: uppercase;
                     letter-spacing: 0.18em;
@@ -794,7 +794,7 @@ const ServicesPage = () => {
 
                 .sv-outro-sub {
                     font-family: var(--font-mono);
-                    font-size: 0.5625rem;
+                    font-size: 0.75rem;
                     font-weight: 500;
                     line-height: 2;
                     letter-spacing: 0.08em;

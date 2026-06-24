@@ -313,7 +313,7 @@ const Hero = () => {
 
                 .hero-tagline {
                     font-family: var(--font-mono);
-                    font-size: 0.625rem;
+                    font-size: 0.75rem;
                     font-weight: 500;
                     text-transform: uppercase;
                     letter-spacing: 0.2em;
@@ -340,7 +340,7 @@ const Hero = () => {
                     color: var(--color-white);
                     border: 1px solid rgba(255,255,255,0.28);
                     font-family: var(--font-mono);
-                    font-size: 0.625rem;
+                    font-size: 0.75rem;
                     font-weight: 500;
                     text-transform: uppercase;
                     letter-spacing: 0.14em;
@@ -375,7 +375,7 @@ const Hero = () => {
                     align-items: center;
                     gap: 6px;
                     font-family: var(--font-mono);
-                    font-size: 0.625rem;
+                    font-size: 0.75rem;
                     font-weight: 500;
                     text-transform: uppercase;
                     letter-spacing: 0.14em;
@@ -433,7 +433,7 @@ const Hero = () => {
 
                 .hero-cred-info span {
                     font-family: var(--font-mono);
-                    font-size: 0.625rem;
+                    font-size: 0.75rem;
                     text-transform: uppercase;
                     letter-spacing: 0.1em;
                     color: rgba(255,255,255,0.5);
@@ -537,7 +537,7 @@ const Hero = () => {
                     }
                     .hero-label {
                         white-space: normal;
-                        font-size: 0.625rem;
+                        font-size: 0.75rem;
                     }
                     .hero-caps-inner {
                         grid-template-columns: repeat(3, 1fr);
@@ -587,7 +587,7 @@ const Hero = () => {
                         align-items: center;
                     }
                     .cap-val { font-size: 1.2rem; }
-                    .cap-lbl { font-size: 0.625rem; }
+                    .cap-lbl { font-size: 0.75rem; }
                     .hl-2, .hl-4, .hl-6, .hl-8 { display: none; }
                 }
 
