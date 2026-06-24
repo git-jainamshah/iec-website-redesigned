@@ -1016,17 +1016,34 @@ const Header = () => {
                         font-size: 0.5625rem;
                     }
 
+                    /* Hide phone & search; keep lang-btn visible on mobile */
                     .header-phone,
-                    .search-btn,
-                    .lang-wrapper {
+                    .search-btn {
                         display: none;
+                    }
+
+                    /* Mobile: restore full-page scroll — split panel looks awkward on single column */
+                    .menu-overlay {
+                        overflow-y: auto;
+                        -webkit-overflow-scrolling: touch;
                     }
 
                     .menu-overlay-grid {
                         grid-template-columns: 1fr;
+                        grid-template-rows: auto;
+                        height: auto;
+                        min-height: calc(100vh - 76px);
                         gap: var(--space-xl);
                         align-content: start;
+                        align-items: start;
                         padding-top: calc(76px + var(--space-2xl));
+                        padding-bottom: var(--space-3xl);
+                    }
+
+                    /* Nav should not scroll independently on mobile — parent handles it */
+                    .menu-overlay-nav {
+                        overflow: visible;
+                        padding: 0;
                     }
 
                     .menu-overlay-link {
@@ -1037,10 +1054,14 @@ const Header = () => {
                         display: none;
                     }
 
+                    /* Aside back to normal stacked flow */
                     .menu-overlay-aside {
+                        overflow: visible;
+                        justify-content: flex-start;
                         padding-left: 0;
-                        border-left: none;
                         padding-top: var(--space-lg);
+                        padding-bottom: 0;
+                        border-left: none;
                         border-top: 1px solid rgba(255, 255, 255, 0.08);
                     }
 
@@ -1075,8 +1096,17 @@ const Header = () => {
                         display: none;
                     }
 
+                    /* Globe icon only on tiny screens — no "EN" text */
+                    .lang-btn span {
+                        display: none;
+                    }
+
                     .search-panel-close span {
                         display: none;
+                    }
+
+                    .menu-overlay-grid {
+                        padding-top: calc(64px + var(--space-xl));
                     }
                 }
             `}</style>
