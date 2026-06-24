@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 180" width="380" height="180">
-  <!-- JSW in blue -->
-  <text x="20" y="145" font-family="Arial Black, 'Arial Bold', sans-serif" font-size="150" font-weight="900" fill="#1a3a8f" letter-spacing="-5">JSW</text>
-  <!-- Red swoosh accent -->
-  <path d="M15,20 Q100,-10 200,35 Q280,70 360,10" stroke="#e31837" stroke-width="12" fill="none" stroke-linecap="round"/>
-</svg>

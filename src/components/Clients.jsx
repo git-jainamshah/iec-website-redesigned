@@ -9,16 +9,16 @@ import marelliLogo from '../assets/clientel-logos/marelli-logo.png';
 import marthonLogo from '../assets/clientel-logos/marthon-energy-logo.png';
 import tecoLogo from '../assets/clientel-logos/teco-logo.png';
 // New logos
-import relianceLogo from '../assets/clientel-logos/reliance-logo.svg';
-import tataLogo from '../assets/clientel-logos/tata-logo.svg';
-import lindeLogo from '../assets/clientel-logos/linde-logo.svg';
-import wegLogo from '../assets/clientel-logos/weg-logo.svg';
-import wartsilaLogo from '../assets/clientel-logos/wartsila-logo.svg';
-import adaniLogo from '../assets/clientel-logos/adani-logo.svg';
-import ongcLogo from '../assets/clientel-logos/ongc-logo.svg';
-import bpclLogo from '../assets/clientel-logos/bpcl-logo.svg';
-import jswLogo from '../assets/clientel-logos/jsw-logo.svg';
-import adityaBirlaLogo from '../assets/clientel-logos/aditya-birla-logo.svg';
+import relianceLogo from '../assets/clientel-logos/reliance-logo.png';
+import tataLogo from '../assets/clientel-logos/tata-logo.png';
+import lindeLogo from '../assets/clientel-logos/linde-logo.png';
+import wegLogo from '../assets/clientel-logos/weg-logo.png';
+import wartsilaLogo from '../assets/clientel-logos/wartsila-logo.png';
+import adaniLogo from '../assets/clientel-logos/adani-logo.png';
+import ongcLogo from '../assets/clientel-logos/ongc-logo.png';
+import bpclLogo from '../assets/clientel-logos/bpcl-logo.png';
+import jswLogo from '../assets/clientel-logos/jsw-logo.png';
+import adityaBirlaLogo from '../assets/clientel-logos/aditya-birla-logo.png';
 
 // International & most-famous brands first, then established Indian names
 const logoItems = [

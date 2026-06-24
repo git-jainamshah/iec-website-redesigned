@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="500" height="280">
-  <!-- Blue background -->
-  <rect x="0" y="0" width="500" height="280" fill="#0d6eaa"/>
-  <!-- Wave/arc shape -->
-  <path d="M0,0 Q250,-60 500,140 L500,0 Z" fill="#1589cc" opacity="0.5"/>
-  <path d="M0,0 Q300,-20 500,80 L500,0 Z" fill="#1e9bd7" opacity="0.4"/>
-  <!-- Linde script text -->
-  <text x="280" y="220" font-family="Georgia, 'Times New Roman', serif" font-size="100" font-weight="400" fill="white" text-anchor="middle" font-style="italic">Linde</text>
-</svg>
