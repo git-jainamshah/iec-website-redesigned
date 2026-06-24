@@ -13,9 +13,11 @@ import LeadershipPage from './pages/Leadership';
 import ServicesPage from './pages/Services';
 import InfrastructurePage from './pages/Infrastructure';
 import BlogsPage from './pages/Blogs';
+import BlogPost from './pages/BlogPost';
 import ContactPage from './pages/Contact';
 import SearchResults from './pages/SearchResults';
 import Careers from './pages/Careers';
+import JobPosting from './pages/JobPosting';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 
@@ -55,9 +57,11 @@ function App() {
                     <Route path="/services" element={<ServicesPage />} />
                     <Route path="/infrastructure" element={<InfrastructurePage />} />
                     <Route path="/blogs" element={<BlogsPage />} />
+                    <Route path="/blogs/:id" element={<BlogPost />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/search" element={<SearchResults />} />
                     <Route path="/careers" element={<Careers />} />
+                    <Route path="/careers/:slug" element={<JobPosting />} />
                     <Route path="/privacy" element={<PrivacyPolicy />} />
                     <Route path="/terms" element={<TermsOfService />} />
                 </Routes>

@@ -3,49 +3,7 @@ import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import imgHeroBg from '../assets/iec-hv-taping-room.jpg';
 import imgCtaBg from '../assets/iec-workshop-overview.jpg';
-
-const openings = [
-    {
-        title: 'Senior Motor Winding Technician',
-        dept: 'Operations',
-        type: 'Full-time',
-        site: 'Ranoli, Vadodara, Gujarat',
-        desc: 'Experienced technician for HV motor rewinding and stator/rotor repair on machines up to 20,000 HP.',
-        posted: new Date('2024-06-01'),
-    },
-    {
-        title: 'Quality Control Engineer',
-        dept: 'Quality Assurance',
-        type: 'Full-time',
-        site: 'Ranoli, Vadodara, Gujarat',
-        desc: 'Ensure all repair processes meet ISO 9001 and EASA standards through rigorous inspection and testing protocols.',
-        posted: new Date('2024-05-15'),
-    },
-    {
-        title: 'Mechanical Workshop Supervisor',
-        dept: 'Operations',
-        type: 'Full-time',
-        site: 'Raika, Vadodara, Gujarat',
-        desc: 'Lead the mechanical workshop team, oversee precision machining, and coordinate repair schedules.',
-        posted: new Date('2024-04-20'),
-    },
-    {
-        title: 'Electrical Test Engineer',
-        dept: 'Engineering',
-        type: 'Full-time',
-        site: 'Ranoli, Vadodara, Gujarat',
-        desc: 'Conduct hi-pot, surge, and load tests on repaired HT motors and generators. Maintain test records per ISO 9001.',
-        posted: new Date('2024-06-10'),
-    },
-    {
-        title: 'Workshop Helper / Trainee',
-        dept: 'Operations',
-        type: 'Part-time',
-        site: 'Raika, Vadodara, Gujarat',
-        desc: 'Entry-level workshop support role. Training provided. Suitable for ITI/Diploma freshers.',
-        posted: new Date('2024-06-18'),
-    },
-];
+import { openings } from '../data/openings.jsx';
 
 const timeAgo = (date) => {
     const days = Math.floor((Date.now() - date) / 86400000);
@@ -200,6 +158,10 @@ const Careers = () => {
                                     <p className="cr-job-desc">{job.desc}</p>
                                 </div>
                                 <div className="cr-job-right">
+                                    <Link to={`/careers/${job.slug}`} className="cr-view-btn">
+                                        View Role
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                    </Link>
                                     <Link to="/contact" className="cr-apply-btn">
                                         Apply Now
                                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -312,7 +274,18 @@ const Careers = () => {
                 .cr-job-tag--loc { display: inline-flex; align-items: center; gap: 4px; }
                 .cr-job-posted { font-family: var(--font-mono); font-size: 0.5625rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-muted); margin-left: auto; }
                 .cr-job-desc { font-size: 0.875rem; line-height: 1.65; color: var(--color-text-light); max-width: 560px; margin: 0; }
-                .cr-job-right { flex-shrink: 0; padding-top: 4px; }
+                .cr-job-right { flex-shrink: 0; padding-top: 4px; display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+
+                .cr-view-btn {
+                    display: inline-flex; align-items: center; gap: 8px;
+                    padding: 10px 22px;
+                    font-family: var(--font-mono); font-size: 0.625rem; font-weight: 500;
+                    text-transform: uppercase; letter-spacing: 0.12em;
+                    color: var(--color-primary); border: 1px solid rgba(17,17,20,0.28);
+                    background: transparent; white-space: nowrap; text-decoration: none;
+                    transition: background 0.25s, color 0.25s, border-color 0.25s;
+                }
+                .cr-view-btn:hover { background: var(--color-primary); border-color: var(--color-primary); color: #ffffff; }
 
                 .cr-apply-btn {
                     display: inline-flex; align-items: center; gap: 8px;

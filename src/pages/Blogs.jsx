@@ -3,50 +3,8 @@ import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import imgHeroBg from '../assets/iec-stator-windings.jpg';
 import imgFeatured from '../assets/iec-rotor-workshop.jpg';
-import imgCard1 from '../assets/iec-stator-crane-01.jpg';
-import imgCard2 from '../assets/iec-stator-front.jpg';
-import imgCard3 from '../assets/iec-stator-crane-02.jpg';
-import imgCard4 from '../assets/iec-taping-machine.jpg';
 import imgNewsletter from '../assets/iec-hv-taping-room.jpg';
-
-const articles = [
-    {
-        id: 1,
-        category: 'Maintenance',
-        date: 'Jan 2024',
-        readTime: '5 min',
-        title: 'Understanding High Voltage Motor Maintenance',
-        excerpt: 'Essential maintenance practices for HV motors to ensure optimal performance, prevent insulation failure, and extend service life across industrial applications.',
-        img: imgCard1,
-    },
-    {
-        id: 2,
-        category: 'Industry',
-        date: 'Jan 2024',
-        readTime: '7 min',
-        title: 'The Future of Industrial Motor Repair in India',
-        excerpt: 'Emerging technologies and process improvements shaping how India\'s industrial sector approaches large rotating machine repair and refurbishment.',
-        img: imgCard2,
-    },
-    {
-        id: 3,
-        category: 'Certification',
-        date: 'Jan 2024',
-        readTime: '4 min',
-        title: 'EASA Certification: What It Means for Your Equipment',
-        excerpt: 'How EASA membership and best-practice standards translate to better repair outcomes, longer machine life, and reduced downtime for plant operators.',
-        img: imgCard3,
-    },
-    {
-        id: 4,
-        category: 'Maintenance',
-        date: 'Dec 2023',
-        readTime: '6 min',
-        title: 'Preventive Maintenance Strategies for Large Generators',
-        excerpt: 'Key strategies to prevent generator failures, extend equipment lifespan, and plan maintenance windows around your plant\'s production schedule.',
-        img: imgCard4,
-    },
-];
+import { articles } from '../data/articles.jsx';
 
 const Blogs = () => {
     const revealRef = useRef([]);
@@ -132,7 +90,7 @@ const Blogs = () => {
                                         <span className="bl-meta-txt">{article.readTime} read</span>
                                     </div>
                                     <h3 className="bl-card-title">
-                                        <Link to={`/blogs/${article.id}`}>{article.title}</Link>
+                                        <Link to={`/blogs/${article.id}`} state={{ from: 'listing' }}>{article.title}</Link>
                                     </h3>
                                     <p className="bl-card-excerpt">{article.excerpt}</p>
                                     <Link to={`/blogs/${article.id}`} className="bl-read-link bl-read-link--sm">

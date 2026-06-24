@@ -37,7 +37,7 @@ const Leadership = () => {
                 <div className="ld-founder-inner">
                     <div className="ld-founder-left ld-reveal" ref={r}>
                         <span className="ld-eyebrow">01 / Founder</span>
-                        <h2 className="ld-founder-name">Mr. Anil<br />Bhardwaj</h2>
+                        <h2 className="ld-founder-name">Late Anil<br />Bhardwaj</h2>
                         <div className="ld-rule" />
                         <p className="ld-founder-bio">
                             Backed by over 40 years of hands-on industry experience,
@@ -47,8 +47,8 @@ const Leadership = () => {
                             serving leading private and government clients across the country.
                         </p>
                         <p className="ld-founder-bio" style={{ marginTop: '1.25rem' }}>
-                            His vision of keeping critical industrial machines running —
-                            with zero compromise on quality, and full in-house capability —
+                            His vision of keeping critical industrial machines running,
+                            with zero compromise on quality and full in-house capability,
                             defines every repair IEC undertakes.
                         </p>
                         <div className="ld-founder-stats">
