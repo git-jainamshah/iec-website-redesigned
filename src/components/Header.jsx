@@ -752,8 +752,7 @@ const Header = () => {
                     opacity: 0;
                     visibility: hidden;
                     transition: opacity 0.5s var(--ease-out), visibility 0.5s;
-                    overflow-y: auto;
-                    -webkit-overflow-scrolling: touch;
+                    overflow: hidden; /* no whole-panel scroll */
                 }
 
                 .menu-overlay.open {
@@ -764,17 +763,21 @@ const Header = () => {
                 .menu-overlay-grid {
                     display: grid;
                     grid-template-columns: 1.4fr 1fr;
+                    grid-template-rows: 1fr;
                     gap: var(--space-4xl);
-                    min-height: 100vh;
-                    align-content: center;
-                    padding-top: calc(var(--header-height) + var(--space-2xl));
-                    padding-bottom: var(--space-2xl);
+                    height: 100vh;
+                    padding-top: 88px; /* header height */
                     box-sizing: border-box;
+                    align-items: stretch;
                 }
 
+                /* Only the nav column scrolls */
                 .menu-overlay-nav {
                     display: flex;
                     flex-direction: column;
+                    overflow-y: auto;
+                    padding: var(--space-2xl) 0;
+                    -webkit-overflow-scrolling: touch;
                 }
 
                 .menu-overlay-link {
@@ -826,12 +829,17 @@ const Header = () => {
                     transform: translateX(0);
                 }
 
+                /* Right aside — fixed in place, no scroll */
                 .menu-overlay-aside {
                     display: flex;
                     flex-direction: column;
                     gap: 6px;
                     padding-left: var(--space-2xl);
+                    padding-top: var(--space-2xl);
+                    padding-bottom: var(--space-2xl);
                     border-left: 1px solid rgba(255, 255, 255, 0.08);
+                    overflow: hidden;
+                    justify-content: center;
                 }
 
                 .menu-overlay-aside-label {
