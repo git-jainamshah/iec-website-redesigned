@@ -132,22 +132,21 @@ const Metrics = () => {
                 }
 
                 .metric-val {
-                    font-family: var(--font-display);
-                    font-size: clamp(3.5rem, 5.5vw, 5rem);
-                    font-weight: 400;
+                    font-family: var(--font-mono);
+                    font-size: clamp(2.75rem, 5vw, 4.5rem);
+                    font-weight: 600;
                     color: var(--color-white);
                     line-height: 1;
-                    letter-spacing: 0.02em;
-                    text-transform: uppercase;
+                    letter-spacing: -0.03em;
                 }
 
                 .metric-unit {
-                    font-family: var(--font-display);
-                    font-size: clamp(1.5rem, 2.5vw, 2.25rem);
-                    font-weight: 400;
+                    font-family: var(--font-mono);
+                    font-size: clamp(1.25rem, 2vw, 1.875rem);
+                    font-weight: 500;
                     color: var(--color-accent);
                     line-height: 1;
-                    letter-spacing: 0.02em;
+                    letter-spacing: -0.01em;
                 }
 
                 .metric-info {

@@ -135,13 +135,12 @@ const PageHero = ({ label, title, subtitle, breadcrumbs = [], bgImage }) => {
                 .page-hero-title {
                     font-family: var(--font-display);
                     color: var(--color-white);
-                    font-size: clamp(4.5rem, 10vw, 9rem);
-                    font-weight: 400;
-                    line-height: 0.9;
-                    letter-spacing: 0.04em;
-                    text-transform: uppercase;
+                    font-size: clamp(3rem, 7vw, 6.5rem);
+                    font-weight: 700;
+                    line-height: 1.05;
+                    letter-spacing: -0.03em;
                     margin-bottom: var(--space-lg);
-                    max-width: 900px;
+                    max-width: 820px;
                     opacity: 0;
                 }
 

@@ -155,12 +155,11 @@ const InfrastructurePage = () => {
                 }
 
                 .ip-stat-val {
-                    font-family: var(--font-display);
-                    font-size: clamp(3.5rem, 6vw, 5.5rem);
-                    font-weight: 400;
+                    font-family: var(--font-mono);
+                    font-size: clamp(2.75rem, 5vw, 4.5rem);
+                    font-weight: 600;
                     color: var(--color-white);
-                    letter-spacing: 0.02em;
-                    text-transform: uppercase;
+                    letter-spacing: -0.03em;
                     line-height: 1;
                 }
 

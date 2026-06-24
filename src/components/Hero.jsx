@@ -302,12 +302,11 @@ const Hero = () => {
 
                 .hero-title {
                     font-family: var(--font-display);
-                    font-size: clamp(4rem, 8vw, 8rem);
-                    font-weight: 400;
+                    font-size: clamp(3rem, 6.5vw, 6rem);
+                    font-weight: 700;
                     color: var(--color-white);
-                    line-height: 0.9;
-                    letter-spacing: 0.03em;
-                    text-transform: uppercase;
+                    line-height: 1.05;
+                    letter-spacing: -0.03em;
                     margin-bottom: var(--space-md);
                     opacity: 0;
                 }
