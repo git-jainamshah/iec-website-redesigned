@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 320" width="300" height="320">
+  <!-- Circle -->
+  <circle cx="150" cy="95" r="88" fill="#c8a96e"/>
+  <!-- Flame/R shape cutout -->
+  <path d="M150,38 C150,38 115,62 112,95 C109,128 128,148 150,152 C172,148 191,128 188,95 C185,62 150,38 150,38Z" fill="white" opacity="0.9"/>
+  <ellipse cx="150" cy="95" rx="28" ry="38" fill="#c8a96e"/>
+  <!-- Reliance text -->
+  <text x="150" y="240" font-family="Georgia, serif" font-size="38" font-weight="400" fill="#2c1a0e" text-anchor="middle" letter-spacing="1">Reliance</text>
+  <text x="150" y="278" font-family="Georgia, serif" font-size="22" font-weight="400" fill="#2c1a0e" text-anchor="middle" letter-spacing="2">Industries</text>
+  <text x="150" y="308" font-family="Georgia, serif" font-size="22" font-weight="400" fill="#2c1a0e" text-anchor="middle" letter-spacing="2">Limited</text>
+</svg>

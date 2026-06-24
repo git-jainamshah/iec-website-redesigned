@@ -8,15 +8,37 @@ import kirloskarLogo from '../assets/clientel-logos/kirloskar-group-logo.png';
 import marelliLogo from '../assets/clientel-logos/marelli-logo.png';
 import marthonLogo from '../assets/clientel-logos/marthon-energy-logo.png';
 import tecoLogo from '../assets/clientel-logos/teco-logo.png';
+// New logos
+import relianceLogo from '../assets/clientel-logos/reliance-logo.svg';
+import tataLogo from '../assets/clientel-logos/tata-logo.svg';
+import lindeLogo from '../assets/clientel-logos/linde-logo.svg';
+import wegLogo from '../assets/clientel-logos/weg-logo.svg';
+import wartsilaLogo from '../assets/clientel-logos/wartsila-logo.svg';
+import adaniLogo from '../assets/clientel-logos/adani-logo.svg';
+import ongcLogo from '../assets/clientel-logos/ongc-logo.svg';
+import bpclLogo from '../assets/clientel-logos/bpcl-logo.svg';
+import jswLogo from '../assets/clientel-logos/jsw-logo.svg';
+import adityaBirlaLogo from '../assets/clientel-logos/aditya-birla-logo.svg';
 
+// International & most-famous brands first, then established Indian names
 const logoItems = [
+    { name: 'Reliance Industries', logo: relianceLogo },
+    { name: 'Tata', logo: tataLogo },
+    { name: 'Linde', logo: lindeLogo },
+    { name: 'WEG', logo: wegLogo },
+    { name: 'Wärtsilä', logo: wartsilaLogo },
+    { name: 'Adani', logo: adaniLogo },
+    { name: 'ONGC', logo: ongcLogo },
     { name: 'ABB', logo: abbLogo },
-    { name: 'Ansaldo', logo: ansaldoLogo },
     { name: 'BHEL', logo: bhelLogo },
+    { name: 'BPCL', logo: bpclLogo },
+    { name: 'JSW', logo: jswLogo },
+    { name: 'Aditya Birla Group', logo: adityaBirlaLogo },
     { name: 'CG Power Group', logo: cgPowerLogo },
     { name: 'Kirloskar Group', logo: kirloskarLogo },
+    { name: 'Ansaldo', logo: ansaldoLogo },
     { name: 'Marelli', logo: marelliLogo },
-    { name: 'Marthon Energy', logo: marthonLogo },
+    { name: 'Marathon Energy', logo: marthonLogo },
     { name: 'TECO', logo: tecoLogo },
 ];
 

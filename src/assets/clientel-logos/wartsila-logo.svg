@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350" width="500" height="350">
+  <!-- Blue oval ring -->
+  <ellipse cx="250" cy="120" rx="130" ry="105" fill="none" stroke="#1565a0" stroke-width="35"/>
+  <!-- Remove inner part to make it look open -->
+  <ellipse cx="250" cy="120" rx="95" ry="70" fill="white"/>
+  <!-- Orange swoosh -->
+  <path d="M250,18 Q360,40 375,120 Q390,200 310,215" stroke="#f57c00" stroke-width="30" fill="none" stroke-linecap="round"/>
+  <!-- White overlap to clean up -->
+  <ellipse cx="250" cy="120" rx="88" ry="63" fill="white"/>
+  <!-- WARTSILA text -->
+  <text x="250" y="295" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#1a1a1a" text-anchor="middle" letter-spacing="3">WÄRTSILÄ</text>
+</svg>

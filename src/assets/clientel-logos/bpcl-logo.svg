@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 320" width="280" height="320">
+  <!-- Outer blue circle -->
+  <circle cx="140" cy="130" r="120" fill="#0057a8"/>
+  <!-- Inner yellow circle -->
+  <circle cx="140" cy="130" r="85" fill="#ffd700"/>
+  <!-- Blue inner circle -->
+  <circle cx="140" cy="130" r="55" fill="#0057a8"/>
+  <!-- Swirls -->
+  <path d="M140,75 C165,75 185,90 185,115 C185,140 165,155 140,155" stroke="white" stroke-width="10" fill="none"/>
+  <path d="M140,105 C120,105 105,118 105,133 C105,148 120,155 140,155" stroke="white" stroke-width="8" fill="none"/>
+  <!-- Bharat Petroleum text -->
+  <text x="140" y="285" font-family="Arial Black, Arial, sans-serif" font-size="22" font-weight="900" fill="#0057a8" text-anchor="middle">BHARAT</text>
+  <text x="140" y="312" font-family="Arial Black, Arial, sans-serif" font-size="22" font-weight="900" fill="#ffd700" text-anchor="middle" style="background:#0057a8">PETROLEUM</text>
+  <rect x="0" y="268" width="280" height="52" fill="#0057a8"/>
+  <text x="140" y="293" font-family="Arial Black, Arial, sans-serif" font-size="20" font-weight="900" fill="white" text-anchor="middle">BHARAT</text>
+  <text x="140" y="316" font-family="Arial Black, Arial, sans-serif" font-size="20" font-weight="900" fill="#ffd700" text-anchor="middle">PETROLEUM</text>
+</svg>
