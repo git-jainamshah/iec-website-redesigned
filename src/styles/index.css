@@ -4,9 +4,10 @@
  * Aerospace/defense-contractor restraint (Boeing/Lockheed/NASA) meets precision engineering red
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 /* ===== Premium CSS Variables ===== */
 :root {
@@ -30,9 +31,10 @@
     --color-steel: #2d3748;
 
     /* Typography */
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-serif: 'Space Grotesk', 'Inter', sans-serif;
-    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --font-display: 'Bebas Neue', 'Arial Narrow', Arial, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'Syne', 'Space Grotesk', sans-serif;
+    --font-mono: 'IBM Plex Mono', 'JetBrains Mono', 'SF Mono', monospace;
 
     /* Spacing Scale */
     --space-xs: 0.25rem;
@@ -123,15 +125,31 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: var(--font-sans);
-    font-weight: 500;
+    font-family: var(--font-serif);
+    font-weight: 700;
     line-height: 1.2;
     color: var(--color-text);
 }
 
+/* Bebas Neue — use for hero h1s and giant stat numbers */
 .display-title {
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 0.95;
+    text-transform: uppercase;
+}
+
+/* Syne section headings (used via --font-serif) */
+h2 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+h3 {
+    font-size: clamp(1.125rem, 1.75vw, 1.5rem);
+    font-weight: 700;
     letter-spacing: -0.02em;
 }
 

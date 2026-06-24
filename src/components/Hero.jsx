@@ -301,12 +301,13 @@ const Hero = () => {
                 }
 
                 .hero-title {
-                    font-family: var(--font-serif);
-                    font-size: clamp(2.75rem, 6vw, 5.5rem);
-                    font-weight: 700;
+                    font-family: var(--font-display);
+                    font-size: clamp(4rem, 8vw, 8rem);
+                    font-weight: 400;
                     color: var(--color-white);
-                    line-height: 1.0;
-                    letter-spacing: -0.03em;
+                    line-height: 0.9;
+                    letter-spacing: 0.03em;
+                    text-transform: uppercase;
                     margin-bottom: var(--space-md);
                     opacity: 0;
                 }

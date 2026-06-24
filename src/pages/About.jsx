@@ -303,11 +303,13 @@ const AboutPage = () => {
                 }
 
                 .ap-stat-val {
-                    font-family: var(--font-mono);
-                    font-size: clamp(2.5rem, 4vw, 3.5rem);
-                    font-weight: 700;
+                    font-family: var(--font-display);
+                    font-size: clamp(3.5rem, 5.5vw, 5rem);
+                    font-weight: 400;
                     color: var(--color-white);
-                    letter-spacing: -0.03em;
+                    letter-spacing: 0.02em;
+                    text-transform: uppercase;
+                    line-height: 1;
                 }
 
                 .ap-stat-unit {
