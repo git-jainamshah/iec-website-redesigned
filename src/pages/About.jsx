@@ -320,11 +320,11 @@ const AboutPage = () => {
                     color: rgba(255,255,255,0.32);
                 }
 
-                /* ── Timeline ───────────────────────────────── */
+                /* ── Timeline (LIGHT) ───────────────────────── */
                 .ap-timeline {
-                    background: var(--color-primary);
+                    background: #f4f5f7;
                     padding: var(--space-5xl) 0;
-                    border-top: 1px solid rgba(255,255,255,0.07);
+                    border-top: 3px solid var(--color-accent);
                 }
 
                 .ap-tl-header {
@@ -345,7 +345,7 @@ const AboutPage = () => {
                     font-family: var(--font-serif) !important;
                     font-size: clamp(1.75rem, 3vw, 2.5rem) !important;
                     font-weight: 700 !important;
-                    color: var(--color-white) !important;
+                    color: var(--color-text) !important;
                     letter-spacing: -0.025em;
                     line-height: 1.1;
                 }
@@ -363,8 +363,8 @@ const AboutPage = () => {
                     top: 10px;
                     left: 0;
                     right: 0;
-                    height: 1px;
-                    background: rgba(255,255,255,0.1);
+                    height: 2px;
+                    background: rgba(0,0,0,0.08);
                 }
 
                 .ap-tl-line::after {
@@ -373,7 +373,7 @@ const AboutPage = () => {
                     left: 0; top: 0;
                     width: 100%;
                     height: 100%;
-                    background: linear-gradient(to right, var(--color-accent) 0%, rgba(200,16,46,0.2) 100%);
+                    background: linear-gradient(to right, var(--color-accent) 0%, rgba(200,16,46,0.15) 100%);
                 }
 
                 .ap-tl-item {
@@ -385,12 +385,12 @@ const AboutPage = () => {
                 .ap-tl-item:last-child { padding-right: 0; }
 
                 .ap-tl-dot {
-                    width: 10px;
-                    height: 10px;
+                    width: 12px;
+                    height: 12px;
                     border-radius: 50%;
                     background: var(--color-accent);
-                    border: 2px solid var(--color-primary);
-                    box-shadow: 0 0 0 1px var(--color-accent);
+                    border: 3px solid #f4f5f7;
+                    box-shadow: 0 0 0 2px var(--color-accent);
                     margin-bottom: var(--space-xl);
                     position: relative;
                     z-index: 1;
@@ -399,7 +399,7 @@ const AboutPage = () => {
 
                 .ap-tl-item:hover .ap-tl-dot {
                     transform: scale(1.4);
-                    box-shadow: 0 0 0 3px rgba(200,16,46,0.3);
+                    box-shadow: 0 0 0 4px rgba(200,16,46,0.2);
                 }
 
                 .ap-tl-year {
@@ -416,7 +416,7 @@ const AboutPage = () => {
                     font-family: var(--font-serif);
                     font-size: 1rem !important;
                     font-weight: 700 !important;
-                    color: var(--color-white) !important;
+                    color: var(--color-text) !important;
                     letter-spacing: -0.01em;
                     line-height: 1.3;
                     margin-bottom: var(--space-sm);
@@ -425,7 +425,7 @@ const AboutPage = () => {
                 .ap-tl-desc {
                     font-size: 0.8125rem;
                     line-height: 1.65;
-                    color: rgba(255,255,255,0.38);
+                    color: var(--color-text-light);
                 }
 
                 /* ── Photo strip ─────────────────────────────── */
@@ -508,16 +508,16 @@ const AboutPage = () => {
                     .ap-photo-col .ap-photo { height: 160px; }
                 }
 
-                /* ── Values (dark, flows from photo strip) ────── */
+                /* ── Values (WHITE — clearly below dark photo strip) ── */
                 .ap-values {
-                    background: var(--color-primary);
+                    background: var(--color-white);
                     padding: var(--space-5xl) 0 0;
-                    border-top: 1px solid rgba(255,255,255,0.06);
+                    border-top: 3px solid var(--color-accent);
                 }
 
                 .ap-values-inner {
                     padding-bottom: var(--space-3xl);
-                    border-bottom: 1px solid rgba(255,255,255,0.07);
+                    border-bottom: 1px solid var(--color-border);
                 }
 
                 .ap-values-header {
@@ -539,7 +539,7 @@ const AboutPage = () => {
                     font-family: var(--font-serif) !important;
                     font-size: clamp(1.75rem, 2.5vw, 2.5rem) !important;
                     font-weight: 700 !important;
-                    color: var(--color-white) !important;
+                    color: var(--color-text) !important;
                     letter-spacing: -0.025em;
                     line-height: 1.1;
                 }
@@ -548,14 +548,14 @@ const AboutPage = () => {
                 .ap-values-grid {
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
-                    border-top: 1px solid rgba(255,255,255,0.07);
+                    border-top: 1px solid var(--color-border);
                     margin-top: var(--space-4xl);
                 }
 
                 .ap-value {
                     position: relative;
                     padding: var(--space-4xl) var(--space-3xl) var(--space-5xl);
-                    border-right: 1px solid rgba(255,255,255,0.07);
+                    border-right: 1px solid var(--color-border);
                     overflow: hidden;
                     transition: background 0.3s;
                 }
@@ -563,7 +563,7 @@ const AboutPage = () => {
                 .ap-value:last-child { border-right: none; }
 
                 .ap-value:hover {
-                    background: rgba(255,255,255,0.02);
+                    background: #f9fafb;
                 }
 
                 /* Oversized ghost number — fills card top */
@@ -571,7 +571,7 @@ const AboutPage = () => {
                     font-family: var(--font-mono);
                     font-size: clamp(6rem, 10vw, 10rem);
                     font-weight: 700;
-                    color: rgba(255,255,255,0.035);
+                    color: rgba(0,0,0,0.04);
                     letter-spacing: -0.06em;
                     line-height: 1;
                     position: absolute;
@@ -583,14 +583,14 @@ const AboutPage = () => {
                 }
 
                 .ap-value:hover .ap-value-ghost {
-                    color: rgba(200,16,46,0.08);
+                    color: rgba(200,16,46,0.06);
                 }
 
                 /* Red animated bottom line */
                 .ap-value-line {
                     position: absolute;
                     bottom: 0; left: 0; right: 0;
-                    height: 2px;
+                    height: 3px;
                     background: var(--color-accent);
                     transform: scaleX(0);
                     transform-origin: left;
@@ -619,7 +619,7 @@ const AboutPage = () => {
                     font-family: var(--font-serif);
                     font-size: clamp(1.375rem, 2vw, 1.75rem);
                     font-weight: 700;
-                    color: var(--color-white);
+                    color: var(--color-text);
                     letter-spacing: -0.025em;
                     line-height: 1.15;
                     margin-bottom: var(--space-lg);
@@ -628,7 +628,7 @@ const AboutPage = () => {
                 .ap-value-desc {
                     font-size: 0.9375rem;
                     line-height: 1.8;
-                    color: rgba(255,255,255,0.48);
+                    color: var(--color-text-light);
                 }
 
                 /* ── Responsive ──────────────────────────────── */
@@ -667,7 +667,7 @@ const AboutPage = () => {
                     .ap-values-grid { grid-template-columns: 1fr; }
                     .ap-value {
                         border-right: none;
-                        border-bottom: 1px solid rgba(255,255,255,0.07);
+                        border-bottom: 1px solid var(--color-border);
                         padding: var(--space-3xl) var(--space-2xl) var(--space-4xl);
                     }
                     .ap-value:last-child { border-bottom: none; }
