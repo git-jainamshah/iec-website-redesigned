@@ -56,7 +56,7 @@ const Leadership = () => {
                         {/* Quote */}
                         <blockquote className="ld-quote">
                             <span className="ld-quote-mark">"</span>
-                            <p className="ld-quote-text">We built IEC on one principle: send every machine back better than it came in, or not at all.</p>
+                            <p className="ld-quote-text">We built IEC on one belief: every machine that enters our workshop must leave stronger than it arrived.</p>
                             <cite className="ld-quote-cite">Late Anil Bhardwaj, Founder</cite>
                         </blockquote>
 
@@ -69,7 +69,7 @@ const Leadership = () => {
                                         <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
                                     </filter>
                                 </defs>
-                                <text x="4" y="48" fontFamily="'Reenie Beanie', cursive" fontSize="46" fill="rgba(255,255,255,0.72)" letterSpacing="1" filter="url(#pen-f)">A. Bhardwaj</text>
+                                <text x="4" y="48" fontFamily="'Homemade Apple', cursive" fontSize="30" fill="rgba(255,255,255,0.72)" letterSpacing="1" filter="url(#pen-f)">A. Bhardwaj</text>
                                 <line x1="4" y1="59" x2="208" y2="59" stroke="rgba(255,255,255,0.15)" strokeWidth="0.75"/>
                             </svg>
                         </div>
@@ -233,7 +233,7 @@ const Leadership = () => {
             </section>
 
             <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Reenie+Beanie&family=Over+the+Rainbow&family=Homemade+Apple&display=swap');
+                @import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Over+the+Rainbow&display=swap');
 
                 .ld-page { min-height: 100vh; }
 
