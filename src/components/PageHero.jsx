@@ -80,9 +80,9 @@ const PageHero = ({ label, title, subtitle, breadcrumbs = [], bgImage }) => {
                     position: absolute;
                     inset: 0;
                     background:
-                        linear-gradient(105deg, rgba(22,28,40,0.82) 0%, rgba(22,28,40,0.38) 55%, rgba(22,28,40,0.15) 100%),
-                        linear-gradient(to top, rgba(22,28,40,0.75) 0%, transparent 50%),
-                        linear-gradient(to bottom, rgba(22,28,40,0.4) 0%, transparent 30%);
+                        linear-gradient(105deg, rgba(17,17,20,0.82) 0%, rgba(17,17,20,0.38) 55%, rgba(17,17,20,0.15) 100%),
+                        linear-gradient(to top, rgba(17,17,20,0.75) 0%, transparent 50%),
+                        linear-gradient(to bottom, rgba(17,17,20,0.4) 0%, transparent 30%);
                 }
 
                 .page-hero-content {

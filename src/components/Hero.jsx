@@ -329,48 +329,72 @@ const Hero = () => {
                     opacity: 0;
                 }
 
+                /* Premium slide-fill CTA */
                 .hero-btn-primary {
+                    position: relative;
                     display: inline-flex;
                     align-items: center;
                     gap: 10px;
-                    padding: 14px 28px;
-                    background: var(--color-white);
-                    color: var(--color-text);
-                    font-size: 0.8125rem;
-                    font-weight: 600;
+                    padding: 14px 30px;
+                    background: transparent;
+                    color: var(--color-white);
+                    border: 1px solid rgba(255,255,255,0.28);
+                    font-family: var(--font-mono);
+                    font-size: 0.625rem;
+                    font-weight: 500;
                     text-transform: uppercase;
-                    letter-spacing: 0.08em;
-                    transition: all 0.25s var(--ease-out);
+                    letter-spacing: 0.14em;
+                    overflow: hidden;
+                    isolation: isolate;
+                    transition: border-color 0.35s, gap 0.25s;
+                    text-decoration: none;
+                }
+
+                .hero-btn-primary::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    background: var(--color-accent);
+                    transform: translateX(-101%);
+                    transition: transform 0.42s cubic-bezier(0.16,1,0.3,1);
+                    z-index: -1;
                 }
 
                 .hero-btn-primary:hover {
-                    background: var(--color-accent);
-                    color: var(--color-white);
+                    border-color: var(--color-accent);
                     gap: 14px;
                 }
 
-                .hero-btn-primary svg {
+                .hero-btn-primary:hover::before {
+                    transform: translateX(0);
+                }
+
+                /* Ghost secondary CTA */
+                .hero-btn-text {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    font-family: var(--font-mono);
+                    font-size: 0.625rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.14em;
+                    color: rgba(255,255,255,0.5);
+                    transition: color 0.25s;
+                }
+
+                .hero-btn-text::after {
+                    content: '→';
+                    display: inline-block;
                     transition: transform 0.25s var(--ease-out);
                 }
 
-                .hero-btn-primary:hover svg {
-                    transform: translateX(3px);
-                }
-
-                .hero-btn-text {
-                    font-size: 0.875rem;
-                    color: rgba(255,255,255,0.7);
-                    font-weight: 500;
-                    letter-spacing: 0.02em;
-                    text-decoration: underline;
-                    text-underline-offset: 4px;
-                    text-decoration-color: rgba(255,255,255,0.3);
-                    transition: color 0.2s, text-decoration-color 0.2s;
-                }
-
                 .hero-btn-text:hover {
-                    color: var(--color-white);
-                    text-decoration-color: rgba(255,255,255,0.7);
+                    color: rgba(255,255,255,0.9);
+                }
+
+                .hero-btn-text:hover::after {
+                    transform: translateX(5px);
                 }
 
                 /* EASA credential card */

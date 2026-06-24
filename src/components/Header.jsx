@@ -613,7 +613,7 @@ const Header = () => {
                     inset: 0;
                     width: 100%;
                     height: 100%;
-                    background: rgba(13, 17, 24, 0.55);
+                    background: rgba(9, 9, 12, 0.55);
                     backdrop-filter: blur(2px);
                     cursor: default;
                 }

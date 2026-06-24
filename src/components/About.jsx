@@ -125,7 +125,7 @@ const About = () => {
                     font-weight: 600;
                     text-transform: uppercase;
                     letter-spacing: 0.12em;
-                    color: rgba(22,28,40,0.45);
+                    color: rgba(17,17,20,0.45);
                     padding: 5px 10px;
                     border: 1px solid var(--color-border);
                 }

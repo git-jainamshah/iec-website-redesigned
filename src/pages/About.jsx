@@ -516,7 +516,7 @@ const AboutPage = () => {
                     position: absolute;
                     bottom: 0; left: 0; right: 0;
                     padding: var(--space-3xl) var(--space-xl) var(--space-xl);
-                    background: linear-gradient(to top, rgba(13,17,24,0.92) 0%, rgba(13,17,24,0.5) 55%, transparent 100%);
+                    background: linear-gradient(to top, rgba(9,9,12,0.92) 0%, rgba(9,9,12,0.5) 55%, transparent 100%);
                     display: flex;
                     flex-direction: column;
                     gap: 5px;
