@@ -1022,6 +1022,11 @@ const Header = () => {
                         display: none;
                     }
 
+                    .lang-btn {
+                        border: none;
+                        padding: 0 6px;
+                    }
+
                     /* Mobile: restore full-page scroll — split panel looks awkward on single column */
                     .menu-overlay {
                         overflow-y: auto;
