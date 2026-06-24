@@ -60,11 +60,11 @@ const Leadership = () => {
                             <cite className="ld-quote-cite">Late Anil Bhardwaj, Founder</cite>
                         </blockquote>
 
-                        {/* Signature */}
-                        <div className="ld-sig ld-sig--dark">
-                            <svg viewBox="0 0 220 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="ld-sig-svg" aria-label="Anil Bhardwaj signature">
-                                <text x="6" y="42" fontFamily="'Brush Script MT','Segoe Script','URW Chancery L',cursive" fontSize="38" fill="rgba(255,255,255,0.72)" letterSpacing="-1">A. Bhardwaj</text>
-                                <line x1="6" y1="50" x2="188" y2="50" stroke="rgba(255,255,255,0.2)" strokeWidth="0.8"/>
+                        {/* Signature — Caveat font (rugged, natural handwriting) */}
+                        <div className="ld-sig">
+                            <svg viewBox="0 0 230 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="ld-sig-svg" aria-label="Anil Bhardwaj signature">
+                                <text x="4" y="46" fontFamily="'Caveat', cursive" fontSize="42" fontWeight="700" fill="rgba(255,255,255,0.7)" letterSpacing="1">A. Bhardwaj</text>
+                                <line x1="4" y1="55" x2="195" y2="55" stroke="rgba(255,255,255,0.18)" strokeWidth="0.75"/>
                             </svg>
                         </div>
 
@@ -87,9 +87,18 @@ const Leadership = () => {
                         </div>
                     </div>
 
+                    {/* Placeholder — replace background-image with actual photo URL when available */}
                     <div className="ld-leader-photo">
-                        <img src={imgFounderPanel} alt="IEC workshop" className="ld-leader-img" />
-                        <div className="ld-leader-img-label"><span>IEC Ranoli Works</span></div>
+                        <div className="ld-ph ld-ph--dark">
+                            <svg className="ld-ph-silhouette" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <ellipse cx="100" cy="82" rx="52" ry="60" fill="rgba(255,255,255,0.055)"/>
+                                <path d="M8 260 C8 168 46 134 100 128 C154 134 192 168 192 260 Z" fill="rgba(255,255,255,0.04)"/>
+                            </svg>
+                        </div>
+                        <div className="ld-nameplate ld-nameplate--dark">
+                            <span className="ld-nameplate-name">Late Anil Bhardwaj</span>
+                            <span className="ld-nameplate-title">Founder, Indian Engineering Company</span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -97,10 +106,18 @@ const Leadership = () => {
             {/* ── Message from CEO ── */}
             <section className="ld-leader ld-leader--light">
                 <div className="ld-leader-inner ld-leader-inner--flip">
-                    {/* Photo LEFT, text RIGHT (mirrored) */}
+                    {/* Placeholder — replace with actual CEO photo when available */}
                     <div className="ld-leader-photo">
-                        <img src={imgFounderSide} alt="IEC facility" className="ld-leader-img ld-leader-img--light" />
-                        <div className="ld-leader-img-label ld-leader-img-label--light"><span>IEC Ranoli Works</span></div>
+                        <div className="ld-ph ld-ph--warm">
+                            <svg className="ld-ph-silhouette" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <ellipse cx="100" cy="82" rx="52" ry="60" fill="rgba(255,255,255,0.06)"/>
+                                <path d="M8 260 C8 168 46 134 100 128 C154 134 192 168 192 260 Z" fill="rgba(255,255,255,0.045)"/>
+                            </svg>
+                        </div>
+                        <div className="ld-nameplate ld-nameplate--dark">
+                            <span className="ld-nameplate-name">Mrs. Arpana Bharadwaj</span>
+                            <span className="ld-nameplate-title">Director &amp; CEO, Indian Engineering Company</span>
+                        </div>
                     </div>
 
                     <div className="ld-leader-text ld-reveal" ref={r}>
@@ -119,21 +136,12 @@ const Leadership = () => {
                             raise with every project we undertake.
                         </p>
 
-                        {/* Signature */}
-                        <div className="ld-sig ld-sig--light">
-                            <svg viewBox="0 0 260 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="ld-sig-svg" aria-label="Arpana Bharadwaj signature">
-                                <text x="6" y="42" fontFamily="'Brush Script MT','Segoe Script','URW Chancery L',cursive" fontSize="34" fill="rgba(17,17,20,0.68)" letterSpacing="-0.5">Arpana Bharadwaj</text>
-                                <line x1="6" y1="50" x2="232" y2="50" stroke="rgba(17,17,20,0.18)" strokeWidth="0.8"/>
+                        {/* Signature — Great Vibes font (elegant, flowing) */}
+                        <div className="ld-sig">
+                            <svg viewBox="0 0 290 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="ld-sig-svg ld-sig-svg--wide" aria-label="Arpana Bharadwaj signature">
+                                <text x="4" y="46" fontFamily="'Great Vibes', cursive" fontSize="40" fill="rgba(17,17,20,0.62)" letterSpacing="0.5">Arpana Bharadwaj</text>
+                                <line x1="4" y1="55" x2="256" y2="55" stroke="rgba(17,17,20,0.15)" strokeWidth="0.75"/>
                             </svg>
-                        </div>
-
-                        {/* Contact */}
-                        <div className="ld-ceo-contact-row">
-                            <a href="tel:+919712914839" className="ld-ceo-phone-light">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.17 6.17l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                                +91 97129 14839
-                            </a>
-                            <span className="ld-ceo-role-tag">Director &amp; CEO</span>
                         </div>
                     </div>
                 </div>
@@ -167,21 +175,25 @@ const Leadership = () => {
                     </div>
                     <div className="ld-team-grid">
                         {[
-                            { role: 'Technical Director', img: imgTeam1, desc: 'Overseeing all high-voltage repair processes and technical standards across the facility.' },
-                            { role: 'Operations Head', img: imgTeam2, desc: 'Managing workflow, scheduling, and the coordination of 300,000 sq.ft of workshop capacity.' },
-                            { role: 'Quality Assurance Lead', img: imgTeam3, desc: 'Ensuring every machine leaving IEC meets ISO 9001 and EASA international standards.' },
+                            { name: 'Mr. Kush Bhardwaj',    title: 'Director' },
+                            { name: 'Mr. Jatin Shah',       title: 'Managing Director' },
+                            { name: 'Mr. Jitu Shah',        title: 'Marketing' },
+                            { name: 'Mr. A.D. Kokje',       title: 'Technical Advisor' },
+                            { name: 'Mr. K.H. Mehta',       title: 'Technical Advisor' },
+                            { name: 'Mr. C.N. Dandiwala',   title: 'Technical Advisor' },
                         ].map((member, i) => (
-                            <div key={i} className="ld-team-card ld-reveal" ref={r} style={{ transitionDelay: `${i * 0.1}s` }}>
+                            <div key={i} className="ld-team-card ld-reveal" ref={r} style={{ transitionDelay: `${i * 0.07}s` }}>
+                                {/* Person silhouette placeholder */}
                                 <div className="ld-team-photo">
-                                    <img src={member.img} alt={member.role} />
+                                    <svg className="ld-team-sil" viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <ellipse cx="80" cy="65" rx="38" ry="44" fill="rgba(255,255,255,0.055)"/>
+                                        <path d="M4 200 C4 130 36 104 80 100 C124 104 156 130 156 200 Z" fill="rgba(255,255,255,0.04)"/>
+                                    </svg>
                                     <div className="ld-team-fog" />
                                     <div className="ld-team-info">
-                                        <span className="ld-team-role">{member.role}</span>
-                                        <span className="ld-team-coming">Profile Coming Soon</span>
+                                        <span className="ld-team-title-tag">{member.title}</span>
+                                        <span className="ld-team-name">{member.name}</span>
                                     </div>
-                                </div>
-                                <div className="ld-team-body">
-                                    <p className="ld-team-desc">{member.desc}</p>
                                 </div>
                             </div>
                         ))}
@@ -209,6 +221,8 @@ const Leadership = () => {
             </section>
 
             <style>{`
+                @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Great+Vibes&display=swap');
+
                 .ld-page { min-height: 100vh; }
 
                 /* ── Reveal animation ── */
@@ -311,7 +325,7 @@ const Leadership = () => {
                 .ld-quote-text {
                     font-family: var(--font-display);
                     font-size: 1.0625rem;
-                    font-style: italic;
+                    font-style: normal;
                     font-weight: 300;
                     color: rgba(255,255,255,0.8);
                     line-height: 1.65;
@@ -330,8 +344,8 @@ const Leadership = () => {
 
                 /* Signature */
                 .ld-sig { margin: var(--space-xl) 0 var(--space-md); }
-                .ld-sig-svg { width: 220px; height: 56px; display: block; overflow: visible; }
-                .ld-leader--light .ld-sig-svg { width: 260px; }
+                .ld-sig-svg { width: 230px; height: 64px; display: block; overflow: visible; }
+                .ld-sig-svg--wide { width: 290px; }
 
                 /* Stats */
                 .ld-leader-stats {
@@ -345,47 +359,44 @@ const Leadership = () => {
                 .ld-f-stat-label { font-family: var(--font-mono); font-size: 0.5625rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.35); }
                 .ld-f-stat-sep { width: 1px; height: 36px; background: rgba(255,255,255,0.1); }
 
-                /* CEO contact row */
-                .ld-ceo-contact-row {
-                    display: flex; align-items: center; gap: var(--space-lg);
-                    margin-top: var(--space-xl); padding-top: var(--space-xl);
-                    border-top: 1px solid var(--color-border);
-                }
-                .ld-ceo-phone-light {
-                    display: inline-flex; align-items: center; gap: 8px;
-                    font-family: var(--font-mono); font-size: 0.875rem; font-weight: 600;
-                    color: var(--color-text); text-decoration: none; transition: color 0.2s;
-                }
-                .ld-ceo-phone-light svg { color: var(--color-accent); }
-                .ld-ceo-phone-light:hover { color: var(--color-accent); }
-                .ld-ceo-role-tag {
-                    font-family: var(--font-mono); font-size: 0.5rem; font-weight: 600;
-                    text-transform: uppercase; letter-spacing: 0.12em;
-                    color: var(--color-accent); border: 1px solid rgba(200,16,46,0.3);
-                    padding: 4px 9px;
-                }
-
-                /* Photo column */
+                /* Photo column — person placeholder */
                 .ld-leader-photo { position: relative; overflow: hidden; }
-                .ld-leader-img {
-                    width: 100%; height: 100%; object-fit: cover; object-position: center;
-                    filter: grayscale(35%) brightness(0.68) contrast(1.05);
-                    transition: filter 0.6s ease;
-                }
-                .ld-leader-img--light {
-                    filter: grayscale(20%) brightness(0.85) contrast(1.02);
-                }
-                .ld-leader-photo:hover .ld-leader-img { filter: grayscale(10%) brightness(0.78) contrast(1.02); }
-                .ld-leader-photo:hover .ld-leader-img--light { filter: grayscale(5%) brightness(0.9) contrast(1.01); }
 
-                .ld-leader-img-label {
-                    position: absolute; bottom: var(--space-xl); left: var(--space-xl);
-                    background: rgba(17,17,20,0.78); padding: 6px 14px;
+                /* Placeholder card — fills the entire photo column */
+                .ld-ph {
+                    width: 100%; height: 100%;
+                    display: flex; align-items: center; justify-content: center;
+                    min-height: 520px;
                 }
-                .ld-leader-img-label--light { background: rgba(17,17,20,0.6); }
-                .ld-leader-img-label span {
-                    font-family: var(--font-mono); font-size: 0.625rem;
-                    text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.55);
+                .ld-ph--dark {
+                    background: linear-gradient(160deg, #1a1a1f 0%, #0e0e11 100%);
+                }
+                .ld-ph--warm {
+                    background: linear-gradient(160deg, #1e1a1a 0%, #110e0e 100%);
+                }
+                .ld-ph-silhouette {
+                    width: 52%; max-width: 210px; opacity: 0.45;
+                }
+
+                /* Nameplate — sits over bottom of photo column */
+                .ld-nameplate {
+                    position: absolute; bottom: 0; left: 0; right: 0;
+                    padding: var(--space-3xl) var(--space-xl) var(--space-xl);
+                    background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%);
+                    display: flex; flex-direction: column; gap: 5px;
+                }
+                .ld-nameplate--dark .ld-nameplate-name,
+                .ld-nameplate--dark .ld-nameplate-title { color: rgba(255,255,255,0.9); }
+                .ld-nameplate-name {
+                    font-family: var(--font-display);
+                    font-size: 1.0625rem; font-weight: 400;
+                    letter-spacing: -0.01em; color: rgba(255,255,255,0.9);
+                }
+                .ld-nameplate-title {
+                    font-family: var(--font-mono);
+                    font-size: 0.5625rem; font-weight: 500;
+                    text-transform: uppercase; letter-spacing: 0.14em;
+                    color: rgba(200,16,46,0.85);
                 }
 
                 /* ── Craft Strip ── */
@@ -450,69 +461,56 @@ const Leadership = () => {
                 .ld-team-grid {
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
-                    gap: var(--space-xl);
+                    gap: var(--space-lg);
                 }
                 .ld-team-card {
-                    display: flex;
-                    flex-direction: column;
-                    border: 1px solid var(--color-border);
                     overflow: hidden;
+                    border: 1px solid var(--color-border);
                     transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
                 }
                 .ld-team-card:hover {
-                    transform: translateY(-6px);
-                    box-shadow: 0 20px 48px rgba(0,0,0,0.12);
+                    transform: translateY(-5px);
+                    box-shadow: 0 16px 40px rgba(0,0,0,0.1);
                 }
                 .ld-team-photo {
                     position: relative;
-                    aspect-ratio: 4/3;
+                    aspect-ratio: 3/4;
+                    background: linear-gradient(150deg, #1a1a1f 0%, #0d0d10 100%);
+                    display: flex; align-items: center; justify-content: center;
                     overflow: hidden;
                 }
-                .ld-team-photo img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    filter: grayscale(80%) brightness(0.65) contrast(1.1);
-                    transition: filter 0.5s ease, transform 0.5s ease;
+                .ld-team-sil {
+                    width: 58%; max-width: 120px; opacity: 0.4;
+                    transition: opacity 0.4s;
                 }
-                .ld-team-card:hover .ld-team-photo img {
-                    filter: grayscale(50%) brightness(0.72) contrast(1.05);
-                    transform: scale(1.04);
-                }
+                .ld-team-card:hover .ld-team-sil { opacity: 0.55; }
                 .ld-team-fog {
                     position: absolute;
                     inset: 0;
-                    background: linear-gradient(to top, rgba(17,17,20,0.85) 0%, transparent 55%);
+                    background: linear-gradient(to top, rgba(17,17,20,0.92) 0%, transparent 45%);
                 }
                 .ld-team-info {
                     position: absolute;
                     bottom: 0; left: 0; right: 0;
-                    padding: var(--space-xl);
+                    padding: var(--space-lg) var(--space-xl);
                     display: flex;
                     flex-direction: column;
-                    gap: 4px;
+                    gap: 5px;
                 }
-                .ld-team-role {
+                .ld-team-title-tag {
                     font-family: var(--font-mono);
-                    font-size: 0.625rem;
+                    font-size: 0.5625rem;
                     text-transform: uppercase;
-                    letter-spacing: 0.14em;
+                    letter-spacing: 0.15em;
                     color: var(--color-accent);
                 }
-                .ld-team-coming {
-                    font-size: 0.9375rem;
-                    font-weight: 500;
+                .ld-team-name {
+                    font-family: var(--font-display);
+                    font-size: 1rem;
+                    font-weight: 400;
+                    letter-spacing: -0.01em;
                     color: var(--color-white);
-                }
-                .ld-team-body {
-                    padding: var(--space-lg) var(--space-xl);
-                    background: var(--color-white);
-                    flex: 1;
-                }
-                .ld-team-desc {
-                    font-size: 0.875rem;
-                    line-height: 1.7;
-                    color: var(--color-text-light);
+                    line-height: 1.25;
                 }
 
                 /* ── CTA Band ── */
@@ -571,7 +569,7 @@ const Leadership = () => {
                     .ld-leader-text { padding: var(--space-3xl) var(--space-xl) !important; }
                     .ld-craft-grid { grid-template-columns: 1fr; }
                     .ld-c-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
-                    .ld-team-grid { grid-template-columns: 1fr; }
+                    .ld-team-grid { grid-template-columns: repeat(2, 1fr); }
                     .ld-cta-inner { flex-direction: column; align-items: flex-start; }
                 }
 

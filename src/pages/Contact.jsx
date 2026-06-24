@@ -40,9 +40,14 @@ const departments = [
     {
         dept: 'Sales & Finance',
         rows: [
-            { name: 'Mr. Jatin Shah', phone: '+91 98240 24839', href: 'tel:+919824024839' },
-            { name: 'Mr. Jitu Shah', phone: '+91 98241 74989', href: 'tel:+919824174989' },
+            { name: 'Mr. Jatin Shah', role: 'Managing Director, IEC', phone: '+91 98240 24839', href: 'tel:+919824024839' },
             { name: 'General Enquiry', phone: '+91 98240 29088', href: 'tel:+919824029088' },
+        ],
+    },
+    {
+        dept: 'Marketing',
+        rows: [
+            { name: 'Mr. Jitu Shah', phone: '+91 98241 74989', href: 'tel:+919824174989' },
         ],
     },
     {
