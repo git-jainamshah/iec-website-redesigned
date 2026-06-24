@@ -22,7 +22,7 @@ import adityaBirlaLogo from '../assets/clientel-logos/aditya-birla-logo.png';
 
 // International & most-famous brands first, then established Indian names
 const logoItems = [
-    { name: 'Reliance Industries', logo: relianceLogo },
+    { name: 'Reliance Industries', logo: relianceLogo, scale: 1.9 },
     { name: 'Tata', logo: tataLogo },
     { name: 'Linde', logo: lindeLogo },
     { name: 'WEG', logo: wegLogo },
@@ -324,7 +324,7 @@ const Clients = () => {
                                     src={client.logo}
                                     alt={client.name}
                                     className="logo-clean"
-                                    style={{ height: `${logoSizes[client.logo]?.marqueeH || 40}px` }}
+                                    style={{ height: `${Math.round((logoSizes[client.logo]?.marqueeH || 40) * (client.scale || 1))}px` }}
                                 />
                             </div>
                         ))}
