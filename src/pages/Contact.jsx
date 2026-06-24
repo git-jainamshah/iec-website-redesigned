@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
-import heroBg from '../assets/iec-hero-bg.jpeg';
+import heroBg from '../assets/iec-stator-lift.jpg';
 import projectBg from '../assets/project-banner-bg.jpg';
 
 /* ── Department directory data ─────────────────────── */
@@ -130,6 +130,7 @@ const Contact = () => {
                 title="Contact Us"
                 subtitle="Connect directly with our technical, sales, or service teams — or send us a brief for your repair."
                 breadcrumbs={[{ label: 'Contact' }]}
+                bgImage={heroBg}
             />
 
             {/* ── Main contact section — light ────────────────── */}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import heroBg from '../assets/iec-hero-about.jpg';
 import imgCoilFloor from '../assets/iec-coil-floor.jpg';
 import imgStatorLift from '../assets/iec-stator-lift.jpg';
 import imgCoilExpanding from '../assets/iec-coil-expanding.jpg';
@@ -38,6 +39,7 @@ const AboutPage = () => {
                 title="About IEC"
                 subtitle="India's trusted partner in heavy industrial motor and generator repair since 1998."
                 breadcrumbs={[{ label: 'About' }]}
+                bgImage={heroBg}
             />
 
             {/* ── Story — dark, flows from PageHero ──────────── */}

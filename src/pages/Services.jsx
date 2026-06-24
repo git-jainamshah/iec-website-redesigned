@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import heroBg from '../assets/iec-rotor-crane.jpg';
 import imgGeneratorWorkshop from '../assets/iec-generator-workshop.jpg';
 import imgRotorCrane from '../assets/iec-rotor-crane.jpg';
 import imgVpiTank from '../assets/iec-vpi-tank.jpg';
@@ -98,6 +99,7 @@ const ServicesPage = () => {
                 title="Our Services"
                 subtitle="Heavy industrial repair and rewinding for high-voltage motors, generators, alternators, DC motors and rotating-machine spares."
                 breadcrumbs={[{ label: 'Services' }]}
+                bgImage={heroBg}
             />
 
             <section className="sp-list">

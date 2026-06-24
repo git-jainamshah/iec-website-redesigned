@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import defaultHeroBg from '../assets/iec-page-hero-bg.jpg';
+import defaultHeroBg from '../assets/iec-hero-default.jpg';
 
 const PageHero = ({ label, title, subtitle, breadcrumbs = [], bgImage }) => {
     const bg = bgImage || defaultHeroBg;
@@ -48,8 +48,11 @@ const PageHero = ({ label, title, subtitle, breadcrumbs = [], bgImage }) => {
                 .page-hero {
                     position: relative;
                     background: var(--color-primary);
-                    padding: calc(var(--header-height) + var(--space-3xl)) 0 var(--space-3xl);
+                    min-height: 480px;
+                    padding: calc(var(--header-height) + var(--space-5xl)) 0 var(--space-4xl);
                     overflow: hidden;
+                    display: flex;
+                    align-items: center;
                 }
 
                 .page-hero-bg {
@@ -62,18 +65,24 @@ const PageHero = ({ label, title, subtitle, breadcrumbs = [], bgImage }) => {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
-                    object-position: center;
-                    filter: grayscale(100%) brightness(0.28) contrast(1.1);
-                    transform: scale(1.04);
+                    object-position: center 35%;
+                    filter: grayscale(100%) brightness(0.42) contrast(1.15) saturate(0);
+                    transform: scale(1.06);
                     display: block;
+                    transition: transform 8s ease-out;
+                }
+
+                .page-hero:hover .page-hero-bg-img {
+                    transform: scale(1.0);
                 }
 
                 .page-hero-bg-overlay {
                     position: absolute;
                     inset: 0;
                     background:
-                        linear-gradient(to right, rgba(10,13,18,0.72) 0%, rgba(10,13,18,0.35) 100%),
-                        linear-gradient(to top, rgba(10,13,18,0.6) 0%, transparent 60%);
+                        linear-gradient(105deg, rgba(10,13,18,0.82) 0%, rgba(10,13,18,0.38) 55%, rgba(10,13,18,0.15) 100%),
+                        linear-gradient(to top, rgba(10,13,18,0.75) 0%, transparent 50%),
+                        linear-gradient(to bottom, rgba(10,13,18,0.4) 0%, transparent 30%);
                 }
 
                 .page-hero-content {
@@ -125,20 +134,21 @@ const PageHero = ({ label, title, subtitle, breadcrumbs = [], bgImage }) => {
                 /* Title */
                 .page-hero-title {
                     color: var(--color-white);
-                    font-size: clamp(2.25rem, 5vw, 3.5rem);
-                    font-weight: 400;
-                    line-height: 1.15;
-                    margin-bottom: var(--space-md);
-                    max-width: 700px;
+                    font-size: clamp(2.75rem, 6vw, 5rem);
+                    font-weight: 700;
+                    line-height: 1.06;
+                    letter-spacing: -0.03em;
+                    margin-bottom: var(--space-lg);
+                    max-width: 780px;
                     opacity: 0;
                 }
 
                 /* Subtitle */
                 .page-hero-subtitle {
-                    font-size: 1.0625rem;
+                    font-size: 1.125rem;
                     line-height: 1.7;
-                    color: rgba(255, 255, 255, 0.55);
-                    max-width: 540px;
+                    color: rgba(255, 255, 255, 0.65);
+                    max-width: 560px;
                     opacity: 0;
                 }
 
@@ -154,15 +164,16 @@ const PageHero = ({ label, title, subtitle, breadcrumbs = [], bgImage }) => {
                 /* Mobile */
                 @media (max-width: 768px) {
                     .page-hero {
-                        padding: calc(var(--header-height) + var(--space-2xl)) 0 var(--space-2xl);
+                        min-height: 360px;
+                        padding: calc(var(--header-height) + var(--space-3xl)) 0 var(--space-3xl);
                     }
 
                     .page-hero-title {
-                        font-size: clamp(1.75rem, 6vw, 2.5rem);
+                        font-size: clamp(2rem, 8vw, 3rem);
                     }
 
                     .page-hero-subtitle {
-                        font-size: 0.9375rem;
+                        font-size: 1rem;
                     }
                 }
             `}</style>

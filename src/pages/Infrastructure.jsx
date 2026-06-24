@@ -1,5 +1,6 @@
 import React from 'react';
 import PageHero from '../components/PageHero';
+import heroBg from '../assets/iec-taping-room-wide.jpg';
 import imgCoilWorkers from '../assets/iec-coil-workers.jpg';
 import imgVpiTank from '../assets/iec-vpi-tank.jpg';
 import imgLaserCnc from '../assets/iec-laser-cnc.jpg';
@@ -63,6 +64,7 @@ const InfrastructurePage = () => {
                 title="Infrastructure"
                 subtitle="300,000 sq.ft of works across Ranoli and Raika, built for high-voltage repair at scale."
                 breadcrumbs={[{ label: 'Infrastructure' }]}
+                bgImage={heroBg}
             />
 
             {/* ── Stats — dark, flows from PageHero ──────────── */}
