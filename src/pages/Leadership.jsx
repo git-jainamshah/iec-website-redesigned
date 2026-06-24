@@ -60,11 +60,11 @@ const Leadership = () => {
                             <cite className="ld-quote-cite">Late Anil Bhardwaj, Founder</cite>
                         </blockquote>
 
-                        {/* Signature — Caveat font (rugged, natural handwriting) */}
+                        {/* Signature — Mrs Saint Delafield (elegant classic handwriting) */}
                         <div className="ld-sig">
-                            <svg viewBox="0 0 230 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="ld-sig-svg" aria-label="Anil Bhardwaj signature">
-                                <text x="4" y="46" fontFamily="'Caveat', cursive" fontSize="42" fontWeight="700" fill="rgba(255,255,255,0.7)" letterSpacing="1">A. Bhardwaj</text>
-                                <line x1="4" y1="55" x2="195" y2="55" stroke="rgba(255,255,255,0.18)" strokeWidth="0.75"/>
+                            <svg viewBox="0 0 260 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="ld-sig-svg ld-sig-svg--wide" aria-label="Anil Bhardwaj signature">
+                                <text x="4" y="46" fontFamily="'Mrs Saint Delafield', cursive" fontSize="44" fill="rgba(255,255,255,0.72)" letterSpacing="0.5">Anil Bhardwaj</text>
+                                <line x1="4" y1="55" x2="230" y2="55" stroke="rgba(255,255,255,0.18)" strokeWidth="0.75"/>
                             </svg>
                         </div>
 
@@ -136,11 +136,11 @@ const Leadership = () => {
                             raise with every project we undertake.
                         </p>
 
-                        {/* Signature — Great Vibes font (elegant, flowing) */}
+                        {/* Signature — Over the Rainbow (casual, warm handwriting) */}
                         <div className="ld-sig">
-                            <svg viewBox="0 0 290 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="ld-sig-svg ld-sig-svg--wide" aria-label="Arpana Bharadwaj signature">
-                                <text x="4" y="46" fontFamily="'Great Vibes', cursive" fontSize="40" fill="rgba(17,17,20,0.62)" letterSpacing="0.5">Arpana Bharadwaj</text>
-                                <line x1="4" y1="55" x2="256" y2="55" stroke="rgba(17,17,20,0.15)" strokeWidth="0.75"/>
+                            <svg viewBox="0 0 310 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="ld-sig-svg ld-sig-svg--xl" aria-label="Arpana Bhardwaj signature">
+                                <text x="4" y="44" fontFamily="'Over the Rainbow', cursive" fontSize="34" fill="rgba(17,17,20,0.62)" letterSpacing="0.5">Arpana Bhardwaj</text>
+                                <line x1="4" y1="55" x2="280" y2="55" stroke="rgba(17,17,20,0.15)" strokeWidth="0.75"/>
                             </svg>
                         </div>
                     </div>
@@ -221,7 +221,7 @@ const Leadership = () => {
             </section>
 
             <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Great+Vibes&display=swap');
+                @import url('https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Over+the+Rainbow&display=swap');
 
                 .ld-page { min-height: 100vh; }
 
@@ -345,7 +345,8 @@ const Leadership = () => {
                 /* Signature */
                 .ld-sig { margin: var(--space-xl) 0 var(--space-md); }
                 .ld-sig-svg { width: 230px; height: 64px; display: block; overflow: visible; }
-                .ld-sig-svg--wide { width: 290px; }
+                .ld-sig-svg--wide { width: 260px; }
+                .ld-sig-svg--xl { width: 310px; }
 
                 /* Stats */
                 .ld-leader-stats {
