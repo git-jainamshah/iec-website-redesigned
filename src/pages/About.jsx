@@ -135,25 +135,26 @@ const AboutPage = () => {
                 </div>
             </section>
 
-            {/* ── Values — light, clean ───────────────────────── */}
+            {/* ── Values ─────────────────────────────────────── */}
             <section className="ap-values">
-                <div className="container">
+                <div className="container ap-values-inner">
                     <div className="ap-values-header">
-                        <div>
-                            <p className="ap-values-eyebrow">Our Foundation</p>
-                            <h2 className="ap-values-heading">Mission &amp; Values</h2>
-                        </div>
-                        <span className="ap-values-count">03 Core Principles</span>
+                        <p className="ap-values-eyebrow">Our Foundation</p>
+                        <h2 className="ap-values-heading">Mission &amp; Values</h2>
                     </div>
-                    <div className="ap-values-grid">
-                        {values.map((v) => (
-                            <div className="ap-value" key={v.num}>
+                </div>
+                <div className="ap-values-grid">
+                    {values.map((v) => (
+                        <div className="ap-value" key={v.num}>
+                            <div className="ap-value-ghost">{v.num}</div>
+                            <div className="ap-value-body">
                                 <span className="ap-value-num">{v.num}</span>
                                 <h3 className="ap-value-title">{v.title}</h3>
                                 <p className="ap-value-desc">{v.desc}</p>
                             </div>
-                        ))}
-                    </div>
+                            <div className="ap-value-line" />
+                        </div>
+                    ))}
                 </div>
             </section>
 
@@ -367,21 +368,20 @@ const AboutPage = () => {
                     .ap-photo-col .ap-photo { height: 160px; }
                 }
 
-                /* ── Values (light) ───────────────────────────── */
+                /* ── Values (dark, flows from photo strip) ────── */
                 .ap-values {
-                    background: var(--color-white);
-                    padding: var(--space-5xl) 0 var(--space-5xl);
-                    border-top: 4px solid var(--color-accent);
+                    background: var(--color-primary);
+                    padding: var(--space-5xl) 0 0;
+                    border-top: 1px solid rgba(255,255,255,0.06);
+                }
+
+                .ap-values-inner {
+                    padding-bottom: var(--space-3xl);
+                    border-bottom: 1px solid rgba(255,255,255,0.07);
                 }
 
                 .ap-values-header {
-                    margin-bottom: var(--space-4xl);
-                    display: flex;
-                    align-items: flex-end;
-                    justify-content: space-between;
-                    gap: var(--space-2xl);
-                    border-bottom: 1px solid var(--color-border);
-                    padding-bottom: var(--space-2xl);
+                    max-width: 640px;
                 }
 
                 .ap-values-eyebrow {
@@ -396,80 +396,98 @@ const AboutPage = () => {
 
                 .ap-values-heading {
                     font-family: var(--font-serif);
-                    font-size: clamp(2rem, 3.5vw, 2.75rem);
+                    font-size: clamp(2.25rem, 4vw, 3.25rem);
                     font-weight: 700;
-                    color: var(--color-text);
-                    letter-spacing: -0.025em;
-                    line-height: 1.1;
+                    color: var(--color-white);
+                    letter-spacing: -0.03em;
+                    line-height: 1.08;
                 }
 
-                .ap-values-count {
-                    font-family: var(--font-mono);
-                    font-size: 0.625rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 0.1em;
-                    color: rgba(0,0,0,0.2);
-                    white-space: nowrap;
-                }
-
+                /* Cards grid — full bleed */
                 .ap-values-grid {
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
-                    gap: 0;
+                    border-top: 1px solid rgba(255,255,255,0.07);
+                    margin-top: var(--space-4xl);
                 }
 
                 .ap-value {
-                    padding: var(--space-3xl) var(--space-2xl);
-                    border-top: 3px solid var(--color-border);
-                    border-right: 1px solid var(--color-border);
                     position: relative;
-                    transition: border-top-color 0.25s;
+                    padding: var(--space-4xl) var(--space-3xl) var(--space-5xl);
+                    border-right: 1px solid rgba(255,255,255,0.07);
                     overflow: hidden;
+                    transition: background 0.3s;
                 }
 
-                .ap-value:first-child { padding-left: 0; }
                 .ap-value:last-child { border-right: none; }
 
-                .ap-value::before {
-                    content: '';
+                .ap-value:hover {
+                    background: rgba(255,255,255,0.02);
+                }
+
+                /* Oversized ghost number — fills card top */
+                .ap-value-ghost {
+                    font-family: var(--font-mono);
+                    font-size: clamp(6rem, 10vw, 10rem);
+                    font-weight: 700;
+                    color: rgba(255,255,255,0.035);
+                    letter-spacing: -0.06em;
+                    line-height: 1;
                     position: absolute;
-                    top: -3px; left: 0;
-                    width: 100%;
-                    height: 3px;
+                    top: var(--space-2xl);
+                    right: var(--space-xl);
+                    pointer-events: none;
+                    user-select: none;
+                    transition: color 0.3s;
+                }
+
+                .ap-value:hover .ap-value-ghost {
+                    color: rgba(200,16,46,0.08);
+                }
+
+                /* Red animated bottom line */
+                .ap-value-line {
+                    position: absolute;
+                    bottom: 0; left: 0; right: 0;
+                    height: 2px;
                     background: var(--color-accent);
                     transform: scaleX(0);
                     transform-origin: left;
-                    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+                    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
                 }
 
-                .ap-value:hover::before { transform: scaleX(1); }
+                .ap-value:hover .ap-value-line { transform: scaleX(1); }
+
+                .ap-value-body {
+                    position: relative;
+                    z-index: 1;
+                }
 
                 .ap-value-num {
                     font-family: var(--font-mono);
-                    font-size: 2.5rem;
-                    font-weight: 700;
-                    color: rgba(0,0,0,0.06);
-                    letter-spacing: -0.05em;
+                    font-size: 0.625rem;
+                    font-weight: 600;
+                    color: var(--color-accent);
+                    letter-spacing: 0.14em;
+                    text-transform: uppercase;
                     display: block;
-                    line-height: 1;
-                    margin-bottom: var(--space-lg);
+                    margin-bottom: var(--space-2xl);
                 }
 
                 .ap-value-title {
                     font-family: var(--font-serif);
-                    font-size: 1.375rem;
+                    font-size: clamp(1.375rem, 2vw, 1.75rem);
                     font-weight: 700;
-                    color: var(--color-text);
-                    letter-spacing: -0.02em;
-                    line-height: 1.2;
-                    margin-bottom: var(--space-md);
+                    color: var(--color-white);
+                    letter-spacing: -0.025em;
+                    line-height: 1.15;
+                    margin-bottom: var(--space-lg);
                 }
 
                 .ap-value-desc {
                     font-size: 0.9375rem;
-                    line-height: 1.75;
-                    color: var(--color-text-light);
+                    line-height: 1.8;
+                    color: rgba(255,255,255,0.48);
                 }
 
                 /* ── Responsive ──────────────────────────────── */
@@ -502,20 +520,19 @@ const AboutPage = () => {
                         border-right: none;
                         border-top: 1px solid rgba(255,255,255,0.07);
                     }
-                    .ap-values-header { flex-direction: column; align-items: flex-start; }
-                    .ap-values-grid {
-                        grid-template-columns: 1fr;
-                    }
+                    .ap-values-grid { grid-template-columns: 1fr; }
                     .ap-value {
                         border-right: none;
-                        border-top: 3px solid var(--color-border);
+                        border-bottom: 1px solid rgba(255,255,255,0.07);
+                        padding: var(--space-3xl) var(--space-2xl) var(--space-4xl);
                     }
-                    .ap-value:first-child { padding-left: var(--space-2xl); }
+                    .ap-value:last-child { border-bottom: none; }
                 }
 
                 @media (max-width: 480px) {
-                    .ap-value:first-child { padding-left: 0; }
-                    .ap-values { padding: var(--space-4xl) 0; }
+                    .ap-values { padding-top: var(--space-4xl); }
+                    .ap-value { padding: var(--space-2xl) var(--space-lg) var(--space-3xl); }
+                    .ap-value-ghost { font-size: 5rem; }
                 }
 
             `}</style>
