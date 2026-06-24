@@ -49,7 +49,7 @@ const CARDS = [
     {
         num: '05', label: 'Site & Works',
         title: 'Preventive Maintenance',
-        desc: "Scheduled maintenance and overhauling at IEC's Vadodara works or in-situ at the client site · sized to your plant's outage window.",
+        desc: "Scheduled maintenance and overhauling at IEC's Ranoli works or in-situ at the client site · sized to your plant's outage window.",
         chips: ['Planned Outage Overhauls', 'Condition Monitoring', 'On-Site Service', 'Emergency Response'],
         img: imgCoilWorkers,
     },

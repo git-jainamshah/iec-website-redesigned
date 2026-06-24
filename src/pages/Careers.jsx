@@ -42,7 +42,7 @@ const Careers = () => {
 
     const depts = ['All', ...new Set(openings.map(j => j.dept))];
     const types = ['All', 'Full-time', 'Part-time'];
-    const sites = ['All', 'Ranoli, Vadodara, Gujarat', 'Raika, Vadodara, Gujarat'];
+    const sites = ['All', 'Ranoli, Gujarat', 'Raika, Gujarat'];
 
     let filtered = openings.filter(j =>
         (filterDept === 'All' || j.dept === filterDept) &&

@@ -5,7 +5,7 @@ export const openings = [
         title: 'Senior Motor Winding Technician',
         dept: 'Operations',
         type: 'Full-time',
-        site: 'Ranoli, Vadodara, Gujarat',
+        site: 'Ranoli, Gujarat',
         posted: new Date('2024-06-01'),
         desc: 'Lead HV motor rewinding and stator/rotor repair on machines up to 20,000 HP at our Ranoli workshop.',
 
@@ -58,7 +58,7 @@ As a Senior Motor Winding Technician, you will work on motors and generators tha
         title: 'Quality Control Engineer',
         dept: 'Quality Assurance',
         type: 'Full-time',
-        site: 'Ranoli, Vadodara, Gujarat',
+        site: 'Ranoli, Gujarat',
         posted: new Date('2024-05-15'),
         desc: 'Own technical integrity across all repair stages, from incoming inspection through final test certification.',
 
@@ -111,7 +111,7 @@ Our clients include major power generation companies, cement manufacturers, and 
         title: 'Mechanical Workshop Supervisor',
         dept: 'Operations',
         type: 'Full-time',
-        site: 'Raika, Vadodara, Gujarat',
+        site: 'Raika, Gujarat',
         posted: new Date('2024-04-20'),
         desc: 'Lead IEC\'s precision mechanical workshop team, machining, dynamic balancing, and mechanical assembly of large rotating machines.',
 
@@ -164,7 +164,7 @@ The Mechanical Workshop Supervisor is responsible for leading the team that does
         title: 'Electrical Test Engineer',
         dept: 'Engineering',
         type: 'Full-time',
-        site: 'Ranoli, Vadodara, Gujarat',
+        site: 'Ranoli, Gujarat',
         posted: new Date('2024-06-10'),
         desc: 'Operate and manage IEC\'s HV test bay, conducting acceptance tests on repaired motors and generators and issuing test certificates to clients.',
 
@@ -210,7 +210,7 @@ The Electrical Test Engineer owns this facility. You will plan and conduct the e
             ],
         },
 
-        compensation: `<strong>Competitive for a qualified HV test engineer in the Vadodara / Gujarat market</strong>, with annual performance increment. Full statutory benefits included.`,
+        compensation: `<strong>Competitive for a qualified HV test engineer in the Ranoli-Vadodara / Gujarat region</strong>, with annual performance increment. Full statutory benefits included.`,
     },
     {
         id: 5,
@@ -218,7 +218,7 @@ The Electrical Test Engineer owns this facility. You will plan and conduct the e
         title: 'Workshop Helper / Trainee',
         dept: 'Operations',
         type: 'Part-time',
-        site: 'Raika, Vadodara, Gujarat',
+        site: 'Raika, Gujarat',
         posted: new Date('2024-06-18'),
         desc: 'Begin your career in industrial motor repair with structured on-the-job training under IEC\'s experienced technical team.',
 

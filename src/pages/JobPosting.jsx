@@ -38,7 +38,7 @@ const useMeta = (job) => {
             datePosted: job.posted.toISOString().split('T')[0],
             employmentType: job.type === 'Full-time' ? 'FULL_TIME' : 'PART_TIME',
             hiringOrganization: { '@type': 'Organization', name: 'Indian Engineering Company', sameAs: 'https://iec-website-redesigned.vercel.app' },
-            jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: 'Vadodara', addressRegion: 'Gujarat', addressCountry: 'IN' } },
+            jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: 'Ranoli', addressRegion: 'Gujarat', addressCountry: 'IN' } },
         });
         document.head.appendChild(ldEl);
 
@@ -182,14 +182,9 @@ const JobPosting = () => {
                         <div className="jp-section-divider" />
 
                         {/* Compensation */}
-                        <section className="jp-section jp-section--comp">
-                            <div className="jp-comp-icon">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                            </div>
-                            <div>
-                                <div className="jp-section-label">Compensation</div>
-                                <p className="jp-narrative-p" dangerouslySetInnerHTML={{ __html: job.compensation }} />
-                            </div>
+                        <section className="jp-section">
+                            <div className="jp-section-label">Compensation</div>
+                            <p className="jp-narrative-p" dangerouslySetInnerHTML={{ __html: job.compensation }} />
                         </section>
 
                         <div className="jp-section-divider" />
@@ -252,7 +247,7 @@ const JobPosting = () => {
                         <div className="jp-about-card">
                             <span className="jp-about-label">About IEC</span>
                             <p className="jp-about-text">
-                                Indian Engineering Company is a Vadodara-based heavy industrial repair and rewinding company with over 26 years of experience. We specialise in HT motors, generators, and large rotating machines for India's cement, power, and process industries.
+                                Indian Engineering Company is a Ranoli-based heavy industrial repair and rewinding company operating near Vadodara, Gujarat, with over 26 years of experience. We specialise in HT motors, generators, and large rotating machines for India's cement, power, and process industries.
                             </p>
                             <Link to="/about" className="jp-about-link">
                                 Learn about IEC
@@ -372,13 +367,6 @@ const JobPosting = () => {
                     padding: var(--space-3xl);
                     margin: 0 calc(-1 * var(--space-xl));
                 }
-                .jp-section--comp {
-                    display: flex; gap: var(--space-xl); align-items: flex-start;
-                    background: rgba(200,16,46,0.03);
-                    padding: var(--space-2xl) var(--space-xl);
-                    border-left: 3px solid var(--color-accent);
-                }
-                .jp-comp-icon { color: var(--color-accent); flex-shrink: 0; margin-top: 2px; }
                 .jp-section-divider { height: 1px; background: rgba(17,17,20,0.07); }
                 .jp-section-label {
                     font-family: var(--font-mono); font-size: 0.625rem;

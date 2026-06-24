@@ -27,7 +27,7 @@ const About = () => {
 
                     <div className="about-side">
                         <p className="about-blurb">
-                            Since 1998, one facility in Vadodara has handled the motor
+                            Since 1998, one facility in Ranoli (near Vadodara) has handled the motor
                             and generator repairs keeping Gujarat's power plants, cement
                             works, and petrochemical plants running.
                         </p>

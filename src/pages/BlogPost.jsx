@@ -113,7 +113,7 @@ const BlogPost = () => {
                         {/* Inject article image after lead */}
                         <div className="bp-inline-image">
                             <img src={article.heroImg} alt={article.title} />
-                            <span className="bp-inline-caption">IEC Workshop · Vadodara, Gujarat</span>
+                            <span className="bp-inline-caption">IEC Workshop · Ranoli, Gujarat</span>
                         </div>
                     </React.Fragment>
                 );
@@ -201,7 +201,7 @@ const BlogPost = () => {
                         <div className="bp-author-avatar">IEC</div>
                         <div>
                             <span className="bp-author-name">Indian Engineering Company</span>
-                            <span className="bp-author-role">Engineering Team · Vadodara, Gujarat</span>
+                            <span className="bp-author-role">Engineering Team · Ranoli, Gujarat</span>
                         </div>
                     </div>
                 </div>
@@ -254,7 +254,7 @@ const BlogPost = () => {
                                     <div className="bp-footer-logo">IEC</div>
                                     <div>
                                         <p className="bp-footer-org">Indian Engineering Company</p>
-                                        <p className="bp-footer-tag">Heavy Industrial Repair · Vadodara, Gujarat · Since 1998</p>
+                                        <p className="bp-footer-tag">Heavy Industrial Repair · Ranoli, Gujarat · Since 1998</p>
                                     </div>
                                 </div>
                                 <Link to="/contact" className="bp-cta-btn">

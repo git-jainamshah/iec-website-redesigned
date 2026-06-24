@@ -21,7 +21,7 @@ const Footer = () => {
                             <p className="footer-desc">
                                 India's premier workshop for heavy industrial motor
                                 and generator repair. Operating since 1998 from
-                                Vadodara, Gujarat.
+                                Ranoli, near Vadodara, Gujarat.
                             </p>
                             <div className="footer-badges">
                                 <span className="footer-badge">ISO 9001</span>

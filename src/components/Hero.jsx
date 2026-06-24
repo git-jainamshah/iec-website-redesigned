@@ -41,7 +41,7 @@ const Hero = () => {
                     {/* Left: headline block */}
                     <div className="hero-content">
                         <p className="hero-label animate-fade-up">
-                            Est. 1998 · Vadodara, Gujarat · ISO 9001
+                            Est. 1998 · Ranoli, Gujarat · ISO 9001
                         </p>
 
                         <h1 className="hero-title animate-fade-up delay-1">

@@ -71,7 +71,7 @@ const Leadership = () => {
                     <div className="ld-founder-right">
                         <img src={imgFounderPanel} alt="IEC workshop rotor" className="ld-founder-img" />
                         <div className="ld-founder-img-label">
-                            <span>IEC Vadodara Works</span>
+                            <span>IEC Ranoli Works</span>
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@ const Leadership = () => {
                     <div className="ld-craft-grid">
                         {[
                             { num: '500+', label: 'Machines Repaired Annually', sub: 'HT motors, generators, alternators' },
-                            { num: '300K', label: 'Sq.ft Workshop Campus', sub: 'Fully in-house, Ranoli, Vadodara' },
+                            { num: '300K', label: 'Sq.ft Workshop Campus', sub: 'Fully in-house, Ranoli, Gujarat' },
                             { num: '26+', label: 'Years of Operation', sub: 'Consistently growing since 1998' },
                         ].map((stat, i) => (
                             <div key={i} className="ld-c-stat ld-reveal" ref={r} style={{ transitionDelay: `${i * 0.12}s` }}>

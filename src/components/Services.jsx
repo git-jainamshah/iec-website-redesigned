@@ -59,7 +59,7 @@ const services = [
         title: 'Preventive Maintenance & Overhauling',
         subtitle: 'Workshop & In-Situ Services',
         capacity: 'Pan-India · Emergency Response',
-        desc: 'Scheduled preventive maintenance, complete machine overhauling, and emergency breakdown response. At our Vadodara works or in-situ at your plant anywhere in India. 19 transport vehicles. 8 specialized crew and testing vehicles. We come to you when it counts most.',
+        desc: 'Scheduled preventive maintenance, complete machine overhauling, and emergency breakdown response. At our Ranoli works or in-situ at your plant anywhere in India. 19 transport vehicles. 8 specialized crew and testing vehicles. We come to you when it counts most.',
         specs: [
             { label: 'Fleet', value: '27 Vehicles' },
             { label: 'Coverage', value: 'Pan-India' },
