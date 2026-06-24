@@ -41,7 +41,7 @@ const Leadership = () => {
                         <div className="ld-rule" />
                         <p className="ld-founder-bio">
                             Backed by over 40 years of hands-on industry experience,
-                            Mr. Anil Bhardwaj founded Indian Engineering Company in 1998.
+                            Late Anil Bhardwaj founded Indian Engineering Company in 1998.
                             Under his leadership, IEC has grown to become one of Gujarat's
                             largest and most trusted heavy industrial repair facilities,
                             serving leading private and government clients across the country.

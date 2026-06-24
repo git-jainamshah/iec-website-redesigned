@@ -9,7 +9,7 @@ const departments = [
     {
         dept: 'Key Contacts',
         rows: [
-            { name: 'Mr. Anil Bhardwaj', role: 'Director', phone: '+91 98242 14839', href: 'tel:+919824214839' },
+            { name: 'Late Anil Bhardwaj', role: 'Director', phone: '+91 98242 14839', href: 'tel:+919824214839' },
             { name: 'Mrs. Arpana Anil Bharadwaj', role: 'Director', phone: '+91 97129 14839', href: 'tel:+919712914839' },
         ],
         email: 'anil@iecindia.co.in',
@@ -18,7 +18,7 @@ const departments = [
     {
         dept: 'Technical Enquiries',
         rows: [
-            { name: 'Mr. Anil Bhardwaj', phone: '+91 98242 14839', href: 'tel:+919824214839' },
+            { name: 'Late Anil Bhardwaj', phone: '+91 98242 14839', href: 'tel:+919824214839' },
             { name: 'Mr. A.D. Kokje', phone: '+91 82383 36294', href: 'tel:+918238336294' },
             { name: 'Mr. K.H. Mehta', phone: '+91 96019 42325', href: 'tel:+919601942325' },
             { name: 'Mr. C.N. Dandiwala', phone: '+91 98243 48744', href: 'tel:+919824348744' },

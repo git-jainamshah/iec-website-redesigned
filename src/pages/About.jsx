@@ -14,7 +14,7 @@ const keyStats = [
 ];
 
 const milestones = [
-    { year: '1984', title: 'Industry Roots', desc: 'Mr. Anil Bhardwaj begins his career in heavy electrical engineering, building expertise in HV rotating machines across Gujarat.' },
+    { year: '1984', title: 'Industry Roots', desc: 'Late Anil Bhardwaj begins his career in heavy electrical engineering, building expertise in HV rotating machines across Gujarat.' },
     { year: '1998', title: 'IEC Founded', desc: 'Indian Engineering Company formally established in Vadodara, bringing specialised HV motor and generator repair to the region.' },
     { year: '2005', title: 'Ranoli Works', desc: 'Main workshop at Ranoli, Vadodara commissioned · dedicated electrical bays, coil shop, and in-house testing infrastructure.' },
     { year: '2012', title: 'Raika Expansion', desc: 'Second facility at Raika inaugurated, adding heavy mechanical bays, 300-ton crane capacity, and balancing machines up to 45 tons.' },
@@ -72,7 +72,7 @@ const AboutPage = () => {
 
                         <div className="ap-story-right">
                             <p>
-                                Founded in 1998 by Mr. Anil Bhardwaj and backed by over 40 years of
+                                Founded in 1998 by Late Anil Bhardwaj and backed by over 40 years of
                                 industry experience, Indian Engineering Company has grown into one of
                                 Gujarat's largest and most trusted facilities for heavy industrial motor
                                 and generator repair. We serve an estimated 95% of the state's HV
