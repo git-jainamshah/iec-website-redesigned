@@ -77,6 +77,39 @@ const Leadership = () => {
                 </div>
             </section>
 
+            {/* ── CEO Section ── */}
+            <section className="ld-ceo">
+                <div className="ld-ceo-inner">
+                    <div className="ld-ceo-left ld-reveal" ref={r}>
+                        <span className="ld-eyebrow">01b / Chief Executive Officer</span>
+                        <h2 className="ld-ceo-name">Mrs. Arpana<br />Bharadwaj</h2>
+                        <div className="ld-rule" />
+                        <p className="ld-founder-bio">
+                            Building on the legacy of Indian Engineering Company's founder, Mrs. Arpana Bharadwaj
+                            leads IEC as Director and Chief Executive Officer. Under her stewardship, IEC continues
+                            to uphold its position as Gujarat's foremost heavy industrial repair facility, serving
+                            power generation, cement, and petrochemical industries across the country.
+                        </p>
+                        <p className="ld-founder-bio" style={{ marginTop: '1.25rem' }}>
+                            Her direction ensures that IEC's founding commitment to in-house capability, technical
+                            excellence, and zero-compromise quality remains central to every project undertaken.
+                        </p>
+                        <div className="ld-ceo-contact">
+                            <a href="tel:+919712914839" className="ld-ceo-phone">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.17 6.17l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                +91 97129 14839
+                            </a>
+                        </div>
+                    </div>
+                    <div className="ld-ceo-right">
+                        <img src={imgFounderSide} alt="IEC facility" className="ld-founder-img" />
+                        <div className="ld-founder-img-label">
+                            <span>IEC Ranoli Works</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* ── Craft Strip ── */}
             <section className="ld-craft">
                 <div className="container">
@@ -274,6 +307,46 @@ const Leadership = () => {
                     color: rgba(255,255,255,0.55);
                 }
 
+                /* ── CEO Section ── */
+                .ld-ceo {
+                    background: #0d0d10;
+                    overflow: hidden;
+                    border-top: 1px solid rgba(255,255,255,0.06);
+                }
+                .ld-ceo-inner {
+                    display: grid;
+                    grid-template-columns: 48% 52%;
+                    min-height: 440px;
+                }
+                .ld-ceo-left {
+                    padding: var(--space-5xl) var(--space-4xl) var(--space-5xl) max(var(--space-3xl), calc((100vw - 1200px)/2 + var(--space-3xl)));
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+                .ld-ceo-name {
+                    font-family: var(--font-display);
+                    font-size: clamp(2rem, 3.5vw, 3.25rem);
+                    font-weight: 300;
+                    letter-spacing: -0.03em;
+                    color: var(--color-white);
+                    line-height: 1.1;
+                    margin-bottom: var(--space-xl);
+                }
+                .ld-ceo-right {
+                    position: relative;
+                    overflow: hidden;
+                }
+                .ld-ceo-contact { margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 1px solid rgba(255,255,255,0.08); }
+                .ld-ceo-phone {
+                    display: inline-flex; align-items: center; gap: 8px;
+                    font-family: var(--font-mono); font-size: 0.875rem; font-weight: 500;
+                    color: rgba(255,255,255,0.65); text-decoration: none;
+                    transition: color 0.2s;
+                }
+                .ld-ceo-phone svg { color: var(--color-accent); }
+                .ld-ceo-phone:hover { color: var(--color-white); }
+
                 /* ── Craft Strip ── */
                 .ld-craft {
                     background: var(--color-dark);
@@ -452,6 +525,9 @@ const Leadership = () => {
                     .ld-founder-inner { grid-template-columns: 1fr; }
                     .ld-founder-right { min-height: 280px; }
                     .ld-founder-left { padding: var(--space-3xl) var(--space-xl); }
+                    .ld-ceo-inner { grid-template-columns: 1fr; }
+                    .ld-ceo-right { min-height: 220px; }
+                    .ld-ceo-left { padding: var(--space-3xl) var(--space-xl); }
                     .ld-craft-grid { grid-template-columns: 1fr; }
                     .ld-c-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
                     .ld-team-grid { grid-template-columns: 1fr; }

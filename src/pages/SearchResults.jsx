@@ -14,7 +14,7 @@ const searchIndex = [
         title: 'Leadership',
         path: '/leadership',
         category: 'Company',
-        content: 'Anil Bhardwaj Founder Managing Director leadership team technical director operations quality assurance 40 years industry experience industrial motor repair',
+        content: 'Arpana Bharadwaj CEO Director Kush Bhardwaj Founder Late Anil Bhardwaj leadership team technical director operations quality assurance 40 years industry experience industrial motor repair',
     },
     {
         title: 'Motor, Generator, Alternator & DC Motor Repair',

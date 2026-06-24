@@ -6,7 +6,9 @@ Use this file to check any factual claim before writing/editing copy. If a new f
 - **Name:** Indian Engineering Company (IEC)
 - **Incorporated:** 1998 (specific date from internal records / contact directory)
 - **"40+ years in the electrical service industry"** (claim from live site, iecindia.co.in): treated as the founder/promoters' cumulative industry experience predating IEC's 1998 incorporation, NOT the company's age. Use phrasing like "backed by 40+ years of industry experience, established 1998" — never claim the company itself is 40+ years old. **Flagged: unverified specifics of pre-1998 history — ask client if this needs sourcing for a press-facing claim.**
-- **Founder / Managing Director:** Mr. Anil Bhardwaj
+- **Founder (deceased):** Late Mr. Anil Bhardwaj — honoured on Leadership page as founder only; not listed as active contact anywhere.
+- **Current CEO / Director:** Mrs. Arpana Bharadwaj (+91 97129 14839)
+- **Director:** Mr. Kush Bhardwaj (contact via email)
 - **Certifications:** ISO 9001:2008; EASA (Electrical Apparatus Service Association) member since 2014
 - **Business type:** B2B heavy industrial repair/service workshop — NOT general electrical contracting or consumer-facing work.
 - **One-line positioning:** Vadodara-based heavy industrial repair and rewinding specialist for high-voltage motors, generators, alternators, DC motors, cryogenic pumps, and related rotating-machine spares — built to keep factories and power plants running.
@@ -44,16 +46,17 @@ Power generation companies, manufacturing plants, cement plants, petrochemical/c
 ## Key Contacts (verified — on Contact page)
 | Role | Name | Phone |
 |---|---|---|
-| Founder/MD | Mr. Anil Bhardwaj | +91 98242 14839 |
-| — | Mrs. Arpana Anil Bharadwaj | +91 97129 14839 |
+| CEO / Director | Mrs. Arpana Bharadwaj | +91 97129 14839 |
+| Director | Mr. Kush Bhardwaj | (contact via email) |
 | Technical | Mr. A.D. Kokje | +91 82383 36294 |
 | Technical | Mr. K.H. Mehta | +91 96019 42325 |
 | Technical | Mr. C.N. Dandiwala | +91 98243 48744 |
 | Sales (Enquiry) | — | +91 98240 29088 |
 | Sales | Mr. Jatin Shah | +91 98240 24839 |
 | Sales | Mr. Jitu Shah | +91 98241 74989 |
-| Purchase/Finance | Mrs. Purnima Sharma | +91 98246 84540 |
-| Email | anil@iecindia.co.in |
+| Sales & Finance | Mr. Jatin Shah | +91 98240 24839 |
+| Emergency / 24x7 | General Enquiry | +91 98240 29088 |
+| Email (general) | info@iecindia.co.in |
 
 ## Services (real 5-category breakdown — replaces old generic 3-item list)
 1. **Motor, Generator, Alternator & DC Motor Repair** — rewinding/repair of AC induction, synchronous, wound-rotor/slip-ring motors; hydro/turbo/gas/wind generators; DC motors. VPI, rotor rebarring/re-caging, field coil rewinding, pole piece rebuilding, stator core restacking, thermal imaging, dielectric/surge/hi-pot testing.

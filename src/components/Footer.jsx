@@ -48,10 +48,10 @@ const Footer = () => {
                             </div>
 
                             <div className="footer-social">
-                                <a href="mailto:anil@iecindia.co.in" className="footer-social-btn" aria-label="Email IEC">
+                                <a href="mailto:info@iecindia.co.in" className="footer-social-btn" aria-label="Email IEC">
                                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                                 </a>
-                                <a href="tel:+919824214839" className="footer-social-btn" aria-label="Call IEC">
+                                <a href="tel:+919824029088" className="footer-social-btn" aria-label="Call IEC">
                                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.9 12.9a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.81 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                                 </a>
                                 <a href="https://www.linkedin.com/company/indian-engineering-company" target="_blank" rel="noopener noreferrer" className="footer-social-btn" aria-label="IEC on LinkedIn">
@@ -97,13 +97,23 @@ const Footer = () => {
                                 <div className="footer-contact-item">
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.9 12.9a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.81 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                                     <div>
-                                        <a href="tel:+919824214839">+91 98242 14839</a>
+                                        <a href="tel:+919712914839">+91 97129 14839</a>
                                         <a href="tel:+912667262326">+91 2667 262326</a>
+                                    </div>
+                                </div>
+                                <div className="footer-contact-item footer-contact-item--emerg">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.9 12.9a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.81 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                    <div className="footer-emerg-wrap">
+                                        <span className="footer-emerg-label">Emergency &amp; Breakdown</span>
+                                        <div className="footer-emerg-row">
+                                            <a href="tel:+919824029088" className="footer-emerg-num">+91 98240 29088</a>
+                                            <span className="footer-emerg-badge">24×7</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="footer-contact-item">
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                                    <a href="mailto:anil@iecindia.co.in">anil@iecindia.co.in</a>
+                                    <a href="mailto:info@iecindia.co.in">info@iecindia.co.in</a>
                                 </div>
                             </address>
                         </div>
@@ -284,6 +294,13 @@ const Footer = () => {
                     letter-spacing: 0.02em;
                 }
                 .footer-contact-item a:hover { color: var(--color-accent); }
+                .footer-contact-item--emerg svg { color: var(--color-accent); opacity: 0.7; }
+                .footer-emerg-wrap { display: flex; flex-direction: column; gap: 3px; }
+                .footer-emerg-label { font-family: var(--font-mono); font-size: 0.5rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.25); }
+                .footer-emerg-row { display: flex; align-items: center; gap: 8px; }
+                .footer-emerg-num { font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 600; color: rgba(255,255,255,0.75); letter-spacing: 0.03em; text-decoration: none; transition: color 0.2s; }
+                .footer-emerg-num:hover { color: var(--color-accent); }
+                .footer-emerg-badge { font-family: var(--font-mono); font-size: 0.4375rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent); border: 1px solid rgba(200,16,46,0.4); padding: 2px 5px; line-height: 1; }
 
                 /* ── Bottom bar ── */
                 .footer-bottom {

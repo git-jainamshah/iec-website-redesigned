@@ -141,11 +141,12 @@ const Header = () => {
                 </Link>
 
                 <div className="header-actions">
-                    <a href="tel:+919824214839" className="header-phone">
+                    <a href="tel:+919824029088" className="header-phone">
                         <svg className="header-phone-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
                             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.17 6.17l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
                         </svg>
-                        +91 98242 14839
+                        <span className="header-phone-number">+91 98240 29088</span>
+                        <span className="header-phone-badge">24×7</span>
                     </a>
 
                     <button
@@ -302,9 +303,12 @@ const Header = () => {
                             ))}
                         </div>
 
-                        <span className="menu-overlay-aside-label">Get in touch</span>
-                        <a href="tel:+919824214839" className="menu-overlay-phone">+91 98242 14839</a>
-                        <a href="mailto:anil@iecindia.co.in" className="menu-overlay-email">anil@iecindia.co.in</a>
+                        <span className="menu-overlay-aside-label">Emergency &amp; Enquiries</span>
+                        <a href="tel:+919824029088" className="menu-overlay-phone">
+                            +91 98240 29088
+                            <span className="menu-overlay-badge">24×7</span>
+                        </a>
+                        <a href="mailto:info@iecindia.co.in" className="menu-overlay-email">info@iecindia.co.in</a>
 
                         <span className="menu-overlay-aside-label">Works</span>
                         <p className="menu-overlay-address">
@@ -427,6 +431,23 @@ const Header = () => {
 
                 .header-phone:hover {
                     color: var(--color-white);
+                }
+
+                .header-phone-number {
+                    font-family: var(--font-mono);
+                }
+
+                .header-phone-badge {
+                    font-family: var(--font-mono);
+                    font-size: 0.5rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.08em;
+                    color: var(--color-accent);
+                    border: 1px solid rgba(200,16,46,0.5);
+                    padding: 2px 5px;
+                    line-height: 1;
+                    align-self: center;
                 }
 
                 .header-phone-icon {
@@ -906,6 +927,21 @@ const Header = () => {
                     font-size: 1.125rem;
                     color: var(--color-white);
                     margin-top: var(--space-xs);
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+
+                .menu-overlay-badge {
+                    font-family: var(--font-mono);
+                    font-size: 0.5rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: var(--color-accent);
+                    border: 1px solid rgba(200,16,46,0.45);
+                    padding: 3px 7px;
+                    line-height: 1;
                 }
 
                 .menu-overlay-phone:hover,

@@ -31,33 +31,26 @@ const departments = [
     {
         dept: 'Key Contacts',
         rows: [
-            { name: 'Late Anil Bhardwaj', role: 'Director', phone: '+91 98242 14839', href: 'tel:+919824214839' },
-            { name: 'Mrs. Arpana Anil Bharadwaj', role: 'Director', phone: '+91 97129 14839', href: 'tel:+919712914839' },
+            { name: 'Mr. Kush Bhardwaj', role: 'Director' },
+            { name: 'Mrs. Arpana Bharadwaj', role: 'Director & CEO', phone: '+91 97129 14839', href: 'tel:+919712914839' },
         ],
-        email: 'anil@iecindia.co.in',
-        emailHref: 'mailto:anil@iecindia.co.in',
+        email: 'info@iecindia.co.in',
+        emailHref: 'mailto:info@iecindia.co.in',
+    },
+    {
+        dept: 'Sales & Finance',
+        rows: [
+            { name: 'Mr. Jatin Shah', phone: '+91 98240 24839', href: 'tel:+919824024839' },
+            { name: 'Mr. Jitu Shah', phone: '+91 98241 74989', href: 'tel:+919824174989' },
+            { name: 'General Enquiry', phone: '+91 98240 29088', href: 'tel:+919824029088' },
+        ],
     },
     {
         dept: 'Technical Enquiries',
         rows: [
-            { name: 'Late Anil Bhardwaj', phone: '+91 98242 14839', href: 'tel:+919824214839' },
             { name: 'Mr. A.D. Kokje', phone: '+91 82383 36294', href: 'tel:+918238336294' },
             { name: 'Mr. K.H. Mehta', phone: '+91 96019 42325', href: 'tel:+919601942325' },
             { name: 'Mr. C.N. Dandiwala', phone: '+91 98243 48744', href: 'tel:+919824348744' },
-        ],
-    },
-    {
-        dept: 'Sales & Marketing',
-        rows: [
-            { name: 'General Enquiry', phone: '+91 98240 29088', href: 'tel:+919824029088' },
-            { name: 'Mr. Jatin Shah', phone: '+91 98240 24839', href: 'tel:+919824024839' },
-            { name: 'Mr. Jitu Shah', phone: '+91 98241 74989', href: 'tel:+919824174989' },
-        ],
-    },
-    {
-        dept: 'Purchase & Finance',
-        rows: [
-            { name: 'Mrs. Purnima Sharma', phone: '+91 98246 84540', href: 'tel:+919824684540' },
         ],
     },
 ];
@@ -105,7 +98,7 @@ const PhoneField = ({ countryIso, number, onCountryChange, onNumberChange, onBlu
             >
                 {ALL_COUNTRIES.map(c => (
                     <option key={c.isoCode} value={c.isoCode}>
-                        {c.flag} {c.dialCode} — {c.name}
+                        {c.flag} {c.dialCode} {c.name}
                     </option>
                 ))}
             </select>
@@ -322,7 +315,10 @@ const Contact = () => {
                                         {d.rows.map((r, i) => (
                                             <div className="cp-dept-row" key={i}>
                                                 <span className="cp-dept-person">{r.name}{r.role && <em>{r.role}</em>}</span>
-                                                <a href={r.href} className="cp-dept-phone">{r.phone}</a>
+                                                {r.phone
+                                                    ? <a href={r.href} className="cp-dept-phone">{r.phone}</a>
+                                                    : <span className="cp-dept-phone cp-dept-phone--tbd">Contact via email</span>
+                                                }
                                             </div>
                                         ))}
                                         {d.email && (
@@ -336,8 +332,35 @@ const Contact = () => {
                             ))}
                         </div>
                         <div className="cp-hours">
-                            <span className="cp-hours-label">Working Hours</span>
-                            <p>Mon – Sat, 9:00 AM to 6:00 PM IST</p>
+                            <div className="cp-hours-header">
+                                <span className="cp-hours-label">Working Hours</span>
+                                <span className="cp-hours-status">
+                                    <span className="cp-hours-dot" />
+                                    Open today
+                                </span>
+                            </div>
+                            <div className="cp-hours-table">
+                                <div className="cp-hours-row">
+                                    <span className="cp-hours-day">Mon – Fri</span>
+                                    <span className="cp-hours-time">09:00 – 18:00 IST</span>
+                                </div>
+                                <div className="cp-hours-row">
+                                    <span className="cp-hours-day">Saturday</span>
+                                    <span className="cp-hours-time">09:00 – 15:00 IST</span>
+                                </div>
+                                <div className="cp-hours-row">
+                                    <span className="cp-hours-day">Sunday</span>
+                                    <span className="cp-hours-time cp-hours-closed">Closed</span>
+                                </div>
+                            </div>
+                            <div className="cp-emergency">
+                                <span className="cp-emerg-dot" />
+                                <div>
+                                    <span className="cp-emerg-label">Emergency &amp; Breakdown</span>
+                                    <a href="tel:+919824029088" className="cp-emerg-num">+91 98240 29088</a>
+                                </div>
+                                <span className="cp-emerg-badge">24×7</span>
+                            </div>
                         </div>
                     </div>
 
@@ -529,9 +552,28 @@ const Contact = () => {
                 .cp-dept-phone:hover { color: var(--color-accent); }
                 .cp-dept-email { font-size: 0.875rem; font-weight: 500; color: var(--color-accent); text-decoration: none; transition: opacity 0.2s; }
                 .cp-dept-email:hover { opacity: 0.75; }
-                .cp-hours { margin-top: var(--space-2xl); padding: var(--space-xl); background: rgba(17,17,20,0.03); border-left: 3px solid var(--color-accent); }
-                .cp-hours-label { font-family: var(--font-mono); font-size: 0.625rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent); display: block; margin-bottom: 6px; }
-                .cp-hours p { font-size: 0.9375rem; color: var(--color-text); font-weight: 500; }
+                /* Working hours */
+                .cp-hours { margin-top: var(--space-2xl); background: var(--color-primary); padding: var(--space-xl) var(--space-xl) 0; }
+                .cp-hours-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-lg); }
+                .cp-hours-label { font-family: var(--font-mono); font-size: 0.5625rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(255,255,255,0.35); }
+                .cp-hours-status { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.5625rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #4ade80; }
+                .cp-hours-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; flex-shrink: 0; animation: hours-pulse 2.2s ease-in-out infinite; }
+                @keyframes hours-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.7); } }
+                .cp-hours-table { display: flex; flex-direction: column; border-top: 1px solid rgba(255,255,255,0.06); }
+                .cp-hours-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+                .cp-hours-row:last-child { border-bottom: none; }
+                .cp-hours-day { font-size: 0.8125rem; font-weight: 500; color: rgba(255,255,255,0.55); }
+                .cp-hours-time { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; color: var(--color-white); letter-spacing: 0.04em; }
+                .cp-hours-closed { color: rgba(255,255,255,0.22) !important; }
+                /* Emergency strip */
+                .cp-emergency { display: flex; align-items: center; gap: 10px; padding: var(--space-lg) var(--space-xl); margin: 0 calc(-1 * var(--space-xl)); margin-top: var(--space-lg); background: rgba(200,16,46,0.08); border-top: 1px solid rgba(200,16,46,0.18); }
+                .cp-emerg-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--color-accent); flex-shrink: 0; animation: hours-pulse 1.6s ease-in-out infinite; }
+                .cp-emergency > div { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+                .cp-emerg-label { font-family: var(--font-mono); font-size: 0.5rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.35); }
+                .cp-emerg-num { font-family: var(--font-mono); font-size: 0.875rem; font-weight: 600; color: var(--color-white); letter-spacing: 0.04em; text-decoration: none; transition: color 0.2s; }
+                .cp-emerg-num:hover { color: var(--color-accent); }
+                .cp-emerg-badge { font-family: var(--font-mono); font-size: 0.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent); border: 1px solid rgba(200,16,46,0.4); padding: 3px 7px; flex-shrink: 0; }
+                .cp-dept-phone--tbd { opacity: 0.35; font-style: italic; font-family: var(--font-sans); font-size: 0.8125rem; }
 
                 /* Form card */
                 .cp-form-card { background: var(--color-primary); padding: var(--space-3xl); position: sticky; top: calc(var(--header-height) + 24px); }
