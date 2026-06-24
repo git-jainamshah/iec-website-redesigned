@@ -1101,11 +1101,6 @@ const Header = () => {
                         display: none;
                     }
 
-                    /* Globe icon only on tiny screens — no "EN" text */
-                    .lang-btn span {
-                        display: none;
-                    }
-
                     .search-panel-close span {
                         display: none;
                     }
