@@ -200,7 +200,7 @@ const Careers = () => {
                                     <p className="cr-job-desc">{job.desc}</p>
                                 </div>
                                 <div className="cr-job-right">
-                                    <Link to="/contact" className="btn-premium btn-premium--lgt">
+                                    <Link to="/contact" className="cr-apply-btn">
                                         Apply Now
                                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                                     </Link>
@@ -314,10 +314,16 @@ const Careers = () => {
                 .cr-job-desc { font-size: 0.875rem; line-height: 1.65; color: var(--color-text-light); max-width: 560px; margin: 0; }
                 .cr-job-right { flex-shrink: 0; padding-top: 4px; }
 
-                .btn-premium--lgt { color: var(--color-text); border-color: rgba(17,17,20,0.25); }
-                .btn-premium--lgt::before { background: var(--color-text); }
-                .btn-premium--lgt:hover,
-                .btn-premium--lgt:hover svg { color: #ffffff !important; border-color: var(--color-text); }
+                .cr-apply-btn {
+                    display: inline-flex; align-items: center; gap: 8px;
+                    padding: 10px 22px;
+                    font-family: var(--font-mono); font-size: 0.625rem; font-weight: 500;
+                    text-transform: uppercase; letter-spacing: 0.12em;
+                    color: var(--color-text); border: 1px solid rgba(17,17,20,0.28);
+                    background: transparent; white-space: nowrap;
+                    transition: background 0.25s, color 0.25s, border-color 0.25s;
+                }
+                .cr-apply-btn:hover { background: var(--color-accent); border-color: var(--color-accent); color: #ffffff; }
 
                 /* Search */
                 .cr-search-wrap { position: relative; display: flex; align-items: center; margin-bottom: var(--space-md); }
