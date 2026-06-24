@@ -69,6 +69,7 @@ const Careers = () => {
     const [filterType, setFilterType] = useState('All');
     const [filterSite, setFilterSite] = useState('All');
     const [sortBy, setSortBy] = useState('date');
+    const [search, setSearch] = useState('');
 
     useEffect(() => {
         const obs = new IntersectionObserver(
@@ -88,7 +89,8 @@ const Careers = () => {
     let filtered = openings.filter(j =>
         (filterDept === 'All' || j.dept === filterDept) &&
         (filterType === 'All' || j.type === filterType) &&
-        (filterSite === 'All' || j.site === filterSite)
+        (filterSite === 'All' || j.site === filterSite) &&
+        (!search || j.title.toLowerCase().includes(search.toLowerCase()))
     );
     if (sortBy === 'date') filtered = [...filtered].sort((a, b) => b.posted - a.posted);
     if (sortBy === 'az') filtered = [...filtered].sort((a, b) => a.title.localeCompare(b.title));
@@ -126,6 +128,19 @@ const Careers = () => {
                             <span className="cr-eyebrow">Open Positions</span>
                             <h2 className="cr-positions-title">Current Openings</h2>
                         </div>
+                    </div>
+
+                    {/* Search */}
+                    <div className="cr-search-wrap cr-reveal" ref={r}>
+                        <svg className="cr-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                        <input
+                            className="cr-search"
+                            type="text"
+                            placeholder="Search positions..."
+                            value={search}
+                            onChange={e => setSearch(e.target.value)}
+                        />
+                        {search && <button className="cr-search-clear" onClick={() => setSearch('')}>✕</button>}
                     </div>
 
                     {/* Filters */}
@@ -168,9 +183,9 @@ const Careers = () => {
 
                     <div className="cr-jobs-list">
                         {filtered.length === 0 ? (
-                            <div className="cr-no-results">No positions match your filters. <button onClick={() => { setFilterDept('All'); setFilterType('All'); setFilterSite('All'); }}>Clear filters</button></div>
+                            <div className="cr-no-results">No positions match. <button onClick={() => { setFilterDept('All'); setFilterType('All'); setFilterSite('All'); setSearch(''); }}>Clear all</button></div>
                         ) : filtered.map((job, i) => (
-                            <div key={i} className="cr-job cr-reveal" ref={r} style={{ transitionDelay: `${i * 0.06}s` }}>
+                            <div key={`${job.title}-${i}`} className="cr-job">
                                 <div className="cr-job-left">
                                     <h3 className="cr-job-title">{job.title}</h3>
                                     <div className="cr-job-tags">
@@ -301,7 +316,16 @@ const Careers = () => {
 
                 .btn-premium--lgt { color: var(--color-text); border-color: rgba(17,17,20,0.25); }
                 .btn-premium--lgt::before { background: var(--color-text); }
-                .btn-premium--lgt:hover { color: var(--color-white); border-color: var(--color-text); }
+                .btn-premium--lgt:hover,
+                .btn-premium--lgt:hover svg { color: #ffffff !important; border-color: var(--color-text); }
+
+                /* Search */
+                .cr-search-wrap { position: relative; display: flex; align-items: center; margin-bottom: var(--space-md); }
+                .cr-search-icon { position: absolute; left: 14px; color: var(--color-muted); pointer-events: none; }
+                .cr-search { width: 100%; padding: 10px 40px 10px 38px; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; border: 1px solid var(--color-border); background: var(--color-white); color: var(--color-text); outline: none; transition: border-color 0.2s; }
+                .cr-search::placeholder { color: var(--color-muted); }
+                .cr-search:focus { border-color: var(--color-text); }
+                .cr-search-clear { position: absolute; right: 12px; background: none; border: none; cursor: pointer; color: var(--color-muted); font-size: 0.75rem; padding: 4px; }
 
                 .cr-no-results { padding: var(--space-3xl) 0; color: var(--color-text-light); font-size: 0.9375rem; }
                 .cr-no-results button { color: var(--color-accent); background: none; border: none; cursor: pointer; text-decoration: underline; }
