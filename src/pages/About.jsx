@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import imgCoilFloor from '../assets/iec-coil-floor.jpg';
 import imgStatorLift from '../assets/iec-stator-lift.jpg';
-import imgCoilWorkers from '../assets/iec-coil-workers.jpg';
+import imgCoilExpanding from '../assets/iec-coil-expanding.jpg';
 
 const keyStats = [
     { value: '1998', label: 'Year established' },
@@ -123,7 +123,7 @@ const AboutPage = () => {
                             </div>
                         </div>
                         <div className="ap-photo">
-                            <img src={imgCoilWorkers} alt="Workers at coil expanding machines" />
+                            <img src={imgCoilExpanding} alt="Workers at coil expanding machines" />
                             <div className="ap-photo-label">
                                 <span>Coil Expanding Station</span>
                                 <em>Precision winding team</em>
@@ -137,8 +137,11 @@ const AboutPage = () => {
             <section className="ap-values">
                 <div className="container">
                     <div className="ap-values-header">
-                        <p className="ap-values-eyebrow">Our Foundation</p>
-                        <h2 className="ap-values-heading">Mission &amp; Values</h2>
+                        <div>
+                            <p className="ap-values-eyebrow">Our Foundation</p>
+                            <h2 className="ap-values-heading">Mission &amp; Values</h2>
+                        </div>
+                        <span className="ap-values-count">03 Core Principles</span>
                     </div>
                     <div className="ap-values-grid">
                         {values.map((v) => (
@@ -366,10 +369,17 @@ const AboutPage = () => {
                 .ap-values {
                     background: var(--color-white);
                     padding: var(--space-5xl) 0 var(--space-5xl);
+                    border-top: 4px solid var(--color-accent);
                 }
 
                 .ap-values-header {
                     margin-bottom: var(--space-4xl);
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: space-between;
+                    gap: var(--space-2xl);
+                    border-bottom: 1px solid var(--color-border);
+                    padding-bottom: var(--space-2xl);
                 }
 
                 .ap-values-eyebrow {
@@ -391,38 +401,62 @@ const AboutPage = () => {
                     line-height: 1.1;
                 }
 
+                .ap-values-count {
+                    font-family: var(--font-mono);
+                    font-size: 0.625rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: rgba(0,0,0,0.2);
+                    white-space: nowrap;
+                }
+
                 .ap-values-grid {
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
+                    gap: 0;
                 }
 
                 .ap-value {
                     padding: var(--space-3xl) var(--space-2xl);
-                    border-top: 2px solid var(--color-border);
+                    border-top: 3px solid var(--color-border);
                     border-right: 1px solid var(--color-border);
-                    transition: border-top-color 0.2s;
+                    position: relative;
+                    transition: border-top-color 0.25s;
+                    overflow: hidden;
                 }
 
                 .ap-value:first-child { padding-left: 0; }
                 .ap-value:last-child { border-right: none; }
 
-                .ap-value:hover {
-                    border-top-color: var(--color-accent);
+                .ap-value::before {
+                    content: '';
+                    position: absolute;
+                    top: -3px; left: 0;
+                    width: 100%;
+                    height: 3px;
+                    background: var(--color-accent);
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
                 }
+
+                .ap-value:hover::before { transform: scaleX(1); }
 
                 .ap-value-num {
                     font-family: var(--font-mono);
-                    font-size: 0.6875rem;
-                    font-weight: 600;
-                    color: var(--color-accent);
-                    letter-spacing: 0.1em;
+                    font-size: 2.5rem;
+                    font-weight: 700;
+                    color: rgba(0,0,0,0.06);
+                    letter-spacing: -0.05em;
                     display: block;
+                    line-height: 1;
                     margin-bottom: var(--space-lg);
                 }
 
                 .ap-value-title {
                     font-family: var(--font-serif);
-                    font-size: 1.5rem;
+                    font-size: 1.375rem;
                     font-weight: 700;
                     color: var(--color-text);
                     letter-spacing: -0.02em;
@@ -466,12 +500,13 @@ const AboutPage = () => {
                         border-right: none;
                         border-top: 1px solid rgba(255,255,255,0.07);
                     }
+                    .ap-values-header { flex-direction: column; align-items: flex-start; }
                     .ap-values-grid {
                         grid-template-columns: 1fr;
                     }
                     .ap-value {
                         border-right: none;
-                        border-top: 1px solid var(--color-border);
+                        border-top: 3px solid var(--color-border);
                     }
                     .ap-value:first-child { padding-left: var(--space-2xl); }
                 }

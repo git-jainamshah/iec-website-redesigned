@@ -1,11 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import defaultHeroBg from '../assets/iec-page-hero-bg.jpg';
 
-const PageHero = ({ label, title, subtitle, breadcrumbs = [] }) => {
+const PageHero = ({ label, title, subtitle, breadcrumbs = [], bgImage }) => {
+    const bg = bgImage || defaultHeroBg;
     return (
         <>
             <section className="page-hero">
-                <div className="page-hero-bg" />
+                <div className="page-hero-bg">
+                    <img src={bg} alt="" className="page-hero-bg-img" />
+                    <div className="page-hero-bg-overlay" />
+                </div>
                 <div className="container page-hero-content">
                     {breadcrumbs.length > 0 && (
                         <nav className="breadcrumbs animate-fade-up">
@@ -50,11 +55,25 @@ const PageHero = ({ label, title, subtitle, breadcrumbs = [] }) => {
                 .page-hero-bg {
                     position: absolute;
                     inset: 0;
-                    background: 
-                        radial-gradient(ellipse at 70% 20%, rgba(200, 16, 46, 0.08) 0%, transparent 50%),
-                        radial-gradient(ellipse at 20% 80%, rgba(26, 45, 74, 0.4) 0%, transparent 60%),
-                        linear-gradient(135deg, var(--color-primary) 0%, #0d1f3c 50%, var(--color-primary) 100%);
-                    opacity: 0.9;
+                    overflow: hidden;
+                }
+
+                .page-hero-bg-img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                    filter: grayscale(100%) brightness(0.28) contrast(1.1);
+                    transform: scale(1.04);
+                    display: block;
+                }
+
+                .page-hero-bg-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background:
+                        linear-gradient(to right, rgba(10,13,18,0.72) 0%, rgba(10,13,18,0.35) 100%),
+                        linear-gradient(to top, rgba(10,13,18,0.6) 0%, transparent 60%);
                 }
 
                 .page-hero-content {
