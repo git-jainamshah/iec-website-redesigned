@@ -56,15 +56,21 @@ const Leadership = () => {
                         {/* Quote */}
                         <blockquote className="ld-quote">
                             <span className="ld-quote-mark">"</span>
-                            <p className="ld-quote-text">We built IEC on one principle — send every machine back better than it came in, or not at all.</p>
+                            <p className="ld-quote-text">We built IEC on one principle: send every machine back better than it came in, or not at all.</p>
                             <cite className="ld-quote-cite">Late Anil Bhardwaj, Founder</cite>
                         </blockquote>
 
-                        {/* Signature — Mrs Saint Delafield (elegant classic handwriting) */}
+                        {/* Signature — Reenie Beanie + pen-texture displacement filter */}
                         <div className="ld-sig">
-                            <svg viewBox="0 0 260 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="ld-sig-svg ld-sig-svg--wide" aria-label="Anil Bhardwaj signature">
-                                <text x="4" y="46" fontFamily="'Mrs Saint Delafield', cursive" fontSize="44" fill="rgba(255,255,255,0.72)" letterSpacing="0.5">Anil Bhardwaj</text>
-                                <line x1="4" y1="55" x2="230" y2="55" stroke="rgba(255,255,255,0.18)" strokeWidth="0.75"/>
+                            <svg viewBox="0 0 240 72" fill="none" xmlns="http://www.w3.org/2000/svg" className="ld-sig-svg ld-sig-svg--wide" aria-label="A. Bhardwaj signature">
+                                <defs>
+                                    <filter id="pen-f" x="-4%" y="-25%" width="108%" height="150%">
+                                        <feTurbulence type="fractalNoise" baseFrequency="0.75 0.55" numOctaves="4" seed="3" result="noise"/>
+                                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
+                                    </filter>
+                                </defs>
+                                <text x="4" y="48" fontFamily="'Reenie Beanie', cursive" fontSize="46" fill="rgba(255,255,255,0.72)" letterSpacing="1" filter="url(#pen-f)">A. Bhardwaj</text>
+                                <line x1="4" y1="59" x2="208" y2="59" stroke="rgba(255,255,255,0.15)" strokeWidth="0.75"/>
                             </svg>
                         </div>
 
@@ -132,15 +138,21 @@ const Leadership = () => {
                         </p>
                         <p className="ld-leader-bio ld-leader-bio--light" style={{ marginTop: '1rem' }}>
                             Our founding commitment to technical excellence, honest workmanship, and
-                            zero-compromise quality is not a heritage we preserve — it is a standard we
+                            zero-compromise quality is not a heritage we preserve; it is a standard we
                             raise with every project we undertake.
                         </p>
 
-                        {/* Signature — Over the Rainbow (casual, warm handwriting) */}
+                        {/* Signature — Over the Rainbow + pen-texture displacement filter */}
                         <div className="ld-sig">
-                            <svg viewBox="0 0 310 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="ld-sig-svg ld-sig-svg--xl" aria-label="Arpana Bhardwaj signature">
-                                <text x="4" y="44" fontFamily="'Over the Rainbow', cursive" fontSize="34" fill="rgba(17,17,20,0.62)" letterSpacing="0.5">Arpana Bhardwaj</text>
-                                <line x1="4" y1="55" x2="280" y2="55" stroke="rgba(17,17,20,0.15)" strokeWidth="0.75"/>
+                            <svg viewBox="0 0 310 72" fill="none" xmlns="http://www.w3.org/2000/svg" className="ld-sig-svg ld-sig-svg--xl" aria-label="Arpana Bhardwaj signature">
+                                <defs>
+                                    <filter id="pen-c" x="-4%" y="-25%" width="108%" height="150%">
+                                        <feTurbulence type="fractalNoise" baseFrequency="0.6 0.45" numOctaves="3" seed="7" result="noise"/>
+                                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.6" xChannelSelector="R" yChannelSelector="G"/>
+                                    </filter>
+                                </defs>
+                                <text x="4" y="46" fontFamily="'Over the Rainbow', cursive" fontSize="34" fill="rgba(17,17,20,0.62)" letterSpacing="0.5" filter="url(#pen-c)">Arpana Bhardwaj</text>
+                                <line x1="4" y1="58" x2="280" y2="58" stroke="rgba(17,17,20,0.15)" strokeWidth="0.75"/>
                             </svg>
                         </div>
                     </div>
@@ -221,7 +233,7 @@ const Leadership = () => {
             </section>
 
             <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Over+the+Rainbow&display=swap');
+                @import url('https://fonts.googleapis.com/css2?family=Reenie+Beanie&family=Over+the+Rainbow&family=Homemade+Apple&display=swap');
 
                 .ld-page { min-height: 100vh; }
 
@@ -323,13 +335,13 @@ const Leadership = () => {
                     pointer-events: none;
                 }
                 .ld-quote-text {
-                    font-family: var(--font-display);
-                    font-size: 1.0625rem;
+                    font-family: 'Homemade Apple', cursive;
+                    font-size: 0.9rem;
                     font-style: normal;
-                    font-weight: 300;
-                    color: rgba(255,255,255,0.8);
-                    line-height: 1.65;
-                    letter-spacing: -0.01em;
+                    font-weight: 400;
+                    color: rgba(255,255,255,0.78);
+                    line-height: 2.0;
+                    letter-spacing: 0.01em;
                     margin-bottom: var(--space-md);
                 }
                 .ld-quote-cite {
