@@ -303,9 +303,9 @@ const Hero = () => {
                 .hero-title {
                     font-family: var(--font-display);
                     font-size: clamp(3rem, 6.5vw, 6rem);
-                    font-weight: 700;
+                    font-weight: 300;
                     color: var(--color-white);
-                    line-height: 1.05;
+                    line-height: 1.08;
                     letter-spacing: -0.03em;
                     margin-bottom: var(--space-md);
                     opacity: 0;

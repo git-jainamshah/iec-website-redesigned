@@ -4,8 +4,8 @@
  * Aerospace/defense-contractor restraint (Boeing/Lockheed/NASA) meets precision engineering red
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 /* ===== Premium CSS Variables ===== */
@@ -30,9 +30,9 @@
     --color-steel: #2d3748;
 
     /* Typography */
-    --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
-    --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --font-display: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'IBM Plex Mono', 'JetBrains Mono', 'SF Mono', monospace;
 
     /* Spacing Scale */
@@ -82,6 +82,7 @@ html {
 body {
     font-family: var(--font-sans);
     font-size: 15px;
+    font-weight: 300;
     line-height: 1.7;
     color: var(--color-text);
     background-color: var(--color-white);
@@ -125,28 +126,28 @@ h4,
 h5,
 h6 {
     font-family: var(--font-serif);
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.2;
     color: var(--color-text);
 }
 
-/* Playfair Display — elegant serif for all display & heading use */
+/* DM Sans display — light, clean, modern */
 .display-title {
     font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
 }
 
 h2 {
     font-size: clamp(1.75rem, 3vw, 2.5rem);
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: -0.02em;
 }
 
 h3 {
     font-size: clamp(1.125rem, 1.75vw, 1.5rem);
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: -0.01em;
 }
 
