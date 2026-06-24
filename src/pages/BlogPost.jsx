@@ -99,7 +99,7 @@ const BlogPost = () => {
 
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(article.title)}&url=${encodeURIComponent(pageUrl)}`;
     const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`;
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(article.title + ' — ' + pageUrl)}`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(article.title + ': ' + pageUrl)}`;
 
     /* Auto-number h2 sections */
     let h2Counter = 0;

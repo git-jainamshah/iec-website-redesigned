@@ -37,7 +37,7 @@ const TermsOfService = () => {
                         <div className="legal-section">
                             <h2>3. Intellectual Property</h2>
                             <p>
-                                All content on this website · including text, images, logos, and graphics —
+                                All content on this website, including text, images, logos, and graphics,
                                 is the property of Indian Engineering Company and is protected by
                                 applicable intellectual property laws. Unauthorized use or reproduction
                                 is prohibited.

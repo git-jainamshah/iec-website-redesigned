@@ -19,7 +19,7 @@ export const articles = [
         sections: [
             {
                 type: 'lead',
-                text: 'High-voltage motors are the workhorses of India\'s industrial backbone. From 6.6kV squirrel-cage induction motors in cement plants to 11kV synchronous machines in power stations, these assets are expected to run continuously for years — often in harsh, high-temperature environments. When they fail, entire production lines stop.',
+                text: 'High-voltage motors are the workhorses of India\'s industrial backbone. From 6.6kV squirrel-cage induction motors in cement plants to 11kV synchronous machines in power stations, these assets are expected to run continuously for years, often in harsh, high-temperature environments. When they fail, entire production lines stop.',
             },
             {
                 type: 'h2',
@@ -27,15 +27,15 @@ export const articles = [
             },
             {
                 type: 'p',
-                text: 'The cost of an unplanned HV motor failure is rarely just the repair bill. Lost production, emergency crane mobilisation, expedited winding materials, and overtime labour can multiply the total cost by 5 to 10 times compared to a planned overhaul. Proactive maintenance is not a cost — it is insurance.',
+                text: 'The cost of an unplanned HV motor failure is rarely just the repair bill. Lost production, emergency crane mobilisation, expedited winding materials, and overtime labour can multiply the total cost by 5 to 10 times compared to a planned overhaul. Proactive maintenance is not a cost, it is insurance.',
             },
             {
                 type: 'p',
-                text: 'IEC\'s service records across 500+ annual repairs show that over 60% of catastrophic motor failures originate from three root causes: insulation degradation, bearing failure, and contamination ingress. All three are detectable — and preventable — with the right maintenance regimen.',
+                text: 'IEC\'s service records across 500+ annual repairs show that over 60% of catastrophic motor failures originate from three root causes: insulation degradation, bearing failure, and contamination ingress. All three are detectable, and preventable, with the right maintenance regimen.',
             },
             {
                 type: 'pullquote',
-                text: 'Over 60% of catastrophic motor failures originate from insulation degradation, bearing failure, or contamination ingress — all detectable before breakdown.',
+                text: 'Over 60% of catastrophic motor failures originate from insulation degradation, bearing failure, or contamination ingress, all detectable before breakdown.',
             },
             {
                 type: 'h2',
@@ -43,16 +43,16 @@ export const articles = [
             },
             {
                 type: 'p',
-                text: 'Winding insulation is the most critical and most vulnerable element of any HV motor. Thermal cycling, moisture absorption, partial discharge, and mechanical vibration steadily erode insulation resistance over time. A motor that tests at 500 MΩ at commissioning may read below 10 MΩ after a decade of service — a level that signals imminent failure under operating voltage.',
+                text: 'Winding insulation is the most critical and most vulnerable element of any HV motor. Thermal cycling, moisture absorption, partial discharge, and mechanical vibration steadily erode insulation resistance over time. A motor that tests at 500 MΩ at commissioning may read below 10 MΩ after a decade of service, a level that signals imminent failure under operating voltage.',
             },
             {
                 type: 'ul',
                 heading: 'Recommended insulation checks:',
                 items: [
-                    'Megger (insulation resistance) test — annually at minimum, before every restart after extended outage',
-                    'Polarisation Index (PI) test — ratio of 10-minute to 1-minute IR reading; PI below 2.0 warrants investigation',
-                    'Hi-Pot (withstand voltage) test — post-rewind acceptance test per IEC 60034-18',
-                    'Partial Discharge (PD) monitoring — online PD sensing for motors above 6.6kV in continuous-duty service',
+                    'Megger (insulation resistance) test, annually at minimum, before every restart after extended outage',
+                    'Polarisation Index (PI) test, ratio of 10-minute to 1-minute IR reading; PI below 2.0 warrants investigation',
+                    'Hi-Pot (withstand voltage) test, post-rewind acceptance test per IEC 60034-18',
+                    'Partial Discharge (PD) monitoring, online PD sensing for motors above 6.6kV in continuous-duty service',
                 ],
             },
             {
@@ -65,15 +65,15 @@ export const articles = [
             },
             {
                 type: 'p',
-                text: 'Vibration analysis using accelerometers and an FFT spectrum analyser is the gold standard for rolling element bearing health. Signatures such as BPFO (ball pass frequency outer race) or BPFI (ball pass frequency inner race) peaks — even at low amplitude — indicate incipient defects weeks or months before audible noise develops.',
+                text: 'Vibration analysis using accelerometers and an FFT spectrum analyser is the gold standard for rolling element bearing health. Signatures such as BPFO (ball pass frequency outer race) or BPFI (ball pass frequency inner race) peaks, even at low amplitude, indicate incipient defects weeks or months before audible noise develops.',
             },
             {
                 type: 'ul',
                 heading: 'Key bearing maintenance actions:',
                 items: [
-                    'Baseline vibration spectrum on commissioning — compare against at every subsequent survey',
+                    'Baseline vibration spectrum on commissioning, compare against at every subsequent survey',
                     'Oil analysis every 3 months for sleeve-bearing machines (viscosity, metal particle content, water contamination)',
-                    'Rolling element bearing replacement at recommended TBO (Time Between Overhaul) — not just on failure',
+                    'Rolling element bearing replacement at recommended TBO (Time Between Overhaul), not just on failure',
                     'Shaft alignment check whenever the driven load is serviced or reconnected',
                 ],
             },
@@ -83,7 +83,7 @@ export const articles = [
             },
             {
                 type: 'p',
-                text: 'Every 10°C rise in winding temperature halves insulation life — a well-established rule in motor engineering. Ensuring adequate cooling is therefore as important as the electrical maintenance itself. Blocked air filters, damaged cooling fins, failed cooling fans, or fouled heat exchangers can silently drive winding temperatures above design limits.',
+                text: 'Every 10°C rise in winding temperature halves insulation life, a well-established rule in motor engineering. Ensuring adequate cooling is therefore as important as the electrical maintenance itself. Blocked air filters, damaged cooling fins, failed cooling fans, or fouled heat exchangers can silently drive winding temperatures above design limits.',
             },
             {
                 type: 'p',
@@ -100,7 +100,7 @@ export const articles = [
                     'Monthly: Visual inspection, cleanliness check, bearing temperature log, cooling system check',
                     'Quarterly: Vibration analysis, oil sampling (sleeve bearings), terminal box inspection',
                     'Annually: Full Megger and PI test, thermal imaging, coupling and alignment verification',
-                    'Every 3–5 years: Full disassembly overhaul — recheck all clearances, rewinding assessment, bearing replacement',
+                    'Every 3–5 years: Full disassembly overhaul, recheck all clearances, rewinding assessment, bearing replacement',
                 ],
             },
             {
@@ -123,7 +123,7 @@ export const articles = [
         sections: [
             {
                 type: 'lead',
-                text: 'India\'s industrial sector operates one of the largest installed bases of large rotating electrical machines in the world. From the 100+ GW of thermal and hydro generation assets to the vast fleets of HT motors in cement, steel, petrochemical, and process industries, the scale of equipment that must be maintained, repaired, and upgraded is enormous — and growing.',
+                text: 'India\'s industrial sector operates one of the largest installed bases of large rotating electrical machines in the world. From the 100+ GW of thermal and hydro generation assets to the vast fleets of HT motors in cement, steel, petrochemical, and process industries, the scale of equipment that must be maintained, repaired, and upgraded is enormous, and growing.',
             },
             {
                 type: 'h2',
@@ -131,7 +131,7 @@ export const articles = [
             },
             {
                 type: 'p',
-                text: 'For decades, the industrial repair sector in India operated largely on established workshop practices: strip the machine, rewind the stator, replace the bearings, reassemble, test. The quality of the outcome depended almost entirely on the skill of the individual technician. That model is changing — driven by tighter plant uptime requirements, increasing machine complexity, and the availability of new diagnostic technologies.',
+                text: 'For decades, the industrial repair sector in India operated largely on established workshop practices: strip the machine, rewind the stator, replace the bearings, reassemble, test. The quality of the outcome depended almost entirely on the skill of the individual technician. That model is changing, driven by tighter plant uptime requirements, increasing machine complexity, and the availability of new diagnostic technologies.',
             },
             {
                 type: 'p',
@@ -139,7 +139,7 @@ export const articles = [
             },
             {
                 type: 'pullquote',
-                text: 'Plant operators who once accepted a 15-day repair turnaround are now specifying 5 days — with full documented test traceability.',
+                text: 'Plant operators who once accepted a 15-day repair turnaround are now specifying 5 days, with full documented test traceability.',
             },
             {
                 type: 'h2',
@@ -151,7 +151,7 @@ export const articles = [
             },
             {
                 type: 'p',
-                text: 'For repair workshops, this creates both a challenge and an opportunity. Repair workshops that can interpret online monitoring data — and align their intervention recommendations with that data — become trusted partners rather than reactive service vendors. IEC has invested in diagnostic capability that complements the monitoring infrastructure increasingly found in client plants.',
+                text: 'For repair workshops, this creates both a challenge and an opportunity. Repair workshops that can interpret online monitoring data, and align their intervention recommendations with that data, become trusted partners rather than reactive service vendors. IEC has invested in diagnostic capability that complements the monitoring infrastructure increasingly found in client plants.',
             },
             {
                 type: 'h2',
@@ -177,11 +177,11 @@ export const articles = [
             },
             {
                 type: 'p',
-                text: 'The biggest constraint on the Indian motor repair industry is not technology — it is people. High-voltage coil winding, vacuum pressure impregnation, precision dynamic balancing, and HV testing require skills that take years to develop and are difficult to transfer. As senior technicians retire, workshops that have not invested in structured apprenticeship programs face serious capability gaps.',
+                text: 'The biggest constraint on the Indian motor repair industry is not technology, it is people. High-voltage coil winding, vacuum pressure impregnation, precision dynamic balancing, and HV testing require skills that take years to develop and are difficult to transfer. As senior technicians retire, workshops that have not invested in structured apprenticeship programs face serious capability gaps.',
             },
             {
                 type: 'p',
-                text: 'IEC has maintained a continuous apprenticeship program since its founding, with a strong proportion of the current workforce having been trained in-house from ITI and diploma entry-level. This internal talent pipeline is one of the company\'s most important competitive assets — and one that is increasingly difficult for smaller or newer workshops to replicate.',
+                text: 'IEC has maintained a continuous apprenticeship program since its founding, with a strong proportion of the current workforce having been trained in-house from ITI and diploma entry-level. This internal talent pipeline is one of the company\'s most important competitive assets, and one that is increasingly difficult for smaller or newer workshops to replicate.',
             },
             {
                 type: 'h2',
@@ -211,7 +211,7 @@ export const articles = [
         sections: [
             {
                 type: 'lead',
-                text: 'When you hand over a critical HV motor or generator for repair, how do you know the work will be done to a standard that preserves — or improves — the machine\'s original performance? The Electrical Apparatus Service Association (EASA) provides exactly that assurance through its internationally recognised repair standards and member accreditation programme.',
+                text: 'When you hand over a critical HV motor or generator for repair, how do you know the work will be done to a standard that preserves, or improves, the machine\'s original performance? The Electrical Apparatus Service Association (EASA) provides exactly that assurance through its internationally recognised repair standards and member accreditation programme.',
             },
             {
                 type: 'h2',
@@ -219,15 +219,15 @@ export const articles = [
             },
             {
                 type: 'p',
-                text: 'EASA is a global trade organisation representing electrical motor service centres, with members in over 70 countries. Its best-practice standard — ANSI/EASA AR100 — defines the minimum requirements for the repair of rotating electrical apparatus. The standard covers rewind specifications, mechanical clearances, testing requirements, and quality documentation.',
+                text: 'EASA is a global trade organisation representing electrical motor service centres, with members in over 70 countries. Its best-practice standard, ANSI/EASA AR100, defines the minimum requirements for the repair of rotating electrical apparatus. The standard covers rewind specifications, mechanical clearances, testing requirements, and quality documentation.',
             },
             {
                 type: 'p',
-                text: 'Critically, the EASA/AEMT Rewind Study — conducted jointly with the Association of Electrical and Mechanical Trades — demonstrated that rewinding to EASA AR100 standards does not reduce motor efficiency. This was a landmark finding that resolved a long-standing concern among plant operators about whether rewinding compromises performance.',
+                text: 'Critically, the EASA/AEMT Rewind Study, conducted jointly with the Association of Electrical and Mechanical Trades, demonstrated that rewinding to EASA AR100 standards does not reduce motor efficiency. This was a landmark finding that resolved a long-standing concern among plant operators about whether rewinding compromises performance.',
             },
             {
                 type: 'pullquote',
-                text: 'The EASA/AEMT Rewind Study proved that rewinding to EASA AR100 standards does not reduce motor efficiency — a landmark finding for plant operators.',
+                text: 'The EASA/AEMT Rewind Study proved that rewinding to EASA AR100 standards does not reduce motor efficiency, a landmark finding for plant operators.',
             },
             {
                 type: 'h2',
@@ -237,12 +237,12 @@ export const articles = [
                 type: 'ul',
                 heading: '',
                 items: [
-                    'Core loss testing before and after stripping — to detect core damage and verify restoration',
-                    'Winding data recording — turns, wire gauge, coil pitch, connection — for full traceability',
-                    'Insulation system requirements — voltage class, thermal class, VPI specifications',
-                    'Mechanical checks — shaft runout, bearing journal dimensions, air-gap uniformity',
-                    'Final testing — no-load current, insulation resistance, hi-pot per IEC/IEEE standards',
-                    'Documentation — test certificates issued with every completed repair',
+                    'Core loss testing before and after stripping, to detect core damage and verify restoration',
+                    'Winding data recording, turns, wire gauge, coil pitch, connection, for full traceability',
+                    'Insulation system requirements, voltage class, thermal class, VPI specifications',
+                    'Mechanical checks, shaft runout, bearing journal dimensions, air-gap uniformity',
+                    'Final testing, no-load current, insulation resistance, hi-pot per IEC/IEEE standards',
+                    'Documentation, test certificates issued with every completed repair',
                 ],
             },
             {
@@ -263,11 +263,11 @@ export const articles = [
             },
             {
                 type: 'p',
-                text: 'Certification and standards matter most when things go wrong. A motor that fails six months after repair — with no test records, no winding data, and no core loss measurements — leaves the plant operator with no recourse and no diagnostic data for the next repair. A motor repaired to EASA AR100, with full documentation, gives you a clear baseline for every future intervention and a contractual basis for warranty discussion.',
+                text: 'Certification and standards matter most when things go wrong. A motor that fails six months after repair, with no test records, no winding data, and no core loss measurements, leaves the plant operator with no recourse and no diagnostic data for the next repair. A motor repaired to EASA AR100, with full documentation, gives you a clear baseline for every future intervention and a contractual basis for warranty discussion.',
             },
             {
                 type: 'p',
-                text: 'For IEC\'s clients, EASA compliance is not a marketing claim — it is a working practice embedded in every repair job sheet, from intake inspection to final test sign-off.',
+                text: 'For IEC\'s clients, EASA compliance is not a marketing claim, it is a working practice embedded in every repair job sheet, from intake inspection to final test sign-off.',
             },
         ],
     },
@@ -285,7 +285,7 @@ export const articles = [
         sections: [
             {
                 type: 'lead',
-                text: 'Large generators — whether in captive power plants, cogeneration systems, or standby diesel-alternator sets — represent one of the most capital-intensive assets in any industrial facility. Unlike production equipment that can sometimes be bypassed or run at reduced capacity, a generator failure typically means a complete halt to operations. The business case for preventive maintenance is therefore straightforward: the cost of a planned overhaul is almost always a fraction of an unplanned failure.',
+                text: 'Large generators, whether in captive power plants, cogeneration systems, or standby diesel-alternator sets, represent one of the most capital-intensive assets in any industrial facility. Unlike production equipment that can sometimes be bypassed or run at reduced capacity, a generator failure typically means a complete halt to operations. The business case for preventive maintenance is therefore straightforward: the cost of a planned overhaul is almost always a fraction of an unplanned failure.',
             },
             {
                 type: 'h2',
@@ -293,7 +293,7 @@ export const articles = [
             },
             {
                 type: 'p',
-                text: 'Generator failures fall into two broad categories: electrical and mechanical. Electrical failures — stator winding insulation breakdown, rotor field winding faults, excitation system failures, and cooling system faults — are often progressive and detectable before complete failure. Mechanical failures — bearing seizure, shaft misalignment, brush gear wear, and vibration-induced fatigue — can be sudden but are equally amenable to preventive action.',
+                text: 'Generator failures fall into two broad categories: electrical and mechanical. Electrical failures, stator winding insulation breakdown, rotor field winding faults, excitation system failures, and cooling system faults, are often progressive and detectable before complete failure. Mechanical failures, bearing seizure, shaft misalignment, brush gear wear, and vibration-induced fatigue, can be sudden but are equally amenable to preventive action.',
             },
             {
                 type: 'ul',
@@ -336,7 +336,7 @@ export const articles = [
             },
             {
                 type: 'p',
-                text: 'The largest challenge in generator maintenance is not technical — it is operational. Taking a critical machine offline for planned maintenance requires coordination across production planning, power distribution management, and the maintenance team. In facilities with a single captive generator, even a 48-hour planned outage may require purchasing grid power, arranging DG backup, or running at reduced output.',
+                text: 'The largest challenge in generator maintenance is not technical, it is operational. Taking a critical machine offline for planned maintenance requires coordination across production planning, power distribution management, and the maintenance team. In facilities with a single captive generator, even a 48-hour planned outage may require purchasing grid power, arranging DG backup, or running at reduced output.',
             },
             {
                 type: 'p',
@@ -348,7 +348,7 @@ export const articles = [
             },
             {
                 type: 'p',
-                text: 'For generators in high-criticality applications, condition-based maintenance (CBM) offers significant advantages over calendar-based schedules. Online partial discharge monitoring, continuous vibration trending, oil particle counting, and thermal imaging during operation provide real-time health data that enables maintenance to be planned with much greater precision — intervening when the data indicates a problem is developing, rather than on a fixed schedule that may intervene either too early or too late.',
+                text: 'For generators in high-criticality applications, condition-based maintenance (CBM) offers significant advantages over calendar-based schedules. Online partial discharge monitoring, continuous vibration trending, oil particle counting, and thermal imaging during operation provide real-time health data that enables maintenance to be planned with much greater precision, intervening when the data indicates a problem is developing, rather than on a fixed schedule that may intervene either too early or too late.',
             },
             {
                 type: 'p',
