@@ -138,30 +138,36 @@ const AboutPage = () => {
                 </div>
             </section>
 
-            {/* ── Photo strip — cinematic ─────────────────────── */}
-            <section className="ap-photos">
-                <div className="ap-photo-grid">
-                    <div className="ap-photo ap-photo--wide">
-                        <img src={imgCoilFloor} alt="IEC coil manufacturing floor with workers" />
-                        <div className="ap-photo-label">
-                            <span>HV Coil Manufacturing Floor</span>
-                            <em>Ranoli Works, Vadodara</em>
+            {/* ── Photo Gallery — 3-panel cinematic ──────────── */}
+            <section className="ap-gallery">
+                <div className="ap-gallery-header">
+                    <div className="container">
+                        <div className="ap-gallery-meta">
+                            <span className="ap-gallery-tag">Inside IEC</span>
+                            <span className="ap-gallery-location">Ranoli &amp; Raika Works · Vadodara</span>
                         </div>
                     </div>
-                    <div className="ap-photo-col">
-                        <div className="ap-photo">
-                            <img src={imgStatorLift} alt="Massive stator being lowered into workshop by crane" />
-                            <div className="ap-photo-label">
-                                <span>300T Crane in Action</span>
-                                <em>Stator lift, Raika Works</em>
-                            </div>
+                </div>
+                <div className="ap-gallery-grid">
+                    <div className="ap-gallery-panel ap-gallery-panel--accent">
+                        <img src={imgCoilFloor} alt="IEC coil manufacturing floor with workers" />
+                        <div className="ap-gallery-caption">
+                            <h3 className="ap-gallery-caption-title">HV Coil Manufacturing</h3>
+                            <em className="ap-gallery-caption-sub">Ranoli Works · 75,000 sq ft floor</em>
                         </div>
-                        <div className="ap-photo">
-                            <img src={imgCoilExpanding} alt="Workers at coil expanding machines" />
-                            <div className="ap-photo-label">
-                                <span>Coil Expanding Station</span>
-                                <em>Precision winding team</em>
-                            </div>
+                    </div>
+                    <div className="ap-gallery-panel">
+                        <img src={imgStatorLift} alt="Massive stator being lowered by 300T crane" />
+                        <div className="ap-gallery-caption">
+                            <h3 className="ap-gallery-caption-title">300T Crane in Action</h3>
+                            <em className="ap-gallery-caption-sub">Raika Works · Heavy mechanical bay</em>
+                        </div>
+                    </div>
+                    <div className="ap-gallery-panel">
+                        <img src={imgCoilExpanding} alt="Workers at coil expanding machines" />
+                        <div className="ap-gallery-caption">
+                            <h3 className="ap-gallery-caption-title">Coil Expanding Station</h3>
+                            <em className="ap-gallery-caption-sub">Precision winding team</em>
                         </div>
                     </div>
                 </div>
@@ -428,84 +434,128 @@ const AboutPage = () => {
                     color: var(--color-text-light);
                 }
 
-                /* ── Photo strip ─────────────────────────────── */
-                .ap-photos {
+                /* ── Photo Gallery (3-panel cinematic) ──────────── */
+                .ap-gallery {
                     background: var(--color-primary);
-                    padding: var(--space-3xl) 0 0;
+                    padding-bottom: var(--space-5xl);
                 }
 
-                .ap-photo-grid {
-                    display: grid;
-                    grid-template-columns: 1.6fr 1fr;
-                    gap: 3px;
-                    height: 480px;
+                .ap-gallery-header {
+                    padding: var(--space-3xl) 0 var(--space-xl);
+                    border-top: 1px solid rgba(255,255,255,0.07);
                 }
 
-                .ap-photo-col {
+                .ap-gallery-meta {
                     display: flex;
-                    flex-direction: column;
+                    align-items: center;
+                    gap: var(--space-xl);
+                }
+
+                .ap-gallery-tag {
+                    font-family: var(--font-mono);
+                    font-size: 0.5625rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.16em;
+                    color: var(--color-white);
+                    background: var(--color-accent);
+                    padding: 4px 10px;
+                }
+
+                .ap-gallery-location {
+                    font-family: var(--font-mono);
+                    font-size: 0.5625rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.14em;
+                    color: rgba(255,255,255,0.28);
+                }
+
+                .ap-gallery-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
                     gap: 3px;
                 }
 
-                .ap-photo {
+                .ap-gallery-panel {
                     position: relative;
                     overflow: hidden;
-                    flex: 1;
+                    height: 540px;
+                    cursor: pointer;
                 }
 
-                .ap-photo img {
+                .ap-gallery-panel img {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
-                    filter: brightness(0.72) saturate(0.9);
-                    transition: transform 0.6s var(--ease-out), filter 0.4s;
+                    filter: brightness(0.68) saturate(0.85);
+                    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s;
                     display: block;
                 }
 
-                .ap-photo:hover img {
-                    transform: scale(1.04);
-                    filter: brightness(0.82) saturate(1.05);
+                .ap-gallery-panel:hover img {
+                    transform: scale(1.07);
+                    filter: brightness(0.8) saturate(1.0);
                 }
 
-                .ap-photo-label {
+                /* Red left-edge accent on first panel */
+                .ap-gallery-panel--accent::before {
+                    content: '';
+                    position: absolute;
+                    top: var(--space-xl);
+                    bottom: var(--space-xl);
+                    left: 0;
+                    width: 3px;
+                    background: var(--color-accent);
+                    z-index: 2;
+                    transition: height 0.3s;
+                }
+
+                .ap-gallery-caption {
                     position: absolute;
                     bottom: 0; left: 0; right: 0;
-                    padding: var(--space-md) var(--space-lg);
-                    background: linear-gradient(to top, rgba(5,7,10,0.82) 0%, transparent 100%);
+                    padding: var(--space-3xl) var(--space-xl) var(--space-xl);
+                    background: linear-gradient(to top, rgba(5,7,10,0.92) 0%, rgba(5,7,10,0.5) 55%, transparent 100%);
                     display: flex;
                     flex-direction: column;
-                    gap: 2px;
+                    gap: 5px;
+                    transform: translateY(6px);
+                    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
                 }
 
-                .ap-photo-label span {
-                    font-size: 0.8125rem;
-                    font-weight: 600;
-                    color: var(--color-white);
-                    line-height: 1.2;
+                .ap-gallery-panel:hover .ap-gallery-caption {
+                    transform: translateY(0);
                 }
 
-                .ap-photo-label em {
+                .ap-gallery-caption-title {
+                    font-family: var(--font-serif) !important;
+                    font-size: 1.0625rem !important;
+                    font-weight: 700 !important;
+                    color: var(--color-white) !important;
+                    letter-spacing: -0.015em;
+                    line-height: 1.25;
+                }
+
+                .ap-gallery-caption-sub {
                     font-style: normal;
                     font-family: var(--font-mono);
                     font-size: 0.5625rem;
                     font-weight: 500;
                     text-transform: uppercase;
-                    letter-spacing: 0.1em;
-                    color: rgba(255,255,255,0.4);
+                    letter-spacing: 0.12em;
+                    color: rgba(255,255,255,0.38);
                 }
 
-                @media (max-width: 768px) {
-                    .ap-photo-grid {
-                        grid-template-columns: 1fr;
-                        height: auto;
-                    }
-                    .ap-photo--wide { height: 260px; }
-                    .ap-photo-col { flex-direction: row; height: 180px; }
+                @media (max-width: 900px) {
+                    .ap-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+                    .ap-gallery-panel:last-child { display: none; }
+                    .ap-gallery-panel { height: 380px; }
                 }
 
-                @media (max-width: 480px) {
-                    .ap-photo-col { flex-direction: column; height: auto; }
-                    .ap-photo-col .ap-photo { height: 160px; }
+                @media (max-width: 600px) {
+                    .ap-gallery-grid { grid-template-columns: 1fr; }
+                    .ap-gallery-panel:last-child { display: block; }
+                    .ap-gallery-panel { height: 300px; }
                 }
 
                 /* ── Values (WHITE — clearly below dark photo strip) ── */
