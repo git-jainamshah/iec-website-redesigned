@@ -13,6 +13,15 @@ const keyStats = [
     { value: '40+', unit: 'yrs', label: 'Industry experience' },
 ];
 
+const milestones = [
+    { year: '1984', title: 'Industry Roots', desc: 'Mr. Anil Bhardwaj begins his career in heavy electrical engineering, building expertise in HV rotating machines across Gujarat.' },
+    { year: '1998', title: 'IEC Founded', desc: 'Indian Engineering Company formally established in Vadodara, bringing specialised HV motor and generator repair to the region.' },
+    { year: '2005', title: 'Ranoli Works', desc: 'Main workshop at Ranoli, Vadodara commissioned — dedicated electrical bays, coil shop, and in-house testing infrastructure.' },
+    { year: '2012', title: 'Raika Expansion', desc: 'Second facility at Raika inaugurated, adding heavy mechanical bays, 300-ton crane capacity, and balancing machines up to 45 tons.' },
+    { year: '2014', title: 'EASA Membership', desc: 'IEC joins the Electrical Apparatus Service Association (EASA) — adopting international best-practice standards across all repair operations.' },
+    { year: '2024', title: 'Market Leader', desc: 'Serving an estimated 95% of Gujarat\'s HV motor and generator repair market, with clients spanning 10+ states and major industrial sectors.' },
+];
+
 const values = [
     {
         num: '01',
@@ -100,6 +109,29 @@ const AboutPage = () => {
                                     {s.unit && <span className="ap-stat-unit">{s.unit}</span>}
                                 </div>
                                 <span className="ap-stat-label">{s.label}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ── Timeline ───────────────────────────────────── */}
+            <section className="ap-timeline">
+                <div className="container">
+                    <div className="ap-tl-header">
+                        <p className="ap-tl-eyebrow">Our Journey</p>
+                        <h2 className="ap-tl-heading">40 Years of Engineering Excellence</h2>
+                    </div>
+                    <div className="ap-tl-track">
+                        <div className="ap-tl-line" />
+                        {milestones.map((m, i) => (
+                            <div className="ap-tl-item" key={m.year} style={{ '--i': i }}>
+                                <div className="ap-tl-dot" />
+                                <div className="ap-tl-content">
+                                    <span className="ap-tl-year">{m.year}</span>
+                                    <h3 className="ap-tl-title">{m.title}</h3>
+                                    <p className="ap-tl-desc">{m.desc}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -288,6 +320,114 @@ const AboutPage = () => {
                     color: rgba(255,255,255,0.32);
                 }
 
+                /* ── Timeline ───────────────────────────────── */
+                .ap-timeline {
+                    background: var(--color-primary);
+                    padding: var(--space-5xl) 0;
+                    border-top: 1px solid rgba(255,255,255,0.07);
+                }
+
+                .ap-tl-header {
+                    margin-bottom: var(--space-4xl);
+                }
+
+                .ap-tl-eyebrow {
+                    font-family: var(--font-mono);
+                    font-size: 0.6875rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.14em;
+                    color: var(--color-accent);
+                    margin-bottom: var(--space-md);
+                }
+
+                .ap-tl-heading {
+                    font-family: var(--font-serif) !important;
+                    font-size: clamp(1.75rem, 3vw, 2.5rem) !important;
+                    font-weight: 700 !important;
+                    color: var(--color-white) !important;
+                    letter-spacing: -0.025em;
+                    line-height: 1.1;
+                }
+
+                .ap-tl-track {
+                    position: relative;
+                    display: grid;
+                    grid-template-columns: repeat(6, 1fr);
+                    gap: 0;
+                    padding-top: var(--space-3xl);
+                }
+
+                .ap-tl-line {
+                    position: absolute;
+                    top: 10px;
+                    left: 0;
+                    right: 0;
+                    height: 1px;
+                    background: rgba(255,255,255,0.1);
+                }
+
+                .ap-tl-line::after {
+                    content: '';
+                    position: absolute;
+                    left: 0; top: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(to right, var(--color-accent) 0%, rgba(200,16,46,0.2) 100%);
+                }
+
+                .ap-tl-item {
+                    padding: 0 var(--space-lg);
+                    position: relative;
+                }
+
+                .ap-tl-item:first-child { padding-left: 0; }
+                .ap-tl-item:last-child { padding-right: 0; }
+
+                .ap-tl-dot {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background: var(--color-accent);
+                    border: 2px solid var(--color-primary);
+                    box-shadow: 0 0 0 1px var(--color-accent);
+                    margin-bottom: var(--space-xl);
+                    position: relative;
+                    z-index: 1;
+                    transition: transform 0.2s, box-shadow 0.2s;
+                }
+
+                .ap-tl-item:hover .ap-tl-dot {
+                    transform: scale(1.4);
+                    box-shadow: 0 0 0 3px rgba(200,16,46,0.3);
+                }
+
+                .ap-tl-year {
+                    font-family: var(--font-mono);
+                    font-size: 0.75rem;
+                    font-weight: 700;
+                    color: var(--color-accent);
+                    letter-spacing: 0.04em;
+                    display: block;
+                    margin-bottom: var(--space-sm);
+                }
+
+                .ap-tl-title {
+                    font-family: var(--font-serif);
+                    font-size: 1rem !important;
+                    font-weight: 700 !important;
+                    color: var(--color-white) !important;
+                    letter-spacing: -0.01em;
+                    line-height: 1.3;
+                    margin-bottom: var(--space-sm);
+                }
+
+                .ap-tl-desc {
+                    font-size: 0.8125rem;
+                    line-height: 1.65;
+                    color: rgba(255,255,255,0.38);
+                }
+
                 /* ── Photo strip ─────────────────────────────── */
                 .ap-photos {
                     background: var(--color-primary);
@@ -394,13 +534,14 @@ const AboutPage = () => {
                     margin-bottom: var(--space-md);
                 }
 
+                /* !important overrides global h2 { font-size: clamp(2rem,4vw,3rem) } */
                 .ap-values-heading {
-                    font-family: var(--font-serif);
-                    font-size: clamp(2.25rem, 4vw, 3.25rem);
-                    font-weight: 700;
-                    color: var(--color-white);
-                    letter-spacing: -0.03em;
-                    line-height: 1.08;
+                    font-family: var(--font-serif) !important;
+                    font-size: clamp(1.75rem, 2.5vw, 2.5rem) !important;
+                    font-weight: 700 !important;
+                    color: var(--color-white) !important;
+                    letter-spacing: -0.025em;
+                    line-height: 1.1;
                 }
 
                 /* Cards grid — full bleed */
@@ -496,6 +637,8 @@ const AboutPage = () => {
                         grid-template-columns: 1fr 1fr;
                         gap: var(--space-3xl);
                     }
+                    .ap-tl-track { grid-template-columns: repeat(3, 1fr); gap: var(--space-3xl) 0; }
+                    .ap-tl-line { display: none; }
                 }
 
                 @media (max-width: 768px) {
@@ -520,6 +663,7 @@ const AboutPage = () => {
                         border-right: none;
                         border-top: 1px solid rgba(255,255,255,0.07);
                     }
+                    .ap-tl-track { grid-template-columns: repeat(2, 1fr); }
                     .ap-values-grid { grid-template-columns: 1fr; }
                     .ap-value {
                         border-right: none;
