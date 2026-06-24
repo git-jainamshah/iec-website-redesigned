@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import imgGeneratorWorkshop from '../assets/iec-generator-workshop.jpg';
+import imgRotorCrane from '../assets/iec-rotor-crane.jpg';
+import imgVpiTank from '../assets/iec-vpi-tank.jpg';
+import imgLaserCnc from '../assets/iec-laser-cnc.jpg';
+import imgCoilFloor from '../assets/iec-coil-floor.jpg';
 
 const services = [
     {
         id: 'motors',
         num: '01',
+        img: imgGeneratorWorkshop,
         label: 'Rewinding & Repair',
         title: 'Motor, Generator, Alternator & DC Motor Repair',
         desc: 'Rewinding and repair of AC induction, synchronous, and wound-rotor/slip-ring motors up to 20,000 HP and 13.8 kV, plus hydro, turbo, gas and wind generators and DC motors. Full-load testing up to 5 MW, no-load testing up to 20 MW.',
@@ -22,6 +28,7 @@ const services = [
     {
         id: 'mechanical',
         num: '02',
+        img: imgRotorCrane,
         label: 'Precision Rebuild',
         title: 'Mechanical Repair',
         desc: 'Precision mechanical rebuild work on the rotating and structural components that keep a machine in tolerance — shafts, bearing housings, commutators and more — for complete operational restoration.',
@@ -38,6 +45,7 @@ const services = [
     {
         id: 'pumps',
         num: '03',
+        img: imgVpiTank,
         label: 'Overhaul',
         title: 'Industrial Pump Repair',
         desc: 'Repair and overhaul of industrial pumps, including high-voltage cryogenic submersible pumps such as Ebara-make 6.6 kV units — specialist work unavailable at most facilities in India.',
@@ -51,6 +59,7 @@ const services = [
     {
         id: 'spares',
         num: '04',
+        img: imgLaserCnc,
         label: 'In-house Manufacturing',
         title: 'Spares Fabrication',
         desc: 'In-house fabrication of critical rotating-machine spares for fast turnaround on failures and planned overhauls. All machining is done on-site, eliminating lead times and reducing downtime.',
@@ -66,6 +75,7 @@ const services = [
     {
         id: 'maintenance',
         num: '05',
+        img: imgCoilFloor,
         label: 'Site & Works',
         title: 'Preventive Maintenance & Overhauling',
         desc: "Scheduled maintenance and overhauling at IEC's Vadodara works or in-situ at the client site — sized to the plant's outage window with our own transport fleet and experienced field engineers.",
@@ -126,6 +136,13 @@ const ServicesPage = () => {
                                 </div>
 
                                 <div className="sp-content">
+                                    <div className="sp-expand-inner">
+                                    {svc.img && (
+                                        <div className="sp-img">
+                                            <img src={svc.img} alt={svc.title} />
+                                        </div>
+                                    )}
+                                    <div className="sp-expand-text">
                                     <p className="sp-desc">{svc.desc}</p>
                                     <div className="sp-chips">
                                         {svc.features.map((f, i) => (
@@ -142,6 +159,8 @@ const ServicesPage = () => {
                                             <path d="M5 12h14M12 5l7 7-7 7" />
                                         </svg>
                                     </Link>
+                                    </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -379,6 +398,44 @@ const ServicesPage = () => {
                 /* Fix grid-template-rows animation — needs wrapper */
                 .sp-content {
                     overflow: hidden;
+                }
+
+                /* Image + text side by side when expanded */
+                .sp-expand-inner {
+                    display: grid;
+                    grid-template-columns: 280px 1fr;
+                    gap: var(--space-2xl);
+                    align-items: start;
+                }
+
+                .sp-img {
+                    flex-shrink: 0;
+                    overflow: hidden;
+                    height: 200px;
+                }
+
+                .sp-img img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    filter: brightness(0.78) saturate(0.85);
+                    transition: transform 0.5s var(--ease-out), filter 0.3s;
+                    display: block;
+                }
+
+                .sp-item--open .sp-img img {
+                    filter: brightness(0.88) saturate(1);
+                }
+
+                .sp-expand-text {
+                    min-width: 0;
+                }
+
+                @media (max-width: 768px) {
+                    .sp-expand-inner {
+                        grid-template-columns: 1fr;
+                    }
+                    .sp-img { height: 180px; }
                 }
 
                 /* ── Bottom CTA band ──────────────────────────── */

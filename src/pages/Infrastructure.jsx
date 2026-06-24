@@ -1,5 +1,11 @@
 import React from 'react';
 import PageHero from '../components/PageHero';
+import imgCoilWorkers from '../assets/iec-coil-workers.jpg';
+import imgVpiTank from '../assets/iec-vpi-tank.jpg';
+import imgLaserCnc from '../assets/iec-laser-cnc.jpg';
+import imgStatorFrame from '../assets/iec-stator-frame.jpg';
+import imgGeneratorWorkshop from '../assets/iec-generator-workshop.jpg';
+import imgRotorCrane from '../assets/iec-rotor-crane.jpg';
 
 const stats = [
     { value: '300K', unit: 'sq ft', label: 'Total land area', sub: 'Ranoli & Raika works' },
@@ -13,33 +19,39 @@ const stats = [
 const facilities = [
     {
         num: '01',
+        img: imgCoilWorkers,
         title: 'HV Coil Manufacturing',
         desc: 'In-house manufacturing of high-voltage coils for stator and field rewinding, supporting motors and generators up to 13.8 kV.',
     },
     {
         num: '02',
-        title: 'Heating Ovens',
-        desc: '3 industrial ovens with a maximum volume of 3,000 cubic ft for VPI curing and insulation heat treatment at precise temperatures.',
+        img: imgVpiTank,
+        title: 'VPI & Heating Ovens',
+        desc: '3 industrial ovens with 3,000 cu ft capacity for VPI curing and insulation heat treatment, with dedicated impregnation tank.',
     },
     {
         num: '03',
+        img: imgLaserCnc,
         title: 'Mechanical Workshop',
-        desc: 'Fully equipped workshop for shaft fabrication, bearing housing repair, commutator work, and bespoke spares fabrication.',
+        desc: 'Fully equipped workshop with CNC, laser cutting, and precision machining for shaft fabrication, commutator work, and spares.',
     },
     {
         num: '04',
+        img: imgStatorFrame,
         title: 'Dynamic Balancing',
         desc: 'Balancing machines rated up to 25-ton and 45-ton rotor capacity for precision rotor and shaft balancing to G-grade standards.',
     },
     {
         num: '05',
+        img: imgGeneratorWorkshop,
         title: 'Testing & Control Room',
         desc: 'Centralised testing bed for no-load testing up to 20 MW, full-load testing up to 5 MW, and DC motor testing with data logging.',
     },
     {
         num: '06',
+        img: imgRotorCrane,
         title: 'Crane System',
-        desc: 'Heavy-duty overhead cranes from 10 to 300 ton capacity for handling large rotors, stators and generator frames with full safety compliance.',
+        desc: 'Heavy-duty overhead cranes from 10 to 300 ton capacity for handling large rotors, stators and generator frames safely.',
     },
 ];
 
@@ -85,9 +97,16 @@ const InfrastructurePage = () => {
                     <div className="ip-fac-grid">
                         {facilities.map((f) => (
                             <div className="ip-fac-card" key={f.num}>
-                                <span className="ip-fac-num">{f.num}</span>
-                                <h3 className="ip-fac-title">{f.title}</h3>
-                                <p className="ip-fac-desc">{f.desc}</p>
+                                {f.img && (
+                                    <div className="ip-fac-img">
+                                        <img src={f.img} alt={f.title} />
+                                    </div>
+                                )}
+                                <div className="ip-fac-body">
+                                    <span className="ip-fac-num">{f.num}</span>
+                                    <h3 className="ip-fac-title">{f.title}</h3>
+                                    <p className="ip-fac-desc">{f.desc}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -211,19 +230,48 @@ const InfrastructurePage = () => {
                 }
 
                 .ip-fac-card {
-                    padding: var(--space-3xl) var(--space-2xl);
                     border-right: 1px solid var(--color-border);
                     border-bottom: 1px solid var(--color-border);
-                    transition: background 0.2s;
+                    transition: box-shadow 0.2s;
                     position: relative;
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
                 }
 
-                .ip-fac-card::before {
+                .ip-fac-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+
+                .ip-fac-img {
+                    width: 100%;
+                    height: 200px;
+                    overflow: hidden;
+                    flex-shrink: 0;
+                }
+
+                .ip-fac-img img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    filter: saturate(0.85) brightness(0.9);
+                    transition: transform 0.5s var(--ease-out), filter 0.3s;
+                    display: block;
+                }
+
+                .ip-fac-card:hover .ip-fac-img img {
+                    transform: scale(1.05);
+                    filter: saturate(1) brightness(0.95);
+                }
+
+                .ip-fac-body {
+                    padding: var(--space-xl) var(--space-xl);
+                    position: relative;
+                    flex: 1;
+                }
+
+                .ip-fac-body::before {
                     content: '';
                     position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
+                    top: 0; left: var(--space-xl); right: var(--space-xl);
                     height: 2px;
                     background: var(--color-accent);
                     transform: scaleX(0);
@@ -231,8 +279,7 @@ const InfrastructurePage = () => {
                     transition: transform 0.3s var(--ease-out);
                 }
 
-                .ip-fac-card:hover { background: rgba(200,16,46,0.02); }
-                .ip-fac-card:hover::before { transform: scaleX(1); }
+                .ip-fac-card:hover .ip-fac-body::before { transform: scaleX(1); }
 
                 .ip-fac-num {
                     font-family: var(--font-mono);
@@ -241,22 +288,22 @@ const InfrastructurePage = () => {
                     color: var(--color-accent);
                     letter-spacing: 0.1em;
                     display: block;
-                    margin-bottom: var(--space-lg);
+                    margin-bottom: var(--space-md);
                 }
 
                 .ip-fac-title {
                     font-family: var(--font-serif);
-                    font-size: 1.1875rem;
+                    font-size: 1.0625rem;
                     font-weight: 700;
                     color: var(--color-text);
                     letter-spacing: -0.02em;
                     line-height: 1.2;
-                    margin-bottom: var(--space-md);
+                    margin-bottom: var(--space-sm);
                 }
 
                 .ip-fac-desc {
-                    font-size: 0.9375rem;
-                    line-height: 1.72;
+                    font-size: 0.875rem;
+                    line-height: 1.7;
                     color: var(--color-text-light);
                 }
 

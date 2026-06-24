@@ -1,37 +1,47 @@
 import React, { useState } from 'react';
-import heroBg from '../assets/iec-hero-bg.jpeg';
-import projectBg from '../assets/project-banner-bg.jpg';
+import imgRotorCrane from '../assets/iec-rotor-crane.jpg';
+import imgStatorLift from '../assets/iec-stator-lift.jpg';
+import imgCoilFloor from '../assets/iec-coil-floor.jpg';
+import imgVpiTank from '../assets/iec-vpi-tank.jpg';
+import imgGeneratorWorkshop from '../assets/iec-generator-workshop.jpg';
+import imgLaserCnc from '../assets/iec-laser-cnc.jpg';
 
 const galleryItems = [
     {
-        img: heroBg,
+        img: imgRotorCrane,
         label: 'Workshop Floor',
-        caption: 'Vadodara Works',
+        caption: 'Heavy Mechanical Bay',
         desc: '75,000 sq ft active repair bays',
     },
     {
-        img: projectBg,
-        label: 'Heavy Machinery',
-        caption: 'In-house Facility',
-        desc: '300-ton crane capacity',
+        img: imgStatorLift,
+        label: 'Crane Operations',
+        caption: 'Raika Works',
+        desc: '300-ton overhead crane capacity',
     },
     {
-        img: null,
-        label: 'HV Coil Making',
-        caption: 'Precision Winding',
-        desc: 'Up to 13.8 kV stator coils',
+        img: imgCoilFloor,
+        label: 'HV Coil Manufacturing',
+        caption: 'Precision Winding Floor',
+        desc: 'Up to 13.8 kV stator coils in-house',
     },
     {
-        img: null,
-        label: 'Dynamic Balancing',
-        caption: 'Testing Bed',
-        desc: 'Rotors up to 45 tons',
+        img: imgVpiTank,
+        label: 'VPI Impregnation',
+        caption: 'Vacuum Pressure System',
+        desc: 'Full stator insulation processing',
     },
     {
-        img: null,
+        img: imgGeneratorWorkshop,
         label: 'High-Voltage Testing',
-        caption: 'Centralized Test Lab',
+        caption: 'Centralised Test Lab',
         desc: '20 MW no-load test capacity',
+    },
+    {
+        img: imgLaserCnc,
+        label: 'Spares Fabrication',
+        caption: 'CNC & Laser Cutting',
+        desc: 'In-house stator lamination & machining',
     },
 ];
 

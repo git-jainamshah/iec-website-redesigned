@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import imgCoilFloor from '../assets/iec-coil-floor.jpg';
+import imgStatorLift from '../assets/iec-stator-lift.jpg';
+import imgCoilWorkers from '../assets/iec-coil-workers.jpg';
 
 const keyStats = [
     { value: '1998', label: 'Year established' },
@@ -97,6 +100,35 @@ const AboutPage = () => {
                                 <span className="ap-stat-label">{s.label}</span>
                             </div>
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ── Photo strip — cinematic ─────────────────────── */}
+            <section className="ap-photos">
+                <div className="ap-photo-grid">
+                    <div className="ap-photo ap-photo--wide">
+                        <img src={imgCoilFloor} alt="IEC coil manufacturing floor with workers" />
+                        <div className="ap-photo-label">
+                            <span>HV Coil Manufacturing Floor</span>
+                            <em>Ranoli Works, Vadodara</em>
+                        </div>
+                    </div>
+                    <div className="ap-photo-col">
+                        <div className="ap-photo">
+                            <img src={imgStatorLift} alt="Massive stator being lowered into workshop by crane" />
+                            <div className="ap-photo-label">
+                                <span>300T Crane in Action</span>
+                                <em>Stator lift, Raika Works</em>
+                            </div>
+                        </div>
+                        <div className="ap-photo">
+                            <img src={imgCoilWorkers} alt="Workers at coil expanding machines" />
+                            <div className="ap-photo-label">
+                                <span>Coil Expanding Station</span>
+                                <em>Precision winding team</em>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -248,6 +280,86 @@ const AboutPage = () => {
                     text-transform: uppercase;
                     letter-spacing: 0.07em;
                     color: rgba(255,255,255,0.32);
+                }
+
+                /* ── Photo strip ─────────────────────────────── */
+                .ap-photos {
+                    background: var(--color-primary);
+                    padding: var(--space-3xl) 0 0;
+                }
+
+                .ap-photo-grid {
+                    display: grid;
+                    grid-template-columns: 1.6fr 1fr;
+                    gap: 3px;
+                    height: 480px;
+                }
+
+                .ap-photo-col {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 3px;
+                }
+
+                .ap-photo {
+                    position: relative;
+                    overflow: hidden;
+                    flex: 1;
+                }
+
+                .ap-photo img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    filter: brightness(0.72) saturate(0.9);
+                    transition: transform 0.6s var(--ease-out), filter 0.4s;
+                    display: block;
+                }
+
+                .ap-photo:hover img {
+                    transform: scale(1.04);
+                    filter: brightness(0.82) saturate(1.05);
+                }
+
+                .ap-photo-label {
+                    position: absolute;
+                    bottom: 0; left: 0; right: 0;
+                    padding: var(--space-md) var(--space-lg);
+                    background: linear-gradient(to top, rgba(5,7,10,0.82) 0%, transparent 100%);
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2px;
+                }
+
+                .ap-photo-label span {
+                    font-size: 0.8125rem;
+                    font-weight: 600;
+                    color: var(--color-white);
+                    line-height: 1.2;
+                }
+
+                .ap-photo-label em {
+                    font-style: normal;
+                    font-family: var(--font-mono);
+                    font-size: 0.5625rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: rgba(255,255,255,0.4);
+                }
+
+                @media (max-width: 768px) {
+                    .ap-photo-grid {
+                        grid-template-columns: 1fr;
+                        height: auto;
+                    }
+                    .ap-photo--wide { height: 260px; }
+                    .ap-photo-col { flex-direction: row; height: 180px; }
+                }
+
+                @media (max-width: 480px) {
+                    .ap-photo-col { flex-direction: column; height: auto; }
+                    .ap-photo-col .ap-photo { height: 160px; }
                 }
 
                 /* ── Values (light) ───────────────────────────── */
