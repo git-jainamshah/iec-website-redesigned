@@ -161,7 +161,7 @@ const Blogs = () => {
                         <p className="bl-newsletter-body">
                             Have a repair question or want to discuss a project with our engineers?
                         </p>
-                        <Link to="/contact" className="btn-premium">
+                        <Link to="/contact" className="bl-cta-btn">
                             Talk to an Engineer
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                         </Link>
@@ -478,6 +478,29 @@ const Blogs = () => {
                     .bl-grid { grid-template-columns: 1fr; }
                     .bl-newsletter-inner { flex-direction: column; align-items: flex-start; }
                     .bl-newsletter-actions { max-width: 100%; }
+                }
+
+                /* Newsletter CTA button */
+                .bl-cta-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 13px 30px;
+                    font-family: var(--font-mono);
+                    font-size: 0.75rem;
+                    font-weight: 500;
+                    letter-spacing: 0.14em;
+                    text-transform: uppercase;
+                    color: var(--color-white);
+                    border: 1px solid rgba(255,255,255,0.22);
+                    background: transparent;
+                    text-decoration: none;
+                    transition: background 0.35s, border-color 0.35s, color 0.35s;
+                }
+                .bl-cta-btn:hover {
+                    background: var(--color-accent);
+                    border-color: var(--color-accent);
+                    color: #ffffff;
                 }
             `}</style>
         </div>
