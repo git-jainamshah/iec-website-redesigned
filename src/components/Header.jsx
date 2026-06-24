@@ -351,8 +351,8 @@ const Header = () => {
                 }
 
                 .header.panel-open {
-                    background: transparent;
-                    border-bottom-color: transparent;
+                    background: var(--color-primary);
+                    border-bottom: 1px solid rgba(255,255,255,0.08);
                     backdrop-filter: none;
                 }
 
@@ -365,12 +365,10 @@ const Header = () => {
                     z-index: 2;
                 }
 
-                /* Hide brand wordmark while a full-screen panel is open so it can
-                   never visually collide with the overlay's nav links underneath. */
+                /* Brand wordmark visible when panel is open */
                 .header.panel-open .brand-text {
-                    opacity: 0;
-                    visibility: hidden;
-                    transition: opacity 0.15s, visibility 0.15s;
+                    opacity: 1;
+                    visibility: visible;
                 }
 
                 .brand-logo {
