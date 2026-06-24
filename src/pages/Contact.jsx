@@ -128,16 +128,16 @@ const Contact = () => {
             <PageHero
                 label="Get In Touch"
                 title="Contact Us"
-                subtitle="Connect directly with our technical, sales, or service teams — or send us a brief for your repair."
+                subtitle="Connect directly with our technical, sales, or service teams · or send us a brief for your repair."
                 breadcrumbs={[{ label: 'Contact' }]}
                 bgImage={heroBg}
             />
 
-            {/* ── Main contact section — light ────────────────── */}
+            {/* ── Main contact section · light ────────────────── */}
             <section className="cp-main">
                 <div className="container cp-grid">
 
-                    {/* Left — Directory */}
+                    {/* Left · Directory */}
                     <div className="cp-dir">
                         <p className="cp-dir-eyebrow">Directory</p>
                         <h2 className="cp-dir-heading">Reach our team directly.</h2>
@@ -172,7 +172,7 @@ const Contact = () => {
                         </div>
                     </div>
 
-                    {/* Right — Form */}
+                    {/* Right · Form */}
                     <div className="cp-form-col">
                         <div className="cp-form-card">
 

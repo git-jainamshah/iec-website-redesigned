@@ -74,7 +74,7 @@ const VideoReel = () => {
                     <h2 className="vr-title">Where precision<br />meets scale.</h2>
                 </div>
                 <p className="vr-header-right">
-                    Inside IEC's Vadodara works — high-voltage machines being
+                    Inside IEC's Vadodara works · high-voltage machines being
                     disassembled, rewound, tested, and returned to service.
                 </p>
             </div>
@@ -217,8 +217,8 @@ const VideoReel = () => {
                     inset: 0;
                     background: linear-gradient(
                         to top,
-                        rgba(22,28,40,0.75) 0%,
-                        rgba(22,28,40,0) 50%
+                        rgba(17,17,20,0.75) 0%,
+                        rgba(17,17,20,0) 50%
                     );
                 }
 

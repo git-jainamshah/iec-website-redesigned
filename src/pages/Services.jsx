@@ -35,21 +35,21 @@ const CARDS = [
     {
         num: '03', label: 'Specialist Overhaul',
         title: 'Industrial Pump Repair',
-        desc: 'Repair of industrial pumps including high-voltage cryogenic submersibles (Ebara 6.6 kV) — specialist work unavailable at most Indian facilities.',
+        desc: 'Repair of industrial pumps including high-voltage cryogenic submersibles (Ebara 6.6 kV) · specialist work unavailable at most Indian facilities.',
         chips: ['Cryogenic Submersible Pumps', 'HV Pump Rewinding 6.6 kV', 'Impeller & Seal Service', 'Full Testing'],
         img: imgVpiTank,
     },
     {
         num: '04', label: 'In-house Manufacturing',
         title: 'Spares Fabrication',
-        desc: 'In-house fabrication of critical rotating-machine spares — all machining done on-site, eliminating lead times and cutting plant downtime.',
+        desc: 'In-house fabrication of critical rotating-machine spares · all machining done on-site, eliminating lead times and cutting plant downtime.',
         chips: ['Rotor Shafts', 'Bearing Housings & Covers', 'Heat Exchangers', 'Cooling Fans & Grills'],
         img: imgLaserCnc,
     },
     {
         num: '05', label: 'Site & Works',
         title: 'Preventive Maintenance',
-        desc: "Scheduled maintenance and overhauling at IEC's Vadodara works or in-situ at the client site — sized to your plant's outage window.",
+        desc: "Scheduled maintenance and overhauling at IEC's Vadodara works or in-situ at the client site · sized to your plant's outage window.",
         chips: ['Planned Outage Overhauls', 'Condition Monitoring', 'On-Site Service', 'Emergency Response'],
         img: imgCoilWorkers,
     },
@@ -106,7 +106,7 @@ const ServicesPage = () => {
                     <div className="sv-feature-img-overlay" />
                 </div>
 
-                {/* Diagonal blade — absolutely positioned over the split boundary */}
+                {/* Diagonal blade · absolutely positioned over the split boundary */}
                 <div className="sv-blade" aria-hidden="true" />
 
                 {/* Content panel */}
@@ -120,7 +120,7 @@ const ServicesPage = () => {
 
                         <h2 className="sv-feature-title">
                             Motor, Generator<br />&amp; Alternator Repair
-                            <span className="sv-feature-sub"> — up to 20,000 HP</span>
+                            <span className="sv-feature-sub"> · up to 20,000 HP</span>
                         </h2>
 
                         <p className="sv-feature-desc">
@@ -434,7 +434,7 @@ const ServicesPage = () => {
                     border-color: rgba(255,255,255,0.22);
                 }
 
-                /* CTA button — premium slide-fill */
+                /* CTA button · premium slide-fill */
                 .sv-cta-btn {
                     position: relative;
                     display: inline-flex;
@@ -751,7 +751,7 @@ const ServicesPage = () => {
                 .sv-card:hover .sv-card-sweep { transform: scaleX(1); }
 
                 /* ═══════════════════════════════════════════════
-                   OUTRO — editorial split panel
+                   OUTRO · editorial split panel
                 ═══════════════════════════════════════════════ */
                 .sv-outro {
                     display: grid;

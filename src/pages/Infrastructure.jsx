@@ -67,7 +67,7 @@ const InfrastructurePage = () => {
                 bgImage={heroBg}
             />
 
-            {/* ── Stats — dark, flows from PageHero ──────────── */}
+            {/* ── Stats · dark, flows from PageHero ──────────── */}
             <section className="ip-stats-section">
                 <div className="container">
                     <div className="ip-stats-grid">
@@ -85,14 +85,14 @@ const InfrastructurePage = () => {
                 </div>
             </section>
 
-            {/* ── Facilities — light ───────────────────────────── */}
+            {/* ── Facilities · light ───────────────────────────── */}
             <section className="ip-facilities-section">
                 <div className="container">
                     <div className="ip-facilities-header">
                         <p className="ip-fac-eyebrow">Capabilities</p>
                         <h2 className="ip-fac-heading">Our Facilities</h2>
                         <p className="ip-fac-sub">
-                            Every major function is handled in-house — no outsourcing, no delays,
+                            Every major function is handled in-house · no outsourcing, no delays,
                             no compromises on quality or traceability.
                         </p>
                     </div>

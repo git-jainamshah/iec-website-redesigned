@@ -16,9 +16,9 @@ const keyStats = [
 const milestones = [
     { year: '1984', title: 'Industry Roots', desc: 'Mr. Anil Bhardwaj begins his career in heavy electrical engineering, building expertise in HV rotating machines across Gujarat.' },
     { year: '1998', title: 'IEC Founded', desc: 'Indian Engineering Company formally established in Vadodara, bringing specialised HV motor and generator repair to the region.' },
-    { year: '2005', title: 'Ranoli Works', desc: 'Main workshop at Ranoli, Vadodara commissioned — dedicated electrical bays, coil shop, and in-house testing infrastructure.' },
+    { year: '2005', title: 'Ranoli Works', desc: 'Main workshop at Ranoli, Vadodara commissioned · dedicated electrical bays, coil shop, and in-house testing infrastructure.' },
     { year: '2012', title: 'Raika Expansion', desc: 'Second facility at Raika inaugurated, adding heavy mechanical bays, 300-ton crane capacity, and balancing machines up to 45 tons.' },
-    { year: '2014', title: 'EASA Membership', desc: 'IEC joins the Electrical Apparatus Service Association (EASA) — adopting international best-practice standards across all repair operations.' },
+    { year: '2014', title: 'EASA Membership', desc: 'IEC joins the Electrical Apparatus Service Association (EASA) · adopting international best-practice standards across all repair operations.' },
     { year: '2024', title: 'Market Leader', desc: 'Serving an estimated 95% of Gujarat\'s HV motor and generator repair market, with clients spanning 10+ states and major industrial sectors.' },
 ];
 
@@ -26,7 +26,7 @@ const values = [
     {
         num: '01',
         title: 'Quality Assurance',
-        desc: 'Every repair meets ISO 9001 and EASA international standards with rigorous in-process testing at every stage — from incoming inspection to final hi-pot and load testing.',
+        desc: 'Every repair meets ISO 9001 and EASA international standards with rigorous in-process testing at every stage · from incoming inspection to final hi-pot and load testing.',
     },
     {
         num: '02',
@@ -51,7 +51,7 @@ const AboutPage = () => {
                 bgImage={heroBg}
             />
 
-            {/* ── Story — dark, flows from PageHero ──────────── */}
+            {/* ── Story · dark, flows from PageHero ──────────── */}
             <section className="ap-story">
                 <div className="container">
                     <div className="ap-story-grid">
@@ -138,7 +138,7 @@ const AboutPage = () => {
                 </div>
             </section>
 
-            {/* ── Photo Gallery — 3-panel cinematic ──────────── */}
+            {/* ── Photo Gallery · 3-panel cinematic ──────────── */}
             <section className="ap-gallery">
                 <div className="ap-gallery-header">
                     <div className="container">
@@ -559,7 +559,7 @@ const AboutPage = () => {
                     .ap-gallery-panel { height: 300px; }
                 }
 
-                /* ── Values (WHITE — clearly below dark photo strip) ── */
+                /* ── Values (WHITE · clearly below dark photo strip) ── */
                 .ap-values {
                     background: var(--color-white);
                     padding: var(--space-5xl) 0 0;
@@ -595,7 +595,7 @@ const AboutPage = () => {
                     line-height: 1.1;
                 }
 
-                /* Cards grid — full bleed */
+                /* Cards grid · full bleed */
                 .ap-values-grid {
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
@@ -617,7 +617,7 @@ const AboutPage = () => {
                     background: #f9fafb;
                 }
 
-                /* Oversized ghost number — fills card top */
+                /* Oversized ghost number · fills card top */
                 .ap-value-ghost {
                     font-family: var(--font-mono);
                     font-size: clamp(6rem, 10vw, 10rem);
