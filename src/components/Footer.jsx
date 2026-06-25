@@ -6,20 +6,6 @@ const Footer = () => {
     return (
         <footer className="footer">
 
-            {/* ── Pre-footer CTA strip ── */}
-            <div className="footer-cta-strip">
-                <div className="container footer-cta-inner">
-                    <div className="footer-cta-text">
-                        <span className="footer-cta-eyebrow">Ready to get started?</span>
-                        <p className="footer-cta-heading">Send us your repair brief today.</p>
-                    </div>
-                    <Link to="/contact" className="footer-cta-btn">
-                        Contact our team
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </Link>
-                </div>
-            </div>
-
             {/* ── Main grid ── */}
             <div className="footer-main">
                 <div className="container">
@@ -137,42 +123,6 @@ const Footer = () => {
                 .footer {
                     background: var(--color-primary);
                 }
-
-                /* ── CTA strip ── */
-                .footer-cta-strip {
-                    border-top: 1px solid rgba(255,255,255,0.06);
-                    border-bottom: 1px solid rgba(255,255,255,0.06);
-                    padding: var(--space-2xl) 0;
-                    background: rgba(255,255,255,0.02);
-                }
-                .footer-cta-inner {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    gap: var(--space-2xl);
-                    flex-wrap: wrap;
-                }
-                .footer-cta-text { display: flex; flex-direction: column; gap: 4px; }
-                .footer-cta-eyebrow {
-                    font-family: var(--font-mono); font-size: 0.5625rem;
-                    font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em;
-                    color: var(--color-accent);
-                }
-                .footer-cta-heading {
-                    font-family: var(--font-display); font-weight: 300;
-                    font-size: clamp(1.1rem, 2vw, 1.5rem);
-                    letter-spacing: -0.02em; color: var(--color-white); margin: 0;
-                }
-                .footer-cta-btn {
-                    display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0;
-                    padding: 12px 28px;
-                    font-family: var(--font-mono); font-size: 0.6875rem;
-                    font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em;
-                    color: var(--color-white); background: var(--color-accent);
-                    border: 1px solid var(--color-accent); text-decoration: none;
-                    transition: background 0.25s, color 0.25s, gap 0.25s;
-                }
-                .footer-cta-btn:hover { background: transparent; color: var(--color-white); gap: 16px; }
 
                 /* ── Main ── */
                 .footer-main { padding: var(--space-5xl) 0 var(--space-4xl); }
@@ -330,8 +280,7 @@ const Footer = () => {
                 @media (max-width: 640px) {
                     .footer-grid { grid-template-columns: 1fr; }
                     .footer-brand { grid-column: span 1; }
-                    .footer-cta-inner { flex-direction: column; align-items: flex-start; }
-                    .footer-bottom-inner { flex-direction: column; gap: var(--space-md); text-align: center; }
+.footer-bottom-inner { flex-direction: column; gap: var(--space-md); text-align: center; }
                 }
             `}</style>
         </footer>
