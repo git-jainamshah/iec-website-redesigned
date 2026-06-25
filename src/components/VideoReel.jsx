@@ -18,6 +18,24 @@ const VideoReel = () => {
     const [dir, setDir]         = useState(1); // 1 = forward (slide up), -1 = backward (slide down)
     const timerRef              = useRef(null);
     const videoRefs             = useRef([]);
+    const sectionRef            = useRef(null);
+    const frameWrapRef          = useRef(null);
+
+    // Parallax scroll effect
+    useEffect(() => {
+        const onScroll = () => {
+            if (!sectionRef.current || !frameWrapRef.current) return;
+            const rect = sectionRef.current.getBoundingClientRect();
+            const vh   = window.innerHeight;
+            // progress: 0 when section center is at viewport center
+            const progress = (vh / 2 - (rect.top + rect.height / 2)) / vh;
+            const y = progress * 40; // ±20px max
+            frameWrapRef.current.style.transform = `translateY(${y}px)`;
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
 
     const resetTimer = useCallback((nextIdx) => {
         clearInterval(timerRef.current);
@@ -58,7 +76,7 @@ const VideoReel = () => {
     };
 
     return (
-        <section className="vr-section">
+        <section className="vr-section" ref={sectionRef}>
             <div className="container">
                 {/* Section header */}
                 <div className="vr-header">
@@ -76,7 +94,7 @@ const VideoReel = () => {
                 <div className="vr-body">
 
                     {/* ── Left: portrait reel frame ── */}
-                    <div className="vr-frame-wrap">
+                    <div className="vr-frame-wrap" ref={frameWrapRef}>
                         <div className="vr-frame">
                             {clips.map((clip, i) => (
                                 <div key={i} className={`vr-slide ${slideClass(i)}`}>
@@ -205,6 +223,8 @@ const VideoReel = () => {
                 /* ── Portrait Frame ── */
                 .vr-frame-wrap {
                     flex-shrink: 0;
+                    will-change: transform;
+                    transition: transform 0.1s linear;
                 }
                 .vr-frame {
                     position: relative;
@@ -213,9 +233,28 @@ const VideoReel = () => {
                     aspect-ratio: 9 / 16;
                     border-radius: 20px;
                     overflow: hidden;
+                    /* Layered phone-depth shadows */
                     box-shadow:
-                        0 0 0 1px rgba(0,0,0,0.08),
-                        0 40px 100px rgba(0,0,0,0.25);
+                        0 0 0 1px rgba(0,0,0,0.07),
+                        0 2px 4px rgba(0,0,0,0.06),
+                        0 8px 16px rgba(0,0,0,0.08),
+                        0 24px 48px rgba(0,0,0,0.13),
+                        0 56px 100px rgba(0,0,0,0.18),
+                        0 80px 160px rgba(0,0,0,0.10);
+                }
+                /* Blurred ambient glow projected beneath the phone */
+                .vr-frame::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -28px;
+                    left: 10%;
+                    right: 10%;
+                    height: 60px;
+                    background: rgba(0,0,0,0.22);
+                    filter: blur(24px);
+                    border-radius: 50%;
+                    z-index: -1;
+                    pointer-events: none;
                 }
 
                 .vr-slide {
