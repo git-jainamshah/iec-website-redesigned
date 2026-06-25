@@ -19,7 +19,7 @@ const Footer = () => {
                                 </div>
                                 <div className="footer-wordmark">
                                     <span className="footer-wordmark-name">Indian Engineering Company</span>
-                                    <span className="footer-wordmark-sub">Est. 1998 · Ranoli, Gujarat</span>
+                                    <span className="footer-wordmark-sub">Est. 1984 · Ranoli, Gujarat</span>
                                 </div>
                             </Link>
 
@@ -30,7 +30,7 @@ const Footer = () => {
                             <div className="footer-badges">
                                 <span className="footer-badge">ISO 9001</span>
                                 <span className="footer-badge footer-badge-accent">EASA Member</span>
-                                <span className="footer-badge">Est. 1998</span>
+                                <span className="footer-badge">Est. 1984</span>
                             </div>
 
                             <div className="footer-social">

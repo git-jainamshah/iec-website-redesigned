@@ -66,7 +66,7 @@ const AboutPage = () => {
                             <div className="ap-creds">
                                 <span className="ap-cred">ISO 9001:2008</span>
                                 <span className="ap-cred ap-cred-accent">EASA Member</span>
-                                <span className="ap-cred">Est. 1998</span>
+                                <span className="ap-cred">Est. 1984</span>
                             </div>
                         </div>
 

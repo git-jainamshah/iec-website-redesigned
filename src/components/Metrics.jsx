@@ -23,7 +23,7 @@ const metrics = [
         value: '40+',
         unit: '',
         label: 'Years Industry Experience',
-        sub: 'Est. 1998 · Ranoli, Gujarat'
+        sub: 'Est. 1984 · Ranoli, Gujarat'
     }
 ];
 

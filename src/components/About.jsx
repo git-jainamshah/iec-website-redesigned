@@ -34,7 +34,7 @@ const About = () => {
                         <div className="about-creds">
                             <span className="about-cred">ISO 9001</span>
                             <span className="about-cred about-cred-accent">EASA Member</span>
-                            <span className="about-cred">Est. 1998</span>
+                            <span className="about-cred">Est. 1984</span>
                         </div>
                         <Link to="/about" className="about-link">
                             Our full story
