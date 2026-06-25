@@ -106,7 +106,7 @@ const VideoReel = () => {
                     <h2 className="vr-title">Where precision<br />meets scale.</h2>
                 </div>
                 <p className="vr-header-right">
-                    Inside IEC's Ranoli works — high-voltage machines being
+                    Inside IEC's Ranoli works: high-voltage machines being
                     disassembled, rewound, tested, and returned to service.
                 </p>
             </div>
