@@ -1,30 +1,50 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Country, State, City } from 'country-state-city';
 import PageHero from '../components/PageHero';
 import heroBg from '../assets/iec-stator-lift.jpg';
 import projectBg from '../assets/project-banner-bg.jpg';
 
-/* ── Normalise phone code: ensure leading +, strip sub-codes ── */
-const normPhone = (code) => {
-    const clean = String(code).replace(/\s/g, '').split('-')[0].split(',')[0];
-    return clean.startsWith('+') ? clean : `+${clean}`;
-};
-
-/* ── Build sorted country list for phone selector ── */
-const ALL_COUNTRIES = Country.getAllCountries()
-    .map(c => ({
-        isoCode: c.isoCode,
-        name: c.name,
-        flag: c.flag || '',
-        dialCode: normPhone(c.phonecode),
-    }))
-    .sort((a, b) => {
-        // India first, then alphabetical
-        if (a.isoCode === 'IN') return -1;
-        if (b.isoCode === 'IN') return 1;
-        return a.name.localeCompare(b.name);
-    });
+/* ── Lightweight dial-code list (replaces country-state-city ~8MB) ── */
+const ALL_COUNTRIES = [
+    { isoCode: 'IN', name: 'India',               flag: '🇮🇳', dialCode: '+91'  },
+    { isoCode: 'AE', name: 'UAE',                  flag: '🇦🇪', dialCode: '+971' },
+    { isoCode: 'SA', name: 'Saudi Arabia',          flag: '🇸🇦', dialCode: '+966' },
+    { isoCode: 'QA', name: 'Qatar',                 flag: '🇶🇦', dialCode: '+974' },
+    { isoCode: 'KW', name: 'Kuwait',                flag: '🇰🇼', dialCode: '+965' },
+    { isoCode: 'BH', name: 'Bahrain',               flag: '🇧🇭', dialCode: '+973' },
+    { isoCode: 'OM', name: 'Oman',                  flag: '🇴🇲', dialCode: '+968' },
+    { isoCode: 'SG', name: 'Singapore',             flag: '🇸🇬', dialCode: '+65'  },
+    { isoCode: 'MY', name: 'Malaysia',              flag: '🇲🇾', dialCode: '+60'  },
+    { isoCode: 'ID', name: 'Indonesia',             flag: '🇮🇩', dialCode: '+62'  },
+    { isoCode: 'TH', name: 'Thailand',              flag: '🇹🇭', dialCode: '+66'  },
+    { isoCode: 'PH', name: 'Philippines',           flag: '🇵🇭', dialCode: '+63'  },
+    { isoCode: 'VN', name: 'Vietnam',               flag: '🇻🇳', dialCode: '+84'  },
+    { isoCode: 'CN', name: 'China',                 flag: '🇨🇳', dialCode: '+86'  },
+    { isoCode: 'JP', name: 'Japan',                 flag: '🇯🇵', dialCode: '+81'  },
+    { isoCode: 'KR', name: 'South Korea',           flag: '🇰🇷', dialCode: '+82'  },
+    { isoCode: 'PK', name: 'Pakistan',              flag: '🇵🇰', dialCode: '+92'  },
+    { isoCode: 'BD', name: 'Bangladesh',            flag: '🇧🇩', dialCode: '+880' },
+    { isoCode: 'LK', name: 'Sri Lanka',             flag: '🇱🇰', dialCode: '+94'  },
+    { isoCode: 'NP', name: 'Nepal',                 flag: '🇳🇵', dialCode: '+977' },
+    { isoCode: 'GB', name: 'United Kingdom',        flag: '🇬🇧', dialCode: '+44'  },
+    { isoCode: 'US', name: 'United States',         flag: '🇺🇸', dialCode: '+1'   },
+    { isoCode: 'CA', name: 'Canada',                flag: '🇨🇦', dialCode: '+1'   },
+    { isoCode: 'AU', name: 'Australia',             flag: '🇦🇺', dialCode: '+61'  },
+    { isoCode: 'NZ', name: 'New Zealand',           flag: '🇳🇿', dialCode: '+64'  },
+    { isoCode: 'DE', name: 'Germany',               flag: '🇩🇪', dialCode: '+49'  },
+    { isoCode: 'FR', name: 'France',                flag: '🇫🇷', dialCode: '+33'  },
+    { isoCode: 'IT', name: 'Italy',                 flag: '🇮🇹', dialCode: '+39'  },
+    { isoCode: 'ES', name: 'Spain',                 flag: '🇪🇸', dialCode: '+34'  },
+    { isoCode: 'NL', name: 'Netherlands',           flag: '🇳🇱', dialCode: '+31'  },
+    { isoCode: 'RU', name: 'Russia',                flag: '🇷🇺', dialCode: '+7'   },
+    { isoCode: 'TR', name: 'Turkey',                flag: '🇹🇷', dialCode: '+90'  },
+    { isoCode: 'ZA', name: 'South Africa',          flag: '🇿🇦', dialCode: '+27'  },
+    { isoCode: 'NG', name: 'Nigeria',               flag: '🇳🇬', dialCode: '+234' },
+    { isoCode: 'KE', name: 'Kenya',                 flag: '🇰🇪', dialCode: '+254' },
+    { isoCode: 'EG', name: 'Egypt',                 flag: '🇪🇬', dialCode: '+20'  },
+    { isoCode: 'BR', name: 'Brazil',                flag: '🇧🇷', dialCode: '+55'  },
+    { isoCode: 'MX', name: 'Mexico',                flag: '🇲🇽', dialCode: '+52'  },
+];
 
 /* ── Department directory ── */
 const departments = [
@@ -140,85 +160,34 @@ const PremiumCheckbox = ({ checked, onChange, error, touched }) => (
     </div>
 );
 
-/* ── LocationField: Country -> State -> City ── */
-const LocationField = ({ countryIso, stateIso, city, onChange }) => {
-    const states = useMemo(() =>
-        countryIso ? State.getStatesOfCountry(countryIso) : [],
-        [countryIso]
-    );
-    const cities = useMemo(() =>
-        (countryIso && stateIso) ? City.getCitiesOfState(countryIso, stateIso) : [],
-        [countryIso, stateIso]
-    );
-
-    const handleCountryChange = (e) => {
-        onChange({ companyCountry: e.target.value, companyState: '', companyCity: '' });
-    };
-    const handleStateChange = (e) => {
-        onChange({ companyState: e.target.value, companyCity: '' });
-    };
-    const handleCityChange = (e) => {
-        onChange({ companyCity: e.target.value });
-    };
-
-    return (
-        <div className="cp-field">
-            <label className="cp-label">
-                Company Location <em className="cp-optional">optional</em>
-            </label>
-            <div className="cp-location-grid">
-                {/* Country */}
-                <div className="cp-location-slot">
-                    <span className="cp-location-slot-label">Country</span>
-                    <select
-                        value={countryIso}
-                        onChange={handleCountryChange}
-                        className="cp-input cp-select cp-location-select"
-                    >
-                        <option value="">Select country</option>
-                        {ALL_COUNTRIES.map(c => (
-                            <option key={c.isoCode} value={c.isoCode}>
-                                {c.flag} {c.name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-
-                {/* State / Province */}
-                <div className="cp-location-slot">
-                    <span className="cp-location-slot-label">State / Province</span>
-                    <select
-                        value={stateIso}
-                        onChange={handleStateChange}
-                        className="cp-input cp-select cp-location-select"
-                        disabled={!countryIso}
-                    >
-                        <option value="">{countryIso ? (states.length ? 'Select state' : 'Not applicable') : 'Select country first'}</option>
-                        {states.map(s => (
-                            <option key={s.isoCode} value={s.isoCode}>{s.name}</option>
-                        ))}
-                    </select>
-                </div>
-
-                {/* City */}
-                <div className="cp-location-slot">
-                    <span className="cp-location-slot-label">City</span>
-                    <select
-                        value={city}
-                        onChange={handleCityChange}
-                        className="cp-input cp-select cp-location-select"
-                        disabled={!stateIso}
-                    >
-                        <option value="">{stateIso ? (cities.length ? 'Select city' : 'Not applicable') : 'Select state first'}</option>
-                        {cities.map((c, i) => (
-                            <option key={i} value={c.name}>{c.name}</option>
-                        ))}
-                    </select>
-                </div>
+/* ── LocationField: free-text inputs (lightweight, no external data) ── */
+const LocationField = ({ companyCountry, companyState, companyCity, onChange }) => (
+    <div className="cp-field">
+        <label className="cp-label">
+            Company Location <em className="cp-optional">optional</em>
+        </label>
+        <div className="cp-location-grid">
+            <div className="cp-location-slot">
+                <span className="cp-location-slot-label">Country</span>
+                <input type="text" name="companyCountry" value={companyCountry}
+                    onChange={e => onChange({ companyCountry: e.target.value })}
+                    placeholder="e.g. India" className="cp-input cp-location-input" />
+            </div>
+            <div className="cp-location-slot">
+                <span className="cp-location-slot-label">State / Province</span>
+                <input type="text" name="companyState" value={companyState}
+                    onChange={e => onChange({ companyState: e.target.value })}
+                    placeholder="e.g. Gujarat" className="cp-input cp-location-input" />
+            </div>
+            <div className="cp-location-slot">
+                <span className="cp-location-slot-label">City</span>
+                <input type="text" name="companyCity" value={companyCity}
+                    onChange={e => onChange({ companyCity: e.target.value })}
+                    placeholder="e.g. Vadodara" className="cp-input cp-location-input" />
             </div>
         </div>
-    );
-};
+    </div>
+);
 
 /* ── Contact page ── */
 const Contact = () => {
@@ -442,9 +411,9 @@ const Contact = () => {
 
                                         {/* Company location */}
                                         <LocationField
-                                            countryIso={formData.companyCountry}
-                                            stateIso={formData.companyState}
-                                            city={formData.companyCity}
+                                            companyCountry={formData.companyCountry}
+                                            companyState={formData.companyState}
+                                            companyCity={formData.companyCity}
                                             onChange={handleLocationChange}
                                         />
 
