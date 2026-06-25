@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import imgRotorCrane from '../assets/iec-rotor-crane.jpg';
 import imgStatorLift from '../assets/iec-stator-lift.jpg';
 import imgCoilFloor from '../assets/iec-coil-floor.jpg';
@@ -15,8 +15,29 @@ const panels = [
     { img: imgLaserCnc,          label: 'Spares Fabrication',   caption: 'CNC & Laser Cutting',      desc: 'In-house stator lamination & machining' },
 ];
 
+const AUTO_ADVANCE = 5000;
+
 const WorkGallery = () => {
     const [active, setActive] = useState(0);
+    const timerRef = useRef(null);
+
+    const resetTimer = useCallback((nextIdx) => {
+        clearInterval(timerRef.current);
+        timerRef.current = setInterval(() => {
+            setActive(prev => (prev + 1) % panels.length);
+        }, AUTO_ADVANCE);
+        if (nextIdx !== undefined) setActive(nextIdx);
+    }, []);
+
+    useEffect(() => {
+        resetTimer();
+        return () => clearInterval(timerRef.current);
+    }, [resetTimer]);
+
+    const handleClick = (i) => {
+        if (i === active) return;
+        resetTimer(i);
+    };
 
     return (
         <section className="wg-section">
@@ -38,12 +59,12 @@ const WorkGallery = () => {
                     <div
                         key={i}
                         className={`wg-panel ${i === active ? 'wg-panel--active' : ''}`}
-                        onClick={() => setActive(i)}
+                        onClick={() => handleClick(i)}
                         role="button"
                         aria-label={panel.label}
                         aria-expanded={i === active}
                         tabIndex={0}
-                        onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && setActive(i)}
+                        onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && handleClick(i)}
                     >
                         <img src={panel.img} alt={panel.label} className="wg-panel-img" loading="lazy" />
                         <div className="wg-panel-overlay" />
@@ -65,6 +86,13 @@ const WorkGallery = () => {
                             <span className="wg-panel-label">{panel.label}</span>
                             <span className="wg-panel-desc">{panel.desc}</span>
                         </div>
+
+                        {/* Progress bar — active panel only */}
+                        {i === active && (
+                            <div className="wg-progress">
+                                <div className="wg-progress-fill" key={`${i}-${active}`} />
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>
@@ -159,8 +187,8 @@ const WorkGallery = () => {
                     inset: 0;
                     background: linear-gradient(
                         to top,
-                        rgba(9,9,12,0.92) 0%,
-                        rgba(9,9,12,0.1) 50%,
+                        rgba(9,9,12,0.88) 0%,
+                        rgba(9,9,12,0.05) 45%,
                         rgba(9,9,12,0.15) 100%
                     );
                 }
@@ -228,14 +256,14 @@ const WorkGallery = () => {
                     opacity: 0;
                 }
 
-                /* Expanded info block */
+                /* Expanded info block — lifted off the bottom edge */
                 .wg-panel-info {
                     position: absolute;
                     bottom: 0;
                     left: 0;
                     right: 0;
-                    padding: 80px var(--space-xl) var(--space-xl);
-                    background: linear-gradient(to top, rgba(9,9,12,0.92) 0%, transparent 100%);
+                    padding: 100px var(--space-xl) var(--space-3xl);
+                    background: linear-gradient(to top, rgba(9,9,12,0.88) 0%, transparent 100%);
                     display: flex;
                     flex-direction: column;
                     gap: 6px;
@@ -273,6 +301,29 @@ const WorkGallery = () => {
                     font-size: 0.875rem;
                     color: rgba(255,255,255,0.5);
                     margin-top: 2px;
+                }
+
+                /* Progress bar */
+                .wg-progress {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 3px;
+                    background: rgba(255,255,255,0.1);
+                    z-index: 3;
+                }
+
+                .wg-progress-fill {
+                    height: 100%;
+                    background: var(--color-accent);
+                    animation: wg-fill ${AUTO_ADVANCE}ms linear forwards;
+                    transform-origin: left;
+                }
+
+                @keyframes wg-fill {
+                    from { transform: scaleX(0); }
+                    to   { transform: scaleX(1); }
                 }
 
                 /* Mobile: vertical accordion */
@@ -318,6 +369,10 @@ const WorkGallery = () => {
 
                     .wg-panel-top {
                         top: var(--space-md);
+                    }
+
+                    .wg-panel-info {
+                        padding-bottom: var(--space-2xl);
                     }
                 }
             `}</style>
