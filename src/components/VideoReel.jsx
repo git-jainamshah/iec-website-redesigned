@@ -193,11 +193,19 @@ const VideoReel = () => {
                 }
 
                 .vr-panel-video {
+                    /* Videos are landscape (1920×1080) but filmed portrait (reels).
+                       Rotate -90deg (left) to restore correct orientation.
+                       After rotation: original width fills vertical, original height fills horizontal.
+                       Set height = 100vw so it covers full viewport width after rotation.
+                       Set width = 56.25vw (9/16 ratio) so it covers the 580px panel height. */
                     position: absolute;
-                    inset: 0;
-                    width: 100%;
-                    height: 100%;
+                    top: 50%;
+                    left: 50%;
+                    height: 100vw;
+                    width: 56.25vw;
+                    min-width: 650px;
                     object-fit: cover;
+                    transform: translate(-50%, -50%) rotate(-90deg);
                     filter: grayscale(60%) brightness(0.45);
                     transition: filter 0.55s ease;
                 }
@@ -258,12 +266,12 @@ const VideoReel = () => {
                     transform: rotate(45deg);
                 }
 
-                /* Rotated label — collapsed only */
+                /* Rotated label — collapsed only — centered vertically so long text never clips */
                 .vr-panel-rot {
                     position: absolute;
-                    bottom: var(--space-xl);
+                    bottom: 50%;
                     left: 50%;
-                    transform: translateX(-50%) rotate(-90deg);
+                    transform: translateX(-50%) translateY(50%) rotate(-90deg);
                     white-space: nowrap;
                     z-index: 2;
                     opacity: 1;
@@ -287,7 +295,7 @@ const VideoReel = () => {
                 /* Expanded info */
                 .vr-panel-info {
                     position: absolute;
-                    bottom: var(--space-xl);
+                    bottom: var(--space-3xl);
                     left: var(--space-xl);
                     right: var(--space-xl);
                     display: flex;

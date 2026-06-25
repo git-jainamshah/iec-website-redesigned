@@ -233,9 +233,9 @@ const WorkGallery = () => {
                 /* Rotated label — only visible when collapsed */
                 .wg-panel-rot {
                     position: absolute;
-                    bottom: var(--space-xl);
+                    bottom: 50%;
                     left: 50%;
-                    transform: translateX(-50%) rotate(-90deg);
+                    transform: translateX(-50%) translateY(50%) rotate(-90deg);
                     white-space: nowrap;
                     z-index: 2;
                     opacity: 1;
