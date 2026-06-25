@@ -5,83 +5,24 @@ import vid3 from '../assets/iec-video-03.mp4';
 import vid4 from '../assets/iec-video-04.mp4';
 
 const clips = [
-    { src: vid1, label: 'Precision Rewinding',    sub: 'Stator coil assembly' },
-    { src: vid2, label: 'Workshop Operations',    sub: 'Ranoli Works' },
-    { src: vid3, label: 'HV Coil Manufacturing',  sub: 'High-voltage winding floor' },
-    { src: vid4, label: 'Heavy Mechanical Bay',   sub: '75,000 sq ft active floor' },
+    { src: vid1, label: 'Precision\nRewinding',    sub: 'Stator coil assembly',       detail: 'High-voltage coil fabrication and insertion for large stator cores.' },
+    { src: vid2, label: 'Workshop\nOperations',    sub: 'Ranoli Works',               detail: '75,000 sq ft facility handling concurrent multi-machine overhauls.' },
+    { src: vid3, label: 'HV Coil\nManufacturing',  sub: 'High-voltage winding floor', detail: 'Up to 13.8 kV stator coils manufactured fully in-house.' },
+    { src: vid4, label: 'Heavy\nMechanical Bay',   sub: '75,000 sq ft active floor',  detail: 'Rotor balancing, shaft repair, and full mechanical rebuild capacity.' },
 ];
 
 const AUTO_ADVANCE = 8000;
 
-const VideoPanel = ({ src, label, sub, index, isActive, onClick }) => {
-    const vidRef = useRef(null);
-
-    useEffect(() => {
-        const el = vidRef.current;
-        if (!el) return;
-        if (isActive) {
-            el.currentTime = 0;
-            el.play().catch(() => {});
-        } else {
-            el.pause();
-        }
-    }, [isActive]);
-
-    return (
-        <div
-            className={`vr-panel ${isActive ? 'vr-panel--active' : ''}`}
-            onClick={onClick}
-            role="button"
-            aria-label={label}
-            aria-expanded={isActive}
-            tabIndex={0}
-            onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && onClick()}
-        >
-            <video
-                ref={vidRef}
-                src={src}
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                className="vr-panel-video"
-            />
-            <div className="vr-panel-overlay" />
-
-            {/* Top row */}
-            <div className="vr-panel-top">
-                <span className="vr-panel-num">{String(index + 1).padStart(2, '0')}</span>
-                <span className="vr-panel-icon">{isActive ? '×' : '+'}</span>
-            </div>
-
-            {/* Collapsed: rotated label */}
-            <div className="vr-panel-rot">
-                <span>{label}</span>
-            </div>
-
-            {/* Expanded: caption + progress */}
-            <div className="vr-panel-info">
-                <span className="vr-panel-sub">{sub}</span>
-                <span className="vr-panel-label">{label}</span>
-            </div>
-
-            {/* Progress bar — only on active */}
-            {isActive && (
-                <div className="vr-progress">
-                    <div className="vr-progress-fill" key={`${index}-${isActive}`} />
-                </div>
-            )}
-        </div>
-    );
-};
-
 const VideoReel = () => {
-    const [active, setActive] = useState(0);
-    const timerRef = useRef(null);
+    const [active, setActive]   = useState(0);
+    const [dir, setDir]         = useState(1); // 1 = forward (slide up), -1 = backward (slide down)
+    const timerRef              = useRef(null);
+    const videoRefs             = useRef([]);
 
     const resetTimer = useCallback((nextIdx) => {
         clearInterval(timerRef.current);
         timerRef.current = setInterval(() => {
+            setDir(1);
             setActive(prev => (prev + 1) % clips.length);
         }, AUTO_ADVANCE);
         if (nextIdx !== undefined) setActive(nextIdx);
@@ -92,56 +33,143 @@ const VideoReel = () => {
         return () => clearInterval(timerRef.current);
     }, [resetTimer]);
 
-    const handleClick = (i) => {
-        if (i === active) return;
-        resetTimer(i);
+    useEffect(() => {
+        videoRefs.current.forEach((el, i) => {
+            if (!el) return;
+            if (i === active) { el.currentTime = 0; el.play().catch(() => {}); }
+            else el.pause();
+        });
+    }, [active]);
+
+    const goTo = (nextIdx) => {
+        if (nextIdx === active) return;
+        setDir(nextIdx > active ? 1 : -1);
+        resetTimer(nextIdx);
+    };
+
+    const prev = () => goTo((active - 1 + clips.length) % clips.length);
+    const next = () => goTo((active + 1) % clips.length);
+
+    const slideClass = (i) => {
+        if (i === active) return 'is-active';
+        // Outgoing direction depends on dir
+        if (dir >= 0) return i < active ? 'is-past'   : 'is-future';
+        else          return i < active ? 'is-future'  : 'is-past';
     };
 
     return (
         <section className="vr-section">
-            {/* Header */}
-            <div className="container vr-header">
-                <div className="vr-header-left">
-                    <p className="vr-eyebrow">Workshop in Motion</p>
-                    <h2 className="vr-title">Where precision<br />meets scale.</h2>
+            <div className="container">
+                {/* Section header */}
+                <div className="vr-header">
+                    <div>
+                        <p className="vr-eyebrow">Workshop in Motion</p>
+                        <h2 className="vr-title">Where precision<br />meets scale.</h2>
+                    </div>
+                    <p className="vr-header-desc">
+                        Inside IEC's Ranoli works: high-voltage machines being
+                        disassembled, rewound, tested, and returned to service.
+                    </p>
                 </div>
-                <p className="vr-header-right">
-                    Inside IEC's Ranoli works: high-voltage machines being
-                    disassembled, rewound, tested, and returned to service.
-                </p>
-            </div>
 
-            {/* Accordion panels — full bleed */}
-            <div className="vr-panels">
-                {clips.map((clip, i) => (
-                    <VideoPanel
-                        key={i}
-                        src={clip.src}
-                        label={clip.label}
-                        sub={clip.sub}
-                        index={i}
-                        isActive={i === active}
-                        onClick={() => handleClick(i)}
-                    />
-                ))}
+                {/* Body */}
+                <div className="vr-body">
+
+                    {/* ── Left: portrait reel frame ── */}
+                    <div className="vr-frame-wrap">
+                        <div className="vr-frame">
+                            {clips.map((clip, i) => (
+                                <div key={i} className={`vr-slide ${slideClass(i)}`}>
+                                    <video
+                                        ref={el => videoRefs.current[i] = el}
+                                        src={clip.src}
+                                        muted loop playsInline preload="metadata"
+                                        className="vr-video"
+                                    />
+                                    <div className="vr-slide-overlay" />
+                                </div>
+                            ))}
+
+                            {/* Progress bar */}
+                            <div className="vr-progress">
+                                <div className="vr-progress-fill" key={active} />
+                            </div>
+
+                            {/* Dot indicators inside frame bottom */}
+                            <div className="vr-frame-dots">
+                                {clips.map((_, i) => (
+                                    <button
+                                        key={i}
+                                        className={`vr-fdot ${i === active ? 'vr-fdot--on' : ''}`}
+                                        onClick={() => goTo(i)}
+                                        aria-label={`Clip ${i + 1}`}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* ── Right: editorial info ── */}
+                    <div className="vr-info">
+                        {/* Ghost number — artistic background element */}
+                        <div className="vr-ghost" aria-hidden="true">
+                            {String(active + 1).padStart(2, '0')}
+                        </div>
+
+                        {/* Red vertical stroke */}
+                        <div className="vr-stroke" aria-hidden="true" />
+
+                        <div className="vr-info-inner">
+                            <span className="vr-count">
+                                {String(active + 1).padStart(2, '0')}
+                                <span className="vr-count-sep"> / </span>
+                                {String(clips.length).padStart(2, '0')}
+                            </span>
+
+                            <h3 className="vr-clip-title" key={active}>
+                                {clips[active].label.split('\n').map((line, j) => (
+                                    <span key={j} className="vr-title-line">{line}</span>
+                                ))}
+                            </h3>
+
+                            <p className="vr-clip-sub" key={`sub-${active}`}>{clips[active].sub}</p>
+                            <p className="vr-clip-detail" key={`det-${active}`}>{clips[active].detail}</p>
+
+                            {/* Nav arrows */}
+                            <div className="vr-nav">
+                                <button className="vr-nav-btn" onClick={prev} aria-label="Previous">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M13 5L8 10L13 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button className="vr-nav-btn" onClick={next} aria-label="Next">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M7 5L12 10L7 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
             <style>{`
                 .vr-section {
                     background: var(--color-primary);
-                    padding: var(--space-5xl) 0 0;
+                    padding: var(--space-5xl) 0;
                     border-top: 1px solid rgba(255,255,255,0.06);
+                    overflow: hidden;
                 }
 
-                /* Header */
+                /* ── Header ── */
                 .vr-header {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     gap: var(--space-3xl);
                     align-items: end;
-                    margin-bottom: var(--space-3xl);
+                    margin-bottom: var(--space-4xl);
                 }
-
                 .vr-eyebrow {
                     font-family: var(--font-mono);
                     font-size: 0.6875rem;
@@ -151,7 +179,6 @@ const VideoReel = () => {
                     color: var(--color-accent);
                     margin-bottom: var(--space-md);
                 }
-
                 .vr-title {
                     font-family: var(--font-serif);
                     font-size: clamp(2rem, 3.5vw, 3rem);
@@ -160,239 +187,285 @@ const VideoReel = () => {
                     line-height: 1.08;
                     letter-spacing: -0.025em;
                 }
-
-                .vr-header-right {
+                .vr-header-desc {
                     font-size: 0.9375rem;
                     color: rgba(255,255,255,0.42);
                     line-height: 1.75;
                     max-width: 420px;
                     align-self: end;
-                    padding-bottom: 4px;
                 }
 
-                /* Accordion strip */
-                .vr-panels {
+                /* ── Body ── */
+                .vr-body {
                     display: flex;
-                    height: 580px;
-                    gap: 3px;
-                    overflow: hidden;
+                    gap: clamp(var(--space-3xl), 6vw, 100px);
+                    align-items: center;
                 }
 
-                .vr-panel {
-                    flex: 0 0 80px;
+                /* ── Portrait Frame ── */
+                .vr-frame-wrap {
+                    flex-shrink: 0;
+                }
+                .vr-frame {
                     position: relative;
+                    width: clamp(240px, 22vw, 320px);
+                    /* 9:16 aspect */
+                    aspect-ratio: 9 / 16;
+                    border-radius: 20px;
                     overflow: hidden;
-                    cursor: pointer;
-                    transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-                    outline: none;
+                    box-shadow:
+                        0 0 0 1px rgba(255,255,255,0.08),
+                        0 40px 100px rgba(0,0,0,0.7);
                 }
 
-                .vr-panel--active {
-                    flex: 1;
-                    cursor: default;
+                .vr-slide {
+                    position: absolute;
+                    inset: 0;
+                    overflow: hidden;
+                    will-change: transform;
+                    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
                 }
+                .vr-slide.is-active { transform: translateY(0); }
+                .vr-slide.is-past   { transform: translateY(-100%); }
+                .vr-slide.is-future { transform: translateY(100%); }
 
-                .vr-panel-video {
-                    /* Videos are landscape (1920×1080) but filmed portrait (reels).
-                       Rotate -90deg (left) to restore correct orientation.
-                       After rotation: original width fills vertical, original height fills horizontal.
-                       Set height = 100vw so it covers full viewport width after rotation.
-                       Set width = 56.25vw (9/16 ratio) so it covers the 580px panel height. */
+                /* Video: stored 1920x1080 landscape, content portrait.
+                   Frame is 9:16. Let frameW = clamp(240,22vw,320), frameH = frameW*(16/9).
+                   Rotate -90deg: element.width fills visual height (frameH),
+                                  element.height fills visual width (frameW).
+                   So set width = frameH, height = frameW via CSS calc. */
+                .vr-video {
                     position: absolute;
                     top: 50%;
                     left: 50%;
-                    height: 100vw;
-                    width: 56.25vw;
-                    min-width: 650px;
-                    object-fit: cover;
+                    /* After -90deg: element width → visual height; height → visual width */
+                    width: calc(clamp(240px, 22vw, 320px) * 16 / 9);
+                    height: clamp(240px, 22vw, 320px);
                     transform: translate(-50%, -50%) rotate(-90deg);
-                    filter: grayscale(60%) brightness(0.45);
-                    transition: filter 0.55s ease;
+                    object-fit: cover;
+                    filter: brightness(0.88) saturate(1.05);
                 }
 
-                .vr-panel--active .vr-panel-video {
-                    filter: grayscale(5%) brightness(0.7);
-                }
-
-                .vr-panel:hover:not(.vr-panel--active) .vr-panel-video {
-                    filter: grayscale(35%) brightness(0.55);
-                }
-
-                .vr-panel-overlay {
+                .vr-slide-overlay {
                     position: absolute;
                     inset: 0;
-                    background: linear-gradient(
-                        to top,
-                        rgba(9,9,12,0.95) 0%,
-                        rgba(9,9,12,0.05) 45%,
-                        rgba(9,9,12,0.2) 100%
+                    background: linear-gradient(to top,
+                        rgba(9,9,12,0.55) 0%,
+                        transparent 50%
                     );
-                }
-
-                /* Top row */
-                .vr-panel-top {
-                    position: absolute;
-                    top: var(--space-lg);
-                    left: var(--space-md);
-                    right: var(--space-md);
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    z-index: 2;
-                }
-
-                .vr-panel-num {
-                    font-family: var(--font-mono);
-                    font-size: 0.5625rem;
-                    letter-spacing: 0.1em;
-                    color: rgba(255,255,255,0.3);
-                }
-
-                .vr-panel-icon {
-                    font-size: 1.375rem;
-                    font-weight: 300;
-                    color: rgba(255,255,255,0.55);
-                    line-height: 1;
-                    transition: color 0.2s, transform 0.3s;
-                    user-select: none;
-                }
-
-                .vr-panel:hover:not(.vr-panel--active) .vr-panel-icon {
-                    color: var(--color-white);
-                }
-
-                .vr-panel--active .vr-panel-icon {
-                    color: var(--color-accent);
-                    transform: rotate(45deg);
-                }
-
-                /* Rotated label — collapsed only — centered vertically so long text never clips */
-                .vr-panel-rot {
-                    position: absolute;
-                    bottom: 50%;
-                    left: 50%;
-                    transform: translateX(-50%) translateY(50%) rotate(-90deg);
-                    white-space: nowrap;
-                    z-index: 2;
-                    opacity: 1;
-                    transition: opacity 0.25s ease;
                     pointer-events: none;
-                }
-
-                .vr-panel-rot span {
-                    font-family: var(--font-mono);
-                    font-size: 0.625rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 0.14em;
-                    color: rgba(255,255,255,0.45);
-                }
-
-                .vr-panel--active .vr-panel-rot {
-                    opacity: 0;
-                }
-
-                /* Expanded info */
-                .vr-panel-info {
-                    position: absolute;
-                    bottom: var(--space-3xl);
-                    left: var(--space-xl);
-                    right: var(--space-xl);
-                    display: flex;
-                    flex-direction: column;
-                    gap: 6px;
-                    z-index: 2;
-                    opacity: 0;
-                    transform: translateY(14px);
-                    transition: opacity 0.4s 0.15s ease, transform 0.4s 0.15s ease;
-                    pointer-events: none;
-                }
-
-                .vr-panel--active .vr-panel-info {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-
-                .vr-panel-sub {
-                    font-family: var(--font-mono);
-                    font-size: 0.5625rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 0.16em;
-                    color: var(--color-accent);
-                }
-
-                .vr-panel-label {
-                    font-family: var(--font-serif);
-                    font-size: clamp(1.125rem, 2vw, 1.625rem);
-                    font-weight: 700;
-                    color: var(--color-white);
-                    letter-spacing: -0.02em;
-                    line-height: 1.15;
                 }
 
                 /* Progress bar */
                 .vr-progress {
                     position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
+                    bottom: 0; left: 0; right: 0;
                     height: 3px;
-                    background: rgba(255,255,255,0.1);
-                    z-index: 3;
+                    background: rgba(255,255,255,0.12);
+                    z-index: 10;
                 }
-
                 .vr-progress-fill {
                     height: 100%;
                     background: var(--color-accent);
-                    animation: vr-fill ${AUTO_ADVANCE}ms linear forwards;
                     transform-origin: left;
+                    animation: vr-fill ${AUTO_ADVANCE}ms linear forwards;
                 }
-
                 @keyframes vr-fill {
                     from { transform: scaleX(0); }
                     to   { transform: scaleX(1); }
                 }
 
-                /* Mobile: vertical accordion */
-                @media (max-width: 768px) {
+                /* Dot indicators inside frame */
+                .vr-frame-dots {
+                    position: absolute;
+                    bottom: var(--space-lg);
+                    right: var(--space-md);
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+                    z-index: 10;
+                }
+                .vr-fdot {
+                    width: 4px;
+                    height: 4px;
+                    border-radius: 50%;
+                    background: rgba(255,255,255,0.3);
+                    border: none;
+                    cursor: pointer;
+                    padding: 0;
+                    transition: all 0.3s ease;
+                }
+                .vr-fdot--on {
+                    height: 18px;
+                    border-radius: 2px;
+                    background: var(--color-accent);
+                }
+
+                /* ── Info Panel ── */
+                .vr-info {
+                    flex: 1;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    min-height: clamp(427px, 39vw, 569px); /* matches frame height */
+                    overflow: hidden;
+                }
+
+                /* Ghost number — behind everything */
+                .vr-ghost {
+                    position: absolute;
+                    right: -0.15em;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    font-family: var(--font-serif);
+                    font-size: clamp(160px, 18vw, 280px);
+                    font-weight: 800;
+                    line-height: 1;
+                    color: transparent;
+                    -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+                    letter-spacing: -0.04em;
+                    pointer-events: none;
+                    user-select: none;
+                    transition: opacity 0.4s;
+                }
+
+                /* Vertical red accent stroke */
+                .vr-stroke {
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 2px;
+                    height: 60%;
+                    background: linear-gradient(
+                        to bottom,
+                        transparent 0%,
+                        var(--color-accent) 30%,
+                        var(--color-accent) 70%,
+                        transparent 100%
+                    );
+                    opacity: 0.7;
+                }
+
+                .vr-info-inner {
+                    position: relative;
+                    z-index: 2;
+                    padding-left: var(--space-2xl);
+                }
+
+                .vr-count {
+                    font-family: var(--font-mono);
+                    font-size: 0.625rem;
+                    font-weight: 600;
+                    letter-spacing: 0.16em;
+                    color: rgba(255,255,255,0.25);
+                    display: block;
+                    margin-bottom: var(--space-xl);
+                }
+                .vr-count-sep { opacity: 0.4; }
+
+                .vr-clip-title {
+                    font-family: var(--font-serif);
+                    font-size: clamp(2.25rem, 4vw, 3.75rem);
+                    font-weight: 700;
+                    color: var(--color-white);
+                    letter-spacing: -0.03em;
+                    line-height: 1.0;
+                    margin-bottom: var(--space-xl);
+                    display: flex;
+                    flex-direction: column;
+                    animation: vr-text-in 0.5s cubic-bezier(0.16,1,0.3,1) both;
+                }
+                .vr-title-line {
+                    display: block;
+                }
+                .vr-title-line:last-child {
+                    color: rgba(255,255,255,0.55);
+                }
+
+                @keyframes vr-text-in {
+                    from { opacity: 0; transform: translateY(16px); }
+                    to   { opacity: 1; transform: translateY(0); }
+                }
+
+                .vr-clip-sub {
+                    font-family: var(--font-mono);
+                    font-size: 0.6875rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.16em;
+                    color: var(--color-accent);
+                    margin-bottom: var(--space-lg);
+                    animation: vr-text-in 0.5s 0.05s cubic-bezier(0.16,1,0.3,1) both;
+                }
+
+                .vr-clip-detail {
+                    font-size: 0.9375rem;
+                    color: rgba(255,255,255,0.38);
+                    line-height: 1.75;
+                    max-width: 340px;
+                    margin-bottom: var(--space-3xl);
+                    animation: vr-text-in 0.5s 0.1s cubic-bezier(0.16,1,0.3,1) both;
+                }
+
+                /* Nav buttons */
+                .vr-nav {
+                    display: flex;
+                    gap: var(--space-sm);
+                }
+                .vr-nav-btn {
+                    width: 46px;
+                    height: 46px;
+                    border-radius: 50%;
+                    border: 1px solid rgba(255,255,255,0.12);
+                    background: rgba(255,255,255,0.04);
+                    color: rgba(255,255,255,0.55);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                }
+                .vr-nav-btn:hover {
+                    background: var(--color-accent);
+                    border-color: var(--color-accent);
+                    color: white;
+                    transform: scale(1.05);
+                }
+
+                /* ── Mobile ── */
+                @media (max-width: 900px) {
                     .vr-header {
                         grid-template-columns: 1fr;
                         gap: var(--space-xl);
                     }
+                    .vr-header-desc { max-width: 100%; }
 
-                    .vr-header-right { max-width: 100%; }
-
-                    .vr-panels {
+                    .vr-body {
                         flex-direction: column;
-                        height: auto;
-                        gap: 2px;
+                        gap: var(--space-2xl);
+                        align-items: flex-start;
                     }
 
-                    .vr-panel {
-                        flex: 0 0 68px;
-                        height: 68px;
-                        min-height: 68px;
-                        transition: flex 0.55s cubic-bezier(0.16,1,0.3,1),
-                                    height 0.55s cubic-bezier(0.16,1,0.3,1),
-                                    min-height 0.55s cubic-bezier(0.16,1,0.3,1);
+                    .vr-frame {
+                        width: 200px;
+                    }
+                    .vr-video {
+                        width: calc(200px * 16 / 9);
+                        height: 200px;
                     }
 
-                    .vr-panel--active {
-                        flex: 0 0 300px;
-                        height: 300px;
-                        min-height: 300px;
+                    .vr-info {
+                        min-height: auto;
+                        width: 100%;
                     }
+                    .vr-info-inner { padding-left: var(--space-lg); }
 
-                    .vr-panel-rot {
-                        bottom: 50%;
-                        left: var(--space-xl);
-                        transform: translateY(50%);
-                    }
+                    .vr-ghost { font-size: 100px; right: -0.1em; }
 
-                    .vr-panel-rot span { font-size: 0.6875rem; }
+                    .vr-clip-title { font-size: 2rem; }
 
-                    .vr-panel-top { top: var(--space-md); }
+                    .vr-clip-detail { max-width: 100%; }
                 }
             `}</style>
         </section>
