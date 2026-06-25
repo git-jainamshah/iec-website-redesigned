@@ -156,9 +156,9 @@ const VideoReel = () => {
 
             <style>{`
                 .vr-section {
-                    background: var(--color-primary);
+                    background: #ffffff;
                     padding: var(--space-5xl) 0;
-                    border-top: 1px solid rgba(255,255,255,0.06);
+                    border-top: 1px solid rgba(0,0,0,0.07);
                     overflow: hidden;
                 }
 
@@ -183,13 +183,13 @@ const VideoReel = () => {
                     font-family: var(--font-serif);
                     font-size: clamp(2rem, 3.5vw, 3rem);
                     font-weight: 700;
-                    color: var(--color-white);
+                    color: var(--color-primary);
                     line-height: 1.08;
                     letter-spacing: -0.025em;
                 }
                 .vr-header-desc {
                     font-size: 0.9375rem;
-                    color: rgba(255,255,255,0.42);
+                    color: rgba(0,0,0,0.45);
                     line-height: 1.75;
                     max-width: 420px;
                     align-self: end;
@@ -214,8 +214,8 @@ const VideoReel = () => {
                     border-radius: 20px;
                     overflow: hidden;
                     box-shadow:
-                        0 0 0 1px rgba(255,255,255,0.08),
-                        0 40px 100px rgba(0,0,0,0.7);
+                        0 0 0 1px rgba(0,0,0,0.08),
+                        0 40px 100px rgba(0,0,0,0.25);
                 }
 
                 .vr-slide {
@@ -250,7 +250,7 @@ const VideoReel = () => {
                     position: absolute;
                     inset: 0;
                     background: linear-gradient(to top,
-                        rgba(9,9,12,0.55) 0%,
+                        rgba(0,0,0,0.45) 0%,
                         transparent 50%
                     );
                     pointer-events: none;
@@ -261,7 +261,7 @@ const VideoReel = () => {
                     position: absolute;
                     bottom: 0; left: 0; right: 0;
                     height: 3px;
-                    background: rgba(255,255,255,0.12);
+                    background: rgba(0,0,0,0.12);
                     z-index: 10;
                 }
                 .vr-progress-fill {
@@ -322,7 +322,7 @@ const VideoReel = () => {
                     font-weight: 800;
                     line-height: 1;
                     color: transparent;
-                    -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+                    -webkit-text-stroke: 1px rgba(0,0,0,0.06);
                     letter-spacing: -0.04em;
                     pointer-events: none;
                     user-select: none;
@@ -358,7 +358,7 @@ const VideoReel = () => {
                     font-size: 0.625rem;
                     font-weight: 600;
                     letter-spacing: 0.16em;
-                    color: rgba(255,255,255,0.25);
+                    color: rgba(0,0,0,0.3);
                     display: block;
                     margin-bottom: var(--space-xl);
                 }
@@ -368,7 +368,7 @@ const VideoReel = () => {
                     font-family: var(--font-serif);
                     font-size: clamp(2.25rem, 4vw, 3.75rem);
                     font-weight: 700;
-                    color: var(--color-white);
+                    color: var(--color-primary);
                     letter-spacing: -0.03em;
                     line-height: 1.0;
                     margin-bottom: var(--space-xl);
@@ -380,7 +380,7 @@ const VideoReel = () => {
                     display: block;
                 }
                 .vr-title-line:last-child {
-                    color: rgba(255,255,255,0.55);
+                    color: rgba(0,0,0,0.38);
                 }
 
                 @keyframes vr-text-in {
@@ -401,7 +401,7 @@ const VideoReel = () => {
 
                 .vr-clip-detail {
                     font-size: 0.9375rem;
-                    color: rgba(255,255,255,0.38);
+                    color: rgba(0,0,0,0.45);
                     line-height: 1.75;
                     max-width: 340px;
                     margin-bottom: var(--space-3xl);
@@ -417,9 +417,9 @@ const VideoReel = () => {
                     width: 46px;
                     height: 46px;
                     border-radius: 50%;
-                    border: 1px solid rgba(255,255,255,0.12);
-                    background: rgba(255,255,255,0.04);
-                    color: rgba(255,255,255,0.55);
+                    border: 1px solid rgba(0,0,0,0.15);
+                    background: rgba(0,0,0,0.04);
+                    color: rgba(0,0,0,0.5);
                     display: flex;
                     align-items: center;
                     justify-content: center;
